@@ -38,7 +38,14 @@
 <li><a href="#sat-viz">
 	<en>Real-time weather and forest fire detection from space</en>
 	<de>Realzeitbeicht der Wetter- und Waldfeuer vom Weltraum</de>
-	<es>Detección del tiempo y de los incendios del bosque, con imágenes tomadas de satélites</es>
+	<es>Detección del tiempo y de los incendios del bosque, con
+	    imágenes tomadas de satélites</es>
+
+<li><a href="#ece">
+       <en>Measuring European air pollution for the U.N.</en>
+       <de>Maß der europäischen Luftverschmutzung für das U.N.</de>
+       <es>Medida de la contaminación atmosférica europea para el U.N.</es>
+       
 
 <li><a href="#magnetic">
 	<en>Artificial vision of magnetic fields on the Sun</en>
@@ -118,6 +125,60 @@ imagenes fueron co-alinadas automáticamente por PDL.
 <td><a href="forest-lg.jpg"><img src="forest-sm.jpg"></a>
 
 
+</table>
+
+<hr>
+<a name="ece">
+
+<en-p><h3>Measuring European air pollution for the U.N.</h3></en-p>
+<de-p><h3>Maß der europäischen Luftverscmutzung für das U.N.</h3></de-p>
+<es-p><h3>Medida de la contaminación atmosférica europea para el U.N.</h3></es-p>
+
+<table>
+<tr><td>
+<en>The UN-ECE's <a href="www.emep.int">EMEP</a> program monitors 
+long-range air pollutants such as acid rain and ozone, over the whole
+of Europe.  The results are used to create international laws and
+accords such as the Gothenborg protocol.  Our FORTRAN code models 
+pollutant motion and chemistry throughout Europe, producing about 
+50 GB of netcdf data for each year studied.
+<p>Comparing these data with other data sources, extracting
+country-based data from the physical grid, and preparing statistics
+required a powerful, memory-efficient, flexible data language.  PDL
+gave us exactly what we needed.  We even used it to generate 
+<a href="http://www.emep.int/reports/2004/Country_Reports">automated
+reports</a> for each of 50 countries.
+</en>
+
+<de>Das UN-ECE Programm für Beobachtung und Evaluierung von
+lang-reichweitiger grenzüberschreitender Luftverschmutzung in Europa
+(<a href="www.emep.int">EMEP</a>) macht Einschätzungen und Vorhersagen
+über Luftverschmutzung, wie z.B. sauren Regen (SOx) und Ozone
+Konzentrationen (NMVOC und NOx) in einem 50x50qkm Gitter über ganz
+Europa. Die Resultate dieser Berechnungen werden als wissenschaftliche
+Grundlage für nationale und internationale Gesetzgebung und
+Protokolle wie das Gothenborg Protokoll genutzt.
+<p>
+Das Hauptmodel für diese Berechnungen wurde in Fortran geschrieben und
+läuft über mehrere Monate auf Supercomputer (sowie großen
+Linux-Clustern). Es verbindet Emissionsdaten, Meteorologie, Chemie und
+Topographie. Die Ausgabe des Models sind für die Vorhersage eines
+Jahres für alle Länder Europas 50GB binärer NetCDF Daten.
+<p>
+Der Vergleich dieser Daten mit anderen Datenquellen, z.B. Meßdaten,
+das Ekstrahieren von Landesdaten aus den Grid-basierten Daten und das
+Errechnen von Statistiken benötigt eine schnelle, Speicher-effiziente
+und flexible Daten-Sprache. PDL erfüllte diese Aufgaben bestens. Wir
+waren unter anderem in der Lage, voll-automatische Berichte für alle
+de ca. 50 Länder/Parteien zu schreiben: <a
+href="http://www.emep.int/reports/2004/Country_Reports/report_DE.pdf">Status
+Bericht für Deutschland, 2004</a>
+</de>
+
+
+<td>
+<img src="ece-emission.jpg">
+<tr><td colspan=2><center><img src="ece-sox2.png"></center>
 </table>
 
 <hr>

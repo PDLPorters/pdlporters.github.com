@@ -37,7 +37,7 @@ PDL::Graphics::TriD</TD>
 <TD bgcolor=#eeeeee width=30% valign=top>
 <EN><P align=justify>OpenGL is a de facto standard for 3D graphics today.
 The PDL installation scripts will check if you have the OpenGL 
-libraries or the free free implementation 
+libraries or the free implementation 
 <A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and build the
 module if they are present.</P></EN>
 
@@ -51,7 +51,7 @@ PDL::Graphics::PGPLOT</TD>
 <EN><P align=justify>PGPLOT is a very powerful fortran library for scientific
 2D plotting.  You need the <A
 HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library  itself and the
-<A HREF="http://www.aao.gov.au/local/www/kgb/pgperl">PGPERL</A> perl module
+<A HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> perl module
 for full functionality.</P></EN>
 
 </TR>

@@ -40,7 +40,7 @@
   PDL release</A></EN>
 
   <DE><A HREF="http://www.perl.com/perl/CPAN/modules/by-module/PDL/">Stabile
-  PDL Release</A></EN>
+  PDL Release</A></DE>
 
 </TD>
 
@@ -104,8 +104,8 @@ Aber so ist das...</DE-P>
 
 <TR>
 <TD bgcolor=#eeeeee width=30% valign=top>
-  <EN>Latest <A HREF="">Perl version</A></EN>
-  <DE>Neueste <A HREF="">Perl-Version</A></DE>
+  <EN>Latest <A HREF="http://www.cpan.org/ports/index.html">Perl version</A></EN>
+  <DE>Neueste <A HREF="http://www.cpan.org/ports/index.html">Perl-Version</A></DE>
 </TD>
 
 <TD bgcolor=#eeeeee width=70%>
@@ -144,11 +144,11 @@ Aber so ist das...</DE-P>
 
 <TR>
 <TD bgcolor=#eeeeee width=30% valign=top>
-<A HREF=""><CODE>Term::Readline</CODE></A> 
+<A HREF="http://www.perl.com/CPAN-local/modules/by-module/Term/"><CODE>Term::Readline::Gnu</CODE></A> 
 <EN>or alternatively</EN>
 <DE>oder alternativ</DE>
 <BR>
-<A HREF=""><CODE>Term::Readline::Gnu</CODE></A>.</TD> 
+<A HREF="http://www.perl.com/CPAN-local/modules/by-module/Term/"><CODE>Term::Readline::Perl</CODE></A>.</TD> 
 
 <TD bgcolor=#eeeeee width=30% valign=top>
 
@@ -166,14 +166,15 @@ Aber so ist das...</DE-P>
 
 <TR>
 <TD bgcolor=#eeeeee width=30% valign=top>
-<A HREF="">pbm+</A> or <BR>
+<A HREF="">pbm+</A> <EN>or</EN><DE>oder</DE>
+<BR>
 <A HREF="ftp://wuarchive.wustl.edu/graphics/graphics/packages/NetPBM">netpbm</A>
 </TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
 
   <EN-P>To read and write images with PDL's rpic/wpic commands
-  the module <CODE>PDL::IO::Pic<CODE> is in the main distribution. However, if
+  the module <CODE>PDL::IO::Pic</CODE> is in the main distribution. However, if
   you want to have access to nearly every possible graphics format you should
   have installed one of these packages before installing PDL. For a jpeg
   converter you should also have  
@@ -213,14 +214,18 @@ Aber so ist das...</DE-P>
 <TD bgcolor=#eeeeee width=30% valign=top>
 
   <EN-P>Slatec fortran lib is included but requires a fortran compiler and the
-  perl module to be installed. Module will not be built unless ExtUtils::F77
+  perl module to be installed. Module will not be built unless 
+  <A HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">  
+  ExtUtils::F77</A>
   (version >= 1.03) is installed and Extutils::F77 supports your
   platform.</EN-P>
   
   <DE-P>Die Fortran-Bibliothek Slatec ist in der Distribution enthalten, es ist
   aber ein Fortran-Compiler und dieses Perl-Modul für die Installation
-  notwendig. Das Modul wird nicht erzeugt, wenn nicht ExtUtils::F77 (Version >=
-  1.03) vorhanden ist und die Plattform unterstützt wird.</DE-P>
+  notwendig. Das Modul wird nicht erzeugt, wenn nicht 
+  <A HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">  
+  ExtUtils::F77</A>
+  (Version >= 1.03) vorhanden ist und die Plattform unterstützt wird.</DE-P>
 
 </TD>
 

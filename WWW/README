@@ -1,3 +1,38 @@
+How to maintain MANIFEST.SKIP
+-----------------------------
+
+MANIFEST.SKIP is used to speficy files
+which should *not* be included with
+the published web pages. For example, all
+.wml will be included and anything else
+that is not part of the actual published
+should be similarly specified. In MANIFEST.SKIP
+use the same regular expressions that you use
+with normal Perl dists (for a good reason the
+syntax is the same: we shamelessly ripped of
+internal code from ExtUtils::Manifest to implement
+the file exclusion code).
+
+If you are not sure if you need to add more exclusions
+to MANIFEST.SKIP run
+
+  make dist
+
+and inspect the file .mirror that will be generated for
+anything that shouldn't be there (i.e. non-html, non-image).
+
+To check if you accidentally excluded something
+that is actually required for the web pages, you
+will have to publish the web page distribution.
+This can be done by making the dist (make dist)
+and unpacking it into a folder of you choice:
+
+  mkdir myfolder
+  (cd myfolder; tar zxf ../pdlwww.tar.gz)
+
+and point you favorite browser at this local copy.
+Then check for any problems.
+
 How to publish these pages
 --------------------------
 
@@ -7,11 +42,11 @@ How to publish these pages
 
 2) copy to SF
 
-  scp pdlwww.tar.gz user@shell.sf.net
+  scp pdlwww.tar.gz your_user_id@shell.sf.net
 
 3) login to shell server at SF
 
-  ssh user@shell.sf.net
+  ssh your_user_id@shell.sf.net
 
 4) install files into testing arena
 
@@ -20,6 +55,11 @@ How to publish these pages
   mkdir WWWbeta
   cd WWWbeta
   tar zxf ~/pdlwww.tar.gz
+
+Now an *important* step to let other developers
+publish, too. Make everything group writable:
+
+ chmod -R g+w WWWbeta
 
 If you run into permission problems
 please ask for help on the mailing list.
@@ -30,15 +70,28 @@ please ask for help on the mailing list.
 
 6) publish web pages
 
+If you have not yet checked out the sourceforge utility
+scripts, do it now:
+
+  cvs -d :pserver:anonymous@cvs1:/cvsroot/pdl co sfscripts
+
+Now you should have a number of scripts in the directory sfscripts.
+If you already checked these out in the past, you still might
+want to check for updates:
+
+  (cd sfscripts; cvs update)
+
+Now you are ready to actually publish the pages:
+
   sfscripts/wwwpublish
 
 7) page should now be online at
 
-  http://pdl.sourceforge.net/WWWbeta/
+  http://pdl.sourceforge.net/WWW/
 
 and will be automatically mirrored to
 
   pdl.perl.org
 
-(not sure about the interval right now, might
- take a day)
+(not sure about the interval right now, it might
+ take up to a day)

@@ -134,7 +134,7 @@ Modulen.</DE-P>
 			      
 			      <DE-P>Dieses Datenformat wird vor allem im Bereich 
 			      der Atmosphärenphysik verwendet. </DE-P>"
-               download    =  "http://www.perl.com/CPAN/modules/by-module/PDL/DHUNT/PDL-NetCDF-0.74.tar.gz"
+               download    =  "http://www.perl.com/CPAN/modules/by-module/PDL/DHUNT/"
 >	       
 </comment>
 
@@ -153,6 +153,26 @@ Modulen.</DE-P>
 			      beschrieben.</DE-P>"
                homepage    = "http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_"			      
                download    = ""
+>	       
+
+<library-table name        = "PDL::IO::Grib"
+               description = "<EN-P>Grib is a data file format specification 
+	                      of the World Meteorological Organization (WMO) 
+			      commonly used for the storage and transmission 
+			      of meteorological data. Please read the 
+			      <A HREF="http://www.wmo.ch/web/www/reports/Guide-binary-2.html">
+			      format specification</A> for further details.
+			      </EN-P>
+			      
+			      <DE-P>Grib ist ein Datenformat zur Speicherung und
+			      Übertragung von meteorologischen Daten. Nähere
+			      Informationen finden sich in der 
+			      <A HREF="http://www.wmo.ch/web/www/reports/Guide-binary-2.html">
+			      Formatbeschreibung</A>.
+			      </DE-P>
+			      "
+               homepage    = ""
+	       download    = "http://www.cpan.org/modules/by-authors/id/J/JE/JEDWARDS/"
 >	       
 
 <library-table name        = "ObjStore::Lib::PDL"

@@ -13,12 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
-
-<TD ALIGN=LEFT>
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <H2>Visualisation Frontends</H2>
 
@@ -82,4 +78,5 @@ have installed it on your system the PDL module will be built.</TD>
 
 </TABLE>
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

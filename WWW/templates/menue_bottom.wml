@@ -1,16 +1,14 @@
+</TD>
 
-<BR><HR><BR>
+<!-- ---------------------------------------------------------------------- -->
+<!-- Add some space between columns                                         -->
+<!-- ---------------------------------------------------------------------- -->
 
-<CENTER>
-PDL development is powered by
-<IMG src="http://sourceforge.net/sflogo.php?group_id=612&type=1" width="88"
- height="31" border="0"></A>
-</CENTER>
+<TD WIDTH=70>&nbsp;</TD>
 
-<!-- add some space between rows -->
-<!-- --------------------------- -->
+<!-- ---------------------------------------------------------------------- -->
+<!-- Column for page body                                                   -->
+<!-- ---------------------------------------------------------------------- -->
 
-<TD WIDTH="50">
-<BR>
+<TD valign=top>
 
-<TD>

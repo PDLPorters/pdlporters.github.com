@@ -1,10 +1,9 @@
 
          ROOT = ..
-    FRAMEWORK = $(ROOT)/templates/menue_top.wml \
-		$(ROOT)/templates/menue_main.wml \
-		$(ROOT)/templates/menue_bottom.wml \
-                $(ROOT)/templates/background.wml \
-                $(ROOT)/templates/header.wml \
+    FRAMEWORK = $(ROOT)/templates/top.wml \
+		$(ROOT)/templates/menue_top.wml \
+                $(ROOT)/templates/menue_bottom.wml \
+                $(ROOT)/templates/bottom.wml \
                 $(ROOT)/templates/footer.wml
 INC_TEMPLATES = -I../templates
 

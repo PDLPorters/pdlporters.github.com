@@ -13,12 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
-
-<TD ALIGN=LEFT>
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <H2> PDL Mailing Lists </H2>
 
@@ -61,4 +57,5 @@ and <A HREF="http://www.rosat.mpe-garching.mpg.de/mailing-lists/pdl-porters">
 pdl-porters</A> mailing lists; thanks to 
 <A HREF="mailto:ach@rosat.mpe-garching.mpg.de">Achim Bohnet</A>.</P></EN>
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

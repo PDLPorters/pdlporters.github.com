@@ -13,12 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
-
-<TD ALIGN=LEFT>
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <H2> Documentation </H2>
 
@@ -47,5 +43,6 @@ organised at present. We are doing our best! There are a series of HTML files
 for each module plus a set of philosophical documents providing insight into
 the ideas and structure of PDL.</P>
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"
 

@@ -13,12 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
-
-<TD ALIGN=LEFT>
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <H2> 3D Graphics Examples </H2>
 
@@ -36,4 +32,5 @@ pictures and the PDL code which produced them.
 Note when displayed with PDL viewing from different angles is as simple
 as rotating the figure with the mouse!
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

@@ -13,15 +13,10 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 #use wml::std::box
-
-<TD ALIGN=LEFT>
-
 
 <H2>Download</H2>
 
@@ -156,4 +151,5 @@ platform.</P></EN></TD>
 
 <!-- ---------------------------------------------------------------------- -->
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

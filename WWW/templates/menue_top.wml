@@ -1,19 +1,13 @@
-<TABLE width="100%" border=0>
+<!-- ---------------------------------------------------------------------- -->
+<!-- Table column for menue                                                 -->
+<!-- ---------------------------------------------------------------------- -->
 
-<!-- The left column contains the menu -->
-<!-- --------------------------------- -->
+<TR>
 
-<TR VALIGN=TOP>
-<TD WIDTH=110 ALIGN=LEFT>
+<TD WIDTH=110 ALIGN=LEFT VALIGN=top>
 
-<CENTER><IMG SRC="$(IMAGES)/pdlthumb.jpg"></CENTER>
-
-
-<!-- 
+<!-- Language selection -->
 <CENTER>
-<FONT size=+2>
-<A HREF="$(ROOT)/index_<EN>en</EN><DE>de</DE>.html">PDL</A></FONT><BR>
-<HR>
 <:
    my $wmlname = '<get-var WML_SRC_FILENAME>';
    $wmlname =~ s/\.wml$//g;
@@ -22,11 +16,15 @@
    print "<A HREF=\"$wmlname\_de.html\">";
    print "<IMG SRC=\"$(IMAGES)/flag_de.gif\" border=0></A>";
 :>
-<BR>
-</CENTER>
--->
+<HR>
 
-# -----------------------------------------------------------------------------
-<HR><BR>
-# -----------------------------------------------------------------------------
+<IMG SRC="$(IMAGES)/pdlthumb.jpg">
+
+<FONT size=+3 color=white>
+PerlDL<BR>
+</FONT>
+</CENTER>
+
+<HR>
+<BR>
 

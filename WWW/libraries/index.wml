@@ -13,12 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
-
-<TD ALIGN=LEFT>
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <H2>External Libraries</H2>
 
@@ -46,6 +42,5 @@ collections. </P></EN>
 
 </TABLE>
 
-#include "footer_rs.wml"
-
-
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

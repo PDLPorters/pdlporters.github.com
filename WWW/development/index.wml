@@ -13,10 +13,8 @@
 
 <set-var doctype=html>
 
-#include '$(ROOT)/templates/background.wml'
-#include '$(ROOT)/templates/menue_top.wml'
-#include '$(ROOT)/templates/menue_main.wml'
-#include '$(ROOT)/templates/menue_bottom.wml'
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
 
 <TD ALIGN=LEFT>
 
@@ -102,4 +100,5 @@ a nice <A HREF="http://www.cyclic.com/cvs/doc-blandy-text.html">concise
 tutorial</A> and the online version of the
 <A HREF="http://cvsbook.red-bean.com/cvsbook.html">CVS book</A>.
 
-#include "footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include '$(PDLROOT)/templates/bottom.wml'

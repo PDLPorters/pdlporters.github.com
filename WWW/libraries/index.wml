@@ -114,8 +114,27 @@ Modulen.</DE-P>
 >	       
 
 <library-table name        = "NETCDF"
-               description = "NetCDF is ..."
-               download    = "http://www.perl.com/CPAN-local/modules/by-module/PDL/PDL-NetCDF-0.40.tar.gz"
+               description = "<EN-P>NetCDF (Network Common Data Form) is an interface 
+	                      for array-oriented data access and a library that
+			      provides an implementation of the interface. The
+			      netCDF library also defines a machine-independent
+			      format for representing scientific data. 
+			      Together, the interface, library, and format 
+			      support the creation, access, and sharing of 
+			      scientific data. </EN-P>
+			      
+			      <DE-P>NetCDF (Network Common Data Form) ist ein 
+			      Dateiformat zum Speichern von Array-orientierten
+			      Daten sowie eine Library, die dieses Format 
+			      implementiert. Die Speicherung der Daten erfolgt
+			      maschinenunabhängig. </DE-P>
+			      
+			      <EN-P>This data format is heavily used in the 
+			      atmospheric sciences.</EN-P>
+			      
+			      <DE-P>Dieses Datenformat wird vor allem im Bereich 
+			      der Atmosphärenphysik verwendet. </DE-P>"
+               download    =  "http://www.perl.com/CPAN/modules/by-module/PDL/DHUNT/PDL-NetCDF-0.74.tar.gz"
 >	       
 </comment>
 

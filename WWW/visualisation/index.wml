@@ -18,7 +18,7 @@
 #include '$(PDLROOT)/templates/top.wml'
 #include '$(PDLROOT)/menue.wml'
 
-#include "visu-defs.wml"
+#include 'defines.wml'
 
 <EN><H2>Visualisation Frontends</H2></EN>
 <DE><H2>Visualisierungs-Frontends</H2></DE>
@@ -41,23 +41,24 @@ sein. </DE-P>
 <TABLE border=1 width=100%>
 
 <TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="30%">
-<EN><B>Packet</B></EN>
-<DE><B>Paket</B></DE>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
+  <EN><B>Packet</B></EN>
+  <DE><B>Paket</B></DE>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
-<EN><B>Description</B></EN>
-<DE><B>Beschreibung</B></DE>
+  <EN><B>Description</B></EN>
+  <DE><B>Beschreibung</B></DE>  
 </TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="10%">
-<B>Screenshot</B>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
+  <EN><B>Ressources</B></EN>
+  <DE><B>Ressourcen</B></DE>  
 </TD>
 </TR>
 
 
 <TR>
 
-<visualisation-table 
+<library-table 
   name        = "PDL::Graphics::TriD"
   description = "<EN-P>OpenGL is a de facto standard for 3D graphics today.
 		The PDL installation scripts will check if you have the OpenGL 
@@ -71,13 +72,15 @@ sein. </DE-P>
 		HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> 
 		vorhanden ist und erzeugen in diesem Fall die dazugehörigen
 		Module.</DE-P>"
-  screenshot =  "<A HREF="">[1]</A>"
->
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
+>	       
 
-<visualisation-table 
+
+<library-table 
   name        = "PDL::Graphics::PGPLOT"
-  description = "
-                 <EN-P>PGPLOT is a very powerful fortran library for scientific
+  description = "<EN-P>PGPLOT is a very powerful fortran library for scientific
 		 2D plotting.  You need the  <A
 		 HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library
 		 itself and  the <A
@@ -90,11 +93,12 @@ sein. </DE-P>
 		 selbst sowie das  <A
 		 HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> 
 		 Perl-Modul.</DE-P>"
-
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 
-<visualisation-table 
+<library-table 
   name        = "PDL::Graphics::IIS"
   description = "<EN-P> Interface to the (somewhat old fashioned)  <A
 		HREF="http://tdc-www.harvard.edu/software/saoimage.html">SAOimage</A>
@@ -107,10 +111,12 @@ sein. </DE-P>
 		oder das <A
 		HREF="http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
 		Ximtool</A></DE-P>"
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 
-<visualisation-table 
+<library-table 
   name        = "PDL::Graphics::Karma"
   description = "<EN-P>An interface to the <A
 		 HREF="http://www.atnf.csiro.au/karma">Karma</A> visualisation
@@ -121,10 +127,12 @@ sein. </DE-P>
 		 HREF="http://www.atnf.csiro.au/karma">Karma</A>
 		 -Visualisierungsbibliothek. Falls diese installiert ist, wird
 		 automatisch das dazugehörige PDL-Modul erzeugt.</DE-P>"
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 
-<visualisation-table 
+<library-table 
   name        = "Chart::XMGR"
   description = "<en-p><A HREF="http://www.cpan.org/modules/by-module/Chart/">
 		 Chart::XMGR</A> uses the 
@@ -137,10 +145,12 @@ sein. </DE-P>
 		 <A HREF="http://plasma-gate.weizmann.ac.il/Grace/">XMGR</A>
 		 Plot-Programm. Dies ist nicht in PDL enthalten, kann aber mit
 		 Piddles umgehen.</de-p>"
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 
-<visualisation-table 
+<library-table 
   name        = "Gimp"
   description = "<en-p>The 
                  <A HREF="http://www.cpan.org/modules/by-module/Gimp/">Gimp</A>
@@ -152,15 +162,19 @@ sein. </DE-P>
 		 -Modul für Perl kann ebenfalls mit PDL verwendet werden. Die 
 		 Bilder in Gimp können mit Hilfe von PDL-Programmen aus 
 		 manipuliert werden.</de-p>"
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 
 
 <comment>
-<visualisation-table 
+<library-table 
   name        = ""
   description = ""
-  screenshot =  "&nbsp;"
+  homepage    = ""
+  download    = ""
+  screenshot  = ""
 >
 </comment>
 

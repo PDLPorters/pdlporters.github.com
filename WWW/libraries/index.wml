@@ -17,6 +17,7 @@
 
 #include '$(PDLROOT)/templates/top.wml'
 #include '$(PDLROOT)/menue.wml'
+#include 'defines.wml'
 
 <EN><H2>External Libraries</H2></EN>
 <DE><H2>Externe Bibliotheken</H2></DE>
@@ -47,22 +48,36 @@ finden. </DE-P>
 <TABLE border=1 width=100%>
 
 <TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
 </TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>  
+</TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
+  <EN><B>Ressources</B></EN>
+  <DE><B>Ressourcen</B></DE>  
 </TD>
 </TR>
 
 <library-table name        = "CFITSIO"
-               description = ""
+               description = "CFITSIO is a library you can use to handle data in
+                              FITS (Flexible Image Transportation System) 
+			      format."
+               homepage    = "http://xxx"			      
+               download    = "xxx"
 >	       
 
+<library-table name        = "NETCDF"
+               description = "NetCDF is ..."
+               download    = "http://www.perl.com/CPAN-local/modules/by-module/PDL/PDL-NetCDF-0.40.tar.gz"
+>	       
+</comment>
+
 <comment>
-<library-table name        = ""
+<library-table name        = "NDF"
                description = ""
 >	       
 </comment>

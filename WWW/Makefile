@@ -28,7 +28,7 @@ subdirs:
 		(cd visualisation && $(MAKE) all)
 		(cd maillists && $(MAKE) all)
 		(cd development && $(MAKE) all)
-		(cd team && ($MAKE) all)
+		(cd team && $(MAKE) all)
 
 index_de.html:	index.wml $(FRAMEWORK) menue.wml
 index_en.html:	index.wml $(FRAMEWORK) menue.wml

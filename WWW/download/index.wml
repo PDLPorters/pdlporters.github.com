@@ -142,7 +142,7 @@ write MPEG videos. This packet is needed to activate it.</P></EN>
 
 <TR>
 <TD bgcolor=#eeeeee width=30% valign=top>
-Slatec</TD>
+<A HREF="http://www.netlib.org/slatec/index.html">Slatec</A></TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
 <EN><P align=justify> Slatec fortran lib is included but requires a fortran

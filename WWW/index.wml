@@ -81,7 +81,7 @@ Bild auf einmal zu bearbeiten.</de-p>
 <es-p> PDL convierte el Perl en una libre lengua númerica y
 orden-orientada, similar (pero, creemos, superior) a los paquetes
 comerciales como IDL y MatLab.  Se puede escribir expreciones simplos
-en perl para manipular los órdenes númericos enteros de una vez.  Por
+en perl para manipular los órdenes numéricos enteros de una vez.  Por
 ejemplo, en <B>PDL</B> el perl variable <B>$a</B> puede contener un
 imagen de coma flotante con 1024x1024 pixeles.  Se usa solamente 4MB
 de recuerdo para almanecerlo, y expreciones como <B>$a=sqrt($a)+2</B>

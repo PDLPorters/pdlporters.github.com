@@ -94,7 +94,7 @@ auffangen der Ansicht zu kennzeichnen schreiben.
 </de-p>
 
 <es-p>
-Mi grupo de investigación usamos PDL para seguir millares de polos magnéticos en el sol.  La supercificie del sol es cuberta por polos magnéticos norte y sur.  Estos postes son constantemente emergándose, moviéndose, recombinándose, y disipándose.  Telescopios especiales, llamados <a href="http://soi.stanford.edu"><i>magnetographs</i></a>, pueden exhibir estos polos como puntos negros y blancos, permitiéndonos sondir el dínamo del sol.  El paquete del "Transform" de PDL hizo fácil quitemos efectos de la perspectiva de datos de telescopios espaciales, y escribir un programa de la visión artificial para identificar cada polo magnético en cada imagen. 
+Mi grupo de investigación usamos PDL para seguir millares de polos magnéticos en el sol.  La supercificie del sol está cubierta por polos magnéticos norte y sur.  Estos polos son constantemente emergándose, moviéndose, recombinándose, y disipándose.  Telescopios especiales, llamados <a href="http://soi.stanford.edu"><i>magnetographs</i></a>, pueden exhibir estos polos como puntos negros y blancos, permitiéndonos sondir el dínamo del sol.  El paquete del "Transform" de PDL hizo fácil quitemos efectos de la perspectiva de datos de telescopios espaciales, y escribir un programa de la visión artificial para identificar cada polo magnético en cada imagen. 
 </es-p>
 
 
@@ -107,7 +107,7 @@ Was mehr ist, ist PDL frei -- also können wir <a href="http://www.boulder.swri.e
 </de-p>
 
 <es-p>
-Por lo mas, PDL es libre -- por eso, ponemos distribuir <a
+Por lo mas, PDL es libre -- por eso, podemos distribuir <a
 href="http://www.boulder.swri.edu/swamis">nuestro programa</a> a
 quienquiera lo desea.
 </es-p>

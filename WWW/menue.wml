@@ -1,0 +1,79 @@
+#include "$(PDLROOT)/templates/menue_top.wml"
+
+<MENUEENTRY de-name1 = "Homepage"
+            de-link  = "$(PDLROOT)/index_de.html"
+	    en-name1 = "Homepage"
+	    en-link  = "$(PDLROOT)/index_en.html"
+            status   = "active"
+>	   
+
+<MENUEENTRY de-name1  = "Download"
+	    de-link   = "$(PDLROOT)/download/index_de.html"
+	    en-name1  = "Download"
+	    en-link   = "$(PDLROOT)/download/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Mailinglisten"
+	    de-link   = "$(PDLROOT)/maillists/index_de.html"
+	    en-name1  = "Mailing"
+	    en-name2  = "Lists"
+	    en-link   = "$(PDLROOT)/maillists/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Screenshots"
+	    de-link   = "$(PDLROOT)/screenshots/index_de.html"
+	    en-name1  = "Screenshots"
+	    en-link   = "$(PDLROOT)/screenshots/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Externe"
+            de-name2  = "Bibliotheken"
+	    de-link   = "$(PDLROOT)/libraries/index_de.html"
+	    en-name1  = "External"
+	    en-name2  = "Libraries"
+	    en-link   = "$(PDLROOT)/libraries/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Visualisierung"
+	    de-link   = "$(PDLROOT)/visualisation/index_de.html"
+	    en-name1  = "Visualisation"
+	    en-link   = "$(PDLROOT)/visualisation/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Online-"
+	    de-name2  = "Dokumentation"
+	    de-link   = "$(PDLROOT)/documentation/index_de.html"
+	    en-name1  = "Online"
+	    en-name2  = "Documentation"
+	    en-link   = "$(PDLROOT)/documentation/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Entwicklung"
+	    de-link   = "$(PDLROOT)/development/index_de.html"
+	    en-name1  = "Development"
+	    en-link   = "$(PDLROOT)/development/index_en.html"
+            status    = "active"
+>	  
+
+<MENUEENTRY de-name1  = "Das Team"
+	    de-link   = "$(PDLROOT)/team/index_de.html"
+	    en-name1  = "The Team"
+	    en-link   = "$(PDLROOT)/team/index_en.html"
+            status    = ""
+>	  
+
+<HR>
+
+<CENTER>
+<EN>PDL Development is powered by</EN>
+<IMG SRC="http://sourceforge.net/sflogo.php?group_id=612&type=1">
+</CENTER>
+
+
+#include "$(PDLROOT)/templates/menue_bottom.wml"

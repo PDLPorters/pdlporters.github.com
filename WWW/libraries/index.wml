@@ -198,7 +198,7 @@ sein. </DE-P>
 		HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and
 		build the module if they are present.</EN-P>
 
-		<DE-P>OpenGL ist der "de facto" Standard für moderne 3D
+		<DE-P>OpenGL ist der &quot;de facto&quot; Standard für moderne 3D
 		Graphikausgabe. Die Installationsscripte von PDL testen, ob
 		OpenGL oder der freie Clone  <A
 		HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> 

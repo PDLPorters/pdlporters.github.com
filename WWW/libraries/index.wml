@@ -63,11 +63,11 @@ finden. </DE-P>
 </TR>
 
 <library-table name        = "CFITSIO"
-               description = "CFITSIO is a library you can use to handle data in
+               description = "CFITSIO is a library you can use to handle data in the
                               FITS (Flexible Image Transportation System) 
 			      format."
-               homepage    = "http://xxx"			      
-               download    = "xxx"
+               homepage    = "http://hea-www.harvard.edu/~rpete/cfitsio/"			      
+               download    = ""
 >	       
 
 <library-table name        = "NETCDF"
@@ -82,6 +82,7 @@ finden. </DE-P>
 			      described in 
 			      <a href="http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_">
 			      Starlink User Note 33</a>.</EN-P>
+
 			      <DE-P>Dieses N-dimensionale Datenformat ist für 
 			      den Cross-Plattform-Einsatz entwickelt und wird 
 			      in 

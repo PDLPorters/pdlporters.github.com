@@ -133,8 +133,6 @@
 
 <TR>
 
-<empty-person>
-
 <person name     = "Robert Schwebel"
         email    = "robert@schwebel.de"
         url      = "http://www.schwebel.de"

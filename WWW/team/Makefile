@@ -27,7 +27,7 @@ index_en.html:		index.wml $(FRAMEWORK) ../menue.wml
 
 link:		
 		rm -f index.html
-		ln -s index_en.html index.html
+		cp index_en.html index.html
 
 clean:		
 		rm -fr *_en.html *_de.html *~

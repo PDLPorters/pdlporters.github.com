@@ -114,6 +114,13 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "So, 02.09.2000"
+      en-date = "Su, 2000/09/02"
+      en-text = "The 'bad value' support has been merged into the main CVS branch -
+                 check it out (DJB)" 
+      de-text = "Support für 'bad values'. (DJB)"
+>      
+
 <NEWS de-date = "Do, 10.07.2000"
       en-date = "Th, 2000/07/10"
       en-text = "A development version with 'bad value' support has been 

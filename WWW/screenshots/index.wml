@@ -211,9 +211,9 @@ die dazugehörigen Koordinatenwerte beinhalten.</de-p>
 
 <en-p>You can also take slices:</en-p>
 
-<en-p>Es können Schnitte durch den Datensatz gelegt werden: </de-p>
+<de-p>Es können Schnitte durch den Datensatz gelegt werden: </de-p>
 
-<pre>
+<PRE>
 
 <STRONG>perldl></STRONG> print $b;
 <STRONG>perldl></STRONG> print $b->slice(":,2:3");  # rows 2 and 3

@@ -36,7 +36,14 @@ for more details.
 </en-p>
 
 <de-p> Auf den folgenden Seiten finden Sie einige Beispiele die zeigen, wie PDL
-aussieht.</de-p>
+aussieht. Viele der Beispiele können auch direkt unter auf der <I>perldl</I>
+shell ausprobiert werden:
+<PRE>
+<CODE>
+ <STRONG>perldl></STRONG> demo
+</CODE>
+</PRE>
+</de-p>
 
 <p>
 <nl>

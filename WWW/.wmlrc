@@ -1,4 +1,4 @@
--DROOT~.
+-DPDLROOT~.
 -DIMAGES~images
--I~./templates
+-I~$(PDLROOT)/templates
 

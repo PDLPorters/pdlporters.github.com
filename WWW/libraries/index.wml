@@ -16,19 +16,43 @@
 #include '$(PDLROOT)/templates/top.wml'
 #include '$(PDLROOT)/menue.wml'
 
-<H2>External Libraries</H2>
+<EN><H2>External Libraries</H2></EN>
+<DE><H2>Externe Bibliotheken</H2></DE>
 
-<EN><P align=justify> One of the most powerful features of PDL is it's role as
+<EN-P> One of the most powerful features of PDL is it's role as
 an integration tool for a variety of external libraries. Not all of the
 features you can use with PDL come with the main package, there are lots of
 "wrapper" modules which act as a connection to other signal processing
-collections. </P></EN>
+collections. </EN-P>
+
+<DE-P> Eines der Features, die PDL so leistungsfähig machen, ist seine Funktion
+als Integrationswerkzeug für eine Reihe externer Libraries. Nicht alle dieser
+Bibliotheken sind in der PDL-Distribution selbste enthalten, bei vielen wird
+lediglich ein Wrapper-Modul für bestehende Bibliotheken mitgeliefert.</DE-P>
+
+<EN-P> You may also look at the <A
+HREF="$(PDLROOT)/visualisation/index_en.html">visualisation</A> page for modules
+dealing with visual data representation.</EN-P>
+
+<DE-P> Weitere Libraries, die zur Visualisierung von Daten dienen, sind auf der
+<A HREF="$(PDLROOT)/visualisation/index_de.html">Visualisierungs</A>-Seite zu
+finden. </DE-P>
+
+<BR><BR>
+
+<!-- ---------------------------------------------------------------------- -->
 
 <TABLE border=1 width=100%>
 
 <TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%>
+  <EN><B>Packet</B></EN>
+  <DE><B>Paket</B></DE>
+</TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%>
+  <EN><B>Description</B></EN>
+  <DE><B>Beschreibung</B></DE>  
+</TD>
 </TR>
 
 <TR>

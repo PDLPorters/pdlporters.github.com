@@ -47,10 +47,9 @@ vollständig sein kann, sollte man sich die Beispiele, die bei
 to PGPLOT. However if you want even better control of your plots
 you might want to include the PGPLOT module specifically:</en-p>
 
-<!-- this paragraph needs changing -->
-<de-p>Das PGPLOT-Modul wird standardmäßig eingebunden, wenn PDL aufgerufen wird.
-Möchte man eine gezieltere Kontrolle über seine Plots haben, sollte es explizit
-eingebunden werden:</de-p>
+<de-p>Das PDL::Graphics::PGPLOT-Modul stellt eine höher abstrahierte
+Schnittstelle zu PGPLOT zur Verfügung. Möchte man eine detailliertere Kontrolle
+über PGPLOT haben, sollte man das PGPLOT-Modul selbst einbinden:</de-p>
 
 <!-- ----- -->
 

@@ -42,11 +42,11 @@ How to publish these pages
 
 2) copy to SF
 
-  scp pdlwww.tar.gz your_user_id@shell.sf.net
+  scp pdlwww.tar.gz your_user_id@shell.sourcrforge.net:.
 
 3) login to shell server at SF
 
-  ssh your_user_id@shell.sf.net
+  ssh your_user_id@shell.sourceforge.net
 
 4) install files into testing arena
 
@@ -72,7 +72,8 @@ please ask for help on the mailing list.
 
 If you have not yet checked out the sourceforge utility
 scripts, do it now:
-
+	 
+  cd
   cvs -d :pserver:anonymous@cvs1:/cvsroot/pdl co sfscripts
 
 Now you should have a number of scripts in the directory sfscripts.

@@ -1,0 +1,17 @@
+<define-tag library-table whitespace=delete>
+<preserve name>
+<preserve description>
+<set-var %attributes>
+
+<TR>
+  <TD bgcolor=#eeeeee width="30%" valign=top>
+  <get-var name>
+  </TD>
+
+  <TD bgcolor=#eeeeee width="70%" valign=top>
+  <get-var description>
+  </TD>
+
+</TR>
+
+</define-tag>

@@ -30,7 +30,13 @@ index_en.html:	index.wml $(FRAMEWORK)
 
 clean:		
 		rm -fr *_en.html *_de.html *~
-#		(cd vita && $(MAKE) clean)
+		(cd screenshots && $(MAKE) clean)
+		(cd documentation && $(MAKE) clean)
+		(cd download && $(MAKE) clean)
+		(cd libraries && $(MAKE) clean)
+		(cd visualisation && $(MAKE) clean)
+		(cd maillists && $(MAKE) clean)
+		(cd development && $(MAKE) clean)
 
 distclean:
 		rm -fr *~

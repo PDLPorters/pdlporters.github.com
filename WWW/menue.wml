@@ -22,6 +22,14 @@
             status    = "active"
 >	  
 
+<MENUEENTRY de-name1  = "Erfolg-"
+            de-name2  = "geschichten"
+	    de-link   = "$(PDLROOT)/nifty/index_de.html"
+	    en-name1  = "Success"
+	    en-name2  = " Stories"
+	    en-link   = "$(PDLROOT)/nifty/index_en.html"
+            status    = "active"
+>	  
 <MENUEENTRY de-name1  = "Screenshots"
             de-name2  = "& Beispiele"
 	    de-link   = "$(PDLROOT)/screenshots/index_de.html"

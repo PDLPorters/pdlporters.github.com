@@ -4,10 +4,10 @@
 <comment> ---------------------------------------------------------- </comment>
 <HEAD*>
 <META* HTTP-EQUIV = "KEYWORDS" 
-       CONTENT    = "Schwebel"
+       CONTENT    = "PDL Perl Data Language"
 >
 <META* NAME       = "DESCRIPTION" 
-       CONTENT    = "Robert Schwebel"
+       CONTENT    = "PDL Perl Data Language"
 >
 <TITLE*>PDL - The Perl Data Language</TITLE*>
 </HEAD*>

@@ -57,6 +57,17 @@
 
 <empty-person>
 
+<person name     = "Karl Glazebrook"
+        email    = ""
+        url      = ""
+        reallife = ""
+        task     = ""
+>
+
+</tr>
+
+<TR>
+
 <person name     = "Doug Hunt"
         email    = "dhunt@ucar.edu"
         url      = "http://www.cosmic.ucar.edu"
@@ -66,6 +77,25 @@
 		    permitted by law.</P>" 
         task     = "<P align=justify> Author of PDL::NetCDF and PDL::Char.
                     Helping with PP optimization of late.</P>"
+>
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
+<person name     = "Tim Jenness"
+        email    = "tjenness@cpan.org"
+        url      = "http://www.jach.hawaii.edu/~timj/"
+        reallife = "Software engineer and Support Astronomer at the 
+	            James Clerk Maxwell Telescope"
+        task     = "Author of PDL::Options, PDL::IO::NDF and miscellaneous
+	            other things. My main contribution seems to be cajoling 
+		    people into doing things like the FITS reader or bad 
+		    pixel masking :-)"
 >
 
 </TR>

@@ -4,7 +4,7 @@ How to maintain MANIFEST.SKIP
 MANIFEST.SKIP is used to speficy files
 which should *not* be included with
 the published web pages. For example, all
-.wml will be included and anything else
+.wml will be excluded and anything else
 that is not part of the actual published
 should be similarly specified. In MANIFEST.SKIP
 use the same regular expressions that you use

@@ -107,13 +107,32 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 <!-- ---------------------------------------------------------------------- -->
 
 <TABLE border=1 width=100%>
-<TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
+<TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B>
+<FONT SIZE="-2">
+<DE><A HREF="oldnews_de.html">alte Einträge...</A></DE>
+<EN><A HREF="oldnews_en.html">old Entries...</A></DE>
+</FONT>
+</CENTER></TD></TR>
 
 <NEWS de-date = "Do, 10.07.2000"
       en-date = "Th, 2000/07/10"
-      en-text = "A development version with 'bad value' support has been started
-                 (see pdl-porters mailing list) (DJB)"
-      de-text = ""
+      en-text = "A development version with 'bad value' support has been 
+                 started (see pdl-porters <A HREF="maillists/index_en.html">
+		 mailing list</A>) (DJB)"
+      de-text = "Es wurde begonnen, Support für 'bad values' zu implementieren.
+                 Die Diskussion dazu findet auf der pdl-porters-
+		 <A HREF="maillists/index_de.html">Mailingliste</A>
+		 statt (DJB)"
+>      
+
+<NEWS de-date = "Do, 29.06.2000"
+      en-date = "Th, 2000/06/29"
+      en-text = "A new Windows version is out. See <A
+                 HREF="download/index_en.html">download page</A> for 
+		 details (RS)"
+      de-text = "Eine neue Windows-Version ist fertig. Nähere Details befinden
+                 sich auf der <A HREF="download/index_de.html">Download</A>-
+		 Seite. (RS)"
 >      
 
 <NEWS de-date = "Do, 22.06.2000"
@@ -138,38 +157,6 @@ Kernfeatures von <B>PDL</B>.</DE-P>
       de-text = "Es gibt jetzt <A HREF="$(PDLROOT)/screenshots/index_de.html">
                  weitere Beispiele</A>, die PDL in Aktion zeigen! (DJB)"
 >      
-
-<NEWS de-date = "Mo, 17.04.2000"
-      en-date = "Mo, 2000/04/17"
-      de-text = "Einige Erweiterungen der neuen Homepage eingebaut. (RS)"
-      en-text = "Some extensions to the new homepage added (RS)"
->      
-
-<NEWS de-date = "Mi, 5.04.2000"
-      en-date = "We, 2000/04/05"
-      de-text = "PDL 2.005 ist ab sofort verfügbar. Diese Version arbeitet
-	nun auch ohne Probleme mit perl 5.6. (CS)"
-      en-text = "PDL 2.005 is released. It is mainly a bugfix
-	release to make PDL work with perl 5.6. (CS)"
->      
-
-
-<NEWS de-date = "Sa, 18.12.1999"
-      en-date = "Sa, 1999/12/18"
-      de-text = "Neue experimentelle PDL-Webseite mit WML erstellt.(RS)"
-      en-text = "New experimental PDL webpage constructed with WML. (RS)"
->      
-
-<NEWS de-date = "Fr, 10.12.1999"
-      en-date = "Fr, 1999/12/10"
-      de-text = "Das <A
-      HREF="https://www.sourceforge.net/project/?form_grp=612">
-      PDL Entwickungssystem</A> befindet sich jetzt bei Sourceforge."
-
-      en-text = "The <A
-      HREF="https://www.sourceforge.net/project/?form_grp=612">
-      PDL development tree</A> is now on CVS at Sourceforge."
->
 
 </TABLE>
 

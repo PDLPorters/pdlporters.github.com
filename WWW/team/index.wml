@@ -72,6 +72,23 @@
 
 <TR>
 
+<person name     = "Tuomas J. Lukka"
+        email    = "lukka@iki.fi"
+        url      = "http://iki.fi/lukka"
+        reallife = "Computer Science Researcher, University of Jyväskylä"
+        task     = "PP, TriD, etc. Much of the slightly strange but useful
+                    stuff in 2.0. Known for missing self-imposed deadlines
+                    on releases."
+>
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
 <person name     = "Robert Schwebel"
         email    = "robert@schwebel.de"
         url      = "http://www.schwebel.de"
@@ -92,13 +109,9 @@
 		    of the <I>real</I> developers.</P>"
 >
 
-<empty-person>
-
 </TR>
 
 <TR>
-
-<empty-person>
 
 <person name     = "Christian Soeller"
         email    = "c.soeller@auckland.ac.nz"
@@ -109,9 +122,13 @@
         task     = "various bits of PDL; occasional Core and PP hacking"
 >	
 
+<empty-person>
+
 </TR>
 
 <TR>
+
+<empty-person>
 
 <person name     = "Fridolin Tux"
         email    = "&nbsp;"
@@ -126,8 +143,6 @@
 		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
 		    spectroscopy software</A>.</P>"
 >
-
-<empty-person>
 
 </TR>
 

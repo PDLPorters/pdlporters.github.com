@@ -109,6 +109,13 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "Do, 10.07.2000"
+      en-date = "Th, 2000/07/10"
+      en-text = "A development version with 'bad value' support has been started
+                 (see pdl-porters mailing list) (DJB)"
+      de-text = ""
+>      
+
 <NEWS de-date = "Do, 22.06.2000"
       en-date = "Th, 2000/06/22"
       en-text = "PDL 2.1.1 is out. A bugfix release to fix PDL +

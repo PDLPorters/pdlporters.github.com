@@ -1,0 +1,19 @@
+TODO:
+
+- Documentation should be regenerated from the current PDL version (CS)
+
+- link to PDL::Index from documentation page (CS)
+
+- link to PDL::Impatient from documentation page (CS)
+
+- a new entry 'Bugs' in the column on the left, should have some info
+  on/links to the bug database at sourceforge and maybe the contents of
+  the Known_Problems file (CS)
+
+- generate webpages with example code for the screenshots page (RS)
+
+- add screenshots and code for the four liner demos (RS)
+
+- external libraries section has to be written (RS)
+
+- "the team" is still missing (RS)

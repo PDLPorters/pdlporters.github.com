@@ -53,12 +53,22 @@ angewendet werden kann. Viele der Beispiele können auch direkt unter der
 <li> <de><a href="$(PDLROOT)/demos/plot2D_de.html">2D Plots mit PGPLOT</a></de>
      <en><a href="$(PDLROOT)/demos/plot2D_en.html">2D plotting with
      PGPLOT</a></en>
+<li> <de><a href="$(PDLROOT)/screenshots/index_de.html#trid">3D Plots</a></de>
+     <en><a href="$(PDLROOT)/screenshots/index_en.html#trid">3D plots</a></en>
+</nl>
+</p>
+
+<en-p>
+The following are only available using a recent CVS version of PDL which
+has been compiled with support for bad values:
+</en-p>
+
+<P>
+<nl>
 <li> <de><a href="$(PDLROOT)/demos/bad1_de.html">Eine PDL tour (XXX)</a></de>
      <en><a href="$(PDLROOT)/demos/bad1_en.html">Tour of the bad value support in PDL</a></en>
 <li> <de><a href="$(PDLROOT)/demos/bad2_de.html">Eine PDL tour mit PGPLOT (XXX)</a></de>
      <en><a href="$(PDLROOT)/demos/bad2_en.html">Graphical tour of the bad value support in PDL</a></en>
-<li> <de><a href="$(PDLROOT)/screenshots/index_de.html#trid">3D Plots</a></de>
-     <en><a href="$(PDLROOT)/screenshots/index_en.html#trid">3D plots</a></en>
 </nl>
 </p>
 

@@ -59,7 +59,7 @@
 
 <person name     = "Karl Glazebrook"
         email    = "kgb@pha.jhu.edu"
-        url      = ""
+        url      = "http://www.pha.jhu.edu/~kgb/"
         reallife = "Professor at Johns Hopkins University, Dept. of 
 	            Physics and Astronomy"
         task     = "Creator of PDL"

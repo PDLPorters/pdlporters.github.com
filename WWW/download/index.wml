@@ -61,11 +61,21 @@
 <download-table
   name        = "<EN>PDL for Windows</EN>
                  <DE>PDL für Windows</DE>"
-  description = "<EN-P> An experimental windows version with pgplot support is
-                 available.</EN-P>
-		 <DE-P> Eine experimentelle Windows-Version mit
-		 pgplot-Unterstützung ist verfügbar.</DE-P>"
-  binary      = "ftp://ftp.jach.hawaii.edu/pub/jcmt/timj/perl/PDL/"
+  description = "<EN-P> An experimental windows version (ppm) for
+		activestate perl 5.6.0 is
+  <A HREF="http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip">available</A>.
+		Tim Jenness has also made PGPLOT (used for 2D data
+		display) available. The PGPLOT module still has some
+		problems. Check
+<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2000-07/msg00000.html">this message</A> for details.
+                 </EN-P>
+		 <DE-P> Eine experimentelle Windows-Version
+		 <A HREF="http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip">ist verfügbar</A>. Tim Jennes hat ausserdem eine
+		erste Version von PGPLOT für win32 kompiliert. Es gibt
+		allerdings noch einige praktische Schwachstellen. Lese
+		<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2000-07/msg00000.html">diese Nachricht</A>,
+		um nähere Einzelheiten zu erfahren.</DE-P>"
+  binary      = "http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip"
 >  		 
 
 <download-table

@@ -16,8 +16,8 @@ INC_TEMPLATES = -Itemplates
 %.html:	
 		$(WML) $(INC_TEMPLATES) $< -o $@
 
-all:		index_de.html index_en.html \
-		oldnews_de.html oldnews_en.html \
+all:		index_de.html index_en.html index_es.html\
+		oldnews_de.html oldnews_en.html oldnews_es.html\
 		subdirs \
 		link
 
@@ -30,12 +30,15 @@ subdirs:
 		(cd development && $(MAKE) all)
 		(cd team && $(MAKE) all)
 		(cd demos && $(MAKE) all)
+	        (cd nifty && $(MAKE) all)
 
 index_de.html:	index.wml $(FRAMEWORK) menue.wml
 index_en.html:	index.wml $(FRAMEWORK) menue.wml
+index_es.html:	index.wml $(FRAMEWORK) menue.wml
 
 oldnews_de.html:oldnews.wml $(FRAMEWORK) menue.wml
 oldnews_en.html:oldnews.wml $(FRAMEWORK) menue.wml
+oldnews_es.html:oldnews.wml $(FRAMEWORK) menue.wml
 
 link:		
 		rm -f index.html

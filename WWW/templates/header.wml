@@ -3,6 +3,7 @@
 #use wml::fmt::isolatin
 <lang:new id=en short>
 <lang:new id=de short>
+<lang:new id=es short>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 
 <HTML>

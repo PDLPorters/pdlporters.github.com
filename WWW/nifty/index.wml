@@ -26,22 +26,39 @@
 <DE><H2> PDL Erfolggeschichten </H2></DE>
 
 <de-p>
-<i>Es tut uns leid, aber wir haben keine deutsche Übersetzung fúr diesen Abschnitt.  Wenn Sie duetsches und englisches sprechen, erwägen Sie bitte, uns zu ulfen übersetzen.</i>
+<i>Sind hier einige Resultate, die mit PDL erreicht worden sind:</i>
 </de-p>
 
 <en-p>Here are some real-world results that have been obtained with PDL:
-<ul>
-<li><a href="#magnetic">Artificial vision of magnetic fields</a>
-<li><a href="#brain">Brain scan visualization</a>
-<li><a href="#galaxy-gas">High-speed galactic winds</a>
-</ul>
 </en-p>
+
+<ul>
+<li><a href="#magnetic">
+	<en>Artificial vision of magnetic fields</en>
+	<de>Künstlicher Anblick von magnetischem fängt</de>
+</a>
+
+<li><a href="#brain">
+	<en>Brain scan visualization</en>
+	<de>Gehimscan-Sichtbarmachung</de>
+</a>
+
+
+<li><a href="#galaxy-gas">
+	<en>High-speed galactic winds</en>
+	<de>Galaktische Schnellwinde</de>
+</a>
+
+</ul>
 
 <hr>
 <a name="magnetic">
 
 <en-p><h3>Artificial vision of magnetic fields</h3>
 </en-p>
+
+<de-p><h3>Künstlicher Anblick von magnetischem fängt auf</h3>
+</de-p>
 
 <en-p>
 My research group uses PDL to track thousands of magnetic features on
@@ -56,21 +73,42 @@ data</a>, and to write an artificial vision application to identify
 every magnetic feature in the field of view.
 </en-p>
 
-<en-p> 
+<de-p> Meine Forschungsgruppe verwendet PDL, um Tausenden der
+magnetischen Eigenschaften auf der Sonne aufzuspüren. Die
+durchschüttelnoberfläche der Sonne wird durch magnetischen Norden und
+Südpole umfaßt, die ständig auftauchend zerstreuend sind, bewegend,
+wiederverbinden, und. Die speziellen Teleskope, die <a href="http://soi.stanford.edu"><i>Magnetographen</i></a>
+genannt werden, können diese Pfosten als schwarze und weiße Punkte
+ansehen und uns erlauben, den Dynamo des Sonnen zu prüfen. PDLs
+wandeln das Paket um, das es einfach gebildet wird, damit wir
+Perspektiveeffekte von den <a href="http://sohowww.nascom.nasa.gov">Raumfahrzeugdaten entfernen</a>, und eine
+künstliche Anblickanwendung, um jede magnetische Eigenschaft in
+auffangen der Ansicht zu kennzeichnen schreiben.  
+</de-p>
+
+
+
+<en-p>
 What's more, PDL is free -- so we can distribute <a href="http://www.boulder.swri.edu/swamis">our software</a> for anyone to use. 
 </en-p>
 
-<en-p>
+<de-p> 
+Was mehr ist, ist PDL frei -- also können wir <a href="http://www.boulder.swri.edu/swamis">unsere Software</a> verteilen, damit jedermann verwendet.
+</de-p>
+
+
+<p>
 <i>--Craig DeForest, deforest (at) boulder (dot) swri (dot) edu</i>
-</en-p>
+</p>
 
 <table>
 <tr><td><center><a href="mag-qtm.mpg"><img src="mag-qtm.png" height=300 width=300></a></center><br>
 	<en>Tracked magnetogram shows about 1/10 of the surface of the Sun, reprojected to appear as if you're hovering immediately over it (click for movie). Our software has identified and numbered every statistically significant feature.</en>
-
+	<de>Aufgespürtes magnetogram zeigt ungefähr 1/10 der Oberfläche der Sonne, reprojected, um zu scheinen, als ob Sie sofort rüber es schweben (Klicken für Film). Unsere Software hat jede statistisch bedeutende Eigenschaft gekennzeichnet und numeriert.</de>
 	<td>&nbsp;&nbsp;&nbsp;
     <td><center><a href="mag-qcm.mpg"><img src="mag-qcm.png" height=300 width=300></a></center><br>
 	<en>Here, poles that appear in N/S pairs are marked by yellow highlights.  Single north or south pole appearances (in apparent but not real violation of physics) are marked by blue highlights.  Flux is emerging on scales too small for the telescope to fully resolve it.</en>
+	<de>Hier werden Pfosten, die in den N/S Paaren erscheinen, durch gelbe Höhepunkte gekennzeichnet. Aussehen des einzelnen Nordens oder des Südpols (in der offensichtlichen aber nicht realen Verletzung von Physik) wird durch blaue Höhepunkte gekennzeichnet. Fluß taucht auf den Skalen auf, die damit das Teleskop es völlig zu klein sind, behebt.</de>
 
 </table>
 
@@ -80,6 +118,9 @@ What's more, PDL is free -- so we can distribute <a href="http://www.boulder.swr
 
 <en-p><h3>Visualization of my brain</h3>
 </en-p>
+
+<de-p><h3>Sichtbarmachung meines Gehims</h3></he>
+</de-p>
 
 <en-p> 
 <a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> is
@@ -91,10 +132,23 @@ with activations in my auditory cortex while I listened to music.
 They were created under MacOS X.
 </en-p>
 
-<en-p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
-</en-p>
+<de-p> 
+<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a>ist
+ein sehr einfaches Werkzeug, das ich für Betrachtung Funktions-MRI
+Daten herstellte, völlig geschrieben in Perl mit PDL. Was über es nett
+ist, ist, daß es Sie gleichzeitig drei Flächen durch das Gehirn
+ansehen und sie in 3d drehen läßt (sehen Sie unten). Diese Bilder
+zeigen mein eigenes Gehirn, überlagert mit Aktivierungen in meiner
+Gehörrinde, während ich Musik hörte. Sie wurden unter MacOS X
+hergestellt.  
+</de-p>
+
+
+<p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
+</p>
 
 <p>
+<center>
 <table><tr>
 <td><center><img src="brain-1.jpg"></center>
 <td rowspan=2>&nbsp;&nbsp;&nbsp;
@@ -103,6 +157,7 @@ They were created under MacOS X.
 <td rowspan=2><img src="brain-4.jpg">
 <tr><td><center><img src="brain-2.jpg"></center>
 </table>
+</center>
 
 <hr>
 <a name="galaxy-gas">
@@ -110,6 +165,8 @@ They were created under MacOS X.
 <en-p><h3>High speed galactic winds</h3>
 </en-p>
 
+<de-p><h3>Galaktische Schnellwinde</h3>
+</de-p>
 
 
 <p>
@@ -124,10 +181,19 @@ manipulate 3-D radio science datacubes in Perl until I met PDL.
 Thanks!
 </en-p>
 
+<de-p> Ich tat viel der Datenanalyse für meine Ph.D. These mit PDL und
+erhielt ein Aas Pressekommuniquã© aus ihm heraus. Ich stellte nie vor,
+mich in der Lage zuSEIN, wissenschaft 3-D Daten-Würfel in Perl zu
+manipulieren Radio, bis ich PDL traf. Danke!
+</de-p>
 
 <en-p>This optical image of the Whirlpool Galaxy (M51) shows the regions
 of high speed galactic winds that I discovered.
 </en-p>
+
+<de-p>Dieses optische Bild der Strudel-Galaxie (M51) zeigt die
+Regionen der galaktischen Schnellwinde, daß ich entdeckte.
+</de-p>
 
 <en-p><i>--Eric Miller ( milleric (at) space (dot) mit (dot) edu )</i>
 </en-p>

@@ -114,46 +114,30 @@ Kernfeatures von <B>PDL</B>.</de-p>
 </FONT>
 </CENTER></TD></TR>
 
-<NEWS de-date = "6.1.2004"
-      en-date = "2004/01/06"
-      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>
+
+<NEWS de-date = "28.12.2004"
+      en-date = "2004/12/28"
+      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.2.tar.gz?download">PDL 2.4.2</A>
 		 is available on
 		 <A HREF="http://www.sourceforge.net">Sourceforge</A>.
-	         Mainly bug fixes and some new features, details are in the
-                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=207935">release notes</A>. (CS)"
+	         Mainly bug fixes and polishing.  Some new features, such
+	         as FITS table I/O.  Details are in the
+                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=292947">release notes</A>. (CD)"
       de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>
 		 ist  ab sofort bei
 		 <A HREF="http://www.sourceforge.net">Sourceforge</A>
-		 erhältlich. Viele Bugs wurden korrigiert und einige
-		 neue Funktionen wurden implementiert. Details entnehme
-	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=207935">
-		 Freigabe Notizen (AKA Release Notes)</A>. (CS)"
+		 erhältlich. Einige Wanzen waren örtlich fesgelegt und
+		 Eigenschaften wurden poliert.  Einige neue 
+	         Eigenschaften, wie binäre FITS-Tabelle I/O, wurden 
+		 hinzugefügt. Details entnehme
+	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=292947">
+		 Freigabe Notizen (AKA Release Notes)</A>. (CD)"
 >
 
-<NEWS de-date = "25.5.2003"
-      en-date = "2003/05/25"
-      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.0.tar.gz?download">PDL 2.4.0</A>
-		 is available on
-		 <A HREF="http://www.sourceforge.net">Sourceforge</A>.
-	         A lot of bug fixes and new features, details are in the
-                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=161098">release notes</A>. (CS)"
-      de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.0.tar.gz?download">PDL 2.4.0</A>
-		 ist  ab sofort bei
-		 <A HREF="http://www.sourceforge.net">Sourceforge</A>
-		 erhältlich. Viele Bugs wurden korrigiert und eine Menge
-		 neuer Funktionen sind implementiert. Details entnehme
-	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=161098">
-		 Freigabe Notizen (AKA Release Notes)</A>. (CS)"
->
-
-<NEWS de-date = "25.5.2003"
-      en-date = "2003/05/25"
-      en-text = "Web page updates are available again. PDL development never
-		 stopped during the time of web update silence."
-      de-text = "Web Seiten updates werden wieder gemacht. Die PDL
-		 Entwicklung ist waerend unsere Web Sensepause unermuedlich
-		 weitergegangen."
->
+<NEWS de-date = "28.12.2004"
+      en-date = "2004/12/28"
+      en-text = "PDL RESULTS IN THE NEWS:  I am assembling a web page of science results, web pages, and interesting plots that were made with PDL.  Some examples include the discovery of <a href="http://www.space.com/businesstechnology/technology/technovel_sunsound_041214.html">\"ultrasound\" on the Sun</a>, and the <a href="http://www.space.com/scienceastronomy/gemini_survey_040105.html">presence of mature galaxies</a> in the young Universe.  If you have a nifty plot or a nice web page you'd like to show off, please send me a note: deforest (at) boulder (dot) swri (dot) edu. (CD)"
+>	
 
 </TABLE>
 

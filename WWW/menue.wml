@@ -26,7 +26,7 @@
             de-name2  = "geschichten"
 	    de-link   = "$(PDLROOT)/nifty/index_de.html"
 	    en-name1  = "Success"
-	    en-name2  = " Stories"
+	    en-name2  = "Stories"
 	    en-link   = "$(PDLROOT)/nifty/index_en.html"
             status    = "active"
 >	  

@@ -1,0 +1,59 @@
+<define-tag person whitespace=delete>
+<preserve name>
+<preserve email>
+<preserve url>
+<preserve reallife>
+<preserve task>
+<set-var %attributes>
+
+<TD width="50%">
+
+  <TABLE width="100%" border=1>
+
+  <TR>
+    <TD width="20%" bgcolor="#eeeeee" valign=top>Name:</TD>
+    <TD width="80%" valign=top bgcolor="#ffff80"><get-var name></TD>
+  </TR>
+  
+  <TR>
+    <TD width="20%" bgcolor="#eeeeee" valign=top>eMail:</TD>
+    <TD width="80%" valign=top>
+    <A HREF="mailto:<get-var email>"><get-var email></A></TD>
+  </TR>
+  
+  <TR>
+    <TD width="20%" bgcolor="#eeeeee" valign=top>Homepage:</TD>
+    <TD width="80%" valign=top>
+    <A HREF="<get-var url>"><get-var url></TD>
+  </TR>
+  
+  <TR>
+    <TD width="20%" bgcolor="#eeeeee" valign=top>Real life:</TD>
+    <TD width="80%" valign=top>
+    <get-var reallife></TD>
+  </TR>
+
+  <TR>
+    <TD width="20%" bgcolor="#eeeeee" valign=top>PerlDL:</TD>
+    <TD width="80%" valign=top>
+    <get-var task></TD>
+  </TR>
+  
+  </TABLE>
+
+</TD>
+
+
+</define-tag>
+
+<define-tag empty-person whitespace=delete>
+<preserve name>
+<preserve email>
+<preserve url>
+<set-var %attributes>
+
+<TD width="50%">
+&nbsp;
+</TD>
+</define-tag>
+

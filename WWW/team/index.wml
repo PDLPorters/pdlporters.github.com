@@ -1,0 +1,78 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - <EN>The Team</EN><DE>Das Team</DE></TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
+
+<set-var doctype=html>
+
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
+#include 'defines.wml'
+
+<EN><H2> The Team </H2></EN>	
+<DE><H2> Das Team </H2></DE>
+
+<TABLE width="100%" border=0>
+
+<TR>
+
+<person name     = "Robert Schwebel"
+        email    = "robert@schwebel.de"
+        url      = "http://www.schwebel.de"
+	reallife = "<P align=justify> I'm a hard- and software engineer working 
+	            for <A HREF="http://www.zeutec.de">Zeutec 
+		    Optoelektronik</A>, a small german company making 
+		    spectroscopy components for chemical applications. </P>
+		    <P align=justify> In private I'm an active amateur 
+		    astronomer, mainly interested in observation of planets.</P> 
+		    <P align=justify> For more information about what I'm 
+		    doing please have a look at my 
+		    <A HREF="http://www.schwebel.de/index_en.html">private 
+		    homepage</A>.</P>"
+         task    = "<P align=justify> I'm maintainign the web pages for PDL. 
+	            As I'm more a PDL user than a hardcore developer 
+		    <CODE>;-)</CODE> my team activities consist mostly of 
+		    writing bug reports and enjoying the quick response time
+		    of the <I>real</I> developers.</P>"
+>
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
+<person name     = "Fridolin Tux"
+        email    = "&nbsp;"
+        url      = "&nbsp;"
+	reallife = "<P align=justify> I'm Robert's Linux penguin. Most of my
+	            daytime I'm spending with searching for fish in his 
+		    fridge.</P>"
+        task     = "<P align=justify> My task is to warn Robert if he forgets
+	            sleeping while programming PDL programs, organizing the
+		    <A HREF="http://Braunschweiger.LinuxTage.de">Braunschweiger
+		    Linux-Days</A> or writing 
+		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
+		    spectroscopy software</A>.</P>"
+>
+
+
+
+</TR>
+
+</TABLE>
+
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include '$(PDLROOT)/templates/bottom.wml'

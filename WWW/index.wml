@@ -109,6 +109,14 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "Do, 22.06.2000"
+      en-date = "Th, 2000/06/22"
+      en-text = "PDL 2.1.1 is out. A bugfix release to fix PDL +
+		 'usethreads=y' (perls without threading are unaffected). (CS)"
+      de-text = "PDL 2.1.1 ist verfügbar. Eine reine Bugfix Version,
+		 die ein Problem mit PDL + 'usethreads=y' behebt. (CS)"
+>      
+
 <NEWS de-date = "Mi, 7.06.2000"
       en-date = "We, 2000/06/07"
       en-text = "PDL 2.1 is out. Speed up of ops on small piddles. (CS)"

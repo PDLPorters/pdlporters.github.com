@@ -113,8 +113,10 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 
 <NEWS de-date = "So, 28.05.2000"
       en-date = "Su, 2000/05/28"
-      en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more examples</A> 
-                 of PDL in action (DJB)"
+      en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more
+		 examples</A>  of PDL in action (DJB)"
+      de-text = "Es gibt jetzt <A HREF="$(PDLROOT)/screenshots/index_de.html">
+                 weitere Beispiele</A>, die PDL in Aktion zeigen! (DJB)"
 >      
 
 <NEWS de-date = "Mo, 17.04.2000"

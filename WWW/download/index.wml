@@ -59,6 +59,16 @@
 >
 
 <download-table
+  name        = "<EN>PDL for Windows</EN>
+                 <DE>PDL für Windows</DE>"
+  description = "<EN-P> An experimental windows version with pgplot support is
+                 available.</EN-P>
+		 <DE-P> Eine experimentelle Windows-Version mit
+		 pgplot-Unterstützung ist verfügbar.</DE-P>"
+  binary      = "ftp://ftp.jach.hawaii.edu/pub/jcmt/timj/perl/PDL/"
+>  		 
+
+<download-table
   name        = "<EN>CVS Server</EN>
                  <DE>CVS Server</DE>"
   description = "<EN-P>The latest source code is available via

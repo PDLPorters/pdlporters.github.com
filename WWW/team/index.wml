@@ -57,6 +57,19 @@
 
 <empty-person>
 
+<person name = "Craig DeForest"
+        email = "deforest@boulder.swri.edu"
+	url = "http://www.boulder.swri.edu/~deforest"
+	reallife = "I am a solar astrophysicist at Southwest Research
+	Institute.  I use PDL for image processing, artificial vision,
+        and magnetohydrodynamic modeling."
+	task = "Module development & debugging, generalized
+	        itch-scratching, and official curmudgeon."
+>
+
+<TR>
+
+
 <person name     = "Karl Glazebrook"
         email    = "kgb@pha.jhu.edu"
         url      = "http://www.pha.jhu.edu/~kgb/"
@@ -64,10 +77,13 @@
 	            Physics and Astronomy"
         task     = "Creator of PDL"
 >
+<empty-person>
 
 </tr>
 
 <TR>
+
+<empty-person>
 
 <person name     = "Doug Hunt"
         email    = "dhunt@ucar.edu"
@@ -80,13 +96,11 @@
                     Helping with PP optimization of late.</P>"
 >
 
-<empty-person>
 
 </TR>
 
 <TR>
 
-<empty-person>
 
 <person name     = "Tim Jenness"
         email    = "tjenness@cpan.org"
@@ -98,10 +112,12 @@
 		    people into doing things like the FITS reader or bad 
 		    pixel masking :-)"
 >
+<empty-person>
 
 </TR>
 
 <TR>
+<empty-person>
 
 <person name     = "Tuomas J. Lukka"
         email    = "lukka@iki.fi"
@@ -112,7 +128,6 @@
                     on releases."
 >
 
-<empty-person>
 
 </TR>
 
@@ -140,9 +155,14 @@
 		    of the <I>real</I> developers.</P>"
 >
 
+<empty-person>
+
+
 </TR>
 
 <TR>
+
+<empty-person>
 
 <person name     = "Christian Soeller"
         email    = "c.soeller@auckland.ac.nz"
@@ -153,13 +173,11 @@
         task     = "various bits of PDL; occasional Core and PP hacking"
 >	
 
-<empty-person>
 
 </TR>
 
 <TR>
 
-<empty-person>
 
 <person name     = "Fridolin Tux"
         email    = "&nbsp;"
@@ -174,6 +192,8 @@
 		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
 		    spectroscopy software</A>.</P>"
 >
+
+<empty-person>
 
 </TR>
 

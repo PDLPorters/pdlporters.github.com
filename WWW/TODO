@@ -1,19 +1,25 @@
 TODO:
 
-- Documentation should be regenerated from the current PDL version (CS)
+- check and correct the english pages
 
-- link to PDL::Index from documentation page (CS)
+- add hint to binaries (rpm/debian)
 
-- link to PDL::Impatient from documentation page (CS)
+- generate a new FAQ (Jarle?)
+
+- Documentation should be regenerated from the current PDL version
+
+- link to PDL::Index from documentation page
+
+- link to PDL::Impatient from documentation page
 
 - a new entry 'Bugs' in the column on the left, should have some info
   on/links to the bug database at sourceforge and maybe the contents of
-  the Known_Problems file (CS)
+  the Known_Problems file
 
-- generate webpages with example code for the screenshots page (RS)
+- generate webpages with example code for the screenshots page (Robert)
 
-- add screenshots and code for the four liner demos (RS)
+- add screenshots and code for the four liner demos 
 
-- external libraries section has to be written (RS)
+- external libraries section has to be written
 
-- "the team" is still missing (RS)
+- "the team" is still missing

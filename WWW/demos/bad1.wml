@@ -23,16 +23,31 @@
 <HR>
 
 <EN><H2> Tour of the bad value support in PDL </H2></EN>
+<DE><H2> Einführung zu "bad values" in PDL</H2></DE>
 
 <en-p>
 Each piddle contains a flag - accessible via the badflag() method - 
 which indicates whether:
 </en-p>
 
+<de-p>
+In jeder PDL-Variable gibt es ein Flag (erreichbar über die
+badflag()-Funktion), das folgendes besagt:
+</de-p>
+
+<!-- ----- -->
+
 <en-p>
 &nbsp;&nbsp;&nbsp;       the piddle contains no bad values (flag equals 0)<BR>
 &nbsp;&nbsp;&nbsp;       the piddle *MAY* contain bad values (flag equals 1)<BR>
 </en-p>
+
+<de-p>
+&nbsp;&nbsp;&nbsp;       Im piddle sind keine "bad values" vorhanden: Flag ist 0<BR>
+&nbsp;&nbsp;&nbsp;       Das piddle *kann* "bad values" beinhalten: Flag ist 1<BR>
+</de-p>
+
+<!-- ----- -->
 
 <en-p>
 If the flag is set, then the routines (well, those that have been
@@ -40,12 +55,25 @@ converted) will process these bad values correctly, otherwise they
 are ignored. 
 </en-p>
 
+<de-p>
+Ist das Flag gesetzt, können die Routienen, die bereits "bad values"
+unterstützen, korrekt mit diesen umgehen. Andernfalls werden sie ignoriert.
+</de-p>
+
+<!-- ----- -->
+
 <en-p>
 The code has been written so as to provide as little overhead as
 possible; therefore there should be almost no difference in the
 time it takes to process piddles which do not have their bad flag 
 set.
 </en-p>
+
+<de-p>
+Der Code wurde so implementiert, daß durch den "bad value"-Support möglichst
+wenig zusätzlicher Aufwand erzeugt wird; dadurch sollte bei piddles, bei denen
+das Flag nicht gesetzt ist, nahezu kein Performanceunterschied spürbar sein. 
+</de-p>
 
 <!-- ----- -->
 
@@ -217,11 +245,18 @@ Whereas the bad value for $a is: -1.79769313486232e+308
 <!-- ----- -->
 
 <en-p>
-
 Many of the 'core' routines have been converted to handle bad values.
 However, some (including most of the additional modules) have not,
 either because it does not make sense or its too much work to do! 
 </en-p>
+
+<de-p>
+Der überwiegende Teil der 'core'-Routinen wurde bereits mit "bad value"-Support
+versehen. Bei den meisten Zusatz-Modulen ist dies allerdings noch nicht der
+Fall!
+</de-p>
+
+<!-- ----- -->
 
 <en-p>
 To find out the status of a particular routine, use the 'badinfo'
@@ -229,8 +264,14 @@ command in perldl (this information is also included when you do
 'help'), or the '-b' switch of pdldoc.
 </en-p>
 
+<de-p>
+Der Status einer Routine kann mit dem 'badinfo'-Kommando auf der perldl
+Kommandozeile abgefragt werden und wird auf den 'help'-Seiten angezeigt. pdldoc
+zeigt den Status bei Angabe der Option '-b' an. 
+</de-p>
+
 <!-- ---------------------------------------------------------------------- -->
 
-#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_db.wml"
 #include "$(PDLROOT)/templates/bottom.wml"
 

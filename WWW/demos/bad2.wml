@@ -23,6 +23,7 @@
 <HR>
 
 <EN><H2> Graphical tour of the bad value support in PDL </H2></EN>
+<DE><H2> Einige praktische Beispiele zu "bad values" und PGPLOT </H2></DE>
 
 <en-p>
 This demo is just a bit of eye-candy to show bad values in action,
@@ -31,10 +32,25 @@ m51 kindly provided by the IRAF group at the National Optical and
 Astronomical Observatories.
 </en-p>
 
+<de-p>
+Diese Demo soll die "bad values"-Funktionen anhand einiger graphischer Beispiele
+vorführen. Zum Ausprobieren muß der Support für PGPLOT in PDL eincompiliert
+sein. Verwendet wird weiterhin das M51-Bild, welches freundlicherweise von der
+IRAF-Gruppa am National Optical and Astronomical Observatory zur Verfügung
+gestellt wurde.
+</de-p>
+
+<!-- ----- -->
+
 <en-p>
 It also serves to demonstrate that you often don't need to change
 your code to handle bad values, as the routines 'do it' for you.
 </en-p>
+
+<de-p>
+Dieses Beispiel zeigt weiterhin, daß in vielen Fällen der Code nicht verändert
+werden muß, um "bad values" zu unterstützen.
+</de-p>
     
 <PRE>
 <CODE>
@@ -136,5 +152,5 @@ Graphics RELEASED
 
 <!-- ---------------------------------------------------------------------- -->
 
-#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_db.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

@@ -1,0 +1,4 @@
+-DROOT~.
+-DIMAGES~images
+-I~./templates
+

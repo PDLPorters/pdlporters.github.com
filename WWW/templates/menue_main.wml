@@ -1,0 +1,63 @@
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/">Introduction</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/download/">Download</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/maillists/">Mailing Lists</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/screenshots/">Screenshots / </A></EN>
+<BR>
+<IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/screenshots/">Demo-Galery</A></EN>
+<BR>
+
+<BR><HR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/libraries/">External</A></EN>
+<BR>
+<IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/libraries/">Libraries</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/visualisation/">Visualisation</A></EN>
+<BR>
+<IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/visualisation/">Frontends</A></EN>
+<BR>
+
+<BR><HR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/documentation/">Online</A></EN>
+<BR>
+<IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/documentation/">Documentation</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/">The Team</A></EN>
+<BR>
+
+<!-- ---------------------------------------- -->

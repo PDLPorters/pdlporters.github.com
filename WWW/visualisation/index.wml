@@ -1,0 +1,85 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<!--===================================================================-->
+<HEAD>
+<META HTTP-EQUIV="KEYWORDS" 
+      CONTENT="Schwebel">
+<META NAME="DESCRIPTION" 
+      CONTENT="Robert Schwebel">
+<TITLE>PDL - Visualisation Frontends</TITLE>
+</HEAD>
+<!--===================================================================-->
+
+<set-var doctype=html>
+
+#include '$(ROOT)/templates/background.wml'
+#include '$(ROOT)/templates/menue_top.wml'
+#include '$(ROOT)/templates/menue_main.wml'
+#include '$(ROOT)/templates/menue_bottom.wml'
+
+<TD ALIGN=LEFT>
+
+<H2>Visualisation Frontends</H2>
+
+<EN><P align=justify> Scientific data often has to be visualized. PDL has
+interfaces to several external visualisation tools.</P></EN>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+PDL::Graphics::TriD</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify>OpenGL is the most popular library for 3D graphics today.
+The PDL installation scripts will look if you have installed the OpenGL
+libraries or the free free implementation 
+<A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and build the
+module if they are present.</P></EN>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+PDL::Graphics::PGPLOT</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify>PGPLOT is a very powerful fortran library for 2D plots
+with scientific quality.  You need the <A
+HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library  itself and the
+<A HREF="http://www.aao.gov.au/local/www/kgb/pgperl">PGPERL</A> perl module
+before compiling PDL.</P></EN>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+PDL::Graphics::IIS</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+Interface to the (somewhat old fashioned) 
+<A HREF="http://tdc-www.harvard.edu/software/saoimage.html">SAOimage</A>
+or <A HREF="http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
+Ximtool</A></TD>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+PDL::Graphics::Karma</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF="http://www.atnf.csiro.au/karma">Karma</A> visualisation library. If you
+have installed it on your system the PDL module will be built.</TD>
+
+</TR>
+
+</TABLE>
+
+#include "footer_rs.wml"

@@ -1,0 +1,303 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::FFT - FFTs for PDL
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#fft">fft</A>
+		<LI><A HREF="#ifft">ifft</A>
+		<LI><A HREF="#realfft_">realfft()</A>
+		<LI><A HREF="#realifft_">realifft()</A>
+		<LI><A HREF="#fftnd_">fftnd()</A>
+		<LI><A HREF="#ifftnd_">ifftnd()</A>
+		<LI><A HREF="#fftn">fftn</A>
+		<LI><A HREF="#ifftn">ifftn</A>
+		<LI><A HREF="#fftconvolve_kernctr_">fftconvolve(), kernctr()</A>
+		<LI><A HREF="#convmath">convmath</A>
+	</UL>
+
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::FFT - FFTs for PDL
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+FFTs for PDL, using routines off the net. These work for arrays of any
+dimension, although ones with small prime factors are likely to be the
+quickest.
+
+
+<P>
+
+Each routine works inplace, as this is what the original routines do. fftnd
+and ifftnd FFT each dimension [fftn and ifftn use the facility in the C
+code to do nD, which seems slower than the pdl threaded approach used in
+(i)fftnd].
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE>        use PDL::FFT qw/:Func/;
+</PRE>
+
+<P>
+
+<PRE>        fft($real,$imag);
+        ifft($real,$imag);
+        realfft($real);
+        realifft($real);
+</PRE>
+
+<P>
+
+<PRE>        fftnd($real,$imag);
+        ifftnd($real,$imag);
+        fftn($real,$imag);
+        ifftn($real,$imag);
+</PRE>
+
+<P>
+
+<PRE>        $kernel = kernctr($image,$smallk);
+        fftconvolve($image,$kernel);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="fft">fft
+
+</A></H2>
+<PRE>  Signature: ([o,nc]real(n); [o,nc]imag(n))
+</PRE>
+
+<P>
+
+Complex FFT of the ``real'' and ``imag'' arrays [inplace]
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ifft">ifft
+
+</A></H2>
+<PRE>  Signature: ([o,nc]real(n); [o,nc]imag(n))
+</PRE>
+
+<P>
+
+Complex Inverse FFT of the ``real'' and ``imag'' arrays [inplace]
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="realfft_">realfft()
+
+</A></H2>
+FFT of real function [inplace].
+
+
+<P>
+
+The real part of the transform ends up in the first half of the array and
+the imaginary part of the transform ends up in the second half of the
+array.
+
+
+<P>
+
+<PRE>        realfft($real);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="realifft_">realifft()
+
+</A></H2>
+Inverse of realfft routine [inplace].
+
+
+<P>
+
+<PRE>        realifft($real);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="fftnd_">fftnd()
+
+</A></H2>
+N-dimensional FFT (inplace)
+
+
+<P>
+
+<PRE>        fftnd($real,$imag);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ifftnd_">ifftnd()
+
+</A></H2>
+N-dimensional inverse FFT
+
+
+<P>
+
+<PRE>        ifftnd($real,$imag);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="fftn">fftn
+
+</A></H2>
+<PRE>  Signature: (int dims(n); [o,nc]real(m); [o,nc]imag(m))
+</PRE>
+
+<P>
+
+N-dimensional FFT [inplace].
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ifftn">ifftn
+
+</A></H2>
+<PRE>  Signature: (int dims(n); [o,nc]real(m); [o,nc]imag(m))
+</PRE>
+
+<P>
+
+N-dimensional inverse FFT [inplace].
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="fftconvolve_kernctr_">fftconvolve(), kernctr()
+
+</A></H2>
+N-dimensional convolution, auxiliary routine to generate `centred' kernel
+
+
+<P>
+
+<PRE>        $kernel = kernctr($image,$smallk);
+        fftconvolve($image,$kernel);
+</PRE>
+
+<P>
+
+fftconvolve works inplace, and returns an error array in kernel as an
+accuracy check -- all the values in it should be negligible.  
+
+
+<P>
+
+The sizes of the image and the kernel must be the same. kernctr centres a
+small kernel to emulate the behaviour of the direct convolution routines.  
+
+
+<P>
+
+The speed cross-over between using straight convolution (conv2d) and these
+fft routines is for kernel sizes roughly 7x7.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="convmath">convmath
+
+</A></H2>
+<PRE>  Signature: ([o,nc]a(m); [o,nc]b(m))
+</PRE>
+
+<P>
+
+Internal routine doing maths for convolution
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR_This_file_copyright_C_R">AUTHOR
+ 
+This file copyright (C) R.J.R. Williams 1997 (rjrw@ast.leeds.ac.uk), Karl
+Glazebrook (kgb@aaoepp.aao.gov.au), Tuomas J. Lukka,
+(lukka@husc.harvard.edu). 
+All rights reserved. There is no warranty. You are allowed
+to redistribute this software / documentation under certain
+conditions. For details, see the file COPYING in the PDL 
+distribution. If this file is separated from the PDL distribution, 
+the copyright notice should be included in the file.
+
+</A></H1>
+</DL>
+    </BODY>
+
+    </HTML>

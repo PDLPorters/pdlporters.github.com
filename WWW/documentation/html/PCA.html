@@ -1,0 +1,92 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::PCA - Principal Component Analysis routines for PDL
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#WARNING">WARNING</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::PCA - Principal Component Analysis routines for PDL
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE>        $a = new PDL::PCA($data,{Averaged =&gt; 1,IncludeDims =&gt; 2});
+</PRE>
+
+<P>
+
+<PRE>        $tdata = $a-&gt;trans();
+</PRE>
+
+<P>
+
+<PRE>        $todata = $a-&gt;trans($otherdata);
+</PRE>
+
+<P>
+
+<PRE>        $wdata = $a-&gt;wtrans();  # Get whitened data
+</PRE>
+
+<P>
+
+<PRE>        $tmat = $a-&gt;get_trans(); # Get trans matrix
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="WARNING">WARNING
+
+</A></H1>
+This is alpha-state code.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+This module implements several different algorithms for doing PCA, both
+off-line (statistics based) and on-line (neural-type) (XXX on-line not yet
+implemented).
+
+
+<P>
+
+The Averaged and IncludeDims flags are for use when you absolutely want to
+conserve space (i.e. <CODE>$data</CODE> is HUGE).
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

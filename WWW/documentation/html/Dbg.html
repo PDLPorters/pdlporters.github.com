@@ -1,0 +1,189 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::Dbg -- functions to support debugging of PDL scripts
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#px">px</A>
+		<LI><A HREF="#vars">vars</A>
+	</UL>
+
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+<PRE>  PDL::Dbg -- functions to support debugging of PDL scripts
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE>       use PDL;
+       use PDL::Dbg;
+</PRE>
+
+<P>
+
+<PRE>       $c = $a-&gt;slice(&quot;5:10,2:30&quot;)-&gt;px-&gt;diagonal(3,4);
+       PDL-&gt;px;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+This packages implements a couple of functions that should come in handy
+when debugging your PDL scripts. They make a lot of sense while you're
+doing rapid prototyping of new PDL code, let's say inside the perldl shell.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="px">px
+
+</A></H2>
+Print info about a piddle (or all known piddles) 
+
+
+<P>
+
+<PRE>    perldl&gt; PDL-&gt;px
+    perldl&gt; $b += $a-&gt;clump(2)-&gt;px('clumptest')-&gt;sumover
+    perldl&gt; $a-&gt;px('%C (%A) Type: %T')
+</PRE>
+
+<P>
+
+This function prints some information about piddles. It can be invoked as a
+class method (e.g. <CODE>PDL-&gt;px</CODE> ) or as an instance method (e.g.
+<CODE>$pdl-&gt;px($arg)</CODE>). If
+
+
+<P>
+
+<DL>
+<DT><STRONG><A NAME="item_invoked">invoked as a class method
+
+</A></STRONG><DD>
+it prints info about all piddles found in the current package (<EM>excluding</EM>  <CODE>my</CODE> variables). This comes in quite handy when you are not quite sure which
+pdls you have already defined, what data they hold , etc. <CODE>px</CODE> is supposed to support inheritance and prints info about all symbols for
+which an <CODE>isa($class)</CODE> is true. An optional string argument is interpreted as the package name for
+which to print symbols:
+
+
+<P>
+
+<PRE>  perldl&gt; PDL-&gt;px('PDL::Mypack')
+</PRE>
+
+<P>
+
+The default package is that of the caller.
+
+
+<P>
+
+<DT><STRONG>invoked as an instance method
+
+</A></STRONG><DD>
+it prints info about that particular piddle if <CODE>$PDL::verbose</CODE> is true and returns the pdl object upon completion. It accepts an optional
+string argument that is simply prepended to the default info if it doesn't
+contain a <CODE>%</CODE> character. If, however, the argument contains a <CODE>%</CODE> then the string is passed to the <CODE>info</CODE> method to control the format of the printed information. This can be used
+to achieve customized output from <CODE>px</CODE>. See the documentation of
+<CODE>PDL::info</CODE> for further details.
+
+
+<P>
+
+</DL>
+The output of px will be determined by the default formatting string that
+is passed to the <CODE>info</CODE> method (unless you pass a string containing <CODE>%</CODE> to px when invoking as an instance method, see above). This default string
+is stored in <CODE>$PDL::Dbg::Infostr</CODE> and the default output format can be accordingly changed by setting this
+variable. If you do this you should also change the default title string
+that the class method branch prints at the top of the listing to match your
+new format string. The default title is stored in the variable <CODE>$PDL::Dbg::Title</CODE>.
+
+
+<P>
+
+For historical reasons <CODE>vars</CODE> is an alias for <CODE>px</CODE>.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="vars">vars
+
+</A></H2>
+Alias for <CODE>px</CODE>
+
+
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+There are probably some. Please report if you find any. Bug reports should
+be sent to the PDL mailing list <A
+HREF="MAILTO:perldl@jachw.hawaii.edu.">perldl@jachw.hawaii.edu.</A>
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+<CODE>Copyright(C)</CODE> 1997 Christian Soeller <A
+HREF="MAILTO:(csoelle@sghms.ac.uk).">(csoelle@sghms.ac.uk).</A> All rights
+reserved. There is no warranty. You are allowed to redistribute this
+software / documentation under certain conditions. For details, see the
+file COPYING in the PDL distribution. If this file is separated from the
+PDL distribution, the copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

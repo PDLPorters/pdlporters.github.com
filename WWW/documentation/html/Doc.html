@@ -1,0 +1,595 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::Doc -- support for PDL online documentation
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#PDL_documentation_conventions">PDL documentation conventions</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#funcname">funcname</A>
+		<LI><A HREF="#rcols_">rcols()</A>
+		<LI><A HREF="#Which_directives_should_be_conta">Which directives should be contained in the documentation</A>
+	</UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#INSTANCE_METHODS">INSTANCE METHODS</A>
+	<UL>
+
+		<LI><A HREF="#new">new</A>
+		<LI><A HREF="#ensuredb">ensuredb</A>
+		<LI><A HREF="#savedb">savedb</A>
+		<LI><A HREF="#gethash">gethash</A>
+		<LI><A HREF="#search">search</A>
+		<LI><A HREF="#scan">scan</A>
+		<LI><A HREF="#scantree">scantree</A>
+		<LI><A HREF="#funcdocs">funcdocs</A>
+	</UL>
+
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+<PRE>  PDL::Doc -- support for PDL online documentation
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE>  use PDL::Doc;
+  $onlinedc = new PDL::Doc ($docfile);
+  @match = $onlinedc-&gt;search('m/slice|clump/');
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+An implementation of online docs for PDL.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="PDL_documentation_conventions">PDL documentation conventions
+
+</A></H1>
+For a package like PDL that has <EM>a lot</EM> of functions it is very desirable to have some form of online help to make
+it easy for the user to remind himself of names, calling conventions and
+typical usage of the multitude of functions at his disposal. To make it
+straightforward to extract the relevant information from the POD
+documentation in source files that make up the PDL distribution certain
+conventions have been adopted in formatting this documentation.
+
+
+<P>
+
+The first convention says that all documentation for PDL functions appears
+in the POD section introduced by
+
+
+<P>
+
+<PRE>  =head1 FUNCTIONS
+</PRE>
+
+<P>
+
+Individual functions in this section are introduced by
+
+
+<P>
+
+<PRE>  =head2 funcname
+</PRE>
+
+<P>
+
+The PDL podparser is derived from the PDL::Pod::Parser class that had to be
+patched in a few places, partly to fix minor bugs, partly to enhance
+functionality for perusal by PDL::Doc. Since the PDL::Doc module is still
+experimental the patched Pod-Parser distribution is included with the
+current PDL-Doc distribution. Note that PDL::Doc will <EM>not</EM> work correctly with the released Pod-Parser distribution.
+
+
+<P>
+
+The PDL Pod parser recognises the following <CODE>=for</CODE> directives:
+
+
+<P>
+
+<DL>
+<DT><STRONG><A NAME="item_Ref">Ref
+
+</A></STRONG><DD>
+indicates that the one line reference for this function follows, e.g.,
+
+
+<P>
+
+<PRE>   =for ref
+</PRE>
+
+<P>
+
+<PRE>   Returns a piddle of lags to parent.
+</PRE>
+
+<P>
+
+<DT><STRONG><A NAME="item_Sig">Sig
+
+</A></STRONG><DD>
+the signature for the current function follows, e.g.,
+
+
+<P>
+
+<PRE>   =for sig
+</PRE>
+
+<P>
+
+<PRE>      Signature: (a(n), [o]b(), [t]tmp(n))
+</PRE>
+
+<P>
+
+<DT><STRONG><A NAME="item_Usage">Usage
+
+</A></STRONG><DD>
+an indication of the possible calling conventions for the current function,
+e.g.,
+
+
+<P>
+
+<PRE>   =for usage
+</PRE>
+
+<P>
+
+<PRE>      wpic($pdl,$filename[,{ options... }])
+</PRE>
+
+<P>
+
+<DT><STRONG><A NAME="item_Opt">Opt
+
+</A></STRONG><DD>
+lists options for the current function, e.g.,
+
+
+<P>
+
+<PRE>   =for options
+</PRE>
+
+<P>
+
+<PRE>      CONVERTER  =&gt; 'ppmtogif',   # explicitly specify pbm converter
+      FLAGS      =&gt; '-interlaced -transparent 0',  # flags for converter
+      IFORM      =&gt; 'PGM',        # explicitly specify intermediate format
+      XTRAFLAGS  =&gt; '-imagename iris', # additional flags to defaultflags
+      FORMAT     =&gt; 'PCX',        # explicitly specify output image format
+      COLOR      =&gt; 'bw',         # specify color conversion
+      LUT        =&gt; $lut,         # use color table information
+</PRE>
+
+<P>
+
+<DT><STRONG><A NAME="item_Example">Example
+
+</A></STRONG><DD>
+gives examples of typical usage for the current function:
+
+
+<P>
+
+<PRE>   =for example
+</PRE>
+
+<P>
+
+<PRE>       wpic $pdl, $file;
+       $im-&gt;wpic('web.gif',{LUT =&gt; $lut});
+       for (@images) {
+         $_-&gt;wpic($name[0],{CONVERTER =&gt; 'ppmtogif'})
+       }
+</PRE>
+
+<P>
+
+</DL>
+The PDL podparser is implemented as a simple state machine. Any of the
+above <CODE>=for</CODE> statements switches the podparser into a state where the following
+paragraph is accepted as information for the respective field (<A HREF="#item_Ref">Ref</A>, <A HREF="#item_Usage">Usage</A>, <A HREF="#item_Opt">Opt</A> or <A HREF="#item_Example">Example</A>). Only the text up to the end of the current paragraph is accepted, for
+example:
+
+
+<P>
+
+<PRE>  =for example
+</PRE>
+
+<P>
+
+<PRE>         ($x,$y) = $a-&gt;func(1,3);  # this is part of the accepted info
+         $x = func($a,0,1);        # this as well
+</PRE>
+
+<P>
+
+<PRE>         $x = func($a,$b);         # but this isn't
+</PRE>
+
+<P>
+
+To make the resulting pod documentation also easily digestible for the
+existing pod filters (pod2man, pod2text, pod2html, etc) the actual
+textblock of information must be separated from the <CODE>=for</CODE> directive by at least one blank line. Otherwise, the textblock will be lost
+in the translation process when the ``normal'' podformatters are used. The
+general idea behind this format is that it should be easy to extract the
+information for online documentation, automatic generation of a reference
+card, etc but at the same time the documentation should be translated by
+the standard podformatters without loss of contents (and without requiring
+any changes in the existing POD format).
+
+
+<P>
+
+The preceding explanations should be further explained by the following
+example (extracted from PDL/IO/Misc/misc.pd):
+
+
+<P>
+
+<PRE>   =head2 rcols()
+</PRE>
+
+<P>
+
+<PRE>   =for ref
+</PRE>
+
+<P>
+
+<PRE>   Read ASCII whitespaced cols from file into piddles efficiently.
+</PRE>
+
+<P>
+
+<PRE>   If no columns are specified all are assumed
+   Will optionally only process lines matching a pattern.
+   Can take file name or *HANDLE.
+</PRE>
+
+<P>
+
+<PRE>   =for usage
+</PRE>
+
+<P>
+
+<PRE>    Usage: ($x,$y,...) = rcols(*HANDLE|&quot;filename&quot;, [&quot;/pattern/&quot;,$col1, $col2,] ...)
+</PRE>
+
+<P>
+
+<PRE>   e.g.,
+</PRE>
+
+<P>
+
+<PRE>   =for example
+</PRE>
+
+<P>
+
+<PRE>     ($x,$y)    = rcols 'file1'
+     ($x,$y,$z) = rcols 'file2', &quot;/foo/&quot;,3,4 
+     $x = PDL-&gt;rcols 'file1';
+</PRE>
+
+<P>
+
+<PRE>   Note: currently quotes are required on the pattern.
+</PRE>
+
+<P>
+
+which is translated by, e.g, the standard <CODE>pod2text</CODE> converter into:
+
+
+<P>
+
+<PRE>  rcols()
+</PRE>
+
+<P>
+
+<PRE>    Read ASCII whitespaced cols from file into piddles efficiently.
+</PRE>
+
+<P>
+
+<PRE>    If no columns are specified all are assumed Will optionally only
+    process lines matching a pattern. Can take file name or *HANDLE.
+</PRE>
+
+<P>
+
+<PRE>      Usage: ($x,$y,...) = rcols(*HANDLE|&quot;filename&quot;, [&quot;/pattern/&quot;,$col1, $col2,] ...)
+</PRE>
+
+<P>
+
+<PRE>    e.g.,
+</PRE>
+
+<P>
+
+<PRE>      ($x,$y)    = rcols 'file1'
+      ($x,$y,$z) = rcols 'file2', &quot;/foo/&quot;,3,4 
+      $x = PDL-&gt;rcols 'file1';
+      
+    Note: currently quotes are required on the pattern.
+</PRE>
+
+<P>
+
+It should be clear from the preceding example that readable output can be
+obtained from this format using the standard converters and the reader will
+hopefully get a feeling how he can easily intersperse the special <CODE>=for</CODE> directives with the normal POD documentation.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="Which_directives_should_be_conta">Which directives should be contained in the documentation
+
+</A></H2>
+The module documentation should start with the
+
+
+<P>
+
+<PRE>  =head1 NAME
+</PRE>
+
+<P>
+
+<PRE>  PDL::Modulename -- do something with piddles
+</PRE>
+
+<P>
+
+section (as anyway required by <CODE>pod2man</CODE>) since the PDL podparser extracts the name of the module this function
+belongs to from that section.
+
+
+<P>
+
+Each function that is <EM>not</EM> only for internal use by the module should be documented, introduced with
+the <CODE>=head2</CODE> directive in the <CODE>=head1 FUNCTIONS</CODE> section. The only field that every function documented along these lines
+should have is the <EM>Ref</EM> field preceding a one line description of its intended functionality
+(suitable for inclusion in a concise reference card). PP defined functions
+(see <EM>PDL/PP</EM>) should have a <EM>Sig</EM> field stating their signature. To facilitate maintainance of this
+documentation for such functions the 'Doc' field has been introduced into
+the definition of <CODE>pp_def</CODE> (see again <EM>PDL/PP</EM>) which will take care that name and signature of the so defined function
+are documented in this way (for examples of this usage see, for example,
+the PDL::Slices module, especially <EM>slices.pd</EM> and the resulting
+<EM>Slices.pm</EM>).
+
+
+<P>
+
+Furthermore, the documentation for each function should contain at least
+one of the <EM>Usage</EM> or <EM>Examples</EM> fields. Depending on the calling conventions for the function under
+consideration presence of both fields may be warranted.
+
+
+<P>
+
+If a function has options that should be given as a hash reference in the
+form
+
+
+<P>
+
+<PRE>   {Option =&gt; Value, ...}
+</PRE>
+
+<P>
+
+then the possible options (and aproppriate values) should be explained in
+the textblock following the <CODE>=for Opt</CODE> directive (see example above and, e.g., PDL::IO::Pic).
+
+
+<P>
+
+It is well possible that some of these conventions appear to be clumsy at
+times and the author is keen to hear of any suggestions for better
+alternatives.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="INSTANCE_METHODS">INSTANCE METHODS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="new">new
+
+</A></H2>
+<PRE>  $onlinedc = new PDL::Doc ('file.pdl');
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ensuredb">ensuredb
+
+</A></H2>
+Make sure that the database is slurped in
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="savedb">savedb
+
+</A></H2>
+save the database (i.e., the hash of PDL symbols) to the file associated
+with this object.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="gethash">gethash
+
+</A></H2>
+Return the PDL symhash (e.g. for custom search operations)
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="search">search
+
+</A></H2>
+Search a PDL symhash
+
+
+<P>
+
+<PRE>  $onldc-&gt;search($regex, $fields [, $sort])
+</PRE>
+
+<P>
+
+Searching is by default case insensitive. Other flags can be given by
+specifying the regexp in the form <CODE>m/regex/ismx</CODE>
+where <CODE>/</CODE> can be replaced with any other non-alphanumeric character.
+<CODE>$fields</CODE> is an array reference for all hash fields that should
+be matched against the regex. Valid fields are
+
+
+<P>
+
+<PRE>  Name,    # name of the function
+  Module,  # module the function belongs to
+  Ref,     # the one-line reference description
+  Example, # the example for this function
+  Opt,     # options
+  File,    # the path to the source file this docs have been extracted from
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="scan">scan
+
+</A></H2>
+Scan a source file using the PDL podparser to extract information for
+online documentation
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="scantree">scantree
+
+</A></H2>
+Scan whole directory trees for online documentation in
+<CODE>.pm</CODE> (module definition) and <CODE>*.pod</CODE> (general documentation) files (using the File::Find module).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="funcdocs">funcdocs
+
+</A></H2>
+extract the complete documentation about a function from its source file
+using the PDL::Pod::Parser filter.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+Quite a few shortcomings which will hopefully be fixed following
+discussions on the pdl-porters mailing list.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+Copyright 1997 Christian Soeller <A
+HREF="MAILTO:<csoelle@sghms.ac.uk>"><csoelle@sghms.ac.uk></A> and Karl
+Glazebrook <A
+HREF="MAILTO:<kgb@aaoepp.aao.gov.au>"><kgb@aaoepp.aao.gov.au></A> All
+rights reserved. There is no warranty. You are allowed to redistribute this
+software / documentation under certain conditions. For details, see the
+file COPYING in the PDL distribution. If this file is separated from the
+PDL distribution, the copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

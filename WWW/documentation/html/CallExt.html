@@ -1,0 +1,258 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::CallExt - call functions in external shared libraries
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#API">API</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#callext">callext</A>
+		<LI><A HREF="#callext_cc">callext_cc</A>
+	</UL>
+
+	<LI><A HREF="#AUTHORS">AUTHORS</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::CallExt - call functions in external shared libraries
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE> use PDL::CallExt;
+ callext('file.so', 'foofunc', $x, $y); # pass piddles to foofunc()
+ 
+ % perl -MPDL::CallExt -e callext_cc file.c 
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+<CODE>callext()</CODE> loads in a shareable object (i.e. compiled code)
+using Perl's dynamic loader, calls the named function and passes a list of
+piddle arguments to it.
+
+
+<P>
+
+It provides a reasonably portable way of doing this, including compiling
+the code with the right flags, though it requires simple perl and C wrapper
+routines to be written. You may prefer to use PP, which is much more
+portable. See <EM>PDL/PP</EM>. You should definitely use the latter for a 'proper' PDL module, or if you
+run in to the limitations of this module.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="API">API
+
+</A></H1>
+<CODE>callext_cc()</CODE> allows one to compile the shared objects using
+Perl's knowledge of compiler flags.
+
+
+<P>
+
+The named function (e.g. 'foofunc') must take a list of piddle structures
+as arguments, there is now way of doing portable general argument
+construction hence this limitation.
+
+
+<P>
+
+In detail the code in the original file.c would look like this:
+
+
+<P>
+
+<PRE> #include &quot;pdlsimple.h&quot; /* Declare simple piddle structs - note this .h file
+                           contains NO perl/PDL dependencies so can be used 
+                           standalone */
+ 
+ int foofunc(int nargs, pdlsimple **args); /* foofunc prototype */
+ 
+</PRE>
+
+<P>
+
+i.e. <CODE>foofunc()</CODE> takes an array of pointers to pdlsimple
+structs. The use is similar to that of <CODE>main(int nargs, char **argv)</CODE> in UNIX C applications.
+
+
+<P>
+
+pdlsimple.h defines a simple N-dimensional data structure which looks like
+this: struct pdlsimple { int datatype; /* whether byte/int/float etc. */
+void *data; /* Generic pointer to the data block */ int nvals; /* Number of
+data values */ PDL_Long *dims; /* Array of data dimensions */ int ndims; /*
+Number of data dimensions */ };
+
+
+<P>
+
+(PDL_Long is always a 4 byte int and is defined in pdlsimple.h)
+
+
+<P>
+
+This is a simplification of the internal reprensation of piddles in PDL
+which is more complicated because of threading, dataflow, etc. It will
+usually be found somewhere like
+/usr/local/lib/perl5/site_perl/PDL/pdlsimple.h
+
+
+<P>
+
+Thus to actually use this to call real functions one would need to right a
+wrapper. e.g. to call a 2D image processing routine:
+
+
+<P>
+
+<PRE> void myimage_processer(double* image, int nx, int ny);
+ 
+ int foofunc(int nargs, pdlsimple **args) {
+    pdlsimple* image = pdlsimple[0]; 
+    myimage_processer( image-&gt;data, *(image-&gt;dims), *(image-&gt;dims+1) );
+    ...
+ }
+ 
+Obviously a real wrapper would include more error and argument checking.
+</PRE>
+
+<P>
+
+This might be compiled (e.g. Linux):
+
+
+<P>
+
+<PRE> cc -shared -o mycode.so mycode.c
+ 
+In general Perl knows how to do this, so you should be able to get
+away with:
+</PRE>
+
+<P>
+
+<PRE> perl -MPDL::CallExt -e callext_cc file.c
+ 
+callext_cc() is a function defined in PDL::CallExt to generate the
+correct compilation flags for shared objects.
+ 
+If their are problems you will need to refer to you C compiler manual to find
+out how to generate shared libraries. 
+</PRE>
+
+<P>
+
+See t/callext.t in the distribution for a working example.
+
+
+<P>
+
+It is up to the caller to ensure datatypes of piddles are correct - if not
+peculiar results or SEGVs will result.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="callext">callext
+
+</A></H2>
+Call a function in an external library using Perl dynamic loading
+
+
+<P>
+
+<PRE>  callext('file.so', 'foofunc', $x, $y); # pass piddles to foofunc()
+</PRE>
+
+<P>
+
+The file must be compiled with dynamic loading options (see <CODE>callext_cc</CODE>). See the module docs <CODE>PDL::Callext</CODE>
+for a description of the API.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="callext_cc">callext_cc
+
+</A></H2>
+Compile external C code for dynamic loading
+
+
+<P>
+
+Usage:
+
+
+<P>
+
+<PRE> % perl -MPDL::CallExt -e callext_cc file.c -o file.so
+</PRE>
+
+<P>
+
+This works portably because when Perl has built in knowledge of how to do
+dynamic loading on the system on which it was installed. See the module
+docs <CODE>PDL::Callext</CODE> for a description of the API.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHORS">AUTHORS
+
+</A></H1>
+Copyright (C) Karl Glazebrook 1997. All rights reserved. There is no
+warranty. You are allowed to redistribute this software / documentation
+under certain conditions. For details, see the file COPYING in the PDL
+distribution. If this file is separated from the PDL distribution, the
+copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

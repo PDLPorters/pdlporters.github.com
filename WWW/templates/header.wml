@@ -1,0 +1,9 @@
+#use wml::std::page
+#use wml::std::lang
+#use wml::fmt::isolatin
+<lang:new id=en short>
+<lang:new id=de short>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+

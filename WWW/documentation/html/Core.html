@@ -1,0 +1,1463 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::Core - fundamental PDL functionality
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#pdl">pdl</A>
+		<LI><A HREF="#null">null</A>
+		<LI><A HREF="#nelem">nelem</A>
+		<LI><A HREF="#dims">dims</A>
+		<LI><A HREF="#PDL_getndims">PDL::getndims</A>
+		<LI><A HREF="#topdl">topdl</A>
+		<LI><A HREF="#howbig">howbig</A>
+		<LI><A HREF="#dims">dims</A>
+		<LI><A HREF="#threadids">threadids</A>
+		<LI><A HREF="#doflow">doflow</A>
+		<LI><A HREF="#PDL_new">PDL::new</A>
+		<LI><A HREF="#PDL_copy">PDL::copy</A>
+		<LI><A HREF="#PDL_unwind">PDL::unwind</A>
+		<LI><A HREF="#PDL_make_physical">PDL::make_physical</A>
+		<LI><A HREF="#dummy">dummy</A>
+		<LI><A HREF="#thread_define">thread_define</A>
+		<LI><A HREF="#PDL_thread">PDL::thread</A>
+		<LI><A HREF="#diagonal">diagonal</A>
+		<LI><A HREF="#PDL_thread1">PDL::thread1</A>
+		<LI><A HREF="#PDL_thread2">PDL::thread2</A>
+		<LI><A HREF="#PDL_thread3">PDL::thread3</A>
+		<LI><A HREF="#PDL_info">PDL::info</A>
+		<LI><A HREF="#mslice">mslice</A>
+		<LI><A HREF="#inplace">inplace</A>
+		<LI><A HREF="#PDL_new_from_specification">PDL::new_from_specification</A>
+		<LI><A HREF="#zeroes">zeroes</A>
+		<LI><A HREF="#ones">ones</A>
+		<LI><A HREF="#reshape">reshape</A>
+		<LI><A HREF="#Datatype_conversions">Datatype_conversions</A>
+		<LI><A HREF="#byte">byte</A>
+		<LI><A HREF="#short">short</A>
+		<LI><A HREF="#ushort">ushort</A>
+		<LI><A HREF="#long">long</A>
+		<LI><A HREF="#float">float</A>
+		<LI><A HREF="#double">double</A>
+		<LI><A HREF="#type">type</A>
+		<LI><A HREF="#list">list</A>
+		<LI><A HREF="#listindices">listindices</A>
+		<LI><A HREF="#set">set</A>
+		<LI><A HREF="#at">at</A>
+		<LI><A HREF="#cat">cat</A>
+		<LI><A HREF="#dog">dog</A>
+		<LI><A HREF="#barf">barf</A>
+	</UL>
+
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::Core - fundamental PDL functionality
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+Methods and functions for type conversions, PDL creation, type conversion,
+threading etc.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+use PDL::Core; # Normal routines use PDL::Core ':Internal'; # Hairy
+routines
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="pdl">pdl
+
+</A></H2>
+piddle constructor - creates new piddle from perl scalars/arrays
+
+
+<P>
+
+<PRE>   $a = pdl(SCALAR|ARRAY REFERENCE|ARRAY);
+</PRE>
+
+<P>
+
+<PRE>   $a = pdl [1..10];             # 1D array
+   $a = pdl (1,2,3,4);           # Ditto
+   $b = pdl [[1,2,3],[4,5,6]];   # 2D 3x2 array
+   $b = pdl 42                   # 0-dimensional scalar
+   $c = pdl $a;                  # Make a new copy
+</PRE>
+
+<P>
+
+<CODE>pdl()</CODE> is a functional synonym for the 'new' constructor, e.g.:
+
+
+<P>
+
+<PRE>   $x = new PDL [1..10];
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="null">null
+
+</A></H2>
+Returns a 'null' piddle.
+
+
+<P>
+
+<PRE>   $x = null;
+   
+null() has a special meaning to C&lt;PDL::PP&gt;. It is used to
+flag a special kind of empty piddle, which can grow to
+appropriate dimensions to store a result. (As opposed to
+storing a result in an existing piddle).    
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; sumover sequence(10,10), $ans=null;p $ans
+ [45 145 245 345 445 545 645 745 845 945]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="nelem">nelem
+
+</A></H2>
+Return the number of elements in a piddle
+
+
+<P>
+
+<PRE> $n = nelem($piddle); $n = $piddle-&gt;nelem;  
+</PRE>
+
+<P>
+
+<PRE> $mean = sum($data)/nelem($data); 
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="dims">dims
+
+</A></H2>
+Return piddle dimensions a a perl list
+
+
+<P>
+
+<PRE> @dims = $piddle-&gt;dims;  @dims = dims($piddle);
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; p @tmp = dims zeroes 10,3,22
+ 10 3 22
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_getndims">PDL::getndims
+
+</A></H2>
+Returns the number of dimensions in a piddle
+
+
+<P>
+
+<PRE>   $ndims = $piddle-&gt;getndims;
+</PRE>
+
+<P>
+
+<PRE>  perldl&gt; p zeroes(10,3,22)-&gt;getndims
+  3
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="topdl">topdl
+
+</A></H2>
+alternate piddle constructor - ensures arg is a piddle
+
+
+<P>
+
+<PRE>   $a = topdl(SCALAR|ARRAY REFERENCE|ARRAY);
+   
+The difference between pdl() and topdl() is that the
+latter will just 'fall through' if the argument is
+already a piddle. It will return a reference and NOT
+a new copy.
+</PRE>
+
+<P>
+
+This is particulary useful if you are writing a function which is doing
+some fiddling with internals and assumes a piddle argument (e.g. for method
+calls). Using <CODE>topdl()</CODE> will ensure nothing breaks if passed
+with '2'.
+
+
+<P>
+
+<PRE>   $a = topdl 43;         # $a is piddle with value '43'
+   $b = topdl $piddle;    # fall through
+   $a = topdl (1,2,3,4);  # Convert 1D array
+   
+=head2 PDL::get_datatype
+</PRE>
+
+<P>
+
+Internal: Return the numeric value identifying the piddle datatype
+
+
+<P>
+
+<PRE>  $x = $piddle-&gt;get_datatype; 
+</PRE>
+
+<P>
+
+Mainly used for internal routines. 
+
+
+<P>
+
+NOTE: get_datatype returns 'just a number' not any special type object. 
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="howbig">howbig
+
+</A></H2>
+Returns the size of a piddle datatype in bytes.
+
+
+<P>
+
+<PRE> $size = howbig($piddle-&gt;get_datatype);
+ 
+Mainly used for internal routines. 
+ 
+NOTE: NOT a method! This is because get_datatype returns
+'just a number' not any special object.
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; p howbig(ushort([1..10])-&gt;get_datatype)
+ 2
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="dims">dims
+
+</A></H2>
+Returns the dimensions of a piddle as a perl list
+
+
+<P>
+
+<PRE>  ($m,$n) = dims $piddle;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="threadids">threadids
+
+</A></H2>
+Returns the piddle thread IDs as a perl list
+
+
+<P>
+
+<PRE>  @ids = threadids $piddle;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="doflow">doflow
+
+</A></H2>
+Turn on/off dataflow
+
+
+<P>
+
+<PRE>   $x-&gt;doflow;  doflow($x);
+</PRE>
+
+<P>
+
+Whether or not a piddle is indulging in dataflow
+
+
+<P>
+
+<PRE>   something if $x-&gt;flows; $hmm = flows($x);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_new">PDL::new
+
+</A></H2>
+new piddle constructor method 
+
+
+<P>
+
+<PRE>  $x = PDL-&gt;new(SCALAR|ARRAY|ARRAY REF); 
+</PRE>
+
+<P>
+
+<PRE>  $x = PDL-&gt;new(42);
+  $y = new PDL [1..10];
+  
+  Constructs piddle from perl numbers and lists.        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_copy">PDL::copy
+
+</A></H2>
+Make a physical copy of a piddle
+
+
+<P>
+
+<PRE>   $new = $old-&gt;copy;
+</PRE>
+
+<P>
+
+Since <CODE>$new = $old</CODE> just makes a new reference, the
+<CODE>copy</CODE> method is provided to allow real independent copies to be made.
+  
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_unwind">PDL::unwind
+
+</A></H2>
+Return a piddle which is the same as the argument except that all threadids
+have been removed.
+
+
+<P>
+
+<PRE> $y = $x-&gt;unwind;  
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_make_physical">PDL::make_physical
+
+</A></H2>
+Make sure the data portion of a piddle can be accessed from XS code.
+
+
+<P>
+
+<PRE>   $a-&gt;make_physical;
+   $a-&gt;call_my_xs_method;
+</PRE>
+
+<P>
+
+Ensures that a piddle gets its own allocated copy of data. This obviously
+implies that there are certain piddles which do not have their own data.
+These are so called <EM>virtual</EM> piddles that make use of the <EM>vaffine</EM>
+optimisation (see <EM>pdlindexing</EM>). They do not have their own copy of data but instead store only access
+information to some (or all) of another piddle's data.
+
+
+<P>
+
+Note: this function should not be used unless absolutely neccessary since
+otherwise memory requirements might be severly increased. Instead of
+writing your own XS code with the need to call make_physical you might want
+to consider using the PDL preprocessor (see <EM>PDL/PP</EM>) which can be used to transparently access virtual piddles without the
+need to physicalise them (though there are exceptions).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="dummy">dummy
+
+</A></H2>
+Insert a 'dummy dimension' of given length (defaults to 1)
+
+
+<P>
+
+No relation to the 'Dungeon Dimensions' in Discworld!
+
+
+<P>
+
+<PRE> $y = $x-&gt;dummy($position[,$dimsize]);   
+</PRE>
+
+<P>
+
+<PRE>  perldl&gt; p sequence(3)-&gt;dummy(0,3) 
+  [
+   [0 0 0]
+   [1 1 1]
+   [2 2 2]
+  ]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="thread_define">thread_define
+
+</A></H2>
+define functions that support threading at the perl level
+
+
+<P>
+
+<PRE>   thread_define 'tline(a(n);b(n))', over {
+    line $_[0], $_[1]; # make line compliant with threading
+   };
+</PRE>
+
+<P>
+
+<CODE>thread_define</CODE> provides some support for threading (see
+<EM>pdlindexing</EM>) at the perl level. It allows you to do things for which you normally
+would have resorted to PDL::PP (see <EM>PDL/PP</EM>); however, it is most useful to wrap existing perl functions so that the
+new routine supports PDL threading.
+
+
+<P>
+
+<CODE>thread_define</CODE> is used to define new <EM>threading aware</EM>
+functions. Its first argument is a symbolic repesentation of the new
+function to be defined. The string is composed of the name of the new
+function followed by its signature (see <EM>pdlindexing</EM> and <EM>PDL/PP</EM>) in parentheses. The second argument is a subroutine that will be called
+with the slices of the actual runtime arguments as specified by its
+signature. Correct dimension sizes and minimal number of dimensions for all
+arguments will be checked (assuming the rules of PDL threading, see <EM>pdlindexing</EM>).
+
+
+<P>
+
+The actual work is done by the <CODE>signature</CODE> class which parses the signature string, does runtime dimension checks and
+the routine <CODE>threadover</CODE> that generates the loop over all appropriate slices of pdl arguments and
+creates pdls as needed.
+
+
+<P>
+
+Similar to <CODE>pp_def</CODE> and its <CODE>OtherPars</CODE> option it is possible to define the new function so that it accepts normal
+perl args as well as piddles. You do this by using the <CODE>NOtherPars</CODE> parameter in the signature. The number of <CODE>NOtherPars</CODE> specified will be passed unaltered into the subroutine given as the second
+argument of
+<CODE>thread_define</CODE>. Let's illustrate this with an example:
+
+
+<P>
+
+<PRE>   PDL::thread_define 'triangles(inda();indb();indc()), NOtherPars =&gt; 2',
+    PDL::over {
+      ${$_[3]} .= $_[4].join(',',map {$_-&gt;at} @_[0..2]).&quot;,-1,\n&quot;;
+    };
+</PRE>
+
+<P>
+
+This defines a function <CODE>triangles</CODE> that takes 3 piddles as input plus 2 arguments which are passed into the
+routine unaltered. This routine is used to collect lists of indices into a
+perl scalar that is passed by reference. Each line is preceded by a prefix
+passed as <CODE>$_[4]</CODE>. Here is typical usage:
+
+
+<P>
+
+<PRE>   $txt = '';
+   triangles(pdl(1,2,3),pdl(1),pdl(0),\$txt,&quot; &quot;x10);
+   print $txt;
+</PRE>
+
+<P>
+
+resulting in the following output
+
+
+<P>
+
+<PRE>          1,1,0,-1,
+          2,1,0,-1,
+          3,1,0,-1,
+</PRE>
+
+<P>
+
+which is used in PDL::VRML to generate VRML output.
+
+
+<P>
+
+Currently, this is probably not much more than a POP (proof of principle)
+but is hoped to be useful enough for some real life work.
+
+
+<P>
+
+Check <EM>PDL/PP</EM> for the format of the signature. Currently, the
+<CODE>[t]</CODE> qualifier and all type qualifiers are ignored.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_thread">PDL::thread
+
+</A></H2>
+Use explicit threading over specified dimensions (see also <EM>PDL/Indexing</EM>)
+
+
+<P>
+
+<PRE>   $b = $a-&gt;thread($dim,[$dim1,...])
+</PRE>
+
+<P>
+
+<PRE>  $a = zeroes 3,4,5;
+  $b = $a-&gt;thread(2,0);
+</PRE>
+
+<P>
+
+Same as <CODE>PDL::thread1</CODE>, i.e. uses thread id 1.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="diagonal">diagonal
+
+</A></H2>
+Returns the multidimensional diagonal over the specified dimensions.
+
+
+<P>
+
+<PRE>   $d = $x-&gt;diagonal(dim1, dim2,...)
+</PRE>
+
+<P>
+
+<PRE>   perldl&gt; $a = zeroes(3,3,3);
+   perldl&gt; ($b = $a-&gt;diagonal(0,1))++;
+   perldl&gt; p $a
+   [
+    [
+     [1 0 0]
+     [0 1 0]
+     [0 0 1]
+    ]
+    [
+     [1 0 0]
+     [0 1 0]
+     [0 0 1]
+    ]
+    [
+     [1 0 0]
+     [0 1 0]
+     [0 0 1]
+    ]
+   ]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_thread1">PDL::thread1
+
+</A></H2>
+Explicit threading over specified dims using thread id 1.
+
+
+<P>
+
+<PRE>   $xx = $x-&gt;thread1(3,1)
+</PRE>
+
+<P>
+
+<PRE>  Wibble
+</PRE>
+
+<P>
+
+Convenience function interfacing to threadI (see <EM>PDL/Slices</EM>).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_thread2">PDL::thread2
+
+</A></H2>
+Explicit threading over specified dims using thread id 2.
+
+
+<P>
+
+<PRE>   $xx = $x-&gt;thread2(3,1)
+</PRE>
+
+<P>
+
+<PRE>  Wibble
+</PRE>
+
+<P>
+
+Convenience function interfacing to threadI (see <EM>PDL/Slices</EM>).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_thread3">PDL::thread3
+
+</A></H2>
+Explicit threading over specified dims using thread id 3.
+
+
+<P>
+
+<PRE>   $xx = $x-&gt;thread3(3,1)
+</PRE>
+
+<P>
+
+<PRE>  Wibble
+</PRE>
+
+<P>
+
+Convenience function interfacing to threadI (see <EM>PDL/Slices</EM>).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_info">PDL::info
+
+</A></H2>
+Return formatted information about a piddle.
+
+
+<P>
+
+<PRE>   $x-&gt;info($format_string);
+</PRE>
+
+<P>
+
+<PRE>   print $x-&gt;info(&quot;Type: %T Dim: %-15D State: %S&quot;);
+</PRE>
+
+<P>
+
+Returns a string with info about a piddle. Takes an optional argument to
+specify the format of information a la sprintf. Format specifiers are in
+the form <CODE>%&lt;width&gt;&lt;letter&gt;</CODE>
+where the width is optional and the letter is one of
+
+
+<P>
+
+<DL>
+<DT><STRONG><A NAME="item_T">T
+
+</A></STRONG><DD>
+Type
+
+
+<P>
+
+<DT><STRONG><A NAME="item_D">D
+
+</A></STRONG><DD>
+Formatted Dimensions
+
+
+<P>
+
+<DT><STRONG><A NAME="item_F">F
+
+</A></STRONG><DD>
+Dataflow status
+
+
+<P>
+
+<DT><STRONG><A NAME="item_S">S
+
+</A></STRONG><DD>
+Some internal flags (P=physical,V=Vaffine,C=changed)
+
+
+<P>
+
+<DT><STRONG><A NAME="item_C">C
+
+</A></STRONG><DD>
+Class of this piddle, i.e. <CODE>ref $pdl</CODE>
+
+
+
+
+<P>
+
+<DT><STRONG><A NAME="item_A">A
+
+</A></STRONG><DD>
+Address of the piddle struct as a unique identifier
+
+
+<P>
+
+<DT><STRONG><A NAME="item_M">M
+
+</A></STRONG><DD>
+Calculated memory consumption of this piddle's data area
+
+
+<P>
+
+</DL>
+<P>
+<HR>
+<H2><A NAME="mslice">mslice
+
+</A></H2>
+Convenience interface to <CODE>slice</CODE>, allowing easier inclusion of dimensions in perl code.
+
+
+<P>
+
+<PRE>  $a = $x-&gt;mslice(...); 
+</PRE>
+
+<P>
+
+<PRE>  $a = $x-&gt;mslice([5,7],X,[3,4,2]); # eq: $x-&gt;slice(&quot;5:7,:,3:4:2&quot;)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="inplace">inplace
+
+</A></H2>
+Flag a piddle so that the next operation is done 'in place'
+
+
+<P>
+
+<PRE>  somefunc($x-&gt;inplace); somefunc(inplace $x); 
+  
+In most cases one likes to use the syntax C&lt;$y = f($x)&gt;, however
+in many case the operation C&lt;f()&gt; can be done correctly
+'in place', i.e. without making a new copy of the data for 
+output. To make it easy to use this, we write C&lt;f()&gt; in such
+a way that it operates in-place, and use C&lt;inplace&gt; to hint
+that a new copy should be disabled. This also makes for
+clear syntax.
+</PRE>
+
+<P>
+
+Obviously this will not work for all functions, and if in doubt see the
+function's documentation. However one can assume this is true for all
+elemental functions (i.e. those which just operate array element by array
+element like <CODE>log10</CODE>).
+
+
+<P>
+
+<PRE> perldl&gt; $x = xvals zeroes 10;
+ perldl&gt; log10(inplace $x)
+ perldl&gt; p $x
+ [      -Inf 0    0.30103 0.47712125 0.60205999    0.69897 
+ 0.77815125 0.84509804 0.90308999 0.95424251]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="PDL_new_from_specification">PDL::new_from_specification
+
+</A></H2>
+Internal method: create piddle by specification
+
+
+<P>
+
+This is the argument processing method called by <CODE>zeroes</CODE> (q.v.) and some other functions which constructs piddles from argument
+listss of the form:
+
+
+<P>
+
+<PRE>   [type], $nx, $ny, $nz,...
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="zeroes">zeroes
+
+</A></H2>
+construct a zero filled piddle from dimension list or template piddle. 
+
+
+<P>
+
+Various forms of usage,
+
+
+<P>
+
+(i) by specification or (ii) by template piddle:
+
+
+<P>
+
+<PRE>    # usage type (i):
+    $a = zeroes([type], $nx, $ny, $nz,...);
+    $a = PDL-&gt;zeroes([type], $nx, $ny, $nz,...);
+    $a = $pdl-&gt;zeroes([type], $nx, $ny, $nz,...);
+    # usage type (ii):
+    $a = zeroes $b;
+    $a = $b-&gt;zeroes
+    zeroes inplace $a;     # Equivalent to   $a .= 0;
+    $a-&gt;inplace-&gt;zeroes;   #  &quot;&quot;
+ 
+=for example
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; $z = zeroes 4,3  
+ perldl&gt; p $z
+ [
+  [0 0 0 0]
+  [0 0 0 0]
+  [0 0 0 0]
+ ]
+ perldl&gt; $z = zeroes ushort, 3,2 # Create ushort array
+</PRE>
+
+<P>
+
+<PRE> [ushort() etc. with no arg returns a PDL::Types token]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ones">ones
+
+</A></H2>
+construct a one filled piddle
+
+
+<P>
+
+<PRE>   $a = ones([type], $nx, $ny, $nz,...);
+   etc. (see 'zeroes')
+   
+</PRE>
+
+<P>
+
+<PRE> see zeroes() and add one
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="reshape">reshape
+
+</A></H2>
+Change the shape (i.e. dimensions) of a piddle, preserving contents.
+
+
+<P>
+
+<PRE> $x-&gt;reshape(NEWDIMS); reshape($x, NEWDIMS);
+ 
+The data elements are preserved, obviously they will wrap
+differently and get truncated if the new array is shorter.
+If the new array is longer it will be zero-padded.   
+</PRE>
+
+<P>
+
+Note: an explicit copy is forced - this is the only way (for now) of
+stopping a crash if <CODE>$x</CODE> is a slice.
+
+
+<P>
+
+<PRE>  perldl&gt; $x = sequence(10)
+  perldl&gt; reshape $x,3,4; p $x
+  [
+   [0 1 2]
+   [3 4 5]
+   [6 7 8]
+   [9 0 0]
+  ]
+  perldl&gt; reshape $x,5; p $x        
+  [0 1 2 3 4]
+</PRE>
+
+<P>
+
+Generic datatype conversion function
+
+
+<P>
+
+<PRE> $y = convert($x, $newtype);  
+</PRE>
+
+<P>
+
+<PRE> $y = convert $x, long
+ $y = convert $x, ushort 
+</PRE>
+
+<P>
+
+<CODE>$newtype</CODE> is a type number, for convenience they are returned by <CODE>long()</CODE>
+etc when called without arguments.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="Datatype_conversions">Datatype_conversions
+
+</A></H2>
+byte|short|ushort|long|float|double convert shorthands
+
+
+<P>
+
+<PRE>  $y = double $x; $y = ushort [1..10];
+  
+  (all of byte|short|ushort|long|float|double behave similarly)
+  
+When called with a piddle argument, they convert to the specific
+datatype.
+        
+When called with a numeric or list ref argument they construct
+a new piddle. This is a convenience to avoid having to be
+long-winded and say &lt;$x = long(pdl(42))&gt;
+        
+When called with no arguments return a special type token.
+This allows syntactical sugar like:
+</PRE>
+
+<P>
+
+<PRE>  $x = ones byte, 1000,1000; 
+  
+This example creates a large piddle directly as byte datatype in 
+order to save memory.
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; p $x=sqrt float [1..10]
+ [1 1.41421 1.73205 2 2.23607 2.44949 2.64575 2.82843 3 3.16228]
+ perldl&gt; p byte $x
+ [1 1 1 2 2 2 2 2 3 3]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="byte">byte
+
+</A></H2>
+Convert to byte datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="short">short
+
+</A></H2>
+Convert to short datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ushort">ushort
+
+</A></H2>
+Convert to ushort datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="long">long
+
+</A></H2>
+Convert to long datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="float">float
+
+</A></H2>
+Convert to float datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="double">double
+
+</A></H2>
+Convert to double datatype - see 'Datatype_conversions'
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="type">type
+
+</A></H2>
+return the type of a piddle as a blessed type object
+
+
+<P>
+
+A convenience function for use with the piddle constructors, e.g.
+
+
+<P>
+
+<PRE>   $b = PDL-&gt;zeroes($a-&gt;type,$a-&gt;dims,3);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="list">list
+
+</A></H2>
+Convert piddle to perl list 
+
+
+<P>
+
+<PRE>   @tmp = list $x;
+</PRE>
+
+<P>
+
+Obviously this is grossly inefficient for the large datasets PDL is
+designed to handle. This was provided as a get out while PDL matured. It
+should now be mostly superseded by superior constructs, such as
+PP/threading. However it is still occasionally useful and is provied for
+backwards compatibility.    
+
+
+<P>
+
+<PRE>  for (list $x) {
+    # Do something on each value...
+  }
+  
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="listindices">listindices
+
+</A></H2>
+Convert piddle indices to perl list 
+
+
+<P>
+
+<PRE>   @tmp = listindices $x;
+   
+C&lt;@tmp&gt; now contains the values 0..nelem($x).   
+   
+Obviously this is grossly inefficient for the large datasets PDL is designed to
+handle. This was provided as a get out while PDL matured. It  should now be mostly
+superseded by superior constructs, such as PP/threading. However it is still
+occasionally useful and is provied for backwards compatibility.    
+</PRE>
+
+<P>
+
+<PRE>  for $i (listindices $x) {
+    # Do something on each value...
+  }
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="set">set
+
+</A></H2>
+Set a single value inside a piddle
+
+
+<P>
+
+<PRE> set $piddle, @position, $value
+   
+C&lt;@position&gt; is a coordinate list, of size equal to the
+number of dimensions in the piddle. Occasionally useful,
+mainly provided for backwards compatibility as superseded
+by use of C&lt;slice&gt; and assigment operator C&lt;.=&gt;.
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; $x = sequence 3,4
+ perldl&gt; set $x, 2,1,99   
+ perldl&gt; p $x             
+ [
+  [ 0  1  2]
+  [ 3  4 99]
+  [ 6  7  8]
+  [ 9 10 11]
+ ]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="at">at
+
+</A></H2>
+Returns a single value inside a piddle as perl scalar.
+
+
+<P>
+
+<PRE>  $z = at($piddle, @position); $z=$piddle-&gt;at(@position);
+</PRE>
+
+<P>
+
+<CODE>@position</CODE> is a coordinate list, of size equal to the number of dimensions in the
+piddle. Occasionally useful in a general context, quite useful too inside
+PDL internals.
+
+
+<P>
+
+<PRE> perldl&gt; $x = sequence 3,4
+ perldl&gt; p $x-&gt;at(1,2)
+ 7 
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="cat">cat
+
+</A></H2>
+concatentate piddles to N+1 dimensional piddle
+
+
+<P>
+
+Takes a list of N piddles of same shape as argument, returns a single
+piddle of dimension N+1
+
+
+<P>
+
+<PRE> perldl&gt; $x = cat ones(3,3),zeroes(3,3),rvals(3,3); p $x
+</PRE>
+
+<P>
+
+<PRE> [
+  [
+   [1 1 1]
+   [1 1 1]
+   [1 1 1]
+  ]
+  [
+   [0 0 0]
+   [0 0 0]
+   [0 0 0]
+  ]
+  [
+   [1 1 1]
+   [1 0 1]
+   [1 1 1]
+  ]
+ ]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="dog">dog
+
+</A></H2>
+Opposite of 'cat' :). Split N dim piddle to list of N-1 dim piddles
+
+
+<P>
+
+Takes a single N-dimensional piddle and splits it into a list of N-1
+dimensional piddles. The breakup is done along the last dimension. Note the
+dataflown connection is still preserved by default, e.g.:
+
+
+<P>
+
+<PRE>        perldl&gt; $p = ones 3,3,3
+        perldl&gt; ($a,$b,$c) = dog $p
+        perldl&gt; $b++; p $p
+</PRE>
+
+<P>
+
+<PRE>        [
+         [
+          [1 1 1]
+          [1 1 1]
+          [1 1 1]
+         ]
+         [
+          [2 2 2]
+          [2 2 2]
+          [2 2 2]
+         ]
+         [
+          [1 1 1]
+          [1 1 1]
+          [1 1 1]
+         ]
+        ]
+</PRE>
+
+<P>
+
+<PRE>   Break =&gt; 1   Break dataflow connection (new copy)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="barf">barf
+
+</A></H2>
+Standard error reporting routine for PDL.
+
+
+<P>
+
+<CODE>barf()</CODE> is the routine PDL modules should call to report
+errors. This is because <CODE>barf()</CODE> will report the error as coming
+from the correct line in the module user's script rather than in the PDL
+module.
+
+
+<P>
+
+It does this magic by unwinding the stack frames until it reaches a package
+NOT beginning with ``PDL::''. If you DO want it to report errors in some
+module PDL::Foo (e.g. when debugging PDL::Foo) then set the variable <CODE>$PDL::Foo::Debugging=1</CODE>.  
+
+
+<P>
+
+Additionally if you set the variable <CODE>$PDL::Debugging=1</CODE> you will get a COMPLETE stack trace back up to the top level package.
+
+
+<P>
+
+Finally <CODE>barf()</CODE> will try and report usage information from the
+PDL documentation database if the error message is of the form 'Usage:
+func'.
+
+
+<P>
+
+Remember <CODE>barf()</CODE> is your friend. *Use* it!
+
+
+<P>
+
+At the perl level:
+
+
+<P>
+
+<PRE>   barf(&quot;User has too low an IQ!&quot;);
+</PRE>
+
+<P>
+
+In C or XS code:
+
+
+<P>
+
+<PRE>  barf(&quot;You have made %d errors&quot;, count);    
+  
+Note: this is one of the few functions ALWAYS exported
+by PDL::Core
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+Copyright (C) Karl Glazebrook <A
+HREF="MAILTO:(kgb@aaoepp.aao.gov.au),">(kgb@aaoepp.aao.gov.au),</A> Tuomas
+J. Lukka, <A
+HREF="MAILTO:(lukka@husc.harvard.edu)">(lukka@husc.harvard.edu)</A> and
+Christian Soeller <A
+HREF="MAILTO:(csoelle@sghms.ac.uk)">(csoelle@sghms.ac.uk)</A> 1997. All
+rights reserved. There is no warranty. You are allowed to redistribute this
+software / documentation under certain conditions. For details, see the
+file COPYING in the PDL distribution. If this file is separated from the
+PDL distribution, the copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

@@ -1,0 +1,1500 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::Primitive - primitive operations for pdl
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#sumover">sumover</A>
+		<LI><A HREF="#prodover">prodover</A>
+		<LI><A HREF="#average">average</A>
+		<LI><A HREF="#medover">medover</A>
+		<LI><A HREF="#oddmedover">oddmedover</A>
+		<LI><A HREF="#avg">avg</A>
+		<LI><A HREF="#sum">sum</A>
+		<LI><A HREF="#min">min</A>
+		<LI><A HREF="#max">max</A>
+		<LI><A HREF="#median">median</A>
+		<LI><A HREF="#oddmedian">oddmedian</A>
+		<LI><A HREF="#minmax">minmax</A>
+		<LI><A HREF="#qsort">qsort</A>
+		<LI><A HREF="#axisvalues">axisvalues</A>
+		<LI><A HREF="#inner">inner</A>
+		<LI><A HREF="#outer">outer</A>
+		<LI><A HREF="#matmult">matmult</A>
+		<LI><A HREF="#innerwt">innerwt</A>
+		<LI><A HREF="#inner2">inner2</A>
+		<LI><A HREF="#inner2d">inner2d</A>
+		<LI><A HREF="#inner2t">inner2t</A>
+		<LI><A HREF="#minimum">minimum</A>
+		<LI><A HREF="#minimum_ind">minimum_ind</A>
+		<LI><A HREF="#minimum_n_ind">minimum_n_ind</A>
+		<LI><A HREF="#maximum">maximum</A>
+		<LI><A HREF="#maximum_ind">maximum_ind</A>
+		<LI><A HREF="#maximum_n_ind">maximum_n_ind</A>
+		<LI><A HREF="#minmaximum">minmaximum</A>
+		<LI><A HREF="#hclip">hclip</A>
+		<LI><A HREF="#lclip">lclip</A>
+		<LI><A HREF="#clip">clip</A>
+		<LI><A HREF="#wtstat">wtstat</A>
+		<LI><A HREF="#wtstat">wtstat</A>
+		<LI><A HREF="#random">random</A>
+		<LI><A HREF="#randsym">randsym</A>
+		<LI><A HREF="#grandom">grandom</A>
+		<LI><A HREF="#assgn">assgn</A>
+		<LI><A HREF="#vsearch">vsearch</A>
+		<LI><A HREF="#interpol">interpol</A>
+		<LI><A HREF="#one2nd">one2nd</A>
+		<LI><A HREF="#which">which</A>
+		<LI><A HREF="#which_both">which_both</A>
+		<LI><A HREF="#which">which</A>
+		<LI><A HREF="#which_both">which_both</A>
+		<LI><A HREF="#where">where</A>
+		<LI><A HREF="#histogram">histogram</A>
+		<LI><A HREF="#whistogram">whistogram</A>
+		<LI><A HREF="#histogram2d">histogram2d</A>
+		<LI><A HREF="#whistogram2d">whistogram2d</A>
+		<LI><A HREF="#crossp">crossp</A>
+		<LI><A HREF="#norm">norm</A>
+		<LI><A HREF="#stats">stats</A>
+		<LI><A HREF="#whichND">whichND</A>
+		<LI><A HREF="#fibonacci">fibonacci</A>
+	</UL>
+
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::Primitive - primitive operations for pdl
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+This module provides some primitive and useful functions defined using
+PDL::PP and able to use the new indexing tricks.
+
+
+<P>
+
+See <EM>PDL/Indexing</EM> for how to use indices creatively.
+
+
+<P>
+
+For explanation of the signature format, see <EM>PDL/PP</EM>.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE> use PDL::Primitive;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="sumover">sumover
+
+</A></H2>
+<PRE>  Signature: (a(n); int+ [o]b())
+</PRE>
+
+<P>
+
+Project via sum to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+sum along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = sumover($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = sumover $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="prodover">prodover
+
+</A></H2>
+<PRE>  Signature: (a(n); int+ [o]b())
+</PRE>
+
+<P>
+
+Project via product to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+product along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = prodover($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = prodover $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="average">average
+
+</A></H2>
+<PRE>  Signature: (a(n); int+ [o]b())
+</PRE>
+
+<P>
+
+Project via average to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+average along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = average($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = average $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="medover">medover
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]b(); [t]tmp(n))
+</PRE>
+
+<P>
+
+Project via median to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+median along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = medover($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = medover $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="oddmedover">oddmedover
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]b(); [t]tmp(n))
+</PRE>
+
+<P>
+
+Project via oddmedian to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+oddmedian along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = oddmedover($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = oddmedover $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+The median is sometimes not a good choice as if the array has an even
+number of elements it lies half-way between the two middle values - thus it
+does not always correspond to a data value. The lower-odd median is just
+the lower of these two values and so it ALWAYS sits on an actual data value
+which is useful in some circumstances.
+		
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="avg">avg
+
+</A></H2>
+Return the average of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>avg($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="sum">sum
+
+</A></H2>
+Return the sum of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>sum($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="min">min
+
+</A></H2>
+Return the minimum of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>min($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="max">max
+
+</A></H2>
+Return the maximum of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>max($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="median">median
+
+</A></H2>
+Return the median of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>median($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="oddmedian">oddmedian
+
+</A></H2>
+Return the oddmedian of all elements in a piddle
+
+
+<P>
+
+<CODE>$x</CODE> = <CODE>oddmedian($data);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="minmax">minmax
+
+</A></H2>
+Returns piddle with minimum, maximum of a piddle.
+
+
+<P>
+
+<PRE> ($mn, $mx) = minmax($pdl);
+</PRE>
+
+<P>
+
+<PRE> Return $mn as minimum, $mx as maximum, $mn_ind as the index of minimum and 
+ $mx_ind as the index of the maximum.
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; $x = pdl [1,-2,3,5,0]
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; ($min, $max) = minmax($x);
+</PRE>
+
+<P>
+
+<PRE> perldl&gt; p &quot;$min $max\n&quot;;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="qsort">qsort
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]b(n))
+</PRE>
+
+<P>
+
+Quicksort a vector into ascending order.
+
+
+<P>
+
+XXX Todo: qsortind
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="axisvalues">axisvalues
+
+</A></H2>
+<PRE>  Signature: ([o,nc]a(n))
+</PRE>
+
+<P>
+
+Internal routine
+
+
+<P>
+
+<CODE>axisvalues</CODE> is the internal primitive that implements <CODE>axisvals</CODE> and alters its argument.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="inner">inner
+
+</A></H2>
+<PRE>  Signature: (a(n); b(n); [o]c(); )
+</PRE>
+
+<P>
+
+Inner product over one dimension
+
+
+<P>
+
+<PRE>        c = sum_i a_i * b_i
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="outer">outer
+
+</A></H2>
+<PRE>  Signature: (a(n); b(m); [o]c(n,m); )
+</PRE>
+
+<P>
+
+outer product over one dimension
+
+
+<P>
+
+Naturally, it is possiblet to achieve the effects of outer product simply
+by threading over the ``<CODE>*</CODE>'' operator but this function is provided for convenience.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="matmult">matmult
+
+</A></H2>
+<PRE> Signature: matmult(a(x,y),b(y,z),[o]c(x,z))
+</PRE>
+
+<P>
+
+Matrix multiplication 
+
+
+<P>
+
+We peruse the inner product to define matrix multiplication via a threaded
+inner product
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="innerwt">innerwt
+
+</A></H2>
+<PRE>  Signature: (a(n); b(n); c(n); [o]d(); )
+</PRE>
+
+<P>
+
+Weighted (i.e. triple) inner product
+
+
+<P>
+
+<PRE>        d = sum_i a(i) b(i) c(i)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="inner2">inner2
+
+</A></H2>
+<PRE>  Signature: (a(n); b(n,m); c(m); [o]d())
+</PRE>
+
+<P>
+
+Inner product of two vectors and a matrix
+
+
+<P>
+
+<PRE>        d = sum_ij a(i) b(i,j) c(j)
+</PRE>
+
+<P>
+
+Note that you should probably not thread over a and c since that would be
+very wasteful. Instead, you should use a temporary for b*c.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="inner2d">inner2d
+
+</A></H2>
+<PRE>  Signature: (a(n,m); b(n,m); [o]c())
+</PRE>
+
+<P>
+
+Inner product over 2 dimensions.
+
+
+<P>
+
+Equivalent to
+
+
+<P>
+
+<PRE>        $c = inner($a-&gt;clump(2), $b-&gt;clump(2))
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="inner2t">inner2t
+
+</A></H2>
+<PRE>  Signature: (a(j,n); b(n,m); c(m,k); [t]tmp(n,k); [o]d(j,k)))
+</PRE>
+
+<P>
+
+Efficient Triple matrix product a*b*c 
+
+
+<P>
+
+Efficiency comes from by using the temporary tmp. This operation only
+scales as N**3 whereas threading using inner2 would scale as N**4.
+
+
+<P>
+
+The reason for having this routine is that you do not need to have the same
+thread-dimensions for <CODE>tmp</CODE> as for the other arguments, which in case of large numbers of matrices
+makes this much more memory-efficient.
+
+
+<P>
+
+It is hoped that things like this could be taken care of as a kind of
+closures at some point.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="minimum">minimum
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]c())
+</PRE>
+
+<P>
+
+Project via minimum to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+minimum along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = minimum($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = minimum $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="minimum_ind">minimum_ind
+
+</A></H2>
+<PRE>  Signature: (a(n); int[o]c())
+</PRE>
+
+<P>
+
+Like minimum but returns the index rather than the value
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="minimum_n_ind">minimum_n_ind
+
+</A></H2>
+<PRE>  Signature: (a(n); int[o]c(m))
+</PRE>
+
+<P>
+
+Returns the index of <CODE>m</CODE> minimum elements
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="maximum">maximum
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]c())
+</PRE>
+
+<P>
+
+Project via maximum to N-1 dimensions
+
+
+<P>
+
+This functions reduces the dimensionality of a piddle by one by taking the
+maximum along the 1st dimension.
+
+
+<P>
+
+By using <CODE>xchg</CODE> etc. (see <EM>PDL/Slices</EM>) it is possible to use
+<EM>any</EM> dimension.
+
+
+<P>
+
+<PRE>    $a = maximum($b);
+</PRE>
+
+<P>
+
+<PRE>        $spectrum = maximum $image-&gt;xchg(0,1) 
+</PRE>
+
+<P>
+
+<PRE>        
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="maximum_ind">maximum_ind
+
+</A></H2>
+<PRE>  Signature: (a(n); int[o]c())
+</PRE>
+
+<P>
+
+Like maximum but returns the index rather than the value
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="maximum_n_ind">maximum_n_ind
+
+</A></H2>
+<PRE>  Signature: (a(n); int[o]c(m))
+</PRE>
+
+<P>
+
+Returns the index of <CODE>m</CODE> maximum elements
+
+
+<P>
+
+<PRE> Find minimum and maximum and their indices for a given piddle;
+</PRE>
+
+<P>
+
+<PRE>        perldl&gt; ($min, $max, $min_ind, $max_ind)=minmaximum($a)
+ 
+        perldl&gt; p $min, $max, $min_ind, $max_ind
+        [-2 0] [4 3] [0 1] [2 2]
+</PRE>
+
+<P>
+
+<PRE>        See also minmax, which clumps the piddle together.
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="minmaximum">minmaximum
+
+</A></H2>
+<PRE>  Signature: (a(n); [o]cmin(); [o] cmax(); int [o]cmin_ind(); int [o]cmax_ind())
+</PRE>
+
+<P>
+
+info not available
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="hclip">hclip
+
+</A></H2>
+<PRE>  Signature: (a(); b(); [o] c())
+</PRE>
+
+<P>
+
+clip <CODE>$a</CODE> by <CODE>$b</CODE> ($b is upper bound)
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="lclip">lclip
+
+</A></H2>
+<PRE>  Signature: (a(); b(); [o] c())
+</PRE>
+
+<P>
+
+clip <CODE>$a</CODE> by <CODE>$b</CODE> ($b is lower bound)
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="clip">clip
+
+</A></H2>
+Clip a piddle by (optional) upper or lower bounds.
+
+
+<P>
+
+<PRE>        $b = $a-&gt;clip(0,3); 
+        $c = $a-&gt;clip(undef, $x);
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="wtstat">wtstat
+
+</A></H2>
+<PRE>  Signature: (a(n); wt(n); avg(); [o]b(); int deg)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="wtstat">wtstat
+
+</A></H2>
+Weighted statistical moment of given degree
+
+
+<P>
+
+This calculates a weighted statistic over the vector a. The formula is  
+
+
+<P>
+
+<PRE> b() = (sum_i wt_i * (a_i ** degree - avg)) / (sum_i wt_i)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="random">random
+
+</A></H2>
+Constructor which returns piddle of random numbers
+
+
+<P>
+
+<PRE>   $a = random([type], $nx, $ny, $nz,...);
+   $a = random $b;
+   
+   etc. (see 'zeroes')
+</PRE>
+
+<P>
+
+This is the uniform distribution between 0 and 1 (assumedly excluding 1
+itself). The arguments are the same as <CODE>zeroes</CODE>
+(q.v.) - i.e. one can specify dimensions, types or give a template.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="randsym">randsym
+
+</A></H2>
+Constructor which returns piddle of random numbers
+
+
+<P>
+
+<PRE>   $a = randsym([type], $nx, $ny, $nz,...);
+   $a = randsym $b;
+   
+   etc. (see 'zeroes')
+</PRE>
+
+<P>
+
+This is the uniform distribution between 0 and 1 (excluding both 0 and 1,
+cf <CODE>random</CODE>). The arguments are the same as <CODE>zeroes</CODE> (q.v.) - i.e. one can specify dimensions, types or give a template.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="grandom">grandom
+
+</A></H2>
+Constructor which returns piddle of Gaussian random numbers
+
+
+<P>
+
+<PRE>   $a = grandom([type], $nx, $ny, $nz,...);
+   $a = grandom $b;
+</PRE>
+
+<P>
+
+<PRE>   etc. See 'zeroes'
+   
+This is generated by summing 12 uniform random
+distributions for now. Hopefully someone can be
+inspired to create a better version!
+</PRE>
+
+<P>
+
+Mean = 0, Stddev = 1
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="assgn">assgn
+
+</A></H2>
+<PRE>  Signature: (a(); [o]b())
+</PRE>
+
+<P>
+
+Plain numerical assignment. This is used to implement the ``.='' operator
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="vsearch">vsearch
+
+</A></H2>
+<PRE>  Signature: (i(); x(n); int [o]ip())
+</PRE>
+
+<P>
+
+routine for searching 1D values i.e. step-function interpolation.
+
+
+<P>
+
+<PRE>   $inds = vsearch($vals, $xs);
+</PRE>
+
+<P>
+
+Returns for each value of <CODE>$val</CODE> the index of the least larger
+member of <CODE>$xs</CODE> (which need to be in increasing order). If the
+value is larger than any member of $xs, the index to the last element of
+<CODE>$xs</CODE> is returned.
+
+
+<P>
+
+This function is useful e.g. when you have a list of probabilities for
+events and want to generate indices to events:
+
+
+<P>
+
+<PRE>        $a = pdl(.01,.86,.93,1); # Barnsley IFS probabilities cumulatively
+        $b = random 20;
+        $c = vsearch($b, $a); # Now, $c will have the appropriate distr.
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="interpol">interpol
+
+</A></H2>
+<PRE>  Signature: (i(); x(n); y(n); [o] ip())
+</PRE>
+
+<P>
+
+routine for 1D linear interpolation
+
+
+<P>
+
+<PRE> $interpolated_values = interpol($interpol_at, $ordered_abscissas, $yvalues)
+</PRE>
+
+<P>
+
+'interpol' uses a binary search to find the suspects, er..., interpolation
+indices and therefore abscissas have to be strictly ordered (increasing or
+decreasing). For interpolation at lots of closely spaced abscissas an
+approach that uses the last index found as a start for the next search can
+be faster (compare Numerical Recipes 'hunt' routine). Feel free to
+implement that on top of the binary search if you like. For out of bounds
+values it just does a linear extrapolation and issues a warning upon
+completion.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="one2nd">one2nd
+
+</A></H2>
+Converts a one dimensional index piddle to a set of ND coordinates
+
+
+<P>
+
+<PRE>  @coords=one2nd($a, $indices)
+</PRE>
+
+<P>
+
+returns an array of piddles containing the ND indexes corresponding to the
+one dimensional list indices. The indices are assumed to correspond to
+array <CODE>$a</CODE> clumped using <CODE>clump(-1).</CODE> This routine is
+used in whichND, but is useful on its own occasionally.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="which">which
+
+</A></H2>
+Returns piddle of indices of non-zero values.
+
+
+<P>
+
+<PRE> $i = which($mask);
+</PRE>
+
+<P>
+
+returns a pdl with indices for all those elements that are nonzero in the
+mask. Note that mask really has to be 1-D (use <CODE>clump(-1)</CODE> if
+you need to work with ND-images) 
+
+
+<P>
+
+If you want to return both the indices of non-zero values and the
+complement, use the function which_both.
+
+
+<P>
+
+<PRE> perldl&gt; $x = sequence(10); p $x
+ [0 1 2 3 4 5 6 7 8 9]
+ perldl&gt; $indx = which($x&gt;6); p $indx
+ [7 8 9]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="which_both">which_both
+
+</A></H2>
+Returns piddle of indices of non-zero values and their complement
+
+
+<P>
+
+<PRE> ($i, $c_i) = which_both($mask);
+</PRE>
+
+<P>
+
+This works just as which, but the complement of <CODE>$i</CODE> will be in
+$c_i.
+
+
+<P>
+
+<PRE> perldl&gt; $x = sequence(10); p $x
+ [0 1 2 3 4 5 6 7 8 9]
+ perldl&gt; ($small, $big) = which_both ($x &gt;= 5); p &quot;$small\n $big&quot;
+ [5 6 7 8 9]
+ [0 1 2 3 4]
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="which">which
+
+</A></H2>
+<PRE>  Signature: (mask(n); int [o] inds(m))
+</PRE>
+
+<P>
+
+info not available
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="which_both">which_both
+
+</A></H2>
+<PRE>  Signature: (mask(n); int [o] inds(m); int [o]notinds(q))
+</PRE>
+
+<P>
+
+info not available
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="where">where
+
+</A></H2>
+Returns indices to non-zero values or those values from another piddle.
+
+
+<P>
+
+<PRE> $i = $x-&gt;where($x+5 &gt; 0); # $i contains elements of $x
+                           # where mask ($x+5 &gt; 0) is 1
+ 
+Note: $i is always 1-D, even if $x is &gt;1-D. The first argument
+(the values) and the second argument (the mask) currently have to have
+the same initial dimensions (or horrible things happen).
+</PRE>
+
+<P>
+
+It is also possible to use the same mask for several piddles with the same
+call:
+
+
+<P>
+
+<PRE> ($i,$j,$k) = where($x,$y,$z, $x+5&gt;0);
+</PRE>
+
+<P>
+
+There is also the following syntax, retained only for compatibility with
+PDL versions &lt;1.99. This use is deprecated, and will be removed in the future. Use <CODE>which</CODE> instead. <CODE>$i</CODE> = <CODE>where($x</CODE> &gt; 0); # indices to $x,
+equivalent to 'which()'
+
+
+<P>
+
+Note: the mask has to be 1-D. See the documentation for <CODE>which</CODE>
+
+
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="histogram">histogram
+
+</A></H2>
+<PRE>  Signature: (in(n); int+[o] hist(m); double step; double min; int msize =&gt; m)
+</PRE>
+
+<P>
+
+Calculates a histogram for given stepsize and minimum.
+
+
+<P>
+
+The output is reset in a different threadloop so that you can take a
+histogram of $a(10,12) into $b(15) and get the result you want.
+
+
+<P>
+
+XXX: needs some more explanation (relation to <CODE>hist()</CODE>) etc. and examples!!!
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="whistogram">whistogram
+
+</A></H2>
+<PRE>  Signature: (in(n); float+ wt();float+[o] hist(m); double step; double min; int msize =&gt; m)
+</PRE>
+
+<P>
+
+Calculates a histogram for given stepsize and minimum.
+
+
+<P>
+
+The output is reset in a different threadloop so that you can take a
+histogram of $a(10,12) into $b(15) and get the result you want.
+
+
+<P>
+
+XXX: needs some more explanation (relation to <CODE>hist()</CODE>) etc. and examples!!!
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="histogram2d">histogram2d
+
+</A></H2>
+<PRE>  Signature: (ina(n); inb(n); int+[o] hist(ma,mb); double stepa; double mina; int masize =&gt; ma;
+                      double stepb; double minb; int mbsize =&gt; mb;)
+</PRE>
+
+<P>
+
+Calculates a 2d histogram.
+
+
+<P>
+
+XXX: needs some more explanation (relation to <CODE>hist()</CODE>) etc. and examples!!!
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="whistogram2d">whistogram2d
+
+</A></H2>
+<PRE>  Signature: (ina(n); inb(n); float+ wt();float+[o] hist(ma,mb); double stepa; double mina; int masize =&gt; ma;
+                      double stepb; double minb; int mbsize =&gt; mb;)
+</PRE>
+
+<P>
+
+Calculates a 2d histogram.
+
+
+<P>
+
+XXX: needs some more explanation (relation to <CODE>hist()</CODE>) etc. and examples!!!
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="crossp">crossp
+
+</A></H2>
+<PRE>  Signature: (a(tri=3); b(tri); [o] c(tri))
+</PRE>
+
+<P>
+
+Cross product of two 3D vectors
+
+
+<P>
+
+After
+
+
+<P>
+
+<PRE>   $c = crossp $a, $b
+</PRE>
+
+<P>
+
+the inner product $c*$a and $c*$b will be zero, i.e. <CODE>$c</CODE> is
+orthogonal to <CODE>$a</CODE> and <CODE>$b</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="norm">norm
+
+</A></H2>
+<PRE>  Signature: (vec(n); [o] norm(n))
+</PRE>
+
+<P>
+
+Normalises a vector to unit Euclidean length
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="stats">stats
+
+</A></H2>
+Calculates useful statistics on a piddle
+
+
+<P>
+
+<PRE> ($mean,$rms,$median,$min,$max) = stats($piddle,[$weights]); 
+</PRE>
+
+<P>
+
+This utility calculates all the most useful quantities in one call.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="whichND">whichND
+
+</A></H2>
+Returns the coordinates for non-zero values
+
+
+<P>
+
+<PRE>   @coords=whichND($mask);
+</PRE>
+
+<P>
+
+returns an array of piddles containing the coordinates of the elements that
+are non-zero in $mask.
+
+
+<P>
+
+<PRE>   perldl&gt; $a=sequence(10,10,3,4)
+   
+   perldl&gt; ($x, $y, $z, $w)=whichND($a == 203); p $x, $y, $z, $w)
+   [3] [0] [2] [0]
+   perldl&gt; print $a-&gt;at($x,$y,$z,$w)
+   203
+=cut
+</PRE>
+
+<P>
+
+<CODE>*whichND</CODE> = \&amp;PDL::whichND; sub PDL::whichND { my
+<CODE>$mask</CODE> = shift; my $ind=which($mask-&gt;clump(-1));
+
+
+<P>
+
+<PRE>  return one2nd($mask, $ind);
+  
+}
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="fibonacci">fibonacci
+
+</A></H2>
+<PRE>  Signature: ([o]x(n))
+</PRE>
+
+<P>
+
+Constructor - a vector with Fibonacci's sequence
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+Copyright (C) Tuomas J. Lukka 1997 <A
+HREF="MAILTO:(lukka@husc.harvard.edu).">(lukka@husc.harvard.edu).</A>
+Contributions by Christian Soeller <A
+HREF="MAILTO:(csoelle@sghms.ac.uk)">(csoelle@sghms.ac.uk)</A> and Karl
+Glazebrook <A
+HREF="MAILTO:(kgb@aaoepp.aao.gov.au).">(kgb@aaoepp.aao.gov.au).</A> All
+rights reserved. There is no warranty. You are allowed to redistribute this
+software / documentation under certain conditions. For details, see the
+file COPYING in the PDL distribution. If this file is separated from the
+PDL distribution, the copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

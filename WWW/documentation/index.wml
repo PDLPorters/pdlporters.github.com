@@ -1,0 +1,51 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<!--===================================================================-->
+<HEAD>
+<META HTTP-EQUIV="KEYWORDS" 
+      CONTENT="Schwebel">
+<META NAME="DESCRIPTION" 
+      CONTENT="Robert Schwebel">
+<TITLE>PDL - Online Documentation</TITLE>
+</HEAD>
+<!--===================================================================-->
+
+<set-var doctype=html>
+
+#include '$(ROOT)/templates/background.wml'
+#include '$(ROOT)/templates/menue_top.wml'
+#include '$(ROOT)/templates/menue_main.wml'
+#include '$(ROOT)/templates/menue_bottom.wml'
+
+<TD ALIGN=LEFT>
+
+<H2> Documentation </H2>
+
+<P ALIGN=justify> PDL comes with online documentation. You can simply ask
+your <CODE>perldl></CODE> command line for <CODE>help</CODE> and get
+information on every module and function included in the package. If you
+want to read the docs now you can use the online tree below.</P>
+
+<BLOCKQUOTE>
+<IMG SRC="$(IMAGES)/M_red.gif"> Before asking the team questions you 
+should read the 
+<A HREF="FAQ.html">FAQ</A>.<BR>
+
+<IMG SRC="$(IMAGES)/M_red.gif"> You can view the 
+<A HREF="html/">Online Documentation</A> tree here. <BR>
+
+<IMG SRC="$(IMAGES)/M_red.gif"> Want to know something about the
+<A HREF="html/perldl.html">PerlDL shell</A>?<BR>
+
+<IMG SRC="$(IMAGES)/M_red.gif"> Last but not least something about PDL's
+<A HREF="html/Philosophy.html">philosophy</A> <BR>
+</BLOCKQUOTE>
+
+<P ALIGN=justify> The HTML documentation is extensive, but rather poorly
+organised at present. We are doing our best! There are a series of HTML files
+for each module plus a set of philosophical documents providing insight into
+the ideas and structure of PDL.</P>
+
+#include "footer_rs.wml"
+

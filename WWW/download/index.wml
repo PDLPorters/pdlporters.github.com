@@ -1,0 +1,155 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<!--===================================================================-->
+<HEAD>
+<META HTTP-EQUIV="KEYWORDS" 
+      CONTENT="Schwebel">
+<META NAME="DESCRIPTION" 
+      CONTENT="Robert Schwebel">
+<TITLE>PDL - Download</TITLE>
+</HEAD>
+<!--===================================================================-->
+
+<set-var doctype=html>
+
+#include '$(ROOT)/templates/background.wml'
+#include '$(ROOT)/templates/menue_top.wml'
+#include '$(ROOT)/templates/menue_main.wml'
+#include '$(ROOT)/templates/menue_bottom.wml'
+
+#use wml::std::box
+
+<TD ALIGN=LEFT>
+
+
+<H2>Download</H2>
+
+<!-- ---------------------------------------------------------------------- -->
+
+<H3>Main PDL Distribution</H3>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF="http://www.perl.com/perl/CPAN/modules/by-module/PDL/">Stable  PDL
+release</A></TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> This link will always take you to the latest stable
+release of PDL. As it is on the Comprehensive Perl Archive Network it should
+automatically choose a site close to your location.</P></EN>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF="http://www.sourceforge.net">CVS Server</A></TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> The code is developed with a CVS server, so you can always
+check out the latest developer snapshots. Please notice that these releases can
+have some lack of documentation and very new and untested code.</P></EN>
+
+</TR>
+
+</TABLE>
+
+<!-- ---------------------------------------------------------------------- -->
+
+<H3>Required software before installing PDL</H3>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top><EN>Latest <A HREF="">Perl
+version</A><EN></TD>
+
+<TD bgcolor=#eeeeee width=70%><P align=justify>PDL is a Perl module, so it's
+really useful if you have it installed on your machine <TT>:-)</TT> For the
+recent stable versions you need at least Perl version 5.004 to succeed.
+</P></TD>
+
+</TR>
+
+</TABLE>
+
+<!-- ---------------------------------------------------------------------- -->
+
+<H3>Optional Software</H3>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF=""><CODE>Term::Readline</CODE></A> <EN>or alternatively</EN><BR>
+<A HREF=""><CODE>Term::Readline::Gnu</CODE></A>.</TD> 
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> If you want to have a nice command line with history
+function in your <CODE>perldl</CODE> shell install one of the
+<CODE>Term::Readline::XXX</CODE> modules.</P></EN></TD>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF="">pbm+</A> or <BR>
+<A HREF="ftp://wuarchive.wustl.edu/graphics/graphics/packages/NetPBM">netpbm</A>
+</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> To read and write images with PDL's rpic/wpic commands
+the module <CODE>PDL::IO::Pic<CODE> is in the main distribution. However, if
+you want to have access to nearly every possible graphics format you should
+have installed one of these packages before installing PDL. For a jpeg
+converter you should also have  
+<A HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A>.</P></EN></TD>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+<A HREF="ftp://mm-ftp.cs.berkeley.edu/pub/multimedia/mpeg/encode">mpeg_encode
+</A></TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> <CODE>PDL::IO::PPic</CODE> has also the wmpeg function to
+write MPEG videos. This packet is needed to activate it.</P></EN>
+
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+Slatec</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify> Slatec fortran lib is included but requires a fortran
+compiler and the perl module to be installed. Module will not be built unless
+ExtUtils::F77 (version >= 1.03) is installed and Extutils::F77 supports your
+platform.</P></EN></TD>
+
+</TR>
+
+</TABLE>
+
+<!-- ---------------------------------------------------------------------- -->
+
+
+#include "footer_rs.wml"

@@ -1,0 +1,65 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::LiteF - minimum PDL module function loader
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::LiteF - minimum PDL module function loader
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+Loads the smallest possible set of modules for PDL to work, making the
+functions available in the current namespace. If you want something even
+smaller see the <CODE>PDL::Lite</CODE> module.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE> use PDL::LiteF; # Is equivalent to the following:
+</PRE>
+
+<P>
+
+<PRE>   use PDL::Core;
+   use PDL::Ops;
+   use PDL::Primitive;
+   use PDL::Basic;
+   use PDL::Slices;
+   use PDL::Version;
+</PRE>
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

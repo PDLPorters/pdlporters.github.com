@@ -1,0 +1,220 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::ImageRGB -- some utility functions for RGB image data handling
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#cquant">cquant</A>
+		<LI><A HREF="#interlrgb">interlrgb</A>
+		<LI><A HREF="#rgbtogr">rgbtogr</A>
+		<LI><A HREF="#bytescl">bytescl</A>
+	</UL>
+
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::ImageRGB -- some utility functions for RGB image data handling
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+Collection of a few commonly used routines involved in handling of RGB,
+palette and grayscale images. Not much more than a start. Should be a good
+place to exercise some of the thread/map/clump PP stuff.
+
+
+<P>
+
+Other stuff that should/could go here:
+
+
+<P>
+
+<UL>
+<LI><STRONG><A NAME="item_color">color space conversion
+
+</A></STRONG>
+<LI><STRONG><A NAME="item_common">common image filters
+
+</A></STRONG>
+<LI><STRONG><A NAME="item_image">image rebinning
+
+</A></STRONG>
+</UL>
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE> use PDL::ImageRGB;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="cquant">cquant
+
+</A></H2>
+quantize and reduce colours in 8-bit images
+
+
+<P>
+
+<PRE>    ($out, $lut) = cquant($image [,$ncols]);
+</PRE>
+
+<P>
+
+This function does color reduction for &lt;=8bit displays and accepts 8bit
+RGB and 8bit palette images. It does this through an interface to the
+ppm_quant routine from the pbmplus package that implements the median cut
+routine which intellegently selects the 'best' colors to represent your
+image on a &lt;= 8bit display (based on the median cut algorithm). Optional
+args: <CODE>$ncols</CODE> sets the maximum nunmber of colours used for the
+output image (defaults to 256). There are images where a different color
+reduction scheme gives better results (it seems this is true for images
+containing large areas with very smoothly changing colours).
+
+
+<P>
+
+Returns a list containing the new palette image (type PDL_Byte) and the RGB
+colormap.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="interlrgb">interlrgb
+
+</A></H2>
+Make an RGB image from a palette image and its lookup table.
+
+
+<P>
+
+<PRE>    $rgb = $palette_im-&gt;interlrgb($lut)
+</PRE>
+
+<P>
+
+Input should be of an integer type and the lookup table (3,x,...). Will
+perform the lookup for any N-dimensional input pdl (i.e. 0D, 1D, 2D, ...).
+Uses the index command but will not dataflow by default. If you want it to
+dataflow the dataflow_forward flag must be set in the <CODE>$lut</CODE>
+piddle (you can do that by saying $lut-&gt;set_dataflow_f(1)).
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="rgbtogr">rgbtogr
+
+</A></H2>
+Converts an RGB image to a grey scale using standard transform
+
+
+<P>
+
+<PRE>   $gr = $rgb-&gt;rgbtogr
+</PRE>
+
+<P>
+
+Performs a conversion of an RGB input image (3,x,....) to a greyscale image
+(x,.....) using standard formula:
+
+
+<P>
+
+<PRE>   Grey = 0.301 R + 0.586 G + 0.113 B
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="bytescl">bytescl
+
+</A></H2>
+Scales a pdl into a specified data range (default 0-255)
+
+
+<P>
+
+<PRE>        $scale = $im-&gt;bytescl([$top])
+</PRE>
+
+<P>
+
+By default $top=255, otherwise you have to give the desired top value as an
+argument to <CODE>bytescl</CODE>. Normally <CODE>bytescl</CODE> doesn't rescale data that fits already in the bounds 0..$top (it only does
+the type conversion if required). If you want to force it to rescale so
+that the max of the output is at <CODE>$top</CODE> and the min at 0 you
+give a negative <CODE>$top</CODE> value to indicate this.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+This package doesn't yet contain enough useful functions!
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+Copyright 1997 Christian Soeller <A
+HREF="MAILTO:<csoelle@sghms.ac.uk>"><csoelle@sghms.ac.uk></A> All rights
+reserved. There is no warranty. You are allowed to redistribute this
+software / documentation under certain conditions. For details, see the
+file COPYING in the PDL distribution. If this file is separated from the
+PDL distribution, the copyright notice should be included in the file.
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

@@ -1,0 +1,287 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>PDL::Image2D - Miscellaneous 2D image processing functions
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#FUNCTIONS">FUNCTIONS</A>
+	<UL>
+
+		<LI><A HREF="#conv2d">conv2d</A>
+		<LI><A HREF="#conv2d">conv2d</A>
+		<LI><A HREF="#med2d">med2d</A>
+		<LI><A HREF="#med2d">med2d</A>
+		<LI><A HREF="#patch2d">patch2d</A>
+		<LI><A HREF="#patch2d">patch2d</A>
+		<LI><A HREF="#max2d_ind">max2d_ind</A>
+		<LI><A HREF="#max2d_ind">max2d_ind</A>
+		<LI><A HREF="#centroid2d">centroid2d</A>
+		<LI><A HREF="#centroid2d">centroid2d</A>
+		<LI><A HREF="#cc8compt">cc8compt</A>
+	</UL>
+
+	<LI><A HREF="#AUTHORS">AUTHORS</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+PDL::Image2D - Miscellaneous 2D image processing functions
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+<PRE>  Miscellaneous 2D image processing functions - for want
+  of anywhere else to put them
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE> use PDL::Image2D;
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="FUNCTIONS">FUNCTIONS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="conv2d">conv2d
+
+</A></H2>
+<PRE>  Signature: (a(m,n); kern(p,q); [o]b(m,n); int opt)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="conv2d">conv2d
+
+</A></H2>
+2D convolution of an array with a kernel (smoothing)
+
+
+<P>
+
+<PRE> $new = conv2d $old, $kernel, {OPTIONS}
+</PRE>
+
+<P>
+
+<PRE>  perldl&gt; $smoothed = conv2d $image, ones(3,3), {Boundary =&gt; Reflect}
+</PRE>
+
+<P>
+
+<PRE> Boundary - controls what values are assumed for the image when kernel 
+            crosses its edge:
+            =&gt; Default  - periodic boundary conditions (i.e. wrap around axis)
+            =&gt; Reflect  - reflect at boundary
+            =&gt; Truncate - truncate at boundary
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="med2d">med2d
+
+</A></H2>
+<PRE>  Signature: (a(m,n); kern(p,q); [o]b(m,n); int opt)
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="med2d">med2d
+
+</A></H2>
+2D median-convolution of an array with a kernel (smoothing)
+
+
+<P>
+
+Note: only points in the kernel &gt;0 are included in the median, other
+points are weighted by the kernel value (medianing lots of zeroes is rather
+pointless)
+
+
+<P>
+
+<PRE> $new = med2d $old, $kernel, {OPTIONS}
+</PRE>
+
+<P>
+
+<PRE>  perldl&gt; $smoothed = med2d $image, ones(3,3), {Boundary =&gt; Reflect}
+</PRE>
+
+<P>
+
+<PRE> Boundary - controls what values are assumed for the image when kernel 
+            crosses its edge:
+            =&gt; Default  - periodic boundary conditions (i.e. wrap around axis)
+            =&gt; Reflect  - reflect at boundary
+            =&gt; Truncate - truncate at boundary
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="patch2d">patch2d
+
+</A></H2>
+<PRE>  Signature: (a(m,n); int bad(m,n); [o]b(m,n))
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="patch2d">patch2d
+
+</A></H2>
+patch bad pixels out of 2D images, 
+
+
+<P>
+
+<CODE>$patched</CODE> = patch2d $data, $bad;
+
+
+<P>
+
+<CODE>$bad</CODE> is a 2D mask array where 1=bad pixel 0=good pixel. Pixels
+are replaced by the average of their non-bad neighbours.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="max2d_ind">max2d_ind
+
+</A></H2>
+<PRE>  Signature: (a(m,n); [o]b(); int [o]c(); int[o]d())
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="max2d_ind">max2d_ind
+
+</A></H2>
+Return value/position of maximum value in 2D image
+
+
+<P>
+
+Contributed by Tim Jeness
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="centroid2d">centroid2d
+
+</A></H2>
+<PRE>  Signature: (im(m,n); x(); y(); box(); [o]xcen(); [o]ycen())
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="centroid2d">centroid2d
+
+</A></H2>
+Refine a list of object positions in 2D image by centroiding in a box
+
+
+<P>
+
+<CODE>$box</CODE> is the full-width of the box, i.e. the window is +/-
+$box/2
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="cc8compt">cc8compt
+
+</A></H2>
+<PRE>  Signature: (a(m,n); [o]b(m,n))
+</PRE>
+
+<P>
+
+Connected 8-component labeling of a binary image.
+
+
+<P>
+
+Connected 8-component labeling of 0,1 image - i.e. find seperate segmented
+objects and fill object pixels with object number
+
+
+<P>
+
+perldl&gt; <CODE>$segmented</CODE> =
+<CODE>cc8compt($image>$threshold);</CODE>
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHORS">AUTHORS
+
+</A></H1>
+Copyright (C) Karl Glazebrook 1997 with additions by Robin Williams <A
+HREF="MAILTO:(rjrw@ast.leeds.ac.uk)">(rjrw@ast.leeds.ac.uk)</A> and Tim
+Jeness <A HREF="MAILTO:(timj@jach.hawaii.edu).">(timj@jach.hawaii.edu).</A>
+All rights reserved. There is no warranty. You are allowed to redistribute
+this software / documentation under certain conditions. For details, see
+the file COPYING in the PDL distribution. If this file is separated from
+the PDL distribution, the copyright notice should be included in the file.
+ 
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>

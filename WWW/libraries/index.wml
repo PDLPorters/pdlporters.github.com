@@ -1,0 +1,51 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<!--===================================================================-->
+<HEAD>
+<META HTTP-EQUIV="KEYWORDS" 
+      CONTENT="Schwebel">
+<META NAME="DESCRIPTION" 
+      CONTENT="Robert Schwebel">
+<TITLE>PDL - External Libraries</TITLE>
+</HEAD>
+<!--===================================================================-->
+
+<set-var doctype=html>
+
+#include '$(ROOT)/templates/background.wml'
+#include '$(ROOT)/templates/menue_top.wml'
+#include '$(ROOT)/templates/menue_main.wml'
+#include '$(ROOT)/templates/menue_bottom.wml'
+
+<TD ALIGN=LEFT>
+
+<H2>External Libraries</H2>
+
+<EN><P align=justify> One of the most powerful features of PDL is it's role as
+an integration tool for a variety of external libraries. Not all of the
+features you can use with PDL come with the main package, there are lots of
+"wrapper" modules which act as a connection to other signal processing
+collections. </P></EN>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+...</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+<EN><P align=justify>...</P></EN></TD>
+
+</TR>
+
+</TABLE>
+
+#include "footer_rs.wml"
+
+

@@ -113,7 +113,7 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 >      
 
 <NEWS de-date = "Mi, 5.04.2000"
-      en-date = "Mi, 2000/04/05"
+      en-date = "We, 2000/04/05"
       de-text = "PDL 2.005 ist ab sofort verfuegbar. Diese Version arbeitet
 	nun auch ohne Probleme mit perl 5.6. (CS)"
       en-text = "PDL 2.005 is released. It is mainly a bugfix

@@ -38,6 +38,8 @@ aussieht.</de-p>
 <li> <de><a href="$(PDLROOT)/screenshots/plot2D_de.html">2D Plots mit PGPLOT</a></de>
      <en><a href="$(PDLROOT)/screenshots/plot2D_en.html">2D plotting with
      PGPLOT</a></en>
+<li> <de><a href="$(PDLROOT)/screenshots/plot3D_de.html">3D Plots</a></de>
+     <en><a href="$(PDLROOT)/screenshots/plot3D_en.html">3D plots</a></en>
 </nl>
 </p>
 

@@ -403,31 +403,5 @@ Vektoren:</de-p>
 
 <!-- ---------------------------------------------------------------------- -->
 
-<HR>
-
-<EN><H3> 3D Graphics Examples </H3></EN>
-<DE><H3> 3D Grafik-Beispiele </H3></DE>
-
-<en-p> Here are some pretty pictures generated using the 
-<CODE>PDL::Graphics::TriD</CODE> module, follow the links to get full-size 
-pictures and the PDL code which produced them.</en-p>
-
-<de-p> Die folgenden Abbildung zeigt einige "pretty pictures", die mit Hilfe des
-<CODE>PDL::Graphics::TriD</CODE>-Moduls erzeugt wurden. Ein Klick auf die
-Screenshots führt zu einer großen Version und dem Code, der die Bilder erzeugt
-hat.</de-p>
-
-<P ALIGN=center>
-<A HREF="ex1.html"><IMG SRC="ex1thumb.gif" alt="Example 1"></A>
-<A HREF="ex2.html"><IMG SRC="ex2thumb.gif" alt="Example 2"></A>
-<A HREF="ex3.html"><IMG SRC="ex3thumb.gif" alt="Example 3"></A>
-
-<en-p> Note when displayed with PDL viewing from different angles is as simple
-as rotating the figure with the mouse!</en-p>
-
-<de-p> Die 3D-Plots können dabei mit der Maus gedreht und aus verschiedenen
-Richtungen angeschaut werden!</de-p>
-
-
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

@@ -58,10 +58,11 @@
 <empty-person>
 
 <person name     = "Karl Glazebrook"
-        email    = ""
+        email    = "kgb@pha.jhu.edu"
         url      = ""
-        reallife = ""
-        task     = ""
+        reallife = "Professor at Johns Hopkins University, Dept. of 
+	            Physics and Astronomy"
+        task     = "Creator of PDL"
 >
 
 </tr>

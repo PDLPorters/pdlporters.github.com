@@ -87,7 +87,7 @@
 		 so you can 
                  always check out the latest developer snapshots. Compressed 
 		 tar archives of the most recent 
-		 <A HREF="ftp://PDL.sourceforge.net/pub/pdl">snapshot</A>
+		 <A HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">snapshot</A>
 		 are available for 
 		 those who want to save dealing with the hassle of CVS. Please
 		 notice that these snapshots can be distinguished by a lack of 
@@ -101,12 +101,12 @@
 		 Snapshots sind 
 		 ebenfalls verfügbar, für Leute die sich nicht mit CVS 
 		 auseinandersetzen wollen. Es ist zu beachten, daß diese 
-		 <A HREF="ftp://PDL.sourceforge.net/pub/pdl">Snapshots</A>
+		 <A HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">Snapshots</A>
 		 evtl. nicht gut dokumentiert sind und sehr neuen 
 		 und ungetesteten Code enthalten können. Aber so ist 
 		 das...</DE-P>"
   homepage    = "http://www.sourceforge.net/project/?form_grp=612"
-  source      = "ftp://PDL.sourceforge.net/pub/pdl"
+  source      = "http://PDL.sourceforge.net/PDLsnap/snapshot.html"
   rpm         = ""
   debian      = ""
 >

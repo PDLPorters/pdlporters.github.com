@@ -73,5 +73,19 @@ entält einige screenshots, die PGPLOT in Aktion zeigen.
 HREF="$(PDLROOT)/demos/plot2D_es.html">demostración PGPLOT</a>.
 </ES>
 
+
+<EN><H3> 2D & 3D Graphics Examples </H3></EN>
+
+<EN><A HREF="http://www.plplot.org">PLplot</A> is a scientific plotting
+library for 2D and 3D grpahics.  PLplot has a rich API allowing fine control
+of every aspects of the plots.  The PDL binding comes in two flavors: a
+high-level, object-oriented interface and a low-level interface which is
+very close to the C API of the library.  The demos distributed with PLplot
+have been ported to the low-level interface of PDL::Graphics:PLplot and are
+avialable at the <A
+HREF="http://plplot.sourceforge.net/examples/index.html">PLplot examples
+area</A>. 
+</EN>
+
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

@@ -276,7 +276,6 @@ externas y APIs.
   screenshot  = ""
 >	       
 
-
 <library-table 
   name        = "PDL::Graphics::PGPLOT"
   description = "<EN-P>PGPLOT is a very powerful fortran library for scientific
@@ -293,6 +292,17 @@ externas y APIs.
 		 HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> 
 		 Perl-Modul.</DE-P>"
   homepage    = ""
+  download    = ""
+  screenshot  = ""
+>
+
+<library-table 
+  name        = "PDL::Graphics::PLplot"
+  description = "<EN-P><A HREF="http://www.plplot.org">PLplot</A> is
+                 scientific library written in C for 
+		 2D and 3D plotting.  All the necessary modules for the PDL
+                 binding are distributed along with PDL itself.</EN-P>"
+  homepage    = "http://www.plplot.org"
   download    = ""
   screenshot  = ""
 >

@@ -114,6 +114,25 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "14.07.2001"
+      en-date = "2001/07/14"
+      en-text = "A first attempt to compile PDL on Mac OS X has been
+		 largely successful. Check the <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">report</A>. (CS)"
+      de-text = "Ein erster Versuch, PDL auf die neue Mac OS X Plattform
+		 zu portieren war weitgehend erfolgreich. Naeheres
+		 entnimm der <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">Meldung</A> in der mailing-liste. (CS)"
+>
+
+<NEWS de-date = "27.06.2001"
+      en-date = "2001/06/27"
+      en-text = "New <A HREF="download/index_en.html">windows binaries</A>
+		 of a post 2.2.1
+		 snapshot including slatec are available. (CS)"
+      de-text = "Neue <A HREF="download/index_de.html">windows binaries</A>
+		 eines post 2.2.1
+		 snapshots sind bereit zum download. (CS)"
+>
+
 <NEWS de-date = "Fr, 27.04.2001"
       en-date = "Fr, 2001/04/27"
       en-text = "<A HREF="http://download.sourceforge.net/PDL/PDL-2.2.1.tar.gz">PDL 2.2.1</A> is out. Includes various bug fixes, lvalue subs

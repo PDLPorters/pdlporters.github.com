@@ -54,28 +54,29 @@
 		 Spalte).</DE-P>"
   source      = "http://www.perl.com/perl/CPAN/modules/by-module/PDL/"
   rpm         = "http://sourceforge.net/project/showfiles.php?group_id=612"
-  debian      = "http://packages.debian.org/cgi-bin/search_packages.pl?keywords=pdl&searchon=names&subword=1&version=all&release=all"
+  debian      = "http://packages.debian.org/pdl"
   freebsd     = "http://www.freebsd.org/ports/math.html"
 >
 
 <download-table
   name        = "<EN>PDL for Windows</EN>
                  <DE>PDL für Windows</DE>"
-  description = "<EN-P> An experimental windows version (ppm) for
-		activestate perl 5.6.0 is
-  <A HREF="http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip">available</A>.
+  description = "<EN-P> Windows versions (ppm) of post 2.2.1 snapshots for use
+                with activestate perl 5.6 are
+  <A HREF="http://sourceforge.net/project/showfiles.php?group_id=612">available</A> (with and without BAD value support). Look for the latest zip archives
+                in the list of released files.
 		Tim Jenness has also made PGPLOT (used for 2D data
 		display) available. The PGPLOT module still has some
 		problems. Check
 <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2000-07/msg00000.html">this message</A> for details.
                  </EN-P>
-		 <DE-P> Eine experimentelle Windows-Version
-		 <A HREF="http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip">ist verfügbar</A>. Tim Jennes hat ausserdem eine
+		 <DE-P> Windows Versionen eines aktuellen post 2.2.1 snapshots
+		 <A HREF="http://sourceforge.net/project/showfiles.php?group_id=612">sind verfügbar</A>. Tim Jennes hat ausserdem eine
 		erste Version von PGPLOT für win32 kompiliert. Es gibt
 		allerdings noch einige praktische Schwachstellen. Lese
 		<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2000-07/msg00000.html">diese Nachricht</A>,
 		um nähere Einzelheiten zu erfahren.</DE-P>"
-  binary      = "http://download.sourceforge.net/PDL/pdl-2.1.1-1.zip"
+  binary      = "http://sourceforge.net/project/showfiles.php?group_id=612"
 >  		 
 
 <download-table
@@ -85,7 +86,9 @@
                  <A HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>,
 		 so you can 
                  always check out the latest developer snapshots. Compressed 
-		 tar archives of the most recent snapshot are available for 
+		 tar archives of the most recent 
+		 <A HREF="ftp://PDL.sourceforge.net/pub/pdl">snapshot</A>
+		 are available for 
 		 those who want to save dealing with the hassle of CVS. Please
 		 notice that these snapshots can be distinguished by a lack of 
 		 documentation and may contain very new and untested code.  
@@ -94,14 +97,16 @@
 		 <A HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>
                  verfügbar, so daß 
 		 dort immer der letzte Stand der Entwicklung abgerufen werden 
-		 kann. Komprimierte tar-Archive der aktuellsten Snapshots sind 
+		 kann. Komprimierte tar-Archive der aktuellsten
+		 Snapshots sind 
 		 ebenfalls verfügbar, für Leute die sich nicht mit CVS 
 		 auseinandersetzen wollen. Es ist zu beachten, daß diese 
-		 Snapshots evtl. nicht gut dokumentiert sind und sehr neuen 
+		 <A HREF="ftp://PDL.sourceforge.net/pub/pdl">Snapshots</A>
+		 evtl. nicht gut dokumentiert sind und sehr neuen 
 		 und ungetesteten Code enthalten können. Aber so ist 
 		 das...</DE-P>"
   homepage    = "http://www.sourceforge.net/project/?form_grp=612"
-  source      = "ftp://PDL.sourceforge.net/pub/PDL"
+  source      = "ftp://PDL.sourceforge.net/pub/pdl"
   rpm         = ""
   debian      = ""
 >

@@ -5,6 +5,7 @@
 <preserve source>
 <preserve rpm>
 <preserve debian>
+<preserve freebsd>
 <set-var %attributes>
 
 <TR>
@@ -21,6 +22,7 @@
   <if <get-var source> <A HREF="<get-var source>">[SRC]</A><BR>>
   <if <get-var rpm>    <A HREF="<get-var rpm>">[RPM]</A><BR>>
   <if <get-var debian> <A HREF="<get-var debian>">[DEB]</A><BR>>
+  <if <get-var freebsd> <A HREF="<get-var freebsd>">[FREEBSD]</A><BR>>
   &nbsp;
   </TD>
 

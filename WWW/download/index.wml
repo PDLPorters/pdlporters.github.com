@@ -53,8 +53,9 @@
 		 Linux Distributionen sind verfügbar (siehe nächste
 		 Spalte).</DE-P>"
   source      = "http://www.perl.com/perl/CPAN/modules/by-module/PDL/"
-  rpm         = "http://grimbergen.astro.rug.nl/~tim/RPMS/rh52/i386/PDL-2.003-3rh52.i386.html"
+  rpm         = "http://sourceforge.net/project/filelist.php?group_id=612"
   debian      = "http://cgi.debian.org/cgi-bin/search_packages.pl?keywords=pdl&searchon=names&version=all&release=all"
+  freebsd     = "http://www.freebsd.org/ports/math.html"
 >
 
 <download-table

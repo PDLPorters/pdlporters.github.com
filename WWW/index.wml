@@ -111,6 +111,13 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "Mi, 7.06.2000"
+      en-date = "We, 2000/06/07"
+      en-text = "PDL 2.1 is out. Speed up of ops on small piddles. (CS)"
+      de-text = "PDL 2.1 ist verfügbar. Operationen mit kleinen piddles
+		 sind nun erheblich schneller. (CS)"
+>      
+
 <NEWS de-date = "So, 28.05.2000"
       en-date = "Su, 2000/05/28"
       en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more
@@ -127,7 +134,7 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 
 <NEWS de-date = "Mi, 5.04.2000"
       en-date = "We, 2000/04/05"
-      de-text = "PDL 2.005 ist ab sofort verfuegbar. Diese Version arbeitet
+      de-text = "PDL 2.005 ist ab sofort verfügbar. Diese Version arbeitet
 	nun auch ohne Probleme mit perl 5.6. (CS)"
       en-text = "PDL 2.005 is released. It is mainly a bugfix
 	release to make PDL work with perl 5.6. (CS)"

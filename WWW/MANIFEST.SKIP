@@ -1,0 +1,13 @@
+MANIFEST.SKIP
+README
+Makefile
+CVS
+TAGS
+.*\.log$
+.*diff.*
+.*~$
+.*\.gz$
+/[.]
+\.wml$
+/util/
+TODO$

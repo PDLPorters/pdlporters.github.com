@@ -114,68 +114,30 @@ Kernfeatures von <B>PDL</B>.</de-p>
 </FONT>
 </CENTER></TD></TR>
 
-<NEWS de-date = "22.12.2001"
-      en-date = "2001/12/22"
-      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.2</A>
-		 is available on <A HREF="http://www.cpan.org/">CPAN</A>.
-                 Merely a bugfix release to resolve a problem with gimp-perl.
-		 If you already got 2.3.1 just get the small <A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.3.1-2.3.2.patch">patch</A>. (CS)"
-      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.2</A>
-		 ist  ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
-		 Servern erhältlich. Korrigiert lediglich ein Problem mit
-                 gimp-perl. Benutzer, die bereits 2.3.1 haben, koennen
-                 einfach den kurzen <A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.3.1-2.3.2.patch">patch</A> verwenden. (CS)"
+<NEWS de-date = "25.5.2003"
+      en-date = "2003/05/25"
+      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.0.tar.gz?download">PDL 2.4.0</A>
+		 is available on
+		 <A HREF="http://www.sourceforge.net">Sourceforge</A>.
+	         A lot of bug fixes and new features, details are in the
+                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=161098">release notes</A>. (CS)"
+      de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.0.tar.gz?download">PDL 2.4.0</A>
+		 ist  ab sofort bei
+		 <A HREF="http://www.sourceforge.net">Sourceforge</A>
+		 erhältlich. Viele Bugs wurden korrigiert und eine Menge
+		 neuer Funktionen sind implementiert. Details entnehme
+	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=161098">
+		 Freigabe Notizen (AKA Release Notes)</A>. (CS)"
 >
 
-<NEWS de-date = "10.12.2001"
-      en-date = "2001/12/10"
-      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.1</A>
-		 is available on <A HREF="http://www.cpan.org/">CPAN</A>. Lots
-		 of bug fixes and the new PDL::NiceSlice for easier slicing.
-                 Plus Inline::Pdlpp to write PDL::PP code on the fly...
-		 New <A HREF="download/index_en.html">windows binaries</A>
-		 are also available for download. (CS)"
-      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.1</A>
-		 ist  ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
-		 Servern erhältlich. Eine Reihe von Bugs ist berichtigt worden
-		 und
-		 das neue PDL::NiceSlice Modul ist enthalten (macht das
-		 Slicen von piddles einfach!). Probier auch das neue
-                 Inline::Pdlpp Modul aus, mit dem PDL::PP Code direkt in
-		 jedes Script eingebunden werden kann. Neue
-		 <A HREF="download/index_en.html">windows binaries</A>
-		 stehen auch zum herunterladen bereit. (CS)"
+<NEWS de-date = "25.5.2003"
+      en-date = "2003/05/25"
+      en-text = "Web page updates are available again. PDL development never
+		 stopped during the time of web update silence."
+      de-text = "Web Seiten updates werden wieder gemacht. Die PDL
+		 Entwicklung ist waerend unsere Web Sensepause unermuedlich
+		 weitergegangen."
 >
-
-<NEWS de-date = "20.07.2001"
-      en-date = "2001/07/20"
-      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL-NiceSlice">PDL::NiceSlice</A>
-		 is available on <A HREF="http://www.cpan.org/">CPAN</A>. It
-		 introduces a much more convenient syntax for slicing piddles.
-		 (CS)"
-      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL-NiceSlice">PDL::NiceSlice</A>
-		 ist ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
-		 Servern erhältlich. Das Modul implementiert eine weitgehend
-		 vereinfachte Syntax für das 'Slicen' von piddles.(CS)"
->
-
-<NEWS de-date = "14.07.2001"
-      en-date = "2001/07/14"
-      en-text = "A first attempt to compile PDL on Mac OS X has been
-		 largely successful. Check the <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">report</A>. (CS)
-		 <B>Update:</B> <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl/2001-07/msg00052.html">Binary packages of PDL for Mac OS X</A>
-		 (+dependencies) are now avilable as part of the
-		 <A HREF="http://fink.sourceforge.net">fink</A> project."
-      de-text = "Ein erster Versuch, PDL auf die neue Mac OS X Plattform
-		 zu portieren war weitgehend erfolgreich. Näheres
-		 entnimm der <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">Meldung</A> in der mailing-liste. (CS)
-		 <B>Update:</B>
-		 <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl/2001-07/msg00052.html">Binär Versionen von PDL für Mac OS X</A>
-		 sind nun im Rahmen des
-		 <A HREF="http://fink.sourceforge.net">fink</A>
-		 Projektes erhältlich."
->
-
 
 </TABLE>
 

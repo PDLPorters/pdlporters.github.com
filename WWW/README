@@ -1,0 +1,44 @@
+How to publish these pages
+--------------------------
+
+1) build the web page archive
+
+  make dist
+
+2) copy to SF
+
+  scp pdlwww.tar.gz user@shell.sf.net
+
+3) login to shell server at SF
+
+  ssh user@shell.sf.net
+
+4) install files into testing arena
+
+  cd /home/groups/p/pd/pdl/htdocs
+  mv WWWbeta WWWbeta_old
+  mkdir WWWbeta
+  cd WWWbeta
+  tar zxf ~/pdlwww.tar.gz
+
+If you run into permission problems
+please ask for help on the mailing list.
+
+5) check out pages which should now be online at
+
+  http://pdl.sourceforge.net/WWWbeta/
+
+6) publish web pages
+
+  sfscripts/wwwpublish
+
+7) page should now be online at
+
+  http://pdl.sourceforge.net/WWWbeta/
+
+and will be automatically mirrored to
+
+  pdl.perl.org
+
+(not sure about the interval right now, might
+ take a day)

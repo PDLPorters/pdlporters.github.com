@@ -54,3 +54,8 @@ clean:
 
 distclean:
 		rm -fr *~
+
+dist:	all
+	perl util/selectfiles > .mirror
+	echo './.mirror' >> .mirror
+	tar -zcf pdlwww.tar.gz  --files-from=.mirror

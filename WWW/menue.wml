@@ -75,21 +75,37 @@
 
 <TABLE width="100%" border=0 cellspacing=0 cellpadding=2>
         <TR>
-        <TD><SPAN class=menue>&nbsp;&nbsp;
-        <A class=menue
-	 HREF="http://sourceforge.net/bugs/?group_id=612"><B>Bugs</B></A>
-	<FONT class=menue> | </FONT>
-        <A class=menue HREF="$(FAQROOT)"><B>FAQ</B></A></SPAN></TD> 
+        <TD width="45%" align=right>
+	  <SPAN class=menue>
+          <A class=menue
+	  HREF="http://sourceforge.net/cvs/?group_id=612"><B>CVS</B></A>
+	  </SPAN>
+	</TD> 
+	<TD width="10%" align=center>
+	  <SPAN class=menue><FONT class=menue> | </FONT></SPAN>
+	</TD>
+        <TD width="45%">
+	  <SPAN class=menue align=left>
+          <A class=menue HREF="$(FAQROOT)"><B>FAQ</B></A></SPAN></TD>
+	  </SPAN>
         </TR>
 
 	<TR>
-        <TD><SPAN class=menue>&nbsp;&nbsp;
-	<A class=menue
-	 HREF="http://sourceforge.net/cvs/?group_id=612"><B>CVS</B></A>
-	<FONT class=menue> | </FONT>
-        <A class=menue
-	 HREF="http://sourceforge.net/patch/?group_id=612"><B>Patches</B></A>
-        </SPAN> </TD>
+        <TD width="45%" align=right>
+	  <SPAN class=menue>
+          <A class=menue
+	  HREF="http://sourceforge.net/bugs/?group_id=612"><B>Bugs</B></A>
+	  </SPAN>
+        </TD>
+	<TD width="10%" align=center>
+	  <SPAN class="menue"><FONT class=menue> | </FONT></SPAN>
+        </TD>
+        <TD width="45%" align=left>
+	  <SPAN class=menue>
+          <A class=menue
+          HREF="http://sourceforge.net/patch/?group_id=612"><B>Patches</B></A>
+	  </SPAN>
+	</TD>
         </TR>
 </TABLE>
 

@@ -52,7 +52,7 @@
 		 führen. Kompilierte Versionen fuer die populärsten
 		 Linux Distributionen sind verfügbar (siehe nächste
 		 Spalte).</DE-P>"
-  source      = "http://www.perl.com/perl/CPAN/modules/by-module/PDL/"
+  source      = "http://search.cpan.org/search?dist=PDL"
   rpm         = "http://sourceforge.net/project/showfiles.php?group_id=612"
   debian      = "http://packages.debian.org/pdl"
   freebsd     = "http://www.freebsd.org/ports/math.html"

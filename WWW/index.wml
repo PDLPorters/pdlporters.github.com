@@ -114,6 +114,26 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "10.12.2001"
+      en-date = "2001/12/10"
+      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.1</A>
+		 is available on <A HREF="http://www.cpan.org/">CPAN</A>. Lots
+		 of bug fixes and the new PDL::NiceSlice for easier slicing.
+                 Plus Inline::Pdlpp to write PDL::PP code on the fly...
+		 New <A HREF="download/index_en.html">windows binaries</A>
+		 are also available for download. (CS)"
+      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.1</A>
+		 ist  ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
+		 Servern erhältlich. Eine Reihe von Bugs ist berichtigt worden
+		 und
+		 das neue PDL::NiceSlice Modul ist enthalten (macht das
+		 Slicen von piddles einfach!). Probier auch das neue
+                 Inline::Pdlpp Modul aus, mit dem PDL::PP Code direkt in
+		 jedes Script eingebunden werden kann. Neue
+		 <A HREF="download/index_en.html">windows binaries</A>
+		 stehen auch zum herunterladen bereit. (CS)"
+>
+
 <NEWS de-date = "20.07.2001"
       en-date = "2001/07/20"
       en-text = "<A HREF="http://search.cpan.org/search?dist=PDL-NiceSlice">PDL::NiceSlice</A>
@@ -181,27 +201,6 @@ Kernfeatures von <B>PDL</B>.</DE-P>
       en-text = "The 'bad value' support has been merged into the main CVS branch -
                  check it out (DJB)" 
       de-text = "Unterstützung für 'bad values' ist nun im Hauptzweig von CVS - probier es aus!. (DJB)"
->      
-
-<NEWS de-date = "Do, 10.07.2000"
-      en-date = "Th, 2000/07/10"
-      en-text = "A development version with 'bad value' support has been 
-                 started (see pdl-porters <A HREF="maillists/index_en.html">
-		 mailing list</A>) (DJB)"
-      de-text = "Es wurde begonnen, Support für 'bad values' zu implementieren.
-                 Die Diskussion dazu findet auf der pdl-porters-
-		 <A HREF="maillists/index_de.html">Mailingliste</A>
-		 statt (DJB)"
->      
-
-<NEWS de-date = "Do, 29.06.2000"
-      en-date = "Th, 2000/06/29"
-      en-text = "A new Windows version is out. See <A
-                 HREF="download/index_en.html">download page</A> for 
-		 details (RS)"
-      de-text = "Eine neue Windows-Version ist fertig. Nähere Details befinden
-                 sich auf der <A HREF="download/index_de.html">Download</A>-
-		 Seite. (RS)"
 >      
 
 </TABLE>

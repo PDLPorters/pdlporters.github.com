@@ -24,6 +24,26 @@
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "Do, 10.07.2000"
+      en-date = "Th, 2000/07/10"
+      en-text = "A development version with 'bad value' support has been 
+                 started (see pdl-porters <A HREF="maillists/index_en.html">
+		 mailing list</A>) (DJB)"
+      de-text = "Es wurde begonnen, Support für 'bad values' zu implementieren.
+                 Die Diskussion dazu findet auf der pdl-porters-
+		 <A HREF="maillists/index_de.html">Mailingliste</A>
+		 statt (DJB)"
+>      
+
+<NEWS de-date = "Do, 29.06.2000"
+      en-date = "Th, 2000/06/29"
+      en-text = "A new Windows version is out. See <A
+                 HREF="download/index_en.html">download page</A> for 
+		 details (RS)"
+      de-text = "Eine neue Windows-Version ist fertig. Nähere Details befinden
+                 sich auf der <A HREF="download/index_de.html">Download</A>-
+		 Seite. (RS)"
+>      
 <NEWS de-date = "Do, 22.06.2000"
       en-date = "Th, 2000/06/22"
       en-text = "PDL 2.1.1 is out. A bugfix release to fix PDL +

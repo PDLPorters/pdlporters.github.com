@@ -23,12 +23,10 @@
 >	  
 
 <MENUEENTRY de-name1  = "Screenshots"
-            de-name2  = "und"
-            de-name3  = "Beispiele"
+            de-name2  = "& Beispiele"
 	    de-link   = "$(PDLROOT)/screenshots/index_de.html"
 	    en-name1  = "Screenshots"
-	    en-name1  = "and"
-	    en-name1  = "Examples"
+	    en-name2  = "& Examples"
 	    en-link   = "$(PDLROOT)/screenshots/index_en.html"
             status    = "active"
 >	  

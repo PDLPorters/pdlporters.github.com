@@ -20,6 +20,7 @@ INC_TEMPLATES = -I../templates
 all:		index_de.html index_en.html ex1.html ex2.html ex3.html \
 		intro_de.html intro_en.html \
 		plot2D_de.html plot2D_en.html \
+		plot3D_de.html plot3D_en.html \
 		subdirs link
 
 subdirs:	
@@ -30,6 +31,8 @@ intro_de.html:		intro.wml $(FRAMEWORK) ../menue.wml
 intro_en.html:		intro.wml $(FRAMEWORK) ../menue.wml
 plot2D_de.html:		plot2D.wml $(FRAMEWORK) ../menue.wml
 plot2D_en.html:         plot2D.wml $(FRAMEWORK) ../menue.wml
+plot3D_de.html:		plot3D.wml $(FRAMEWORK) ../menue.wml
+plot3D_en.html:         plot3D.wml $(FRAMEWORK) ../menue.wml
 
 ex1.html:		ex1.wml $(FRAMEWORK)
 ex2.html:		ex2.wml $(FRAMEWORK)

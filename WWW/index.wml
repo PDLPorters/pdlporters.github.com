@@ -114,6 +114,22 @@ Kernfeatures von <B>PDL</B>.</de-p>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "6.1.2004"
+      en-date = "2004/01/06"
+      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>
+		 is available on
+		 <A HREF="http://www.sourceforge.net">Sourceforge</A>.
+	         Mainly bug fixes and some new features, details are in the
+                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=207935">release notes</A>. (CS)"
+      de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>
+		 ist  ab sofort bei
+		 <A HREF="http://www.sourceforge.net">Sourceforge</A>
+		 erhältlich. Viele Bugs wurden korrigiert und einige
+		 neue Funktionen wurden implementiert. Details entnehme
+	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=207935">
+		 Freigabe Notizen (AKA Release Notes)</A>. (CS)"
+>
+
 <NEWS de-date = "25.5.2003"
       en-date = "2003/05/25"
       en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.0.tar.gz?download">PDL 2.4.0</A>

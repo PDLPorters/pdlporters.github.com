@@ -114,6 +114,19 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "22.12.2001"
+      en-date = "2001/12/22"
+      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.2</A>
+		 is available on <A HREF="http://www.cpan.org/">CPAN</A>.
+                 Merely a bugfix release to resolve a problem with gimp-perl.
+		 If you already got 2.3.1 just get the small <A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.3.1-2.3.2.patch">patch</A>. (CS)"
+      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.2</A>
+		 ist  ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
+		 Servern erhältlich. Korrigiert lediglich ein Problem mit
+                 gimp-perl. Benutzer, die bereits 2.3.1 haben, koennen
+                 einfach den kurzen <A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.3.1-2.3.2.patch">patch</A> verwenden. (CS)"
+>
+
 <NEWS de-date = "10.12.2001"
       en-date = "2001/12/10"
       en-text = "<A HREF="http://search.cpan.org/search?dist=PDL">PDL 2.3.1</A>
@@ -163,45 +176,6 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 		 Projektes erhältlich."
 >
 
-<NEWS de-date = "27.06.2001"
-      en-date = "2001/06/27"
-      en-text = "New <A HREF="download/index_en.html">windows binaries</A>
-		 of a post 2.2.1
-		 snapshot including slatec are available. (CS)"
-      de-text = "Neue <A HREF="download/index_de.html">windows binaries</A>
-		 eines post 2.2.1
-		 snapshots sind bereit zum download. (CS)"
->
-
-<NEWS de-date = "Fr, 27.04.2001"
-      en-date = "Fr, 2001/04/27"
-      en-text = "<A HREF="http://download.sourceforge.net/PDL/PDL-2.2.1.tar.gz">PDL 2.2.1</A> is out. Includes various bug fixes, lvalue subs
-		 for PDL, updates to work with perl 5.6.1. More than
-		 just a bugfix release. Further details in the 
-<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Notes</A>. (CS)"
-      de-text = "PDL 2.2.1 ist <A HREF="http://download.sourceforge.net/PDL/PDL-2.2.1.tar.gz">verfügbar</A>. Eine handvoll Bugs wurde berichtigt,
-		 PDL lvalue subs sind implementiert und 2.2.1 compiliert
-		 nun ok mit perl 5.6.1. Detaillierte Änderungen entnimm den 
-<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Release Notes</A>. (CS)"
->      
-
-<NEWS de-date = "Mi, 22.17.2000"
-      en-date = "We, 2000/12/27"
-      en-text = "PDL 2.2 is out. Includes bad value support, improved Tri-D
-                 and PGPLOT interfaces, PDL::Reduce, and lots more.
-                 Read about it 
-<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">here</A>. (DJB)"
-      de-text = "PDL 2.2 ist verfügbar. 
-                 Mehr Details sind
-<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">online</A> auf dem sourceforge site (DJB)"
->      
-
-<NEWS de-date = "So, 02.09.2000"
-      en-date = "Su, 2000/09/02"
-      en-text = "The 'bad value' support has been merged into the main CVS branch -
-                 check it out (DJB)" 
-      de-text = "Unterstützung für 'bad values' ist nun im Hauptzweig von CVS - probier es aus!. (DJB)"
->      
 
 </TABLE>
 

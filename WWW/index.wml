@@ -109,6 +109,12 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "So, 28.05.2000"
+      en-date = "Su, 2000/05/28"
+      en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more examples</A> 
+                 of PDL in action (DJB)"
+>      
+
 <NEWS de-date = "Mo, 17.04.2000"
       en-date = "Mo, 2000/04/17"
       de-text = "Einige Erweiterungen der neuen Homepage eingebaut. (RS)"

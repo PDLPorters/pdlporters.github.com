@@ -1,15 +1,17 @@
 #include "header.wml"
 <lang:star:slice: index_*.html>
 
-<!--===================================================================-->
-<HEAD>
-<META HTTP-EQUIV="KEYWORDS" 
-      CONTENT="Schwebel">
-<META NAME="DESCRIPTION" 
-      CONTENT="Robert Schwebel">
-<TITLE>PDL - External Libraries</TITLE>
-</HEAD>
-<!--===================================================================-->
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - External Libraries</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
 
 <set-var doctype=html>
 
@@ -55,14 +57,15 @@ finden. </DE-P>
 </TD>
 </TR>
 
-<TR>
-<TD bgcolor=#eeeeee width=30% valign=top>
-...</TD>
+<library-table name        = "CFITSIO"
+               description = ""
+>	       
 
-<TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify>...</P></EN></TD>
-
-</TR>
+<comment>
+<library-table name        = ""
+               description = ""
+>	       
+</comment>
 
 </TABLE>
 

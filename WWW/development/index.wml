@@ -1,15 +1,17 @@
 #include "header.wml"
 <lang:star:slice: index_*.html>
 
-<!--===================================================================-->
-<HEAD>
-<META HTTP-EQUIV="KEYWORDS" 
-      CONTENT="Schwebel">
-<META NAME="DESCRIPTION" 
-      CONTENT="Robert Schwebel">
-<TITLE>PDL - Development</TITLE>
-</HEAD>
-<!--===================================================================-->
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - Development</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
 
 <set-var doctype=html>
 

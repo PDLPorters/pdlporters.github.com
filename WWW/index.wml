@@ -1,32 +1,35 @@
-#include "header.wml"
+#include "$(PDLROOT)/header.wml"
 <lang:star:slice: index_*.html>
 
-<!--===================================================================-->
-<HEAD>
-<META HTTP-EQUIV="KEYWORDS" 
-      CONTENT="Schwebel">
-<META NAME="DESCRIPTION" 
-      CONTENT="Robert Schwebel">
-<TITLE>PDL - The Perl Data Language</TITLE>
-</HEAD>
-<!--===================================================================-->
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - The Perl Data Language</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
 
 <set-var doctype=html>
 
 #include "$(PDLROOT)/top.wml"
-#include "$(PDLROOT)/menue.wml"
+#include 'menue.wml'
 
 <TD ALIGN=LEFT>
 
 <TABLE border=0 width=100% cellspacing=15>
 <TR>
 <TD WIDTH=100 valign=top>
-<IMG SRC="images/pdllogo.jpg" ALIGN=CENTER>
+  <IMG SRC="images/pdllogo.jpg" ALIGN=CENTER>
 </TD>
 <TD valign=top>
-<BR><BR><FONT size=+5><B>PDL - The Perl Data Language</B></FONT><BR><BR>
-<FONT size=+3 color="#FF0000">Number crunching capabilities for Perl</FONT>
+  <BR><BR><FONT size=+5><B>PDL - The Perl Data Language</B></FONT><BR><BR>
+  <FONT size=+3 color="#FF0000">Number crunching capabilities for Perl</FONT>
 </TD>
+</TR>
 </TABLE>
 
 

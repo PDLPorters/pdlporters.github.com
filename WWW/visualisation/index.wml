@@ -1,15 +1,17 @@
 #include "header.wml"
 <lang:star:slice: index_*.html>
 
-<!--===================================================================-->
-<HEAD>
-<META HTTP-EQUIV="KEYWORDS" 
-      CONTENT="Schwebel">
-<META NAME="DESCRIPTION" 
-      CONTENT="Robert Schwebel">
-<TITLE>PDL - Visualisation Frontends</TITLE>
-</HEAD>
-<!--===================================================================-->
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - Visualisation Frontends</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
 
 <set-var doctype=html>
 
@@ -121,6 +123,46 @@ sein. </DE-P>
 		 automatisch das dazugehörige PDL-Modul erzeugt.</DE-P>"
   screenshot =  "&nbsp;"
 >
+
+<visualisation-table 
+  name        = "Chart::XMGR"
+  description = "<en-p><A HREF="http://www.cpan.org/modules/by-module/Chart/">
+		 Chart::XMGR</A> uses the 
+		 <A HREF="http://plasma-gate.weizmann.ac.il/Grace/">XMGR</A>
+		 plotting package and does not come with PDL but it does 
+		 recognise PDL's. </en-p>
+		 
+		 <de-p> <A HREF="http://www.cpan.org/modules/by-module/Chart/">
+		 Chart::XMGR</A> benutzt das  
+		 <A HREF="http://plasma-gate.weizmann.ac.il/Grace/">XMGR</A>
+		 Plot-Programm. Dies ist nicht in PDL enthalten, kann aber mit
+		 Piddles umgehen.</de-p>"
+  screenshot =  "&nbsp;"
+>
+
+<visualisation-table 
+  name        = "Gimp"
+  description = "<en-p>The 
+                 <A HREF="http://www.cpan.org/modules/by-module/Gimp/">Gimp</A>
+		 module for perl can be used with piddles as well. You can 
+		 write PDL scripts to manipulate your Gimp images.</en-p>
+		 
+		 <de-p>Das
+		 <A HREF="http://www.cpan.org/modules/by-module/Gimp/">Gimp</A>
+		 -Modul für Perl kann ebenfalls mit PDL verwendet werden. Die 
+		 Bilder in Gimp können mit Hilfe von PDL-Programmen aus 
+		 manipuliert werden.</de-p>"
+  screenshot =  "&nbsp;"
+>
+
+
+<comment>
+<visualisation-table 
+  name        = ""
+  description = ""
+  screenshot =  "&nbsp;"
+>
+</comment>
 
 </TABLE>
 

@@ -25,14 +25,22 @@
 <A NAME="trid"></A>
 <EN><H3> 3D Graphics Examples </H3></EN>
 <DE><H3> 3D Grafik-Beispiele </H3></DE>
+<ES><H3> Ejemplos de gráficos 3D </H3></ES>
+
 <en-p> Here are some pretty pictures generated using the 
 <CODE>PDL::Graphics::TriD</CODE> module, follow the links to get full-size 
 pictures and the PDL code which produced them.</en-p>
 
-<de-p> Die folgenden Abbildung zeigt einige "pretty pictures", die mit Hilfe des
-<CODE>PDL::Graphics::TriD</CODE>-Moduls erzeugt wurden. Ein Klick auf die
-Screenshots führt zu einer großen Version und dem Code, der die Bilder erzeugt
-hat.</de-p>
+<de-p> Die folgenden Abbildung zeigt einige "pretty pictures", die mit
+Hilfe des <CODE>PDL::Graphics::TriD</CODE>-Moduls erzeugt wurden. Ein
+Klick auf die Screenshots führt zu einer großen Version und dem Code,
+der die Bilder erzeugt hat.</de-p>
+
+<es-p> Aquí estan algos cuadros bonitos, hechos con el módulo
+<CODE>PDL::Graphics:T:riD</CODE>.  Siga los acoplamientos para
+conseguir los cuadros del maximo tamaño y el código del PDL que los
+produjeron.
+</es-p>
 
 <P ALIGN=center>
 <A HREF="ex1.html"><IMG SRC="ex1thumb.gif" alt="Example 1"></A>
@@ -45,8 +53,13 @@ as rotating the figure with the mouse!</en-p>
 <de-p> Die 3D-Plots können dabei mit der Maus gedreht und aus verschiedenen
 Richtungen angeschaut werden!</de-p>
 
+<es-p> Cuando el PDL exhibe las imágenes directamente, se puede
+arrastrar con el ratón para rotar la escena.
+</es-p>
+
 <EN><H3> 2D Graphics Examples </H3></EN>
 <DE><H3> 2D Grafik-Beispiele </H3></DE>
+<ES><H3> Ejemplos de gráficos 2D </H3></ES>
 
 <EN>For some screenshots of PGPLOT in action check the
 <A HREF="$(PDLROOT)/demos/plot2D_en.html">PGPLOT demo</A>.
@@ -55,6 +68,10 @@ Richtungen angeschaut werden!</de-p>
 <DE>Die <A HREF="$(PDLROOT)/demos/plot2D_en.html">PGPLOT demo</A>
 entält einige screenshots, die PGPLOT in Aktion zeigen.
 </DE>
+
+<ES>Para ver algunos imagenes hecho con PGPLOT, compruebe la <a
+HREF="$(PDLROOT)/demos/plot2D_es.html">demostración PGPLOT</a>.
+</ES>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

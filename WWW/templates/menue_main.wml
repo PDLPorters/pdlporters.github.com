@@ -1,26 +1,47 @@
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/">Introduction</A></EN>
+<A HREF="$(ROOT)/">
+<EN>Introduction</EN>
+<DE>Einleitung</DE>
+<ES>Introducción</ES>
+</A>
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/download/">Download</A></EN>
+<A HREF="$(ROOT)/download/">
+<EN>Download</EN>
+<DE>Download</DE>
+<ES>Transferencia directa</ES>
+</A>
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/maillists/">Mailing Lists</A></EN>
+<A HREF="$(ROOT)/maillists/">
+<EN>Mailing Lists</EN>
+<DE>Postsendung-Listen</DE>
+<ES>Listas de enviar</ES>
+
+</A><
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/screenshots/">Screenshots / </A></EN>
+<A HREF="$(ROOT)/screenshots/">
+<EN>Screenshots /</EN>
+<DE>Screenshots /</DE>
+<ES>Imagenes /</DE>
+</A>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/screenshots/">Demo-Gallery</A></EN>
+<A HREF="$(ROOT)/screenshots/">
+<EN>Demo-Gallery</EN>
+<DE>Demo-Gallery</DE>
+<ES>Demostraciónes</ES>
+</A>
 <BR>
 
 <BR><HR>
@@ -28,19 +49,35 @@
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/libraries/">External</A></EN>
+<A HREF="$(ROOT)/libraries/">
+<EN>External</EN>
+<DE>Externe</DE>
+<ES>Bibliotecas</ES>
+</A>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/libraries/">Libraries</A></EN>
+<A HREF="$(ROOT)/libraries/">
+<EN>Libraries</EN>
+<DE>Bibliotheken</DE>
+<ES>externas</ES>
+</A></EN>
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/visualisation/">Visualisation</A></EN>
+<A HREF="$(ROOT)/visualisation/">
+<EN>Visualization</EN>
+<DE>Sichtbarmachung</DE>
+<ES>Visualización</ES>
+</A>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/visualisation/">Frontends</A></EN>
+<A HREF="$(ROOT)/visualisation/">
+<EN>Frontends</EN>
+<DE>Schnittstelle</DE>
+<ES>interfaz</ES>
+</A>
 <BR>
 
 <BR><HR>
@@ -48,24 +85,32 @@
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/documentation/">Online</A></EN>
+<A HREF="$(ROOT)/documentation/">Online</A>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/documentation/">Documentation</A></EN>
+<A HREF="$(ROOT)/documentation/">Documentation</A>
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/development/">Development</A></EN>
+<A HREF="$(ROOT)/development/">
+<EN>Development</EN>
+<DE>Entwicklung</DE>
+<ES>Desarrollo</ES>
+</A>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/development/">CVS</A></EN>
+<A HREF="$(ROOT)/development/">CVS</A>
 <BR>
 
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/">The Team</A></EN>
+<A HREF="$(ROOT)/">
+<EN>The Team</EN>
+<DE>Die Mannschaft</DE>
+<ES>El Equipo</ES>
+</A>
 <BR>
 
 <!-- ---------------------------------------- -->

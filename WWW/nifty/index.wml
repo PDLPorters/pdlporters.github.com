@@ -34,19 +34,22 @@
 
 <ul>
 <li><a href="#magnetic">
-	<en>Artificial vision of magnetic fields</en>
+	<en>Artificial vision of magnetic fields on the Sun</en>
 	<de>Künstlicher Anblick von magnetischem fängt</de>
+	<es>Visión artificial de flujo magnético en el sol</es>
 </a>
 
 <li><a href="#brain">
 	<en>Brain scan visualization</en>
 	<de>Gehimscan-Sichtbarmachung</de>
+	<es>Visualización de la exploración del cerebro</es>
 </a>
 
 
 <li><a href="#galaxy-gas">
 	<en>High-speed galactic winds</en>
 	<de>Galaktische Schnellwinde</de>
+	<es>Vientos galácticos de alta velocidad</es>
 </a>
 
 </ul>
@@ -59,6 +62,9 @@
 
 <de-p><h3>Künstlicher Anblick von magnetischem fängt auf</h3>
 </de-p>
+
+<es-p><h3>Visión artificial de flujo magnético en el sol</h3>
+</es-p>
 
 <en-p>
 My research group uses PDL to track thousands of magnetic features on
@@ -86,6 +92,9 @@ künstliche Anblickanwendung, um jede magnetische Eigenschaft in
 auffangen der Ansicht zu kennzeichnen schreiben.  
 </de-p>
 
+<es-p>
+Mi grupo de investigación usamos PDL para seguir millares de polos magnéticos en el sol.  La supercificie del sol es cuberta por polos magnéticos norte y sur.  Estos postes son constantemente emergándose, moviéndose, recombinándose, y disipándose.  Telescopios especiales, llamados <a href="http://soi.stanford.edu"><i>magnetographs</i></a>, pueden exhibir estos polos como puntos negros y blancos, permitiéndonos sondir el dínamo del sol.  El paquete del "Transform" de PDL hizo fácil quitemos efectos de la perspectiva de datos de telescopios espaciales, y escribir un programa de la visión artificial para identificar cada polo magnético en cada imagen. 
+</es-p>
 
 
 <en-p>
@@ -96,6 +105,11 @@ What's more, PDL is free -- so we can distribute <a href="http://www.boulder.swr
 Was mehr ist, ist PDL frei -- also können wir <a href="http://www.boulder.swri.edu/swamis">unsere Software</a> verteilen, damit jedermann verwendet.
 </de-p>
 
+<es-p>
+Por lo mas, PDL es libre -- por eso, ponemos distribuir <a
+href="http://www.boulder.swri.edu/swamis">nuestro programa</a> a
+quienquiera lo desea.
+</es-p>
 
 <p>
 <i>--Craig DeForest, deforest (at) boulder (dot) swri (dot) edu</i>
@@ -103,12 +117,28 @@ Was mehr ist, ist PDL frei -- also können wir <a href="http://www.boulder.swri.e
 
 <table>
 <tr><td><center><a href="mag-qtm.mpg"><img src="mag-qtm.png" height=300 width=300></a></center><br>
-	<en>Tracked magnetogram shows about 1/10 of the surface of the Sun, reprojected to appear as if you're hovering immediately over it (click for movie). Our software has identified and numbered every statistically significant feature.</en>
-	<de>Aufgespürtes magnetogram zeigt ungefähr 1/10 der Oberfläche der Sonne, reprojected, um zu scheinen, als ob Sie sofort rüber es schweben (Klicken für Film). Unsere Software hat jede statistisch bedeutende Eigenschaft gekennzeichnet und numeriert.</de>
+
+	<en>Tracked magnetogram shows about 1/10 of the surface of the
+	Sun, reprojected to appear as if you're hovering immediately
+	over it (click for movie). Our software has identified and
+	numbered every statistically significant feature.</en>
+
+	<de>Aufgespürtes magnetogram zeigt ungefähr 1/10 der
+	Oberfläche der Sonne, reprojected, um zu scheinen, als ob Sie
+	sofort rüber es schweben (Klicken für Film). Unsere Software
+	hat jede statistisch bedeutende Eigenschaft gekennzeichnet und
+	numeriert.</de>
+
+	<es>Esto magnetogram demuestra cerca de 1/10 de la supercicie
+	del sol, correctido para aparecer como si estemos asomando
+	inmediatamente sobre el centro del imagen.
+	</es>
+	
 	<td>&nbsp;&nbsp;&nbsp;
     <td><center><a href="mag-qcm.mpg"><img src="mag-qcm.png" height=300 width=300></a></center><br>
 	<en>Here, poles that appear in N/S pairs are marked by yellow highlights.  Single north or south pole appearances (in apparent but not real violation of physics) are marked by blue highlights.  Flux is emerging on scales too small for the telescope to fully resolve it.</en>
 	<de>Hier werden Pfosten, die in den N/S Paaren erscheinen, durch gelbe Höhepunkte gekennzeichnet. Aussehen des einzelnen Nordens oder des Südpols (in der offensichtlichen aber nicht realen Verletzung von Physik) wird durch blaue Höhepunkte gekennzeichnet. Fluß taucht auf den Skalen auf, die damit das Teleskop es völlig zu klein sind, behebt.</de>
+	<es>Aquí, polos que aparecen en pares N/S son marcados con amarillo.  Aparezcas de un polo solo (en violación evidente per no verdadera de los leyes de la fisica) son marcados con azul.  El flujo magnético está emergiendo en las escalas demasiado pequeñas para mirar con este telescopio.</es> 
 
 </table>
 
@@ -119,8 +149,11 @@ Was mehr ist, ist PDL frei -- also können wir <a href="http://www.boulder.swri.e
 <en-p><h3>Visualization of my brain</h3>
 </en-p>
 
-<de-p><h3>Sichtbarmachung meines Gehims</h3></he>
+<de-p><h3>Sichtbarmachung meines Gehims</h3>
 </de-p>
+
+<es-p><h3>Vizualización de mi cerebro</h3>
+</es-p>
 
 <en-p> 
 <a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> is
@@ -133,7 +166,7 @@ They were created under MacOS X.
 </en-p>
 
 <de-p> 
-<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a>ist
+<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> ist
 ein sehr einfaches Werkzeug, das ich für Betrachtung Funktions-MRI
 Daten herstellte, völlig geschrieben in Perl mit PDL. Was über es nett
 ist, ist, daß es Sie gleichzeitig drei Flächen durch das Gehirn
@@ -143,6 +176,9 @@ Gehörrinde, während ich Musik hörte. Sie wurden unter MacOS X
 hergestellt.  
 </de-p>
 
+<es-p>
+<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> es una herramienta muy simplo que creé para los datos de la visión MRI.  Se escribe enteramente en el perl con el PDL.  Cuál es agradable sobre él es que la deja simultáneamente visión tres planos a través del cerebro y también rotarlos en 3D (mira abajo).  Estes imagenes son del cerebro mío, con colores representando activaciónes en mi corteza auditiva mientras que escuché la música.  Todos fueron creados debajo de MacOS X.
+</es-p>
 
 <p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
 </p>
@@ -168,6 +204,9 @@ hergestellt.
 <de-p><h3>Galaktische Schnellwinde</h3>
 </de-p>
 
+<es-p><h3>Vientos galácticos de alta velocidad</h3>
+</es-p>
+
 
 <p>
 <table><tr>
@@ -187,6 +226,9 @@ mich in der Lage zuSEIN, wissenschaft 3-D Daten-Würfel in Perl zu
 manipulieren Radio, bis ich PDL traf. Danke!
 </de-p>
 
+<es-p>Yo hice la mayoría del dato-análisis para me tesis de Ph.D. usando el PDL, y publiqué un lanzamiento de prensa del AAS sobre él.  Nunca me imaginaba el poder manipular los dato-cubos 3-D de sciencia radio en el Perl hasta que resolví el PDL.  ¡Grazias!
+</es-p>
+
 <en-p>This optical image of the Whirlpool Galaxy (M51) shows the regions
 of high speed galactic winds that I discovered.
 </en-p>
@@ -194,6 +236,9 @@ of high speed galactic winds that I discovered.
 <de-p>Dieses optische Bild der Strudel-Galaxie (M51) zeigt die
 Regionen der galaktischen Schnellwinde, daß ich entdeckte.
 </de-p>
+
+<es-p>Esta imagen óptica de la Galaxia del Torbellino (M51) demuestra las regiones de vientos galácticos de alta velocidad que descubrí.
+</es-p>
 
 <en-p><i>--Eric Miller ( milleric (at) space (dot) mit (dot) edu )</i>
 </en-p>

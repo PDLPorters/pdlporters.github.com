@@ -39,9 +39,10 @@
 
 <download-table
   name        = "<EN>Stable PDL Release</EN>
-                 <DE>Stabile PDL Release</DE>"
+                 <DE>Stabile PDL Release</DE>
+		 <ES>Lanzamiento estable del PDL</ES>"
   description = "<EN-P>This is the latest stable release of PDL. You should
-                 always use it for serious work.As it is on the Comprehensive 
+                 always use it for serious work.  As it is on the Comprehensive
 		 Perl Archive Network it should automatically choose a site 
 		 close to your location. Binaries for the most popular linux
 		 distributions are available (see next column).</EN-P>
@@ -51,8 +52,13 @@
 		 sollte der Link immer zu einem nahegelegenen Mirror 
 		 führen. Kompilierte Versionen fuer die populärsten
 		 Linux Distributionen sind verfügbar (siehe nächste
-		 Spalte).</DE-P>"
-  source      = "http://search.cpan.org/search?dist=PDL"
+		 Spalte).</DE-P>
+		 <ES-P>Esto es el lanzamiento estable más reciente del
+		 PDL.  Usted debe utilizarlo solo esto para el trabajo
+		 serio.  El acoplamiento está a CPAN, así que debe
+		 elegir automáticamente un sitio cerca de su
+		 localización.  Los binaries para las distribuciones
+		 más populares del linux están disponibles (mira abajo).</ES-P>"  source      = "http://search.cpan.org/search?dist=PDL"
   rpm         = "http://sourceforge.net/project/showfiles.php?group_id=612"
   debian      = "http://packages.debian.org/pdl"
   freebsd     = "http://www.freebsd.org/ports/math.html"
@@ -60,7 +66,8 @@
 
 <download-table
   name        = "<EN>PDL for Windows</EN>
-                 <DE>PDL für Windows</DE>"
+                 <DE>PDL für Windows</DE>
+		 <ES>PDL para Windows</ES>"
   description = "<EN-P> Windows versions (ppm) of post 2.2.1 snapshots for use
                 with activestate perl 5.6 are
   <A HREF="http://sourceforge.net/project/showfiles.php?group_id=612">available</A> (with and without BAD value support). Look for the latest zip archives
@@ -75,36 +82,54 @@
 		erste Version von PGPLOT für win32 kompiliert. Es gibt
 		allerdings noch einige praktische Schwachstellen. Lese
 		<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2000-07/msg00000.html">diese Nachricht</A>,
-		um nähere Einzelheiten zu erfahren.</DE-P>"
+		um nähere Einzelheiten zu erfahren.</DE-P>
+		<ES-P> Las versiones para Windows (PPM) para el uso
+  con Perl 5.6 «activestate» están 
+  <A HREF="http://sourceforge.net/project/showfiles.php?group_id=612">disponibles</a> (con y sin la ayuda
+  para los malos valores).  Busca los zip-archivos más últimos en la
+  lista de archivos lanzados. </ES-P>
+	   "
   binary      = "http://sourceforge.net/project/showfiles.php?group_id=612"
 >  		 
 
 <download-table
   name        = "<EN>CVS Server</EN>
-                 <DE>CVS Server</DE>"
-  description = "<EN-P>The latest source code is available via
-                 <A HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>,
-		 so you can 
-                 always check out the latest developer snapshots. Compressed 
-		 tar archives of the most recent 
-		 <A HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">snapshot</A>
-		 are available for 
-		 those who want to save dealing with the hassle of CVS. Please
-		 notice that these snapshots can be distinguished by a lack of 
-		 documentation and may contain very new and untested code.  
-		 But that's life at the leading edge...</EN-P>
-		 <DE-P>Der aktuellste Sourcecode ist per
-		 <A HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>
-                 verfügbar, so daß 
-		 dort immer der letzte Stand der Entwicklung abgerufen werden 
-		 kann. Komprimierte tar-Archive der aktuellsten
-		 Snapshots sind 
-		 ebenfalls verfügbar, für Leute die sich nicht mit CVS 
-		 auseinandersetzen wollen. Es ist zu beachten, daß diese 
-		 <A HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">Snapshots</A>
-		 evtl. nicht gut dokumentiert sind und sehr neuen 
-		 und ungetesteten Code enthalten können. Aber so ist 
-		 das...</DE-P>"
+                 <DE>CVS Server</DE>
+		 <ES>CVS Servidor</ES>"
+
+  description = "<EN-P>The latest source code is available via <A
+                 HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>,
+                 so you can always check out the latest developer
+                 snapshots. Compressed tar archives of the most recent
+                 <A
+                 HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">snapshot</A>
+                 are available for those who want to save dealing with
+                 the hassle of CVS. Please notice that these snapshots
+                 can be distinguished by a lack of documentation and
+                 may contain very new and untested code.  But that's
+                 life at the leading edge...</EN-P> <DE-P>Der
+                 aktuellste Sourcecode ist per <A
+                 HREF=http://sourceforge.net/cvs/?group_id=612>CVS</A>
+                 verfügbar, so daß dort immer der letzte Stand der
+                 Entwicklung abgerufen werden kann. Komprimierte
+                 tar-Archive der aktuellsten Snapshots sind ebenfalls
+                 verfügbar, für Leute die sich nicht mit CVS
+                 auseinandersetzen wollen. Es ist zu beachten, daß
+                 diese <A
+                 HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">Snapshots</A>
+                 evtl. nicht gut dokumentiert sind und sehr neuen und
+                 ungetesteten Code enthalten können. Aber so ist
+                 das...</DE-P> <ES-P>El código de fuente más último
+                 está disponible vía <a
+                 href=http://sourceforge.net/cvs/?group_id=612>CVS</a>. Por
+                 eso, siempre puedes comprobador fuera el código más
+                 último de los programadores.  También, <a
+                 href="http://pdl.sourceforge.net/PDLsnap/snapshot.html">snapshots</a>
+                 son disponibles si no se quiere usar CVS.  Note por
+                 favor que las snapshots pueden conetener código nuevo
+                 y no comprobado. Pero ésa es la vida en el borde
+                 principal...</ES-P>"
+
   homepage    = "http://www.sourceforge.net/project/?form_grp=612"
   source      = "http://PDL.sourceforge.net/PDLsnap/snapshot.html"
   rpm         = ""
@@ -117,6 +142,7 @@
 
 <EN><H3>Required software before installing PDL</H3></EN>
 <DE><H3>Notwendige Software, die installiert sein muß</H3></DE>
+<ES><H3>Software requerido antes de la instalación de PDL</H3></ES>
 
 <TABLE border=1 width=100%>
 
@@ -124,33 +150,38 @@
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
+  <ES><B>Paquete</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>
+  <ES><B>Descripción</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
   <EN><B>Resources</B></EN>
   <DE><B>Resourcen</B></DE>
+  <ES><B>Recursos</B></ES>
 </TD>
 </TR>
 
 <download-table
   name        = "<EN>Latest Perl version</EN>
-                 <DE>Aktuellste Perl-Version</DE>"
-  description = "<EN-P>PDL is a Perl module, so it's really useful if you have 
-                 it installed on your machine <TT>:-)</TT> For the recent 
-		 stable versions you need at least Perl version 5.004 to 
-		 succeed. To take advantage of the latest lvalue subroutine
-		 support in perl (which allows a somewhat nicer PDL syntax
-		 in some cases) you should go straight for perl 5.6.</EN-P>
-		 <DE-P>PDL ist ein Perl-Modul, es ist also anzuraten, daß man 
-		 Perl installiert hat <TT>:-)</TT> Für die aktuellen 
-		 stabilen Versionen ist mindestens die Perl-Version 5.004 
-		 notwendig. Um die neue Unterstützung von lvalue
-                 Unterprogrammen (und die damit einhergehenden PDL Syntax
-		 Verbesserungen) in perl ausnutzen zu können, ist die
-		 perl Version 5.6 erforderlich.</DE-P>"
+                 <DE>Aktuellste Perl-Version</DE>
+		 <ES>La versi más última del Perl</ES>"
+  description = "<EN-P>PDL is a Perl module, so it's really useful if
+                 you have it installed on your machine <TT>:-)</TT>
+                 For the recent stable versions you need at least Perl
+                 version 5.6.1 to succeed. Version 5.8.x is
+                 preferred.</EN-P> <DE-P>PDL ist ein Perl-Modul, es
+                 ist also anzuraten, daß man Perl installiert hat
+                 <TT>:-)</TT> Für die aktuellen stabilen Versionen ist
+                 mindestens die Perl-Version 5.6.1 notwendig. Perl
+                 Version 5.8.x wird bevorzugt.</DE-P> <ES-P>PDL es un
+                 módulo de Perl, así que es muy útil hacerlo instalado
+                 en su máquina. <TT>:-)</TT> Para las versiones
+                 estables reciented usted necesita por lo menos el
+                 verison 5.6.1 del Perl.  El verison 5.8.x es
+                 mejor.</ES-P>"
   homepage    = "http://www.cpan.org/ports/index.html"
   source      = ""
   rpm         = ""
@@ -163,6 +194,7 @@
 
 <EN><H3>Optional Software</H3></EN>
 <DE><H3>Optionale Software</H3></DE>
+<ES><H3>Software Opcional</H3></ES>
 
 <TABLE border=1 width=100%>
 
@@ -170,26 +202,34 @@
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
+  <ES><B>Paquete</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>
+  <ES><B>Descripción</B></ES>
 </TD>
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Resources</B></EN>
   <DE><B>Resources</B></DE>
+  <ES><B>Recursos</B></ES>
 </TD>
 </TR>
 
 <download-table
   name        = "<EN>Term::Readline::Gnu<BR>Term::Readline::Perl</EN>
-                 <DE>Term::Readline::Gnu<BR>Term::Readline::Perl</DE>"
-  description = "<EN-P>If you want to have a nice command line with history
-                 function in your <CODE>perldl</CODE> shell install one of 
-		 the <CODE>Term::Readline::XXX</CODE> modules.</EN-P>
-		 <DE-P>Für eine nette Kommandozeile mit History-Funktion in 
-		 der <CODE>perldl</CODE>-Shell ist eines der 
-		 <CODE>Term::Readline:XXX</CODE>-Module nötig.</DE-P>"
+                 <DE>Term::Readline::Gnu<BR>Term::Readline::Perl</DE>
+		 <ES>Term::Readline::Gnu<BR>Term::Readline::Perl</ES>"
+  description = "<EN-P>If you want to have a nice command line with
+                 history function in your <CODE>perldl</CODE> shell
+                 install one of the <CODE>Term::Readline::XXX</CODE>
+                 modules.</EN-P> <DE-P>Für eine nette Kommandozeile
+                 mit History-Funktion in der <CODE>perldl</CODE>-Shell
+                 ist eines der <CODE>Term::Readline:XXX</CODE>-Module
+                 nötig.</DE-P> <ES-P>Si usted quiere tener linea buena
+                 de comando agradable con historia en su cáscara
+                 <CODE>perldl</CODE>, instale uno de los módulos
+                 <CODE>Term::Readline:XXX</CODE>.</ES-P>"
   homepage    = "http://www.perl.com/CPAN-local/modules/by-module/Term/"
   source      = ""
   rpm         = ""
@@ -199,21 +239,31 @@
 <download-table
   name        = "<EN>pbm+</EN>
                  <DE>pbm+</DE>"
-  description = "<EN-P>To read and write images with PDL's rpic/wpic commands
-                 the module <CODE>PDL::IO::Pic</CODE> is in the main 
-		 distribution. However, if you want to have access to nearly 
-		 every possible graphics format you should have installed one 
-		 of these packages before installing PDL. For a jpeg converter 
-		 you should also have 
-		 <A HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A>.</EN-P>
-		 <DE-P>Zum Lesen und Schreiben von Bildern mit PDLs 
-		 rpic/wpic-Befehlen dient das Modul <CODE>PDL::IO::Pic</CODE> 
-		 in der Main-Distribution. Für den Zugriff auf nahezu jedes 
-		 mögliche Bildformat wird eine dieser beiden Pakete benötigt,
-		 bevor PDL installiert wird. Für einen JPG-Filter sollte 
-		 weiterhin  
-		 <A HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A> 
-		 vorhanden sein.</DE-P>"
+  description = "<EN-P>To read and write images with PDL's rpic/wpic
+                 commands the module <CODE>PDL::IO::Pic</CODE> is in
+                 the main distribution. However, if you want to have
+                 access to nearly every possible graphics format you
+                 should have installed one of these packages before
+                 installing PDL. For a jpeg converter you should also
+                 have <A
+                 HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A>.</EN-P>
+                 <DE-P>Zum Lesen und Schreiben von Bildern mit PDLs
+                 rpic/wpic-Befehlen dient das Modul
+                 <CODE>PDL::IO::Pic</CODE> in der
+                 Main-Distribution. Für den Zugriff auf nahezu jedes
+                 mögliche Bildformat wird eine dieser beiden Pakete
+                 benötigt, bevor PDL installiert wird. Für einen
+                 JPG-Filter sollte weiterhin <A
+                 HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A>
+                 vorhanden sein.</DE-P> <ES-P>Para leer y escribir
+                 imagenes con los comandos <code>rpic</code> y
+                 <code>wpic</code>, hay el módulo
+                 <CODE>PDL::IO::Pic</CODE> en el distribución
+                 mayor. Per si usted desea tener acceso a qualquier
+                 formato de los graficos, usted debe instalar uno de
+                 estos paquetes antes de instalar PDL.  También debe
+                 tener <a
+                 HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</a>.</ES-P>"
   homepage    = "ftp://wuarchive.wustl.edu/graphics/graphics/packages/NetPBM"
   source      = ""
   rpm         = ""
@@ -222,13 +272,16 @@
 
 <download-table
   name        = "<EN>mpeg_encode</EN>
-                 <DE>mpeg_encode</DE>"
-  description = "<EN-P>PDL::IO::Pic</CODE> has also the wmpeg function to 
+                 <DE>mpeg_encode</DE>
+		 <ES>mpeg_encode</ES>"
+  description = "<EN-P><code>PDL::IO::Pic</CODE> has also the wmpeg function to 
                  write MPEG videos. This packet is needed to activate 
 		 it.</EN-P>
-		 <DE-P>PDL::IO::Pic</CODE> besitzt weiterhin eine 
+		 <DE-P><code>PDL::IO::Pic</CODE> besitzt weiterhin eine 
 		 wmpeg-Funktion, um MPEG-Videos zu schreiben. Dazu wird dieses 
-		 Paket benutzt.</DE-P>"
+		 Paket benutzt.</DE-P>
+		 <ES-P><code>PDL::IO::Pic</code> tiene la función
+  <code>wmpeg</code> para escribir video MPEG.  Él usa este paquete.</ES-P>"
   homepage    = "ftp://mm-ftp.cs.berkeley.edu/pub/multimedia/mpeg/encode"
   source      = ""
   rpm         = ""
@@ -237,20 +290,25 @@
 
 <download-table
   name        = "<EN>Slatec</EN>
-                 <DE>Slatec</DE>"
-  description = "<EN-P>Slatec fortran lib is included but requires a fortran 
-                 compiler and the perl module to be installed. Module will not 
-		 be built unless 
-		 <A HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">  
-                 ExtUtils::F77</A> (version >= 1.03) is installed and 
-		 Extutils::F77 supports your platform.</EN-P>
-		 <DE-P>Die Fortran-Bibliothek Slatec ist in der Distribution 
-		 enthalten, es ist aber ein Fortran-Compiler und dieses 
-		 Perl-Modul für die Installation notwendig. Das Modul wird 
-		 nicht erzeugt, wenn nicht 
-		 <A HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">  
-                 ExtUtils::F77</A> (Version >= 1.03) vorhanden ist und die 
-		 Plattform unterstützt wird.</DE-P>"
+                 <DE>Slatec</DE>
+		 <ES>Slatec</ES>"
+  description = "<EN-P>Slatec fortran lib is included but requires a
+                 fortran compiler and the perl module to be
+                 installed. Module will not be built unless <A
+                 HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">
+                 ExtUtils::F77</A> (version >= 1.03) is installed and
+                 Extutils::F77 supports your platform.</EN-P>
+                 <DE-P>Die Fortran-Bibliothek Slatec ist in der
+                 Distribution enthalten, es ist aber ein
+                 Fortran-Compiler und dieses Perl-Modul für die
+                 Installation notwendig. Das Modul wird nicht erzeugt,
+                 wenn nicht <A
+                 HREF="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">
+                 ExtUtils::F77</A> (Version >= 1.03) vorhanden ist und
+                 die Plattform unterstützt wird.</DE-P> <ES-P>La
+                 biblioteca numerical «Slatec» en FORTRAN está incluído pero
+                 necesita un recopilador de FORTRAN y el módulo <a
+                 href="http://www.perl.com/CPAN-local/modules/by-authors/Karl_Glazebrook/">ExtUtils::F77</a>.</ES-P>"
   homepage    = "http://www.netlib.org/slatec/index.html"
   source      = ""
   rpm         = ""

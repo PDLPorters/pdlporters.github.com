@@ -20,12 +20,12 @@
 
 <H2> PDL Mailing Lists </H2>
 
-<EN><P align=justify> If you are interested in contact to other people using
-PDL, if you need help for a special problem or if you are a developer and want
-to help us improving PDL you should subscribe to one of our mailing lists.
-There are two lists (thanks to 
-<A HREF="mailto:frossie@jach.hawaii.edu">Frossie</A>), one to talk about PDL 
-and one for developers to coordinate their work.</P></EN>
+<P align=justify> If you are interested in contacting other people
+who are using PDL, if you need help for a special problem, or if you
+are a developer and want to help us improving PDL,  you should subscribe
+to one of our mailing lists.  There are two lists (thanks to <A
+HREF="mailto:frossie@jach.hawaii.edu">Frossie</A>), one to talk about
+PDL and one for developers to coordinate their work.</P>
 
 <OL>
 
@@ -53,11 +53,11 @@ and one for developers to coordinate their work.</P></EN>
 </LI>
 </OL>
 
-<EN><P> There are hypertext archives of both the 
+<P> There are hypertext archives of both the 
 <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl">perldl</A> 
 and <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters">
 pdl-porters</A> mailing lists; thanks to 
-<A HREF="mailto:ach@mpe.mpg.de">Achim Bohnet</A>.</P></EN>
+<A HREF="mailto:ach@mpe.mpg.de">Achim Bohnet</A>.</P>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

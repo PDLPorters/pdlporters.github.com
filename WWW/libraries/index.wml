@@ -22,7 +22,7 @@
 <EN><H2>Algorithm Libraries</H2></EN>
 <DE><H2>Algorithmen-Bibliotheken</H2></DE>
 
-<EN-P> One of the most powerful features of PDL is it's role as
+<EN-P> One of the most powerful features of PDL is its role as
 an integration tool for a variety of external libraries. Not all of the
 features you can use with PDL come with the main package, there are lots of
 "wrapper" modules which act as a connection to other signal processing
@@ -31,7 +31,15 @@ collections. </EN-P>
 <DE-P> Eines der Features, die PDL so leistungsfähig machen, ist seine Funktion
 als Integrationswerkzeug für eine Reihe externer Libraries. Nicht alle dieser
 Bibliotheken sind in der PDL-Distribution selbst enthalten, bei vielen wird
-lediglich ein Wrapper-Modul für bestehende Bibliotheken mitgeliefert.</DE-P>
+lediglich ein Wrapper-Modul für bestehende Bibliotheken
+mitgeliefert.</DE-P>
+
+<es-p> Una de las características más de gran alcance del PDL es el
+herramienta de la integración para muchas bibliotecas externas.  No
+todas de las características que usted puede utilizar con en PDL
+vienen con el paquete principal: hay muchos modulos envolturas que
+connectan PDL a otros paquetes de proceso de señales.
+</es-p>
 
 <BR><BR>
 
@@ -43,14 +51,17 @@ lediglich ein Wrapper-Modul für bestehende Bibliotheken mitgeliefert.</DE-P>
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
+  <ES><b>Paquete</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>  
+  <ES><B>Descripción</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
   <EN><B>Resources</B></EN>
   <DE><B>Resourcen</B></DE>  
+  <ES><b>Recursos</B></ES>
 </TD>
 </TR>
 
@@ -84,6 +95,9 @@ uses external libraries and special modules.</EN-P>
 auf sie zugreifen zu können, bietet PDL Schnittstellen zu einigen externen
 Modulen.</DE-P>
 
+<ES-P>, Hay muchos formatos de datos cientificos.  Para accesarlos,
+PDL usa bibliotecas externas y modulos especiales.</ES-P>
+
 <BR><BR>
 
 <!-- ---------------------------------------------------------------------- -->
@@ -94,14 +108,17 @@ Modulen.</DE-P>
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
+  <ES><B>Paquete</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>  
+  <ES><B>Descripción</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
   <EN><B>Resources</B></EN>
   <DE><B>Resourcen</B></DE>  
+  <ES><b>Recursos</B></ES>
 </TD>
 </TR>
 
@@ -190,6 +207,7 @@ Modulen.</DE-P>
 <A NAME="visualisation"></A>
 <EN><H2>Visualisation Frontends</H2></EN>
 <DE><H2>Visualisierungs-Frontends</H2></DE>
+<ES><H2>Interfaces de la Visualización</H2></ES>
 
 <EN-P>Visualization is one of the corner stones of scientific
 data processing. PDL is no exception in this regard and provides a number
@@ -201,6 +219,13 @@ Datenverarbeitung. PDL bietet eine Reihe von Schnittstellen zu zwei- und
 dreidimensionalen Graphikbibliotheken. Um die volle Leistungsfähigkeit nutzen
 zu können, müssen einige externe Visualisierungstools und APIs installiert
 sein. </DE-P>
+
+<ES-P>La visualización es una piedra de la esquina de la informática
+científica.  El PDL proporciona varios interfaces a los graficos 2-D y
+3-D. Para la funcionalidad completa conía en varias herramientas
+externas y APIs.
+</ES-P>
+
 
 <BR><BR>
 
@@ -214,14 +239,17 @@ sein. </DE-P>
 <TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
   <EN><B>Packet</B></EN>
   <DE><B>Paket</B></DE>
+  <ES><B>Paquete</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
   <EN><B>Description</B></EN>
   <DE><B>Beschreibung</B></DE>  
+  <ES><B>Descripción</B></ES>
 </TD>
 <TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
   <EN><B>Resources</B></EN>
   <DE><B>Resourcen</B></DE>  
+  <ES><B>Recursos</B></ES>
 </TD>
 </TR>
 

@@ -1,3 +1,8 @@
+# might barf on non GNU makes
+ifndef WML
+	WML = wml
+endif
+
 
          ROOT = ..
     FRAMEWORK = $(ROOT)/templates/top.wml \
@@ -10,7 +15,7 @@ INC_TEMPLATES = -I../templates
 .SUFFIXES: .html .wml
 
 %.html:
-		wml $(INC_TEMPLATES) $< -o $@
+		$(WML) $(INC_TEMPLATES) $< -o $@
 
 all:		index_de.html index_en.html \
 		subdirs

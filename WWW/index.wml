@@ -46,9 +46,9 @@ using <B>PDL</B> the perl variable <B>$a</B> can hold a 1024x1024 floating
 point image, it only takes 4MB of memory to store it and expressions like
 <B>$a=sqrt($a)+2</B> manipulate the whole image in a few seconds. </EN-P>
 
-<EN-P>  A simple interactive shell (<A HREF="Doc/perldl.html">perldl</A>) is
+<EN-P>  A simple interactive shell (<A HREF="documentation/html/perldl.html">perldl</A>) is
 provided for use from the command line and a module  (<A
-HREF="Doc/PDL.html">PDL</A>) for use in perl scripts. </EN-P>
+HREF="documentation/html/PDL.html">PDL</A>) for use in perl scripts. </EN-P>
 
 <EN-P> The <B>PDL</B> distribution for Perl is <B>free</B> software and
 provides extensive numerical and semi-numerical functionality with support for
@@ -72,6 +72,15 @@ interfacing to such systems is one of the core design features of <B>PDL</B>.
       de-text = "Einige Erweiterungen der neuen Homepage eingebaut. (RS)"
       en-text = "Some extensions to the new homepage added (RS)"
 >      
+
+<NEWS de-date = "Mi, 5.04.2000"
+      en-date = "Mi, 2000/04/05"
+      de-text = "PDL 2.005 ist ab sofort verfuegbar. Diese Version arbeitet
+	nun auch ohne Probleme mit perl 5.6. (CS)"
+      en-text = "PDL 2.005 is released. It is mainly a bugfix
+	release to make PDL work with perl 5.6. (CS)"
+>      
+
 
 <NEWS de-date = "Sa, 18.12.1999"
       en-date = "Sa, 1999/12/18"

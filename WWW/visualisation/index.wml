@@ -18,8 +18,10 @@
 
 <H2>Visualisation Frontends</H2>
 
-<EN><P align=justify> Scientific data often has to be visualized. PDL has
-interfaces to several external visualisation tools.</P></EN>
+<EN><P>Visualization is one of the corner stones of scientific
+data processing. PDL is no exception in this regard and provides a number
+of interfaces to 2 and 3D graphics. For full functionality it relies on a
+number of external visualization tools and APIs.</P></EN>
 
 <TABLE border=1 width=100%>
 
@@ -33,8 +35,8 @@ interfaces to several external visualisation tools.</P></EN>
 PDL::Graphics::TriD</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify>OpenGL is the most popular library for 3D graphics today.
-The PDL installation scripts will look if you have installed the OpenGL
+<EN><P align=justify>OpenGL is a de facto standard for 3D graphics today.
+The PDL installation scripts will check if you have the OpenGL 
 libraries or the free free implementation 
 <A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and build the
 module if they are present.</P></EN>
@@ -46,11 +48,11 @@ module if they are present.</P></EN>
 PDL::Graphics::PGPLOT</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify>PGPLOT is a very powerful fortran library for 2D plots
-with scientific quality.  You need the <A
+<EN><P align=justify>PGPLOT is a very powerful fortran library for scientific
+2D plotting.  You need the <A
 HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library  itself and the
 <A HREF="http://www.aao.gov.au/local/www/kgb/pgperl">PGPERL</A> perl module
-before compiling PDL.</P></EN>
+for full functionality.</P></EN>
 
 </TR>
 
@@ -71,8 +73,9 @@ Ximtool</A></TD>
 PDL::Graphics::Karma</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<A HREF="http://www.atnf.csiro.au/karma">Karma</A> visualisation library. If you
-have installed it on your system the PDL module will be built.</TD>
+An interface to the <A HREF="http://www.atnf.csiro.au/karma">Karma</A>
+visualisation library. If it is installed on your system the PDL module
+will be built.</TD>
 
 </TR>
 

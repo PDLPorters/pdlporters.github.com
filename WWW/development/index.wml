@@ -70,7 +70,7 @@ an example of including POD documentation in PDL .pd files.</LI>
 description of the PDL documentation conventions</LI>
 </UL>
 </LI>
-
+</P>
 <LI> <P align=justify>Make sure you add a test case in the 't' directory for any 
    significant additional capability you add to the PDL
    package.</P>

@@ -25,8 +25,8 @@
 <EN><H2> Screenshots and Examples </H2></EN>
 <DE><H2> Screenshots und Beispiele </H2></DE>
 
-<en-p> On the following pages you'll find some examples of how PDL looks like.
-Several of the examples are available as demos within I<perldl> - try
+<en-p>On the following pages you'll find some examples of how PDL looks like.
+Several of the examples are available as demos within <I>perldl</I> - try
 <PRE>
 <CODE>
  <STRONG>perldl></STRONG> demo

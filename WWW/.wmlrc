@@ -1,4 +1,5 @@
 -DPDLROOT~.
 -DIMAGES~images
+-DDOCROOT=http://pdl.sourceforge.net/PDLdocs
 -I~$(PDLROOT)/templates
 

@@ -9,7 +9,7 @@
 <META* NAME       = "DESCRIPTION" 
        CONTENT    = "Robert Schwebel"
 >
-<TITLE*>PDL - External Libraries</TITLE*>
+<TITLE*>PDL - Visualisation Frontends</TITLE*>
 </HEAD*>
 <comment> ---------------------------------------------------------- </comment>
 
@@ -17,138 +17,8 @@
 
 #include '$(PDLROOT)/templates/top.wml'
 #include '$(PDLROOT)/menue.wml'
+
 #include 'defines.wml'
-
-<EN><H2>Algorithm Libraries</H2></EN>
-<DE><H2>Algorithmen-Bibliotheken</H2></DE>
-
-<EN-P> One of the most powerful features of PDL is it's role as
-an integration tool for a variety of external libraries. Not all of the
-features you can use with PDL come with the main package, there are lots of
-"wrapper" modules which act as a connection to other signal processing
-collections. </EN-P>
-
-<DE-P> Eines der Features, die PDL so leistungsfähig machen, ist seine Funktion
-als Integrationswerkzeug für eine Reihe externer Libraries. Nicht alle dieser
-Bibliotheken sind in der PDL-Distribution selbst enthalten, bei vielen wird
-lediglich ein Wrapper-Modul für bestehende Bibliotheken mitgeliefert.</DE-P>
-
-<BR><BR>
-
-<!-- ---------------------------------------------------------------------- -->
-
-<TABLE border=1 width=100%>
-
-<TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
-  <EN><B>Packet</B></EN>
-  <DE><B>Paket</B></DE>
-</TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
-  <EN><B>Description</B></EN>
-  <DE><B>Beschreibung</B></DE>  
-</TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
-  <EN><B>Resources</B></EN>
-  <DE><B>Resourcen</B></DE>  
-</TD>
-</TR>
-
-
-<library-table name        = "PDL::Audio"
-               description = "?"
-               homepage    = ""
-	       download    = ""
->	       
-
-<comment>
-<library-table name        = ""
-               description = ""
->	       
-</comment>
-
-</TABLE>
-
-<BR><BR>
-
-<comment> ---------------------------------------------------------- </comment>
-
-
-<EN><H2>Access to Data Formats</H2></EN>
-<DE><H2>Zugriff auf Daten-Formate</H2></DE>
-
-<EN-P> There are lots of different scientific data formats. To access them PDL
-uses external libraries and special modules.</EN-P>
-
-<DE-P> Wissenschaftliche Daten liegen in vielen verschiedenen Formaten vor. Um
-auf sie zugreifen zu können, bietet PDL Schnittstellen zu einigen externen
-Modulen.</DE-P>
-
-<BR><BR>
-
-<!-- ---------------------------------------------------------------------- -->
-
-<TABLE border=1 width=100%>
-
-<TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width="20%">
-  <EN><B>Packet</B></EN>
-  <DE><B>Paket</B></DE>
-</TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="60%">
-  <EN><B>Description</B></EN>
-  <DE><B>Beschreibung</B></DE>  
-</TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width="20%">
-  <EN><B>Resources</B></EN>
-  <DE><B>Resourcen</B></DE>  
-</TD>
-</TR>
-
-<library-table name        = "CFITSIO"
-               description = "CFITSIO is a library you can use to handle data in the
-                              FITS (Flexible Image Transportation System) 
-			      format."
-               homepage    = "http://hea-www.harvard.edu/~rpete/cfitsio/"			      
-               download    = ""
->	       
-
-<library-table name        = "NETCDF"
-               description = "NetCDF is ..."
-               download    = "http://www.perl.com/CPAN-local/modules/by-module/PDL/PDL-NetCDF-0.40.tar.gz"
->	       
-</comment>
-
-<library-table name        = "PDL::IO::NDF"
-               description = "<EN-P>The N-dimensional data format is a 
-	                      cross-platform hierarchical data format and is 
-			      described in 
-			      <a href="http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_">
-			      Starlink User Note 33</a>.</EN-P>
-
-			      <DE-P>Dieses N-dimensionale Datenformat ist für 
-			      den Cross-Plattform-Einsatz entwickelt und wird 
-			      in 
-			      <a href="http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_">
-			      Starlink User Note 33</a> näher 
-			      beschrieben.<DE-P>"
-               homepage    = "http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_"			      
-               download    = ""
->	       
-
-<library-table name        = "ObjStore::Lib::PDL"
-               description = "?"
-               homepage    = ""
-	       download    = ""
->	       
-
-</TABLE>
-
-<BR><BR>
-
-
-<comment> ---------------------------------------------------------- </comment>
-
 
 <EN><H2>Visualisation Frontends</H2></EN>
 <DE><H2>Visualisierungs-Frontends</H2></DE>
@@ -166,9 +36,7 @@ sein. </DE-P>
 
 <BR><BR>
 
-
-<comment> ---------------------------------------------------------- </comment>
-
+<!-- ----------------------------------------------------------------------- -->
 
 <TABLE border=1 width=100%>
 
@@ -198,7 +66,7 @@ sein. </DE-P>
 		HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and
 		build the module if they are present.</EN-P>
 
-		<DE-P>OpenGL ist der "de facto" Standard für moderne 3D
+		<DE-P>OpenGL ist der &quot;de facto&quot; Standard für moderne 3D
 		Graphikausgabe. Die Installationsscripte von PDL testen, ob
 		OpenGL oder der freie Clone  <A
 		HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> 
@@ -206,7 +74,7 @@ sein. </DE-P>
 		Module.</DE-P>"
   homepage    = ""
   download    = ""
-  screenshot  = ""
+  screenshot  = "<EN><A HREF="../screenshots">[1]</A></EN>"
 >	       
 
 
@@ -294,7 +162,7 @@ sein. </DE-P>
 		 -Modul für Perl kann ebenfalls mit PDL verwendet werden. Die 
 		 Bilder in Gimp können mit Hilfe von PDL-Programmen aus 
 		 manipuliert werden.</de-p>"
-  homepage    = "http://www.gimp.org"
+  homepage    = ""
   download    = ""
   screenshot  = ""
 >

@@ -70,14 +70,14 @@ auf einmal zu bearbeiten.</DE-P>
 <!-- ----- -->
 
 <EN-P>  A simple interactive shell (<A
-HREF="documentation/html/perldl.html">perldl</A>) is provided for use from the
-command line and a module  (<A HREF="documentation/html/PDL.html">PDL</A>) for
+HREF="$(DOCROOT)/perldl.html">perldl</A>) is provided for use from the
+command line and a module  (<A HREF="$(DOCROOT)/PDL.html">PDL</A>) for
 use in perl scripts. </EN-P>
 
 <DE-P> Es gibt eine einfache interaktive shell (<A 
-HREF="documentation/html/perldl.html">perldl</A>), mit deren Hilfe auf der
+HREF="$(DOCROOT)/perldl.html">perldl</A>), mit deren Hilfe auf der
 Kommandozeile gearbeitet werden kann. Für Skripte dient das Modul
-<A HREF="documentation/html/PDL.html">PDL.pm</A>.</DE-P>
+<A HREF="$(DOCROOT)/PDL.html">PDL.pm</A>.</DE-P>
 
 <!-- ----- -->
 

@@ -4,6 +4,9 @@
             de-link  = "$(PDLROOT)/index_de.html"
 	    en-name1 = "Homepage"
 	    en-link  = "$(PDLROOT)/index_en.html"
+	    es-name1 = "Página"
+	    es-name2 = "mayor"
+	    es-link  = "$(PDLROOT)/index_es.html"
             status   = "active"
 >	   
 
@@ -11,6 +14,9 @@
 	    de-link   = "$(PDLROOT)/download/index_de.html"
 	    en-name1  = "Download"
 	    en-link   = "$(PDLROOT)/download/index_en.html"
+	    es-name1  = "Transferencia"
+	    es-name2  = "directa"
+	    es-link   = "$(PDLROOT)/download/indes_es.html"
             status    = "active"
 >	  
 
@@ -19,6 +25,9 @@
 	    en-name1  = "Mailing"
 	    en-name2  = "Lists"
 	    en-link   = "$(PDLROOT)/maillists/index_en.html"
+	    es-name1  = "Listas de"
+	    es-name2  = "enviar"
+	    es-link   = "$(PDLROOT)/maillists/index_es.html"
             status    = "active"
 >	  
 
@@ -28,6 +37,9 @@
 	    en-name1  = "Success"
 	    en-name2  = "Stories"
 	    en-link   = "$(PDLROOT)/nifty/index_en.html"
+	    es-name1  = "Historias"
+	    es-name2  = "del éxito"
+	    es-link   = "$(PDLROOT)/nifty/index_es.html"
             status    = "active"
 >	  
 <MENUEENTRY de-name1  = "Screenshots"
@@ -36,6 +48,9 @@
 	    en-name1  = "Screenshots"
 	    en-name2  = "& Examples"
 	    en-link   = "$(PDLROOT)/screenshots/index_en.html"
+	    es-name1  = "Imagenes y"
+	    es-name2  = "ejemplos"
+	    es-link   = "$(PDLROOT)/screenshots/index_es.html"	
             status    = "active"
 >	  
 
@@ -43,6 +58,8 @@
 	    de-link   = "$(PDLROOT)/demos/index_de.html"
 	    en-name1  = "Demos"
 	    en-link   = "$(PDLROOT)/demos/index_en.html"
+	    es-name1  = "Demos"
+	    es-link   = "$(PDLROOT)/demos/index_en.html"
             status    = "active"
 >	  
 
@@ -53,6 +70,9 @@
 	    en-name1  = "External"
 	    en-name2  = "Libraries"
 	    en-link   = "$(PDLROOT)/libraries/index_en.html"
+	    es-name1  = "Bibliotecas"
+	    es-name2  = "externales"
+	    es-link   = "$(PDLROOT)/libraries/index_es.html"
             status    = "active"
 >	  
 
@@ -62,6 +82,9 @@
 	    en-name1  = "Online"
 	    en-name2  = "Documentation"
 	    en-link   = "$(PDLROOT)/documentation/index_en.html"
+ 	    es-name1  = "Documentación"
+	    es-name2  = "en linea"
+	    es-link   = "$(PDLROOT)/documentation/index_es.html"
             status    = "active"
 >	  
 
@@ -69,6 +92,8 @@
 	    de-link   = "$(PDLROOT)/development/index_de.html"
 	    en-name1  = "Development"
 	    en-link   = "$(PDLROOT)/development/index_en.html"
+	    es-name1  = "Desarrollo"
+	    es-link   = "$(PDLROOT)/development/index_es.html"
             status    = "active"
 >	  
 
@@ -76,6 +101,8 @@
 	    de-link   = "$(PDLROOT)/team/index_de.html"
 	    en-name1  = "The Team"
 	    en-link   = "$(PDLROOT)/team/index_en.html"
+	    es-name1  = "El Equipo"
+	    es-link   = "$(PDLROOT)/team/index_es.html"
             status    = "active"
 >	  
 
@@ -122,6 +149,8 @@
 <CENTER>
 <FONT class=menue SIZE=-2>
 <en>PDL development<BR>is powered by<BR></en>
+<de>PDL Entwicklung wird angetrieben durch<BR></de>
+<es>El desarrollo del PDL se acciona cerca<BR></es>
 </FONT>
 <A HREF="http://www.sourceforge.net/project/?form_grp=612">
 <IMG SRC="http://sourceforge.net/sflogo.php?group_id=612&type=1" border=0

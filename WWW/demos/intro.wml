@@ -24,9 +24,11 @@
 
 <EN><H2> PDL Tour </H2></EN>
 <DE><H2> PDL Beispiele </H2></DE>
+<ES><H2> PDL Demonstración </H2></DE>
 
 <EN><H3> Introduction </H3></EN>
 <DE><H3> Einführung </H3></DE>
+<ES><H3> Introducción </H3></ES>
 
 <en-p> Welcome to a short tour of PDL's capabilities. This tour shows some of the main selling points of PDL. However, because
 we want this script to run everywhere, some modules which require external
@@ -55,6 +57,15 @@ PDL-Umgebung.
 
 </de-p>
 
+<es-p> Bienvenidos a un viaje corto de las capabilidades de PDL.  Este viaje demonstruye algos de los ventajas de PDL.  Pero, porque deseamos para que esta escritura funcione por todas partes, algos módulos que requieren bibliotecas externales se excluyen.  En detalle, 
+<UL>
+<LI>PDL::Graphics::TriD (graficos de 3D [*]</LI>
+<LI>PDL::Graphics::PGPLOT (graficos 2D mit PGPLOT)</LI>
+<LI>PDL::IO::FlexRaw (I/O crudo y versátil)</LI>
+</UL>
+[*] Este módulo tiene escritura de demo individual.
+</es-p>
+
 <!-- ----- -->
 
 <en-p> Note that your own scripts must start with "<CODE>use PDL;</CODE>"  to
@@ -68,12 +79,16 @@ script.pl</CODE>". Eine andere Möglichkeit zum Ausprobieren der hier
 vorgestellten Demos ist, sie direkt in der interaktiven
 "<code>perldl</code>"-Shell einzugeben.</de-p>
 
+<es-p> Notea que sus escrituras se deben empezar con "<CODE>use PDL;</CODE>" para funcionar correctamente, para que se puede decir "<CODE>perl script.pl</CODE>".  También, se puede tratar algos de los mandatos en los demos escribiendo el comando en la cáscara <code>perldl</code>.
+</es-p>
+
 <!-- ---------------------------------------------------------------------- -->
 
 <HR>
 
 <EN><H3> Generation of PDLs </H3></EN>
 <DE><H3> Erzeugen von PDLs </H3></DE>
+<ES><H3> Generación de PDLs </H3></DE>
 
 <en-p> PDLs or "piddles" are N-dimensional data cubes. There are several ways of
 generating piddles:</en-p>
@@ -81,11 +96,17 @@ generating piddles:</en-p>
 <de-p> PDLs oder "piddles" sind N-dimensionale Datensätze. Es gibt verschiedene
 Möglichkeiten, piddles zu erzeugen:</de-p>
 
+<es-p> PDLs, o "piddles", sone cubos N-dimensionales de los datos.  Hay varias maneras de generar PDLs:
+</es-p>
+
+
 <!-- ----- -->
 
 <en-p> We generate a zero filled 5x5 matrix:</en-p>
 
 <de-p> Wir erzeugen eine mit Nullen gefüllte 5x5-Matrix:</de-p>
+
+<es-p> Generamos un matriz 5x5 por completo de ceros.</es-p>
 
 <PRE>
 <CODE>
@@ -106,6 +127,8 @@ Möglichkeiten, piddles zu erzeugen:</de-p>
 <en-p> Now, don't think that the number of dimensions is limited to two:</en-p>
 
 <de-p> Die Zahl der Dimensionen ist natürlich nicht auf zwei beschränkt:</de-p>
+
+<es-p> El número de dimenciones puede ser mas que dos:</es-p>
 
 <PRE>
 <STRONG>perldl></STRONG> $m = zeroes(3,2,2); # 3x2x2 cube
@@ -129,10 +152,13 @@ Möglichkeiten, piddles zu erzeugen:</de-p>
 
 <EN><H3> Mathematical operations </H3></EN>
 <DE><H3> Mathematische Operationen </H3></DE>
+<ES><H3> Operaciónes matemáticas </H3></ES>
 
 <en-p> Operators like increment work...</en-p>
 
 <de-p> Es können Operatoren wie "Incrementieren" verwendet werden... </de-p>
+
+<es-p> Operadores como incrementar funcionen...</es-p>
 
 <PRE>
 <STRONG>perldl></STRONG> $a ++;
@@ -155,6 +181,10 @@ which give the coordinate value.</en-p>
 <de-p> "xvals" und "yvals" (ja, es gibt auch "zvals"...) erzeugen piddles, die
 die dazugehörigen Koordinatenwerte beinhalten.</de-p>
 
+<es-p> "xvals" y "yvals (si, hay también un "zvals"...) se dan piddles
+con el valor coordinado.
+</es-p>
+
 <PRE>
 <STRONG>perldl></STRONG> $b = xvals $a;
 <STRONG>perldl></STRONG> print $b;
@@ -173,6 +203,8 @@ die dazugehörigen Koordinatenwerte beinhalten.</de-p>
 <en-p> So you can do things like </en-p>
 
 <de-p> Damit können Dinge gemacht werden wie </de-p>
+
+<es-p> Por eso, se puede hacer tan cosas como esto: </es>
 
 <PRE>
 <STRONG>perldl></STRONG> $b = $a + 0.1 * xvals($a) + 0.01 * yvals($a);
@@ -193,6 +225,8 @@ die dazugehörigen Koordinatenwerte beinhalten.</de-p>
 
 <de-p> Arithmetische Operationen funktionieren: </de-p>
 
+<es-p> Operaciones aritmeticales funcionen: </es-p>
+
 <PRE>
 <STRONG>perldl></STRONG> $x = xvals(10) / 5;
 <STRONG>perldl></STRONG> print $x,"\n";
@@ -208,10 +242,14 @@ die dazugehörigen Koordinatenwerte beinhalten.</de-p>
 
 <EN><H3> Slices </H3></EN>
 <DE><H3> Slices </H3></DE>
+<ES><H3> Rebanadas </H3></ES>
+
 
 <en-p>You can also take slices:</en-p>
 
 <de-p>Es können Schnitte durch den Datensatz gelegt werden: </de-p>
+
+<es-p>También, se puede tomar rebanadas: </es-p>
 
 <PRE>
 
@@ -262,6 +300,9 @@ references back to the original piddle:</en-p>
 <de-p>Eines der rafiniertesten Features ist die Tatsache, daß die Slices
 Referenzen auf einen Teil eines Original-Piddles darstellen:</de-p>
 
+<es-p>Una caracteristica muy buena es que las rebanadas realmente son
+referencias a la piddle original:</es-p>
+
 <PRE>
 <STRONG>perldl></STRONG> $diag = $b->diagonal(0,1);
 <STRONG>perldl></STRONG> print $b;
@@ -302,6 +343,8 @@ Now, guess what $b looks like?
 <de-p>Ein anderes Beispiel: wir modifizieren nur die Elemente 0, 2 und 4 jeder
 Zeile:</de-p>
 
+<es-p>Un ejemplo mas (solo modificamos elementos 0, 2, y 4 de cada fila):</es-p>
+
 <PRE>
 
 <STRONG>perldl></STRONG> $t = $b->slice("0:4:2"); $t += 50;
@@ -324,6 +367,9 @@ PDL::Slices - we can't show you all but here are some examples:</en-p>
 <de-p> Es gibt eine Reihe nützlicher Funktionen, z.B. in PDL::Primitive und
 PDL::Slices, die nicht alle hier vorgestellt werden können. Trotzdem einige
 Beispiele:</de-p>
+
+<es-p> Hay muchas funciónes útiles en, por ejemplo, PDL::Primitive y 
+PDL::Slices -- no podemos demonstrar todos per aquí hay algos ejemplos:</es-p>
 
 <PRE>
 
@@ -372,12 +418,15 @@ Beispiele:</de-p>
 
 <EN><H3> Manipulation of parts of piddles </H3></EN>
 <DE><H3> Manipulation von Teilen von Piddles </H3></DE>
+<ES><H3> Manipulación de las partes de piddles </H3></ES>
 
 <en-p>Here are some more advanced tricks for selecting parts of 1-D
 vectors:</en-p>
 
 <de-p>Hier noch einige komplexere Tricks zur Selektrion von Teilen von 1-D
 Vektoren:</de-p>
+
+<es-p>Aquí hay algunos trucos avanzados para seleccionar partes de los vectores 1-D:</es-p>
 
 <pre>
 

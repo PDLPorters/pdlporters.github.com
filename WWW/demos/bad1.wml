@@ -24,6 +24,7 @@
 
 <EN><H2> Tour of the bad value support in PDL </H2></EN>
 <DE><H2> Einführung zu "bad values" in PDL</H2></DE>
+<ES><H2> Viaje de la ayuda para valores malos en PDL </H2></ES>
 
 <en-p>
 Each piddle contains a flag - accessible via the badflag() method - 
@@ -34,6 +35,11 @@ which indicates whether:
 In jeder PDL-Variable gibt es ein Flag (erreichbar über die
 badflag()-Funktion), das folgendes besagt:
 </de-p>
+
+<es-p>
+Cada piddle contiene una bandera -- accesible con el método «badflag()» --
+que indica si:
+</es-p>
 
 <!-- ----- -->
 
@@ -47,6 +53,12 @@ badflag()-Funktion), das folgendes besagt:
 &nbsp;&nbsp;&nbsp;       Das piddle *kann* "bad values" beinhalten: Flag ist 1<BR>
 </de-p>
 
+<es-p>
+&nbsp;&nbsp;&nbsp;       el piddle no contiene valores malos (bandera es 0)</BR>
+&nbsp;&nbsp;&nbsp;       el piddle <i>puede</i> contener valoras malos (bandera es 1)</BR>
+</es-p>
+
+
 <!-- ----- -->
 
 <en-p>
@@ -59,6 +71,10 @@ are ignored.
 Ist das Flag gesetzt, können die Routienen, die bereits "bad values"
 unterstützen, korrekt mit diesen umgehen. Andernfalls werden sie ignoriert.
 </de-p>
+
+<es-p>
+Si se fija la bandera, entonces las rutinas procesarán los valores malos correctamente; Si no, no harán caso de ellos.
+</es-p>
 
 <!-- ----- -->
 
@@ -74,6 +90,10 @@ Der Code wurde so implementiert, daß durch den "bad value"-Support möglichst
 wenig zusätzlicher Aufwand erzeugt wird; dadurch sollte bei piddles, bei denen
 das Flag nicht gesetzt ist, nahezu kein Performanceunterschied spürbar sein. 
 </de-p>
+
+<es-p>
+El código fue escrito para imponer como pocos gastos indirectos como sea posible.  Por eso, no se debe haber casi diferencia en el tiempo que se requiren para procesar las variables con o sin la bandera de valores malos.
+</es-p>
 
 <!-- ----- -->
 
@@ -256,6 +276,10 @@ versehen. Bei den meisten Zusatz-Modulen ist dies allerdings noch nicht der
 Fall!
 </de-p>
 
+<es-p>
+Muchas de las rutinas de la base se han convertido para manejar malos valores.  Pero algos (incluyendo lo mas de los módulos adicionales) no se lo han, tampoco porque no hace sentido o requerría demasiado trabajo.
+</es-p>
+
 <!-- ----- -->
 
 <en-p>
@@ -269,6 +293,10 @@ Der Status einer Routine kann mit dem 'badinfo'-Kommando auf der perldl
 Kommandozeile abgefragt werden und wird auf den 'help'-Seiten angezeigt. pdldoc
 zeigt den Status bei Angabe der Option '-b' an. 
 </de-p>
+
+<es-p>
+Para descubrir el estado de una rutina particular, se puede utilizar el comando «badinfo» en <code>perldl</code>, o el interruptor «-b» de <code>pdldoc</code>.  Este información tambien está incluído cuando usted dice «help» en <code>perldl</code>.
+</es-p>
 
 <!-- ---------------------------------------------------------------------- -->
 

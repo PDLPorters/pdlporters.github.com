@@ -9,7 +9,7 @@
 <META* NAME       = "DESCRIPTION" 
        CONTENT    = "Robert Schwebel"
 >
-<TITLE*>PDL - <EN>The Team</EN><DE>Das Team</DE></TITLE*>
+<TITLE*>PDL - <EN>The Team</EN><DE>Das Team</DE><ES>El Equipo</ES></TITLE*>
 </HEAD*>
 <comment> ---------------------------------------------------------- </comment>
 
@@ -64,8 +64,8 @@
 	reallife = "I am a solar astrophysicist at Southwest Research
 	Institute.  I use PDL for image processing, artificial vision,
         and magnetohydrodynamic modeling."
-	task = "Module development & debugging, generalized
-	        itch-scratching, and official curmudgeon."
+	task = "Module development & debugging, current release manager,
+		web page development."
 >
 
 <TR>

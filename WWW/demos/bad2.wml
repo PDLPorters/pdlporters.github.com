@@ -24,11 +24,12 @@
 
 <EN><H2> Graphical tour of the bad value support in PDL </H2></EN>
 <DE><H2> Einige praktische Beispiele zu "bad values" und PGPLOT </H2></DE>
+<ES><H2> Un viaje grafical de la ayuda para valores malos en PDL </H2></ES>
 
 <en-p>
 This demo is just a bit of eye-candy to show bad values in action,
 and requires PGPLOT support in PDL. It makes use of the image of
-m51 kindly provided by the IRAF group at the National Optical and 
+m51 kindly provided by the Hubble Space Telescope.
 Astronomical Observatories.
 </en-p>
 
@@ -36,9 +37,12 @@ Astronomical Observatories.
 Diese Demo soll die "bad values"-Funktionen anhand einiger graphischer Beispiele
 vorführen. Zum Ausprobieren muß der Support für PGPLOT in PDL eincompiliert
 sein. Verwendet wird weiterhin das M51-Bild, welches freundlicherweise von der
-IRAF-Gruppa am National Optical and Astronomical Observatory zur Verfügung
-gestellt wurde.
+Telescope Hubble.
 </de-p>
+
+<es-p>
+Este viaje es solamente un poquito de ojo-caramelo para demostrar valores malos en acción.  Requiere ayuda para PGPLOT en PDL.  Usa un imagen del telescopio Hubble.
+</es-p>
 
 <!-- ----- -->
 
@@ -51,6 +55,11 @@ your code to handle bad values, as the routines may 'do it' for you.
 Dieses Beispiel zeigt weiterhin, daß in vielen Fällen der Code nicht verändert
 werden muß, um "bad values" zu unterstützen.
 </de-p>
+
+<es-p>
+Tambien sirve para demostrar que usted no debe cambiar su códiga para 
+manipular valores malos: las rutinas de PDL pueden hacerlo para usted.
+</es-p>
     
 <PRE>
 <CODE>

@@ -25,7 +25,11 @@
 </TD>
 <TD valign=top>
   <BR><FONT face="arial,helvetica,sans-serif" size=+5><B>PDL - The Perl Data Language</B></FONT><BR><BR>
-  <FONT face="arial,helvetica,sans-serif" size=+3 color="#FF0000">Number crunching capabilities for Perl</FONT>
+  <FONT face="arial,helvetica,sans-serif" size=+3 color="#FF0000">
+<en>Number crunching capabilities for Perl</en>
+<de>Zahlknirschenfähigkeiten für Perl</de>
+<es>Capacidad del crujido de números para el Perl</es>
+</FONT>
 </TD>
 </TR>
 </TABLE>
@@ -48,22 +52,41 @@ M&ouml;glichkeit, große N-dimensionale Datensätze, wie sie in allen
 Bereichen des wissenschaftlichen Rechnens vorkommen, <I>kompakt</I> im
 Speicher unterzubringen und <I>schnell</I> zu bearbeiten.</de-p>
 
+<es-p><B>PDL</B> («Perl Data Language», la lengua de datos de perl) da
+a <href="http://www.perl.org">Perl</a> la capacidad de almacenar
+compactamente y manipular rápidamente los datos multidimensionales
+grandes que son el pan y la mantequilla del computo cietifico.  
+</es-p>
+
 <!-- ----- -->
 
-<en-p>  PDL turns perl in to a free, array-oriented, numerical language similar
-to such commerical packages as IDL and MatLab. One can write simple perl
-expressions to manipulate entire numerical arrays all at once. For example,
-using <B>PDL</B> the perl variable <B>$a</B> can hold a 1024x1024 floating
-point image, it only takes 4MB of memory to store it and expressions like
-<B>$a=sqrt($a)+2</B> manipulate the whole image in a few seconds. </en-p>
+<en-p> PDL turns perl in to a free, array-oriented, numerical language
+similar to (but, we believe, better than) such commerical packages as
+IDL and MatLab. One can write simple perl expressions to manipulate
+entire numerical arrays all at once. For example, using <B>PDL</B> the
+perl variable <B>$a</B> can hold a 1024x1024 floating point image, it
+only takes 4MB of memory to store it and expressions like
+<B>$a=sqrt($a)+2</B> manipulate the whole image in a few
+milliseconds. </en-p>
 
 <de-p> PDL macht aus Perl eine freie, Array-orientierte numerische
-Programmiersprache, ähnlich kommerzieller Programme wie IDL oder MatLab. Mit
-Hilfe von einfachen Perl-Ausdrücken können ganze numerische Arrays auf einmal
-manipuliert werden. Die Perl-Variable <B>$a</B> kann z.B. ein ganzes 1024x1024
-Pixel großes Fließpunktbild enthalten. Sie benötigt dazu nur 4 MB Speicher und
-es ist möglich, mit Hilfe von Befehlen wie <B>$a=sqrt($a)+2</B> das ganze Bild
-auf einmal zu bearbeiten.</de-p>
+Programmiersprache, ähnlich (aber besser als) kommerzieller Programme
+wie IDL oder MatLab. Mit Hilfe von einfachen Perl-Ausdrücken können
+ganze numerische Arrays auf einmal manipuliert werden. Die
+Perl-Variable <B>$a</B> kann z.B. ein ganzes 1024x1024 Pixel großes
+Fließpunktbild enthalten. Sie benötigt dazu nur 4 MB Speicher und es
+ist möglich, mit Hilfe von Befehlen wie <B>$a=sqrt($a)+2</B> das ganze
+Bild auf einmal zu bearbeiten.</de-p>
+
+<es-p> PDL convierte el Perl en una libre lengua númerica y
+orden-orientada, similar (pero, creemos, superior) a los paquetes
+comerciales como IDL y MatLab.  Se puede escribir expreciones simplos
+en perl para manipular los órdenes númericos enteros de una vez.  Por
+ejemplo, en <B>PDL</B> el perl variable <B>$a</B> puede contener un
+imagen de coma flotante con 1024x1024 pixeles.  Se usa solamente 4MB
+de recuerdo para almanecerlo, y expreciones como <B>$a=sqrt($a)+2</B>
+manipulan todo el imagen muy rapidamente.  
+</es-p>
 
 <!-- ----- -->
 
@@ -76,6 +99,12 @@ use in perl scripts. </en-p>
 HREF="$(DOCROOT)/perldl.html">perldl</A>), mit deren Hilfe auf der
 Kommandozeile gearbeitet werden kann. Für Skripte dient das Modul
 <A HREF="$(DOCROOT)/PDL.html">PDL.pm</A>.</de-p>
+
+<es-p> Se proporciona una cáscara interactiva y simple (<a
+HREF="$(DOCROOT)/perldl.html">perldl</A>) para el uso de la linea de
+comando, y un módulo (<A HREF="$(DOCROOT)/PDL.html">PDL</a>) para el
+uso dentro de las escrituras en perl.</es-p>
+
 
 <!-- ----- -->
 
@@ -100,6 +129,9 @@ Numerik-Paketen</A>, Grafik- und Visualisierungssystemen zusammenarbeiten zu
 lassen. Einfache Schnittstellen zu solchen externen Paketen ist eines der
 Kernfeatures von <B>PDL</B>.</de-p>
 
+<es-p> El paquete <B>PDL</B> para Perl es software libre.  Proporciona extensivo funcionalidad númerico y semi-númerico con ayuda por bidimensional y tridimensional <a HREF="$(PDLROOT)/libraries/index_es.html">visualización</a> así como un variedad de formatas de I/O.  La meta es perimitir que el PDL obre reciprocamente con un variedad de <a href="$(PDLROOT)/libraries/index_es.html">bibliotecas númericas externales</a>, y sistemas gráficas y de visualización.  La interfaz facil a estes sistemas es una de las caracteristicas basicas del diseño del PDL. 
+</es-p>
+
 </TD>
 
 <TD width=30% valign=top>
@@ -114,6 +146,13 @@ Kernfeatures von <B>PDL</B>.</de-p>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "11.03.2005"
+      en-date = "2005/03/11"
+      es-date = "11.03.2005"
+      en-text = "Updates to the web pages:  a <A HREF="$(PDLROOT)/nifty/index_en.html">success stories</a> page, and Spanish language support.  My spanish is rusty and I barely speak any German at all.  If the language is a bit broken, please let me know how to fix it! deforest (at) boulder (dot) swri (dot) edu. (CD)"
+      de-text = "Updates zu den Webseiten: ein <A HREF="$(PDLROOT)/nifty/index_en.html">Erfolggeschichte</a> Seite, und Spanische Sprachenunterstützung.  Mein Spanisch ist rostig un ich spreche kaum irgenwie Deutsches an allen.  Wenn die Sprache eine gebrochene Spitze ist, erklären Sie mir, wie man bitte sie repariert! deforest (at) boulder (dot) swri (dot) edu. (CD)"
+      es-text = "Actualizaciones a las páginas:  una página de <A HREF="$(PDLROOT)/nifty/index_en.html">historias del éxito</a>, y ayuda en español.  Me español está oxidado y hablo como nada de alemán.  Si la lengua de las páginas es un poquito roto, por favor digame cómo arreglarlo.   deforest (at) boulder (dot) swri (dot) edu. (CD)"
+>
 
 <NEWS de-date = "28.12.2004"
       en-date = "2004/12/28"

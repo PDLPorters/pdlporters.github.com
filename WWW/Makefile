@@ -29,8 +29,8 @@ subdirs:
 		(cd maillists && $(MAKE) all)
 		(cd development && $(MAKE) all)
 
-index_de.html:	index.wml $(FRAMEWORK)
-index_en.html:	index.wml $(FRAMEWORK)
+index_de.html:	index.wml $(FRAMEWORK) menue.wml
+index_en.html:	index.wml $(FRAMEWORK) menue.wml
 
 link:		
 		rm -f index.html

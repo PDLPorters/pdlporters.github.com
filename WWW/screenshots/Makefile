@@ -23,8 +23,8 @@ all:		index_de.html index_en.html \
 
 subdirs:	
 
-index_de.html:	index.wml $(FRAMEWORK)
-index_en.html:	index.wml $(FRAMEWORK)
+index_de.html:	index.wml $(FRAMEWORK) ../menue.wml
+index_en.html:	index.wml $(FRAMEWORK) ../menue.wml
 
 link:		
 		rm -f index.html

@@ -65,7 +65,7 @@
 	    de-link   = "$(PDLROOT)/team/index_de.html"
 	    en-name1  = "The Team"
 	    en-link   = "$(PDLROOT)/team/index_en.html"
-            status    = ""
+            status    = "active"
 >	  
 
 <HR>

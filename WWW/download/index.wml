@@ -89,7 +89,38 @@ Aber so ist das...</DE-P>
 
 <!-- ---------------------------------------------------------------------- -->
 
-<H3>Required software before installing PDL</H3>
+<EN><H3>Binary PDL Distribution</H3></EN>
+<DE><H3>Bin‰re PDL-Distribution</H3></DE>
+
+<TABLE border=1 width=100%>
+
+<TR>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+</TR>
+
+<TR>
+<TD bgcolor=#eeeeee width=30% valign=top>
+  RPM
+</TD>
+
+<TD bgcolor=#eeeeee width=30% valign=top>
+
+  <P>
+  <EN>Download binaries in RPM format:</EN>
+  <DE>Pakete im RPM-Format: </DE>
+  <A HREF=""></A>
+  
+  
+
+</TD>
+</TR>
+</TABLE>
+
+<!-- ---------------------------------------------------------------------- -->
+
+<EN><H3>Required software before installing PDL</H3></EN>
+<DE><H3>Notwendige Software, die installiert sein muﬂ</H3></DE>
 
 <TABLE border=1 width=100%>
 

@@ -1,0 +1,92 @@
+<!-- ---------------------------------------------------------------------- -->
+<!-- Define a tag for menu entries                                          -->
+<!-- ---------------------------------------------------------------------- -->
+
+<define-tag MENUEENTRY whitespace=delete>
+<preserve de-name1>
+<preserve de-name2>
+<preserve de-link>
+<preserve en-name1>
+<preserve en-name2>
+<preserve en-link>
+<preserve status>
+<set-var %attributes>
+
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> &nbsp;
+<ifeq "<get-var status>" "active" \
+"<EN><A HREF="<get-var en-link>"></EN><DE><A HREF="<get-var de-link>"></DE>">\
+<DE><get-var de-name1></DE>\
+<EN><get-var en-name1></EN>\
+<ifeq "<get-var status>" "active" "</A>">
+  
+<BR>
+
+<EN>
+  <if <get-var en-name2> <prog \
+      <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
+      <ifeq "<get-var status>" "active" "<A HREF="<get-var en-link>">">\
+      <get-var en-name2>\
+      <ifeq "<get-var status>" "active" "</A>"> <BR>\
+    >
+  >
+</EN>
+
+<DE>
+  <if <get-var de-name2> <prog \
+      <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
+      <ifeq "<get-var status>" "active" "<A HREF="<get-var de-link>">">\
+      <get-var de-name2>\
+      <ifeq "<get-var status>" "active" "</A>"> <BR>\
+    >
+  >
+</DE>
+
+<BR>
+
+</define-tag>
+
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- Define a tag for news ticker                                           -->
+<!-- ---------------------------------------------------------------------- -->
+
+<define-tag NEWS whitespace=delete>
+<preserve de-date>
+<preserve en-date>
+<preserve de-text>
+<preserve en-text>
+<set-var %attributes>
+
+<TR><TD bgcolor=#E0E0E0>
+<B><I>
+<EN><get-var en-date></EN>
+<DE><get-var de-date></DE>
+</I></B><BR>
+</TD>
+
+<TR><TD bgcolor=#E0E0E0>
+<EN><get-var en-text></EN>
+<DE><get-var de-text></DE>
+<BR>
+</TD>
+
+</define-tag>
+
+
+
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- Define new tags for paragraphs                                         -->
+<!-- ---------------------------------------------------------------------- -->
+
+<!-- english paragraph -->
+
+<define-container en-p>
+<EN><p align=justify> %body</EN>
+</define-container>
+
+<!-- german paragraph -->
+
+<define-container de-p>
+<DE><p align=justify> %body</DE>
+</define-container>

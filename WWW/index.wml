@@ -18,16 +18,14 @@
 #include "$(PDLROOT)/top.wml"
 #include 'menue.wml'
 
-<TD ALIGN=LEFT>
-
 <TABLE border=0 width=100% cellspacing=15>
 <TR>
 <TD WIDTH=100 valign=top>
-  <IMG SRC="images/pdllogo.jpg" ALIGN=CENTER>
+  <IMG SRC="images/pdllogo.jpg" ALT="PDL Logo" ALIGN=CENTER>
 </TD>
 <TD valign=top>
-  <BR><BR><FONT size=+5><B>PDL - The Perl Data Language</B></FONT><BR><BR>
-  <FONT size=+3 color="#FF0000">Number crunching capabilities for Perl</FONT>
+  <BR><FONT face="arial,helvetica,sans-serif" size=+5><B>PDL - The Perl Data Language</B></FONT><BR><BR>
+  <FONT face="arial,helvetica,sans-serif" size=+3 color="#FF0000">Number crunching capabilities for Perl</FONT>
 </TD>
 </TR>
 </TABLE>

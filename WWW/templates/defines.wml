@@ -14,7 +14,8 @@
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> &nbsp;
 <ifeq "<get-var status>" "active" \
-"<EN><A HREF="<get-var en-link>"></EN><DE><A HREF="<get-var de-link>"></DE>">\
+"<EN><A CLASS=menue HREF="<get-var en-link>"></EN>\
+<DE><A CLASS=menue HREF="<get-var de-link>"></DE>">\
 <DE><get-var de-name1></DE>\
 <EN><get-var en-name1></EN>\
 <ifeq "<get-var status>" "active" "</A>">
@@ -24,7 +25,8 @@
 <EN>
   <if <get-var en-name2> <prog \
       <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
-      <ifeq "<get-var status>" "active" "<A HREF="<get-var en-link>">">\
+      <ifeq "<get-var status>" "active" \
+	"<A CLASS=menue HREF="<get-var en-link>">">\
       <get-var en-name2>\
       <ifeq "<get-var status>" "active" "</A>"> <BR>\
     >
@@ -34,7 +36,8 @@
 <DE>
   <if <get-var de-name2> <prog \
       <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
-      <ifeq "<get-var status>" "active" "<A HREF="<get-var de-link>">">\
+      <ifeq "<get-var status>" "active" \
+	"<A CLASS=menue HREF="<get-var de-link>">">\
       <get-var de-name2>\
       <ifeq "<get-var status>" "active" "</A>"> <BR>\
     >

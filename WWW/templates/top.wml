@@ -1,5 +1,6 @@
 #include "$(PDLROOT)/templates/defines.wml"
 
+<LINK rel="stylesheet" href="$(PDLROOT)/pdl.css" type="text/css">
 <BODY TEXT="#000000"  
       BGCOLOR="#C0C0C0"  
       LINK="#24009C"  
@@ -12,6 +13,7 @@
 <!-- ---------------------------------------------------------------------- -->
 <!-- Main table                                                             -->
 <!-- ---------------------------------------------------------------------- -->
+
 
 <TABLE width="100%" border=0>
 

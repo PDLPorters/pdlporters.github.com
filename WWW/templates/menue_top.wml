@@ -18,13 +18,16 @@
 :>
 <HR>
 
-<IMG SRC="$(IMAGES)/pdlthumb.jpg">
-
+<IMG SRC="$(IMAGES)/pdlthumb.jpg" ALT="PDL">
+</CENTER>
+<:
+  my $tmp = '
 <FONT size=+3 color=white>
 PerlDL<BR>
 </FONT>
 </CENTER>
-
+';
+:>
 <HR>
 <BR>
 

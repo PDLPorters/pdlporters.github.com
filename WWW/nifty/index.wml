@@ -1,0 +1,99 @@
+#include "header.wml"
+<lang:star:slice: index_*.html>
+
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "DeForest"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "DeForest"
+>
+<TITLE*>PDL - Success Stories</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
+
+<set-var doctype=html>
+
+#include '$(PDLROOT)/templates/top.wml'
+#include '$(PDLROOT)/menue.wml'
+
+<!-- ---------------------------------------------------------------------- -->
+
+<HR>
+
+<EN><H2> PDL Success Stories </H2></EN>
+<DE><H2> PDL Erfolggeschichten </H2></DE>
+
+<de-p>
+<i>Es tut uns leid, aber wir haben keine deutsche Übersetzung fúr diesen Abschnitt.  Wenn Sie duetsches und englisches sprechen, erwägen Sie bitte, uns zu ulfen übersetzen.</i>
+</de-p>
+
+<en-p>Here are some real-world results that have been obtained with PDL:
+<ul>
+<li><a href="#magnetic">Artificial vision of magnetic fields</a>
+<li><a href="#brain">Brain scan visualization</a>
+<li><a href="#ultrasound">Ultrasound on the Sun</a>
+<li><a href="#galaxy-gas">Eric Miller result</a>
+<li><a href="#galaxies">Mature galaxies in the Universe</a>
+</ul>
+</en-p>
+
+<hr>
+<a name="magnetic">
+
+<en-p><h3>Artificial vision of magnetic fields</h3>
+</en-p>
+
+<en-p>
+My research group uses PDL to track thousands of magnetic features on
+the Sun.  The churning surface of the Sun is covered by
+magnetic north and south poles that are constantly emerging, moving,
+recombining, and dissipating.  Special telescopes called <a
+href="http://soi.stanford.edu"><i>magnetographs</i></a> can view these
+poles as black and white spots, allowing us to probe the Sun's dynamo.
+PDL's Transform package made it easy for us to remove perspective
+effects from <a href="http://sohowww.nascom.nasa.gov">spacecraft
+data</a>, and to write an artificial vision application to identify
+every magnetic feature in the field of view.
+</en-p>
+
+<en-p> 
+What's more, PDL is free -- so we can distribute <a href="http://www.boulder.swri.edu/swamis">our software</a> for anyone to use. 
+</en-p>
+
+<en-p>
+<i>--Craig DeForest, deforest (at) boulder (dot) swri (dot) edu</i>
+</en-p>
+
+<table>
+<tr><td><center><a href="mag-qtm.mpg"><img src="mag-qtm.png" height=300 width=300></a></center><br>
+	<en>Tracked magnetogram shows about 1/10 of the surface of the Sun, reprojected to appear as if you're hovering immediately over it (click for movie). Our software has identified and numbered every statistically significant feature.</en>
+
+	<td>&nbsp;&nbsp;&nbsp;
+    <td><center><a href="mag-qcm.mpg"><img src="mag-qcm.png" height=300 width=300></a></center><br>
+	<en>Here, poles that appear in N/S pairs are marked by yellow highlights.  Single north or south pole appearances (in apparent but not real violation of physics) are marked by blue highlights.  Flux is emerging on scales too small for the telescope to fully resolve it.</en>
+
+</table>
+
+
+<hr>
+<a name="brain">
+
+<en-p><h3>Visualization of my brain</h3>
+</en-p>
+
+<en-p> 
+<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> is
+a very simple tool I created for viewing functional MRI data, written
+entirely in perl with PDL.  What's nice about it is that it lets you
+simultaneously view three planes through the brain and to rotate them
+in 3d (see below).  These images are showing my own brain, overlain
+with activations in my auditory cortex while I listened to music.
+</en-p>
+
+<en-p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
+</en-p>
+
+#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/bottom.wml"

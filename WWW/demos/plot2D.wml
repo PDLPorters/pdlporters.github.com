@@ -43,10 +43,11 @@ vollständig sein kann, sollte man sich die Beispiele, die bei
 
 <!-- ----- -->
 
-<en-p>The PGPLOT module is included by default when you use PDL. However
-if you want even better control of your plots you might want to
-include the PGPLOT module specifically:</en-p>
+<en-p>The PDL::Graphics::PGPLOT module provides a high-level interface
+to PGPLOT. However if you want even better control of your plots
+you might want to include the PGPLOT module specifically:</en-p>
 
+<!-- this paragraph needs changing -->
 <de-p>Das PGPLOT-Modul wird standardmäßig eingebunden, wenn PDL aufgerufen wird.
 Möchte man eine gezieltere Kontrolle über seine Plots haben, sollte es explizit
 eingebunden werden:</de-p>
@@ -82,6 +83,8 @@ möchten:</de-p>
 
 <PRE>
 <CODE>
+<STRONG>perldl></STRONG> <FONT COLOR="RED"># ensure the module is loaded (required for PDL versions >= 2.004)</FONT>
+<STRONG>perldl></STRONG> use PDL::Graphics::PGPLOT;
 <STRONG>perldl></STRONG> <FONT COLOR="RED"># The size of the window can be specified</FONT>
 <STRONG>perldl></STRONG> $ENV{PGPLOT_XW_WIDTH}=0.3;
 <STRONG>perldl></STRONG> <FONT COLOR="RED"># You can set your device explicitly</FONT>

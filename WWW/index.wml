@@ -84,7 +84,7 @@ comerciales como IDL y MatLab.  Se puede escribir expreciones simplos
 en perl para manipular los órdenes numéricos enteros de una vez.  Por
 ejemplo, en <B>PDL</B> el perl variable <B>$a</B> puede contener un
 imagen de coma flotante con 1024x1024 pixeles.  Se usa solamente 4MB
-de recuerdo para almanecerlo, y expreciones como <B>$a=sqrt($a)+2</B>
+de recuerdo para almacenarlo, y expreciones como <B>$a=sqrt($a)+2</B>
 manipulan todo el imagen muy rapidamente.  
 </es-p>
 

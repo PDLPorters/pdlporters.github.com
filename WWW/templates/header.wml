@@ -8,3 +8,34 @@
 
 <HTML>
 
+{:
+ [[s|á|&aacute;|g]] 
+ [[s|é|&eacute;|g]] 
+ [[s|í|&iacute;|g]]
+ [[s|ó|&oacute;|g]]
+ [[s|ú|&uacute;|g]] 
+ [[s|Á|&Aacute;|g]]
+ [[s|É|&Eacute;|g]]
+ [[s|Í|&Iacute;|g]]
+ [[s|Ó|&Oacute;|g]]
+ [[s|Ú|&Uacute;|g]]
+
+ [[s|ñ|&ntilde;|g]]
+ [[s|Ñ|&Ntilde;|g]]
+
+ [[s|«|&laquo;|g]]
+ [[s|»|&raquo;|g]]
+
+
+ [[s|ä|&auml;|g]]
+ [[s|ë|&euml;|g]]
+ [[s|ï|&iuml;|g]]
+ [[s|ö|&ouml;|g]]
+ [[s|ü|&uuml;|g]]
+ [[s|Ä|&Auml;|g]]
+ [[s|Ë|&Euml;|g]]
+ [[s|Ï|&Iuml;|g]]
+ [[s|Ö|&Ouml;|g]]
+ [[s|Ü|&Uuml;|g]]
+
+ [[s|ß|&szlig;|g]]

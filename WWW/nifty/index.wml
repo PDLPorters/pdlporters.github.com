@@ -1,4 +1,5 @@
 #include "header.wml"
+
 <lang:star:slice: index_*.html>
 
 <comment> ---------------------------------------------------------- </comment>
@@ -34,6 +35,11 @@
 </en-p>
 
 <ul>
+<li><a href="#sat-viz">
+	<en>Real-time weather and forest fire detection from space</en>
+	<de>Realzeitbeicht der Wetter- und Waldfeuer vom Weltraum</de>
+	<es>Detección del tiempo y de los incendios del bosque, con imágenes tomadas de satélites</es>
+
 <li><a href="#magnetic">
 	<en>Artificial vision of magnetic fields on the Sun</en>
 	<de>Künstlicher Anblick von magnetischem fängt</de>
@@ -54,6 +60,65 @@
 </a>
 
 </ul>
+
+<hr>
+<a name="sat-viz">
+
+<en-p><h3>Forest fire detection</h3></en-p>
+<de-p><h3>Waldfeuerwarnanlage</h3></de-p>
+<es-p><h3>Detección de los incendios del bosque</h3></es-p>
+
+<table>
+<tr><td>
+
+<en>At the <a href="http://www.latuv.uva.es">teledetection laboratory
+of the University of Valladolid</a>, we combine data from several
+satellites to produce real-time images of Spain and surroundings as a 
+public service.
+With PDL we are able to co-align the images easily and compare them
+directly.  Among other services, we can detect forest fires from satellite
+images within a few minutes, in time to alert regional authorities.
+Our pipeline includes 20 steps, some compiled in C and FORTRAN and
+others in Perl and Perl/PDL.  Our results are published <a
+href="http://www.latuv.uva.es/modisql">on the web</a> and emailed to
+<a href="http://www.rtve.es/tve/teletexto/500/542_0001.htm">
+Televisión Española</a> where they are made available via the national
+teletext service.
+<p>
+At right is an image of spain with several potential wildfires marked
+in red.  Their locations are listed at far right.  The various
+aqua-colored outlines are regions that were photographed by different
+satellites and co-aligned automatically using PDL.  
+</en> 
+
+<es>En el <a href="http://www.latuv.uva.es">Laboratorio de
+Teledetección de la Universidad de Valladolid</a>, combinamos datos
+desde varios satélites para hacer imágenes en tiempo real de la España
+y sus aldrededores, por servicio público.  Con PDL, podemos co-alinear los imágenes
+fácilmente para compararlos directamente.  Entre otros servicios,
+podemos detectar incendios del bosque in imágenes de satélites en
+solamente pocos minutos, en hora de alertar los gobiernos regionales y
+otros autoridades.  Los ficheros pasan por mas de 20 procesos
+distintos, unos compilados en C y Fortran, y otros puro Perl + PDL,
+realizando trabajos de ajuste, co-alinear, y así sucesivamente.
+Publicamos nuestros resultados <a
+href="http://www.latuv.uva.es/modisql">en el web</a>, y los enviamos
+por email a <a
+href="http://www.rtve.es/tve/teletexto/500/542_0001.htm">Teletexto de
+Televisión Española</a> como información totalmente pública.
+<p>
+En la derecha hay un imagen de la España en que 
+varios incendios potenciales están marcadas.  Los contornos azules 
+son regiones que fueron fotografadas por satélites diferentes.  Los
+imagenes fueron co-alinadas automáticamente por PDL.
+</es>
+
+<p><i>-- Joaquin Ferrero, explorer (at) latuv (dot) uva (dot) es</i></p>
+
+<td><a href="forest-lg.jpg"><img src="forest-sm.jpg"></a>
+
+
+</table>
 
 <hr>
 <a name="magnetic">
@@ -130,7 +195,7 @@ quienquiera lo desea.
 	hat jede statistisch bedeutende Eigenschaft gekennzeichnet und
 	numeriert.</de>
 
-	<es>Esto magnetogram demuestra cerca de 1/10 de la supercicie
+	<es>Esto magnetogram demuestra cerca de 1/10 de la superficie
 	del sol, correctido para aparecer como si estemos asomando
 	inmediatamente sobre el centro del imagen.
 	</es>
@@ -178,7 +243,7 @@ hergestellt.
 </de-p>
 
 <es-p>
-<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> es una herramienta muy simplo que creé para los datos de la visión MRI.  Se escribe enteramente en el perl con el PDL.  Cuál es agradable sobre él es que la deja simultáneamente visión tres planos a través del cerebro y también rotarlos en 3D (mira abajo).  Estes imagenes son del cerebro mío, con colores representando activaciónes en mi corteza auditiva mientras que escuché la música.  Todos fueron creados debajo de MacOS X.
+<a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> es una herramienta muy simplo que creé para los datos de la visión MRI.  Se escribe enteramente en el perl con el PDL.  Cuál es agradable sobre él es que la deja simultáneamente visión tres planos a través del cerebro y también rotarlos en 3D (mira abajo).  Estes imagenes son del cerebro mío, con colores representando activaciónes en la corteza auditiva mientras que escuché la música.  Todos fueron creados debajo de MacOS X.
 </es-p>
 
 <p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
@@ -227,7 +292,7 @@ mich in der Lage zuSEIN, wissenschaft 3-D Daten-Würfel in Perl zu
 manipulieren Radio, bis ich PDL traf. Danke!
 </de-p>
 
-<es-p>Yo hice la mayoría del dato-análisis para me tesis de Ph.D. usando el PDL, y publiqué un lanzamiento de prensa del AAS sobre él.  Nunca me imaginaba el poder manipular los dato-cubos 3-D de sciencia radio en el Perl hasta que resolví el PDL.  ¡Grazias!
+<es-p>Yo hice la mayoría del dato-análisis para me tesis de Ph.D. usando el PDL, y publiqué un lanzamiento de prensa del AAS sobre él.  Nunca me imaginaba el poder manipular los dato-cubos 3-D de sciencia radio en el Perl hasta que resolví el PDL.  ¡Gracias!
 </es-p>
 
 <en-p>This optical image of the Whirlpool Galaxy (M51) shows the regions
@@ -241,12 +306,13 @@ Regionen der galaktischen Schnellwinde, daß ich entdeckte.
 <es-p>Esta imagen óptica de la Galaxia del Torbellino (M51) demuestra las regiones de vientos galácticos de alta velocidad que descubrí.
 </es-p>
 
-<en-p><i>--Eric Miller ( milleric (at) space (dot) mit (dot) edu )</i>
-</en-p>
+<p><i>--Eric Miller ( milleric (at) space (dot) mit (dot) edu )</i>
+</p>
 
 <td>
 <img src="galaxy-sm.jpg">
 </table>
+</p>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

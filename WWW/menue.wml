@@ -38,13 +38,6 @@
             status    = "active"
 >	  
 
-<MENUEENTRY de-name1  = "Visualisierung"
-	    de-link   = "$(PDLROOT)/visualisation/index_de.html"
-	    en-name1  = "Visualisation"
-	    en-link   = "$(PDLROOT)/visualisation/index_en.html"
-            status    = "active"
->	  
-
 <MENUEENTRY de-name1  = "Online-"
 	    de-name2  = "Dokumentation"
 	    de-link   = "$(PDLROOT)/documentation/index_de.html"

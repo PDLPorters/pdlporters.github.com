@@ -72,6 +72,23 @@
 
 </TR>
 
+<TR>
+
+<person name     = "Doug Hunt"
+        email    = "dhunt@ucar.edu"
+        url      = "http://www.cosmic.ucar.edu"
+        reallife = "<P align=justify> Software engineer for the COSMIC
+                    project (using GPS receivers in low earth orbit for 
+		    weather and climate measurement).  Use perl whenever 
+		    permitted by law.</P>" 
+        task     = "<P align=justify> Author of PDL::NetCDF and PDL::Char.
+                    Helping with PP optimization of late.</P>"
+>
+
+<empty-person>
+
+</TR>
+
 </TABLE>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"

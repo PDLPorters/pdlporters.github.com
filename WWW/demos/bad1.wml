@@ -143,7 +143,7 @@ c Double D [2]             P            0.02Kb
 <CODE>
 <STRONG>perldl></STRONG> print "No bad values:   $a\n";
 <FONT COLOR="RED"># set the middle value bad</FONT>
-<STRONG>perldl></STRONG> set($a,1,$a->badvalue());
+<STRONG>perldl></STRONG> $a->setbadat(1);
 <FONT COLOR="RED"># now print out</FONT>
 <STRONG>perldl></STRONG> print "Some bad values: $a\n";
 <STRONG>perldl></STRONG> print "b contains:      $b\n";
@@ -168,7 +168,7 @@ so a + b =       [3 BAD 9]
 <STRONG>perldl></STRONG> print "The bad value for type #",$a->get_datatype," is ",$a->badvalue,"\n";
 <STRONG>perldl></STRONG> print "It is easy to find whether a value is good: ", isgood($a), "\n\n";
 <STRONG>perldl></STRONG> print "or to remove the bad values\n";
-<STRONG>perldl></STRONG> $a->inplace->replacebad(23);
+<STRONG>perldl></STRONG> $a->inplace->setbadtoval(23);
 <STRONG>perldl></STRONG> print "a = $a and \$a->badflag == ", $a->badflag, "\n\n";
 
 a contains 1 bad elements.
@@ -211,7 +211,7 @@ We can even label certain values as bad!
 <STRONG>perldl></STRONG> $a = $a->setbadif( $a == 3 );
 <STRONG>perldl></STRONG> $b = $a->slice("(1),:");
 <STRONG>perldl></STRONG> print "b = $b\tbadflag = ", $b->badflag, "\n";
-<STRONG>perldl></STRONG> $a->inplace->replacebad(3);
+<STRONG>perldl></STRONG> $a->inplace->setbadtoval(3);
 <STRONG>perldl></STRONG> print "b = $b\tbadflag = ", $b->badflag, "\n\n";
 
 b = [1 BAD 5]	badflag = 1

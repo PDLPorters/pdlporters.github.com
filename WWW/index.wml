@@ -116,11 +116,11 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 
 <NEWS de-date = "Fr, 27.04.2001"
       en-date = "Fr, 2001/04/27"
-      en-text = "PDL 2.2.1 is out. Includes various bug fixes, lvalue subs
+      en-text = "<A HREF="http://download.sourceforge.net/PDL/PDL-2.2.1.tar.gz">PDL 2.2.1</A> is out. Includes various bug fixes, lvalue subs
 		 for PDL, updates to work with perl 5.6.1. More than
 		 just a bugfix release. Further details in the 
 <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Notes</A>. (CS)"
-      de-text = "PDL 2.2.1 ist verfügbar. Eine handvoll Bugs wurde berichtigt,
+      de-text = "PDL 2.2.1 ist <A HREF="http://download.sourceforge.net/PDL/PDL-2.2.1.tar.gz">verfügbar</A>. Eine handvoll Bugs wurde berichtigt,
 		 PDL lvalue subs sind implementiert und 2.2.1 compiliert
 		 nun ok mit perl 5.6.1. Detaillierte Änderungen entnimm den 
 <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Release Notes</A>. (CS)"

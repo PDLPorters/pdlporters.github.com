@@ -26,6 +26,39 @@
 
 <TR>
 
+<empty-person>
+
+<person name     = "Jarle Brinchmann"
+        email    = "jarle@astro.ox.ac.uk"
+        url      = "http://www-astro.physics.ox.ac.uk/~jarle/"
+        reallife = "Post-doc in astrophysics studying the formation of 
+	            galaxies"
+        task     = "Updated PGPLOT; FAQ maintainer"
+>	
+
+</TR>
+
+<TR>
+
+<person name     = "Doug Hunt"
+        email    = "dhunt@ucar.edu"
+        url      = "http://www.cosmic.ucar.edu"
+        reallife = "<P align=justify> Software engineer for the COSMIC
+                    project (using GPS receivers in low earth orbit for 
+		    weather and climate measurement).  Use perl whenever 
+		    permitted by law.</P>" 
+        task     = "<P align=justify> Author of PDL::NetCDF and PDL::Char.
+                    Helping with PP optimization of late.</P>"
+>
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
 <person name     = "Robert Schwebel"
         email    = "robert@schwebel.de"
         url      = "http://www.schwebel.de"
@@ -46,13 +79,9 @@
 		    of the <I>real</I> developers.</P>"
 >
 
-<empty-person>
-
 </TR>
 
 <TR>
-
-<empty-person>
 
 <person name     = "Fridolin Tux"
         email    = "&nbsp;"
@@ -66,23 +95,6 @@
 		    Linux-Days</A> or writing 
 		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
 		    spectroscopy software</A>.</P>"
->
-
-
-
-</TR>
-
-<TR>
-
-<person name     = "Doug Hunt"
-        email    = "dhunt@ucar.edu"
-        url      = "http://www.cosmic.ucar.edu"
-        reallife = "<P align=justify> Software engineer for the COSMIC
-                    project (using GPS receivers in low earth orbit for 
-		    weather and climate measurement).  Use perl whenever 
-		    permitted by law.</P>" 
-        task     = "<P align=justify> Author of PDL::NetCDF and PDL::Char.
-                    Helping with PP optimization of late.</P>"
 >
 
 <empty-person>

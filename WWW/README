@@ -42,7 +42,7 @@ How to publish these pages
 
 2) copy to SF
 
-  scp pdlwww.tar.gz your_user_id@shell.sourcrforge.net:.
+  scp pdlwww.tar.gz your_user_id@shell.sourceforge.net:.
 
 3) login to shell server at SF
 
@@ -74,7 +74,7 @@ If you have not yet checked out the sourceforge utility
 scripts, do it now:
 	 
   cd
-  cvs -d :pserver:anonymous@cvs1:/cvsroot/pdl co sfscripts
+  cvs -d :pserver:anonymous@cvs:/cvsroot/pdl co sfscripts
 
 Now you should have a number of scripts in the directory sfscripts.
 If you already checked these out in the past, you still might
@@ -84,6 +84,7 @@ want to check for updates:
 
 Now you are ready to actually publish the pages:
 
+  chmod +x sfscripts/wwwpublish
   sfscripts/wwwpublish
 
 7) page should now be online at

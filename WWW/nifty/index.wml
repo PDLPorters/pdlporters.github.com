@@ -33,9 +33,8 @@
 <ul>
 <li><a href="#magnetic">Artificial vision of magnetic fields</a>
 <li><a href="#brain">Brain scan visualization</a>
-<li><a href="#ultrasound">Ultrasound on the Sun</a>
-<li><a href="#galaxy-gas">Eric Miller result</a>
-<li><a href="#galaxies">Mature galaxies in the Universe</a>
+<li><a href="#galaxy-gas">High-speed galactic winds</a>
+<li><a href="#galaxies"></a>
 </ul>
 </en-p>
 
@@ -90,10 +89,53 @@ entirely in perl with PDL.  What's nice about it is that it lets you
 simultaneously view three planes through the brain and to rotate them
 in 3d (see below).  These images are showing my own brain, overlain
 with activations in my auditory cortex while I listened to music.
+They were created under MacOS X.
 </en-p>
 
 <en-p><i>--Jonas Kaplan ( jonask (at) ucla (dot) edu )</i>
 </en-p>
+
+<p>
+<table><tr>
+<td><center><img src="brain-1.jpg"></center>
+<td rowspan=2>&nbsp;&nbsp;&nbsp;
+<td rowspan=2><center><img src="brain-3.jpg"></center>
+<td rowspan=2>&nbsp;&nbsp;&nbsp;
+<td rowspan=2><img src="brain-4.jpg">
+<tr><td><center><img src="brain-2.jpg"></center>
+</table>
+
+<hr>
+<a name="galaxy-gas">
+
+<en-p><h3>High speed galactic winds</h3>
+</en-p>
+
+
+
+<p>
+<table><tr>
+<td>
+<en-p>
+I did much of the data analysis for my Ph.D. thesis using PDL, and got a 
+<a
+href="http://www.umich.edu/news/index.html?Releases/2004/Jan04/r010604">AAS
+press release</a> out of it.  I never imagined being able to
+manipulate 3-D radio science datacubes in Perl until I met PDL.
+Thanks!
+</en-p>
+
+
+<en-p>This optical image of the Whirlpool Galaxy (M51) shows the regions
+of high speed galactic winds that I discovered.
+</en-p>
+
+<en-p><i>--Eric Miller ( milleric (at) space (dot) mit (dot) edu )</i>
+</en-p>
+
+<td>
+<img src="galaxy-sm.jpg">
+</table>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

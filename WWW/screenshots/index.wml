@@ -108,10 +108,10 @@ HREF="http://plplot.sourceforge.net/examples/index.html">PLplot examples
 area</A> (two examples are shown below).</ES>
 
 <P ALIGN=center>
-<A HREF="http://plplot.sourceforge.net/examples/demo16.php"><IMG
+<A HREF="http://plplot.sourceforge.net/examples/demo16.php?lbind=PerlDL"><IMG
 SRC="http://plplot.sourceforge.net/examples-data/demo16/prev-x16.03.png"
 alt="2D PLplot Example"></A>
-<A HREF="http://plplot.sourceforge.net/examples/demo08.php"><IMG
+<A HREF="http://plplot.sourceforge.net/examples/demo08.php?lbind=PerlDL"><IMG
 SRC="http://plplot.sourceforge.net/examples-data/demo08/prev-x08.04.png" alt="3D PLplot Example"></A>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"

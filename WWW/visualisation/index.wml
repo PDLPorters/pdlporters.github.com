@@ -16,18 +16,33 @@
 #include '$(PDLROOT)/templates/top.wml'
 #include '$(PDLROOT)/menue.wml'
 
-<H2>Visualisation Frontends</H2>
+<EN><H2>Visualisation Frontends</H2></EN>
+<DE><H2>Visualisierungs-Frontends</H2></DE>
 
-<EN><P>Visualization is one of the corner stones of scientific
+<EN-P>Visualization is one of the corner stones of scientific
 data processing. PDL is no exception in this regard and provides a number
 of interfaces to 2 and 3D graphics. For full functionality it relies on a
-number of external visualization tools and APIs.</P></EN>
+number of external visualization tools and APIs.</EN-P>
+
+<DE-P>Die Visualisierung ist ein wichtiger Teilbereich wissenschaftlicher
+Datenverarbeitung. PDL bietet eine Reihe von Schnittstellen zu zwei- und
+dreidimensionalen Graphikbibliotheken. Um die volle Leistungsfähigkeit nutzen
+zu können, müssen einige externe Visualisierungstools und APIs installiert
+sein. </DE-P>
+
+<BR><BR>
 
 <TABLE border=1 width=100%>
 
 <TR>
-<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%><B>Packet</B></TD>
-<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%><B>Description</B></TD>
+<TD bgcolor=#FFFF80 fgcolor=#FFFFFF width=30%>
+<EN><B>Packet</B></EN>
+<DE><B>Paket</B></DE>
+</TD>
+<TD bgcolor=#FFFF80  fgcolor=#FFFFFF width=70%>
+<EN><B>Description</B></EN>
+<DE><B>Beschreibung</B></DE>
+</TD>
 </TR>
 
 <TR>
@@ -35,24 +50,44 @@ number of external visualization tools and APIs.</P></EN>
 PDL::Graphics::TriD</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify>OpenGL is a de facto standard for 3D graphics today.
-The PDL installation scripts will check if you have the OpenGL 
-libraries or the free implementation 
-<A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and build the
-module if they are present.</P></EN>
+
+  <EN-P>OpenGL is a de facto standard for 3D graphics today.
+  The PDL installation scripts will check if you have the OpenGL 
+  libraries or the free implementation 
+  <A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A> and build the
+  module if they are present.</EN-P>
+  
+  <DE-P>OpenGL ist der "de facto" Standard für moderne 3D Graphikausgabe. Die
+  Installationsscripte von PDL testen, ob OpenGL oder der freie Clone 
+  <A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html">Mesa</A>  vorhanden ist
+  und erzeugen in diesem Fall die dazugehörigen Module.</DE-P>
+  
+</TD>
 
 </TR>
 
 <TR>
+
 <TD bgcolor=#eeeeee width=30% valign=top>
 PDL::Graphics::PGPLOT</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify>PGPLOT is a very powerful fortran library for scientific
-2D plotting.  You need the <A
-HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library  itself and the
-<A HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> perl module
-for full functionality.</P></EN>
+
+  <EN-P>PGPLOT is a very powerful fortran library for scientific
+  2D plotting.  You need the 
+  <A HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> library itself and 
+  the
+  <A HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> 
+  perl module for full functionality.</EN-P>
+  
+  <DE-P>PGPLOT ist eine leistungsfähige Fortran-Bibliothek für wissenschaftliche
+  2D Plots. Benötigt wird die 
+  <A HREF="http://astro.caltech.edu/~tjp/pgplot">PGPLOT</A> Library selbst sowie
+  das 
+  <A HREF="http://www.perl.com/CPAN-local/modules/by-module/PGPLOT/">PGPERL</A> 
+  Perl-Modul.</DE-P>
+  
+</TD>
 
 </TR>
 
@@ -61,10 +96,18 @@ for full functionality.</P></EN>
 PDL::Graphics::IIS</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-Interface to the (somewhat old fashioned) 
-<A HREF="http://tdc-www.harvard.edu/software/saoimage.html">SAOimage</A>
-or <A HREF="http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
-Ximtool</A></TD>
+
+  <EN-P> Interface to the (somewhat old fashioned) 
+  <A HREF="http://tdc-www.harvard.edu/software/saoimage.html">SAOimage</A>
+  or <A HREF="http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
+  Ximtool</A></EN-P>
+  
+  <DE-P> Interface für das (etwas veraltete) 
+  <A HREF="http://tdc-www.harvard.edu/software/saoimage.html">SAOimage</A>
+  oder das <A HREF="http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
+  Ximtool</A></DE-P>
+  
+</TD>
 
 </TR>
 
@@ -73,9 +116,17 @@ Ximtool</A></TD>
 PDL::Graphics::Karma</TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-An interface to the <A HREF="http://www.atnf.csiro.au/karma">Karma</A>
-visualisation library. If it is installed on your system the PDL module
-will be built.</TD>
+
+
+  <EN-P>An interface to the <A HREF="http://www.atnf.csiro.au/karma">Karma</A>
+  visualisation library. If it is installed on your system the PDL module
+  will be built.</EN-P>
+  
+  <DE-P>Ein Interface für die <A HREF="http://www.atnf.csiro.au/karma">Karma</A>
+  -Visualisierungsbibliothek. Falls diese installiert ist, wird automatisch das
+  dazugehörige PDL-Modul erzeugt.</DE-P>
+  
+</TD>
 
 </TR>
 

@@ -3,7 +3,6 @@ ifndef WML
 	WML = wml
 endif
 
-
          ROOT = ..
     FRAMEWORK = $(ROOT)/templates/top.wml \
 		$(ROOT)/templates/menue_top.wml \
@@ -18,12 +17,17 @@ INC_TEMPLATES = -I../templates
 		$(WML) $(INC_TEMPLATES) $< -o $@
 
 all:		index_de.html index_en.html \
-		subdirs
+		subdirs \
+		link
 
 subdirs:	
 
 index_de.html:		index.wml $(FRAMEWORK)
 index_en.html:		index.wml $(FRAMEWORK)
+
+link:		
+		rm -f index.html
+		ln -s index_en.html index.html
 
 clean:		
 		rm -fr *_en.html *_de.html *~

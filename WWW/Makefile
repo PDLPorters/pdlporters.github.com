@@ -17,7 +17,8 @@ INC_TEMPLATES = -Itemplates
 		$(WML) $(INC_TEMPLATES) $< -o $@
 
 all:		index_de.html index_en.html \
-		subdirs
+		subdirs \
+		link
 
 subdirs:	
 		(cd screenshots && $(MAKE) all)
@@ -30,6 +31,10 @@ subdirs:
 
 index_de.html:	index.wml $(FRAMEWORK)
 index_en.html:	index.wml $(FRAMEWORK)
+
+link:		
+		rm -f index.html
+		ln -s index_en.html index.html
 
 clean:		
 		rm -fr *_en.html *_de.html *~

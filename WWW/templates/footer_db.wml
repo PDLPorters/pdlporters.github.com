@@ -1,0 +1,17 @@
+<HR>
+<IMG SRC="$(IMAGES)/eMail.gif" ALT="" ALIGN=LEFT> 
+<SMALL>
+<EN>This page was written by </EN>
+<DE>Diese Seite wurde erstellt von </DE>
+Doug Burke. 
+<EN>Please send bugs and ideas for this web page to </EN>
+<DE>Bitte senden Sie Hinweise auf Fehler an </DE>
+<A HREF="mailto:burke@IfA.Hawaii.Edu">burke@IfA.Hawaii.Edu</A>.
+<BR>
+<EN>Last modified: </EN>
+<DE>Letzte Änderung: </DE>
+<get-var WML_SRC_ISOTIME>
+</SMALL>
+</TABLE>
+</BODY>
+</HTML>

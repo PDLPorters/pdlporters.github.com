@@ -24,6 +24,29 @@
 <TABLE border=1 width=100%>
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
+<NEWS de-date = "Do, 22.06.2000"
+      en-date = "Th, 2000/06/22"
+      en-text = "PDL 2.1.1 is out. A bugfix release to fix PDL +
+		 'usethreads=y' (perls without threading are unaffected). (CS)"
+      de-text = "PDL 2.1.1 ist verfügbar. Eine reine Bugfix Version,
+		 die ein Problem mit PDL + 'usethreads=y' behebt. (CS)"
+>      
+
+<NEWS de-date = "Mi, 7.06.2000"
+      en-date = "We, 2000/06/07"
+      en-text = "PDL 2.1 is out. Speed up of ops on small piddles. (CS)"
+      de-text = "PDL 2.1 ist verfügbar. Operationen mit kleinen piddles
+		 sind nun erheblich schneller. (CS)"
+>      
+
+<NEWS de-date = "So, 28.05.2000"
+      en-date = "Su, 2000/05/28"
+      en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more
+		 examples</A>  of PDL in action (DJB)"
+      de-text = "Es gibt jetzt <A HREF="$(PDLROOT)/screenshots/index_de.html">
+                 weitere Beispiele</A>, die PDL in Aktion zeigen! (DJB)"
+>      
+
 <NEWS de-date = "Mo, 17.04.2000"
       en-date = "Mo, 2000/04/17"
       de-text = "Einige Erweiterungen der neuen Homepage eingebaut. (RS)"

@@ -114,6 +114,18 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "Fr, 27.04.2001"
+      en-date = "Fr, 2001/04/27"
+      en-text = "PDL 2.2.1 is out. Includes various bug fixes, lvalue subs
+		 for PDL, updates to work with perl 5.6.1. More than
+		 just a bugfix release. Further details in the 
+<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Notes</A>. (CS)"
+      de-text = "PDL 2.2.1 ist verfügbar. Eine handvoll Bugs wurde berichtigt,
+		 PDL lvalue subs sind implementiert und 2.2.1 compiliert
+		 nun ok mit perl 5.6.1. Detaillierte Änderungen entnimm den 
+<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=32838">Release Notes</A>. (CS)"
+>      
+
 <NEWS de-date = "Mi, 22.17.2000"
       en-date = "We, 2000/12/27"
       en-text = "PDL 2.2 is out. Includes bad value support, improved Tri-D
@@ -121,15 +133,15 @@ Kernfeatures von <B>PDL</B>.</DE-P>
                  Read about it 
 <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">here</A>. (DJB)"
       de-text = "PDL 2.2 ist verfügbar. 
-                 Mehr Details sind hier 
-<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">hier</A> vorhanden (DJB)"
+                 Mehr Details sind
+<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">online</A> auf dem sourceforge site (DJB)"
 >      
 
 <NEWS de-date = "So, 02.09.2000"
       en-date = "Su, 2000/09/02"
       en-text = "The 'bad value' support has been merged into the main CVS branch -
                  check it out (DJB)" 
-      de-text = "Support für 'bad values'. (DJB)"
+      de-text = "Unterstützung für 'bad values' ist nun im Hauptzweig von CVS - probier es aus!. (DJB)"
 >      
 
 <NEWS de-date = "Do, 10.07.2000"
@@ -151,29 +163,6 @@ Kernfeatures von <B>PDL</B>.</DE-P>
       de-text = "Eine neue Windows-Version ist fertig. Nähere Details befinden
                  sich auf der <A HREF="download/index_de.html">Download</A>-
 		 Seite. (RS)"
->      
-
-<NEWS de-date = "Do, 22.06.2000"
-      en-date = "Th, 2000/06/22"
-      en-text = "PDL 2.1.1 is out. A bugfix release to fix PDL +
-		 'usethreads=y' (perls without threading are unaffected). (CS)"
-      de-text = "PDL 2.1.1 ist verfügbar. Eine reine Bugfix Version,
-		 die ein Problem mit PDL + 'usethreads=y' behebt. (CS)"
->      
-
-<NEWS de-date = "Mi, 7.06.2000"
-      en-date = "We, 2000/06/07"
-      en-text = "PDL 2.1 is out. Speed up of ops on small piddles. (CS)"
-      de-text = "PDL 2.1 ist verfügbar. Operationen mit kleinen piddles
-		 sind nun erheblich schneller. (CS)"
->      
-
-<NEWS de-date = "So, 28.05.2000"
-      en-date = "Su, 2000/05/28"
-      en-text = "Added <A HREF="$(PDLROOT)/screenshots/index_en.html">more
-		 examples</A>  of PDL in action (DJB)"
-      de-text = "Es gibt jetzt <A HREF="$(PDLROOT)/screenshots/index_de.html">
-                 weitere Beispiele</A>, die PDL in Aktion zeigen! (DJB)"
 >      
 
 </TABLE>

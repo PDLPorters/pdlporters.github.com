@@ -22,40 +22,39 @@
 
 <HR>
 
-<EN><H2> Screenshots and Examples </H2></EN>
-<DE><H2> Screenshots und Beispiele </H2></DE>
+<A NAME="trid"></A>
+<EN><H3> 3D Graphics Examples </H3></EN>
+<DE><H3> 3D Grafik-Beispiele </H3></DE>
+<en-p> Here are some pretty pictures generated using the 
+<CODE>PDL::Graphics::TriD</CODE> module, follow the links to get full-size 
+pictures and the PDL code which produced them.</en-p>
 
-<en-p>On the following pages you'll find some examples of how PDL looks like.
-Several of the examples are available as demos within <I>perldl</I> - try
-<PRE>
-<CODE>
- <STRONG>perldl></STRONG> demo
-</CODE>
-</PRE>
-for more details.
-</en-p>
+<de-p> Die folgenden Abbildung zeigt einige "pretty pictures", die mit Hilfe des
+<CODE>PDL::Graphics::TriD</CODE>-Moduls erzeugt wurden. Ein Klick auf die
+Screenshots führt zu einer großen Version und dem Code, der die Bilder erzeugt
+hat.</de-p>
 
-<de-p> Auf den folgenden Seiten finden Sie einige Beispiele die zeigen, wie PDL
-aussieht. Viele der Beispiele können auch direkt unter auf der <I>perldl</I>
-shell ausprobiert werden:
-<PRE>
-<CODE>
- <STRONG>perldl></STRONG> demo
-</CODE>
-</PRE>
-</de-p>
+<P ALIGN=center>
+<A HREF="ex1.html"><IMG SRC="ex1thumb.gif" alt="Example 1"></A>
+<A HREF="ex2.html"><IMG SRC="ex2thumb.gif" alt="Example 2"></A>
+<A HREF="ex3.html"><IMG SRC="ex3thumb.gif" alt="Example 3"></A>
 
-<p>
-<nl>
-<li> <de><a href="$(PDLROOT)/screenshots/intro_de.html">Einführung</a></de>
-     <en><a href="$(PDLROOT)/screenshots/intro_en.html">Introduction</a></en>
-<li> <de><a href="$(PDLROOT)/screenshots/plot2D_de.html">2D Plots mit PGPLOT</a></de>
-     <en><a href="$(PDLROOT)/screenshots/plot2D_en.html">2D plotting with
-     PGPLOT</a></en>
-<li> <de><a href="$(PDLROOT)/screenshots/plot3D_de.html">3D Plots</a></de>
-     <en><a href="$(PDLROOT)/screenshots/plot3D_en.html">3D plots</a></en>
-</nl>
-</p>
+<en-p> Note when displayed with PDL viewing from different angles is as simple
+as rotating the figure with the mouse!</en-p>
+
+<de-p> Die 3D-Plots können dabei mit der Maus gedreht und aus verschiedenen
+Richtungen angeschaut werden!</de-p>
+
+<EN><H3> 2D Graphics Examples </H3></EN>
+<DE><H3> 2D Grafik-Beispiele </H3></DE>
+
+<EN>For some screenshots of PGPLOT in action check the
+<A HREF="$(PDLROOT)/demos/plot2D_en.html">PGPLOT demo</A>.
+</EN>
+
+<DE>Die <A HREF="$(PDLROOT)/demos/plot2D_en.html">PGPLOT demo</A>
+entält einige screenshots, die PGPLOT in Aktion zeigen.
+</DE>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

@@ -83,6 +83,23 @@
 
 <TR>
 
+<person name     = "Christian Soeller"
+        email    = "c.soeller@auckland.ac.nz"
+        url      = "http://not.done.yet"
+        reallife = "Member of staff in the Dept. of Physiology,
+		    Univ. of Auckland - main interests biophysics
+		    and biomedical imaging (confocal/multiphoton)"
+        task     = "various bits of PDL; occasional Core and PP hacking"
+>	
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
 <person name     = "Fridolin Tux"
         email    = "&nbsp;"
         url      = "&nbsp;"
@@ -96,8 +113,6 @@
 		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
 		    spectroscopy software</A>.</P>"
 >
-
-<empty-person>
 
 </TR>
 

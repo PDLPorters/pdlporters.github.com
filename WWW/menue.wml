@@ -31,6 +31,14 @@
             status    = "active"
 >	  
 
+<MENUEENTRY de-name1  = "Demos"
+	    de-link   = "$(PDLROOT)/demos/index_de.html"
+	    en-name1  = "Demos"
+	    en-link   = "$(PDLROOT)/demos/index_en.html"
+            status    = "active"
+>	  
+
+
 <MENUEENTRY de-name1  = "Externe"
             de-name2  = "Bibliotheken"
 	    de-link   = "$(PDLROOT)/libraries/index_de.html"
@@ -68,8 +76,7 @@
 <CENTER>
 <EN>PDL Development is powered by</EN>
 <A HREF="http://www.sourceforge.net/project/?form_grp=612">
-<IMG SRC="http://sourceforge.net/sflogo.php?group_id=612&type=1">
-</A>
+<IMG SRC="http://sourceforge.net/sflogo.php?group_id=612&type=1"></A>
 </CENTER>
 
 

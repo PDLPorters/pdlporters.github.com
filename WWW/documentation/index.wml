@@ -33,7 +33,7 @@ organised at present. We are doing our best! Help is always welcome.</P>
 <BLOCKQUOTE>
 <IMG SRC="$(IMAGES)/M_red.gif"> Before asking the team questions you 
 should read the 
-<A HREF="FAQ.html">FAQ</A>.<BR>
+<A HREF="$(FAQROOT)">FAQ</A>.<BR>
 
 <IMG SRC="$(IMAGES)/M_red.gif">  You can view the 
 <A HREF="$(DOCROOT)">Online Documentation</A> here. <BR>

@@ -1,5 +1,6 @@
 -DPDLROOT~.
 -DIMAGES~images
 -DDOCROOT=http://pdl.sourceforge.net/PDLdocs
+-DFAQROOT=http://pdl.sourceforge.net/FAQ
 -I~$(PDLROOT)/templates
 

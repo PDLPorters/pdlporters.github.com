@@ -114,13 +114,33 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "20.07.2001"
+      en-date = "2001/07/20"
+      en-text = "<A HREF="http://search.cpan.org/search?dist=PDL-NiceSlice">PDL::NiceSlice</A>
+		 is available on <A HREF="http://www.cpan.org/">CPAN</A>. It
+		 introduces a much more convenient syntax for slicing piddles.
+		 (CS)"
+      de-text = "<A HREF="http://search.cpan.org/search?dist=PDL-NiceSlice">PDL::NiceSlice</A>
+		 ist ab sofort auf den <A HREF="http://www.cpan.org/">CPAN</A>
+		 Servern erhältlich. Das Modul implementiert eine weitgehend
+		 vereinfachte Syntax für das 'Slicen' von piddles.(CS)"
+>
+
 <NEWS de-date = "14.07.2001"
       en-date = "2001/07/14"
       en-text = "A first attempt to compile PDL on Mac OS X has been
-		 largely successful. Check the <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">report</A>. (CS)"
+		 largely successful. Check the <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">report</A>. (CS)
+		 <B>Update:</B> <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl/2001-07/msg00052.html">Binary packages of PDL for Mac OS X</A>
+		 (+dependencies) are now avilable as part of the
+		 <A HREF="http://fink.sourceforge.net">fink</A> project."
       de-text = "Ein erster Versuch, PDL auf die neue Mac OS X Plattform
-		 zu portieren war weitgehend erfolgreich. Naeheres
-		 entnimm der <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">Meldung</A> in der mailing-liste. (CS)"
+		 zu portieren war weitgehend erfolgreich. Näheres
+		 entnimm der <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters/2001-07/msg00011.html">Meldung</A> in der mailing-liste. (CS)
+		 <B>Update:</B>
+		 <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl/2001-07/msg00052.html">Binär Versionen von PDL für Mac OS X</A>
+		 sind nun im Rahmen des
+		 <A HREF="http://fink.sourceforge.net">fink</A>
+		 Projektes erhältlich."
 >
 
 <NEWS de-date = "27.06.2001"

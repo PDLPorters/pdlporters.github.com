@@ -108,7 +108,7 @@ Möglichkeiten, piddles zu erzeugen:</de-p>
 <de-p> Die Zahl der Dimensionen ist natürlich nicht auf zwei beschränkt:</de-p>
 
 <PRE>
-<STRONG>perldl></STRONG> $m = zeroes(3,2,2); # 2x2x2 cube
+<STRONG>perldl></STRONG> $m = zeroes(3,2,2); # 3x2x2 cube
 <STRONG>perldl></STRONG> print $m;
 
 [

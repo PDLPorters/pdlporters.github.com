@@ -1,0 +1,65 @@
+#include "$(PDLROOT)/header.wml"
+<lang:star:slice: oldnews_*.html>
+
+<comment> ---------------------------------------------------------- </comment>
+<HEAD*>
+<META* HTTP-EQUIV = "KEYWORDS" 
+       CONTENT    = "Schwebel"
+>
+<META* NAME       = "DESCRIPTION" 
+       CONTENT    = "Robert Schwebel"
+>
+<TITLE*>PDL - Old News Entries</TITLE*>
+</HEAD*>
+<comment> ---------------------------------------------------------- </comment>
+
+<set-var doctype=html>
+
+#include "$(PDLROOT)/top.wml"
+#include 'menue.wml'
+
+<EN><H2>Old News Entries</H2></EN>
+<DE><H2>Alte News-Einträge</H2></DE>
+
+<TABLE border=1 width=100%>
+<TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
+
+<NEWS de-date = "Mo, 17.04.2000"
+      en-date = "Mo, 2000/04/17"
+      de-text = "Einige Erweiterungen der neuen Homepage eingebaut. (RS)"
+      en-text = "Some extensions to the new homepage added (RS)"
+>      
+
+<NEWS de-date = "Mi, 5.04.2000"
+      en-date = "We, 2000/04/05"
+      de-text = "PDL 2.005 ist ab sofort verfügbar. Diese Version arbeitet
+	nun auch ohne Probleme mit perl 5.6. (CS)"
+      en-text = "PDL 2.005 is released. It is mainly a bugfix
+	release to make PDL work with perl 5.6. (CS)"
+>      
+
+<NEWS de-date = "Sa, 18.12.1999"
+      en-date = "Sa, 1999/12/18"
+      de-text = "Neue experimentelle PDL-Webseite mit WML erstellt.(RS)"
+      en-text = "New experimental PDL webpage constructed with WML. (RS)"
+>      
+
+<NEWS de-date = "Fr, 10.12.1999"
+      en-date = "Fr, 1999/12/10"
+      de-text = "Das <A
+      HREF="https://www.sourceforge.net/project/?form_grp=612">
+      PDL Entwickungssystem</A> befindet sich jetzt bei Sourceforge."
+
+      en-text = "The <A
+      HREF="https://www.sourceforge.net/project/?form_grp=612">
+      PDL development tree</A> is now on CVS at Sourceforge."
+>
+
+</TABLE>
+
+<!-- ---------------------------------------------------------------------- -->
+
+#include "$(PDLROOT)/footer_rs.wml"
+#include "$(PDLROOT)/bottom.wml"
+
+ 

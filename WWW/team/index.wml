@@ -40,6 +40,23 @@
 
 <TR>
 
+<person name     = "John Cerney"
+        email    = "j-cerney1@raytheon.com"
+        url      = "&nbsp;"
+        reallife = "I develop data-analysis and visualization tools for
+                    RF/Microwave test data."
+        task     = "PDL Pumpking (Incorporation of patches, generating
+                    official releases, etc) since 1998."
+>
+
+<empty-person>
+
+</TR>
+
+<TR>
+
+<empty-person>
+
 <person name     = "Doug Hunt"
         email    = "dhunt@ucar.edu"
         url      = "http://www.cosmic.ucar.edu"
@@ -51,13 +68,9 @@
                     Helping with PP optimization of late.</P>"
 >
 
-<empty-person>
-
 </TR>
 
 <TR>
-
-<empty-person>
 
 <person name     = "Robert Schwebel"
         email    = "robert@schwebel.de"
@@ -79,9 +92,13 @@
 		    of the <I>real</I> developers.</P>"
 >
 
+<empty-person>
+
 </TR>
 
 <TR>
+
+<empty-person>
 
 <person name     = "Christian Soeller"
         email    = "c.soeller@auckland.ac.nz"
@@ -92,13 +109,9 @@
         task     = "various bits of PDL; occasional Core and PP hacking"
 >	
 
-<empty-person>
-
 </TR>
 
 <TR>
-
-<empty-person>
 
 <person name     = "Fridolin Tux"
         email    = "&nbsp;"
@@ -113,6 +126,8 @@
 		    <A HREF="http://www.schwebel.de/software/pengumentrics/"> 
 		    spectroscopy software</A>.</P>"
 >
+
+<empty-person>
 
 </TR>
 

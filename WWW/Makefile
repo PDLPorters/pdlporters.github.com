@@ -28,6 +28,7 @@ subdirs:
 		(cd visualisation && $(MAKE) all)
 		(cd maillists && $(MAKE) all)
 		(cd development && $(MAKE) all)
+		(cd team && ($MAKE) all)
 
 index_de.html:	index.wml $(FRAMEWORK) menue.wml
 index_en.html:	index.wml $(FRAMEWORK) menue.wml
@@ -45,6 +46,7 @@ clean:
 		(cd visualisation && $(MAKE) clean)
 		(cd maillists && $(MAKE) clean)
 		(cd development && $(MAKE) clean)
+		(cd team && $(MAKE) clean)
 
 distclean:
 		rm -fr *~

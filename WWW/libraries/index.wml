@@ -76,8 +76,36 @@ finden. </DE-P>
 >	       
 </comment>
 
+<library-table name        = "PDL::IO::NDF"
+               description = "<EN-P>The N-dimensional data format is a 
+	                      cross-platform hierarchical data format and is 
+			      described in 
+			      <a href="http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_">
+			      Starlink User Note 33</a>.</EN-P>
+			      <DE-P>Dieses N-dimensionale Datenformat ist für 
+			      den Cross-Plattform-Einsatz entwickelt und wird 
+			      in 
+			      <a href="http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_">
+			      Starlink User Note 33</a> näher 
+			      beschrieben.<DE-P>"
+               homepage    = "http://rlspc5.bnsc.rl.ac.uk/star/docs/sun33.htx/sun33.html#xref_"			      
+               download    = ""
+>	       
+
+<library-table name        = "PDL::Audio"
+               description = "?"
+               homepage    = ""
+	       download    = ""
+>	       
+
+<library-table name        = "ObjStore::Lib::PDL"
+               description = "?"
+               homepage    = ""
+	       download    = ""
+>	       
+
 <comment>
-<library-table name        = "NDF"
+<library-table name        = ""
                description = ""
 >	       
 </comment>

@@ -136,7 +136,6 @@ Modulen.</DE-P>
 			      der Atmosphärenphysik verwendet. </DE-P>"
                download    =  "http://www.perl.com/CPAN/modules/by-module/PDL/DHUNT/"
 >	       
-</comment>
 
 <library-table name        = "PDL::IO::NDF"
                description = "<EN-P>The N-dimensional data format is a 

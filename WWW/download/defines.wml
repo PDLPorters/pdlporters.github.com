@@ -30,4 +30,12 @@
 
 </TR>
 
+<restore name>
+<restore description>
+<restore homepage>
+<restore source>
+<restore rpm>
+<restore debian>
+<restore freebsd>
+<restore binary>
 </define-tag>

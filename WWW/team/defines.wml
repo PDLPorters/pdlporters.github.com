@@ -43,6 +43,11 @@
 
 </TD>
 
+<restore name>
+<restore email>
+<restore url>
+<restore reallife>
+<restore task>
 
 </define-tag>
 
@@ -55,5 +60,8 @@
 <TD width="50%">
 &nbsp;
 </TD>
+<restore name>
+<restore email>
+<restore url>
 </define-tag>
 

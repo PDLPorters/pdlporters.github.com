@@ -14,38 +14,45 @@
 
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> &nbsp;
 <ifeq "<get-var status>" "active" \
-"<EN><A CLASS=menue HREF="<get-var en-link>"></EN>\
-<DE><A CLASS=menue HREF="<get-var de-link>"></DE>">\
-<DE><get-var de-name1></DE>\
-<EN><get-var en-name1></EN>\
+"<en><A CLASS=menue HREF="<get-var en-link>"></en>\
+<de><A CLASS=menue HREF="<get-var de-link>"></de>">\
+<de><get-var de-name1></de>\
+<en><get-var en-name1></en>\
 <ifeq "<get-var status>" "active" "</A>">
   
 <BR>
 
-<EN>
-  <if <get-var en-name2> <prog \
+<en>
+  <if <get-var en-name2>  "\
       <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
       <ifeq "<get-var status>" "active" \
 	"<A CLASS=menue HREF="<get-var en-link>">">\
       <get-var en-name2>\
       <ifeq "<get-var status>" "active" "</A>"> <BR>\
-    >
+    "
   >
-</EN>
+</en>
 
-<DE>
-  <if <get-var de-name2> <prog \
+<de>
+  <if <get-var de-name2> "\
       <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> &nbsp;\
       <ifeq "<get-var status>" "active" \
 	"<A CLASS=menue HREF="<get-var de-link>">">\
       <get-var de-name2>\
       <ifeq "<get-var status>" "active" "</A>"> <BR>\
-    >
+    "
   >
-</DE>
+</de>
 
 <BR>
 
+<restore de-name1>
+<restore de-name2>
+<restore de-link>
+<restore en-name1>
+<restore en-name2>
+<restore en-link>
+<restore status>
 </define-tag>
 
 
@@ -73,6 +80,10 @@
 <BR>
 </TD>
 
+<restore de-date>
+<restore en-date>
+<restore de-text>
+<restore en-text>
 </define-tag>
 
 
@@ -82,12 +93,12 @@
 
 <!-- english paragraph -->
 
-<define-container en-p>
-<EN><p align=justify> %body</EN>
-</define-container>
+<define-tag en-p endtag=required>
+<en><p align=justify> %body</p></en>
+</define-tag>
 
 <!-- german paragraph -->
 
-<define-container de-p>
-<DE><p align=justify> %body</DE>
-</define-container>
+<define-tag de-p endtag=required>
+<de><p align=justify> %body</p></de>
+</define-tag>

@@ -1,0 +1,16 @@
+use File::Find;
+use File::Basename;
+use ExtUtils::Manifest;
+
+# all files *unless* they are wml files, Makefiles or related to CVS
+# or some other stuff
+# as specified in MANIFEST.SKIP
+
+# use internal functionality in ExtUtils::Manifest
+$skip = ExtUtils::Manifest::_maniskip();
+$sub = sub {
+	# print STDERR "checking $File::Find::name\n";
+        return if $skip->($File::Find::name);
+	print $File::Find::name,"\n" if -f basename $File::Find::name;
+};
+File::Find::find( $sub, '.' );

@@ -114,6 +114,17 @@ Kernfeatures von <B>PDL</B>.</DE-P>
 </FONT>
 </CENTER></TD></TR>
 
+<NEWS de-date = "Mi, 22.17.2000"
+      en-date = "We, 2000/12/27"
+      en-text = "PDL 2.2 is out. Includes bad value support, improved Tri-D
+                 and PGPLOT interfaces, PDL::Reduce, and lots more.
+                 Read about it 
+<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">here</A>. (DJB)"
+      de-text = "PDL 2.2 ist verfügbar. 
+                 Mehr Details sind hier 
+<A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&release_id=18914">hier</A> vorhanden (DJB)"
+>      
+
 <NEWS de-date = "So, 02.09.2000"
       en-date = "Su, 2000/09/02"
       en-text = "The 'bad value' support has been merged into the main CVS branch -

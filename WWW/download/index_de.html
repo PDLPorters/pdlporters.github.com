@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
+<lang:star:slice: index_*.html>
 <!--===================================================================-->
 <!--===================================================================-->
 <BODY TEXT="#000000"
@@ -19,7 +20,7 @@
 <!--
 <div align="center">
 <FONT size="+2">
-<A HREF="../index_de.html">PDL</A></FONT><BR>
+<A HREF="../index_ende.html">PDL</A></FONT><BR>
 <HR>
 <A HREF="index_en.html"><IMG SRC="../images/flag_uk.gif" border="0" alt=""></A><A HREF="index_de.html"><IMG SRC="../images/flag_de.gif" border="0" alt=""></A>
 <BR>
@@ -27,49 +28,56 @@
 -->
 <HR><BR>
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../">Introduction</A>
 <BR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../download/">Download</A>
 <BR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../maillists/">Mailing Lists</A>
 <BR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../screenshots/">Screenshots / </A>
 <BR>
 <IMG SRC="../images/M_empty.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../screenshots/">Demo-Gallery</A>
 <BR>
 <BR><HR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../libraries/">External</A>
 <BR>
 <IMG SRC="../images/M_empty.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../libraries/">Libraries</A>
 <BR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../visualisation/">Visualisation</A>
 <BR>
 <IMG SRC="../images/M_empty.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../visualisation/">Frontends</A>
 <BR>
 <BR><HR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../documentation/">Online</A>
 <BR>
 <IMG SRC="../images/M_empty.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../documentation/">Documentation</A>
 <BR>
 <BR> <!-- ---------------------------------------- -->
 <IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
-
+<A HREF="../development/">Development</A>
+<BR>
+<IMG SRC="../images/M_empty.gif" ALIGN="TOP" alt="" width="10" height="10">
+<A HREF="../development/">CVS</A>
+<BR>
+<BR> <!-- ---------------------------------------- -->
+<IMG SRC="../images/M_red.gif" ALIGN="TOP" alt="" width="10" height="10">
+<A HREF="../">The Team</A>
 <BR>
 <!-- ---------------------------------------- -->
 <BR><HR><BR>
@@ -92,13 +100,22 @@
 <A HREF="http://www.perl.com/perl/CPAN/modules/by-module/PDL/">Stable PDL
 release</A></TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-
+<P align="justify"> This link will always take you to the latest stable
+release of PDL. As it is on the Comprehensive Perl Archive Network it should
+automatically choose a site close to your location.</P>
 </TR>
 <TR>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
 <A HREF="http://www.sourceforge.net">CVS Server</A></TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-
+<P align="justify"> The latest source code is available via
+<A HREF="http://sourceforge.net/cvs/?group_id=612">CVS</A>, so you can
+always check out the latest developer snapshots.
+<A HREF="ftp://PDL.sourceforge.net/pub/PDL">Compressed tar archives</A>
+of the most recent snapshot are available for those who want to save
+dealing with the hassle of CVS. Please notice that these snapshots can
+be distinguished by a lack of documentation and may contain very new
+and untested code. But that's life at the leading edge...</P>
 </TR>
 </TABLE>
 <!-- ---------------------------------------------------------------------- -->
@@ -126,10 +143,12 @@ recent stable versions you need at least Perl version 5.004 to succeed.
 </TR>
 <TR>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-<A HREF=""><CODE>Term::Readline</CODE></A> <BR>
+<A HREF=""><CODE>Term::Readline</CODE></A> or alternatively<BR>
 <A HREF=""><CODE>Term::Readline::Gnu</CODE></A>.</TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-</TD>
+<P align="justify"> If you want to have a nice command line with history
+function in your <CODE>perldl</CODE> shell install one of the
+<CODE>Term::Readline::XXX</CODE> modules.</P></TD>
 </TR>
 <TR>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
@@ -137,20 +156,29 @@ recent stable versions you need at least Perl version 5.004 to succeed.
 <A HREF="ftp://wuarchive.wustl.edu/graphics/graphics/packages/NetPBM">netpbm</A>
 </TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-</TD>
+<P align="justify"> To read and write images with PDL's rpic/wpic commands
+the module <CODE>PDL::IO::Pic<CODE> is in the main distribution. However, if
+you want to have access to nearly every possible graphics format you should
+have installed one of these packages before installing PDL. For a jpeg
+converter you should also have
+<A HREF="ftp://ftp.uu.net/graphics/jpeg">libjpeg</A>.</P></TD>
 </TR>
 <TR>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
 <A HREF="ftp://mm-ftp.cs.berkeley.edu/pub/multimedia/mpeg/encode">mpeg_encode
 </A></TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-
+<P align="justify"> <CODE>PDL::IO::PPic</CODE> has also the wmpeg function to
+write MPEG videos. This packet is needed to activate it.</P>
 </TR>
 <TR>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
 Slatec</TD>
 <TD bgcolor="#eeeeee" width="30%" valign="top">
-</TD>
+<P align="justify"> Slatec fortran lib is included but requires a fortran
+compiler and the perl module to be installed. Module will not be built unless
+ExtUtils::F77 (version >= 1.03) is installed and Extutils::F77 supports your
+platform.</P></TD>
 </TR>
 </TABLE>
 <!-- ---------------------------------------------------------------------- -->
@@ -158,16 +186,16 @@ Slatec</TD>
 <HR>
 <IMG SRC="../images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
 <SMALL>
-
+This page was written by 
 Diese Seite wurde erstellt von 
 <A HREF="http://www.schwebel.de">Robert Schwebel</A>.
-
+Please send bugs and ideas for this web page to 
 Bitte senden Sie Hinweise auf Fehler an 
 <A HREF="mailto:robert@schwebel.de">robert@schwebel.de</A>.
 <BR>
-
+Last modified: 
 Letzte Änderung: 
-18-12-1999 21:07:59
+24-02-19100 22:23:00
 </SMALL>
 </TABLE>
 </BODY>

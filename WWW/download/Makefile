@@ -11,7 +11,7 @@ INC_TEMPLATES = -I../templates
 .SUFFIXES: .html .wml
 
 %.html:
-		wml $(INC_TEMPLATES) $<
+		wml $(INC_TEMPLATES) $< -o $@
 
 all:		index_de.html index_en.html \
 		subdirs

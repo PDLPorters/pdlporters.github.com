@@ -20,7 +20,7 @@
 <EN><A HREF="$(ROOT)/screenshots/">Screenshots / </A></EN>
 <BR>
 <IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
-<EN><A HREF="$(ROOT)/screenshots/">Demo-Galery</A></EN>
+<EN><A HREF="$(ROOT)/screenshots/">Demo-Gallery</A></EN>
 <BR>
 
 <BR><HR>
@@ -56,6 +56,14 @@
 
 <BR> <!-- ---------------------------------------- -->
 
+<IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/development/">Development</A></EN>
+<BR>
+<IMG SRC="$(IMAGES)/M_empty.gif" ALIGN=TOP> 
+<EN><A HREF="$(ROOT)/development/">CVS</A></EN>
+<BR>
+
+<BR> <!-- ---------------------------------------- -->
 <IMG SRC="$(IMAGES)/M_red.gif" ALIGN=TOP> 
 <EN><A HREF="$(ROOT)/">The Team</A></EN>
 <BR>

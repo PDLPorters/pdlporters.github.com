@@ -53,9 +53,14 @@ automatically choose a site close to your location.</P></EN>
 <A HREF="http://www.sourceforge.net">CVS Server</A></TD>
 
 <TD bgcolor=#eeeeee width=30% valign=top>
-<EN><P align=justify> The code is developed with a CVS server, so you can always
-check out the latest developer snapshots. Please notice that these releases can
-have some lack of documentation and very new and untested code.</P></EN>
+<EN><P align=justify> The latest source code is available via
+<A HREF="http://sourceforge.net/cvs/?group_id=612">CVS</A>, so you can
+always check out the latest developer snapshots.
+<A HREF="ftp://PDL.sourceforge.net/pub/PDL">Compressed tar archives</A>
+of the most recent snapshot are available for those who want to save
+dealing with the hassle of CVS. Please notice that these snapshots can
+be distinguished by a lack of documentation and may contain very new
+and untested code.  But that's life at the leading edge...</P></EN>
 
 </TR>
 

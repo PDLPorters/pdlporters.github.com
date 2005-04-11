@@ -259,7 +259,7 @@ Regionen der galaktischen Schnellwinde, daß ich entdeckte.
 <en-p><h3>Star Formation throughout the Universe</h3>
 </en-p>
 
-<en> <p>As a professional astrophysicist, I have analyzed countless
+<en-p>As a professional astrophysicist, I have analyzed countless
 types of data using PDL; here is one example.  In 1997 I collected
 some very deep-field images of the <a
 href="http://www.stsci.edu/ftp/science/hdf/hdf.html">Hubble Deep
@@ -273,8 +273,34 @@ astronomical software. I reduced my data entirely with home-brew PDL
 scripts that identified galaxies and separated them by wavelength and
 position.  The slicing, dicing, rapid prototyping, and "glue"
 features of PDL and Perl were all used to the max.
+</en-p>
 
-<p>This figure is from a <a
+<de-p>
+Als professioneller Astrophysiker habe ich unzählige Arten von Daten
+mit PDL analysiert.  Ist hier ein Beispiel.  1997 sammelte ich einige
+Bilder des Hubble "deep-field" mit dem Sier-Tunable Filter und dem 4m
+William Herschel Teleskop im La Palma.  Der tunable Filter produziert
+Daten 3-D (x,y,Wellenlänge) die schwierig, mit herkömmlicher
+astronomischer Software zu analysieren sind. Ich verringerte meine
+Daten völlig mit Haus-braue PDL Indexe, die Galaxien kennzeichneten
+und ihnen durch Wellenlänge und Position trennen.  Das Schneiden, das
+Würfeln, das schnelle "Prototyping" und die "Kleber" Funktionen von
+PDL und von Perl wurden alle zum Maximum benutzt.
+</de-p>
+
+<es-p>Soy astrofísico profecional.  He analisado muchos tipos de
+ordenes con PDL; aquí hay uno ejemplo.  En 1997, recogí algunas
+imágenes del campo profundo de Hubble usando el filtro rmonioso del
+tauro y el telescopio de 4 metros Guillermo Heschel en La Palma.  El
+filtro armonioso produce datos 3-D (x,y,lambda) que son dificiles de
+analizar con programas astronómicos convencionales.  Reduje mis datos con 
+escrituras del PDL que identificaron galaxias y las separaron por longitud de onda y por la posición.  Ultilizé al máximo el rabanar, el «dicing», el prototipar rápido, y las caracteristicas del "pegamento" de PDL y de Perl. 
+</es-p>
+
+
+
+
+<en-p>This figure is from a <a
 href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2004AJ....128.2652G&amp;db_key=AST&amp;high=425327f64719038">
 paper</a> that I and some colleagues published in the <a
 href="http://www.journals.uchicago.edu/AJ/journal/">Astronomical
@@ -286,17 +312,53 @@ wavelengths, and the graph to the right shows the total brightness of
 the galaxy at each wavelength.  These galaxies are at distances of
 5,000 - 10,000 million light years.  We used these data to estimate the
 formation rate of stars throughout much of the history of the Universe.
+</en-p>
+
+<de-p>
+Diese Abbildung ist von einem Papier, das ich und einige Kollegen im 
+astronomichen Journal veröffentlichten.  Sie zeight Emissionlinie Galaxien,
+daß wir im Datenwürfel fanden (einen anderen PDL Index verwendend).  Solche
+Galaxien haben überschüssige Emission bei einer Wellenlänge wegen der nebular Emission von den jungen Sternen, die einin ionisierten Nebelfleck herstellen.  Jede Reihe zeight eine einzelne Galaxie an einigen unterschiedlichen Wellenlängen, und das Diagramm rechts zeight die Gesamthelligkeit der der Galaxie an jeder Wellenlänge.  Diese Galaxien sind in Abständen von 5.000 - 10.000 Million hellen Jahren.  Wir verwendeten diese Daten, um die Anordnung Rate der Sterne Während viel der Geschichte des Universums zu schätzen.
+</de-p>
+
+<es-p>
+Esta figura es de un papel que yo y algunos colegas publicaron en el
+Diario Astronómico.  Demuestra las galaxias de lineas de emisión que
+encontramos en el cubo de datos (que usa otra escritura del PDL).
+Tales galaxias tienen exceso de emisión en una longitud de onda debido
+a la emisión nebular de las estrellas jóvenes que crean una nebulosa ionizada.
+Cada fila demuestra una sola galaxia en varias diversas longitudes de onda, y
+el gráfico a la derecha demuestra el brillo total de la galaxia en cada longitud de onda.  Estas galaxias están en las distancias de 5.000 - 10.000 millones de años ligeros.  Utilizamos estos datos para estimar el indice de la formación de estrellas a través de mucha de la historia del universo.
+</es-p>
+
 <p>
 <center><table><tr><td><a href="kgb-figure.png"><img
-src="kgb-figure-small.png"></a><br>(Click to enlarge)</br>
+src="kgb-figure-small.png"></a><br>
+	<en>(Click to enlarge)</en>
+	<de>(Klicken Sie, um zu vergrößern)</de>
+	<es>(Chasque para agrandar)</es>
+</br>
 </table>
 </center>
-<p>
+
+
+<en-p>
 One interesting fact: the
 original PDL script used to make this figure (on a Sparc 20
 workstation) in 1998 still worked unchanged (on a G5 Mac) in 2004 when
-the final paper was submitted!  <p> <i>--Karl Glazebrook, kgb (at) pha
-(dot) jhu (dot) edu</i> </en>
+the final paper was submitted!  
+</en-p>
+
+<de-p>
+Ein interessante Tatache: der ursprüngliche PDL Index verwendete, diese Abbildung (auf einer Sparc 20 Workstation) im 1998 ruhigen zu bilden unverändert bearbeitet (auf einem Mac G5) 2004, als das abschließende Papier eigereicht wurde!
+</de-p>
+
+<es-p>
+Un hecho interestante: ¡la escritura original del PDL que hició esta figura (en un Sparc 20) en 1998 functionaba sin cambiar (en un mac G5) en 2004, cuando sometimos el papel final!
+</es-p>
+
+<p> <i>--Karl Glazebrook, kgb (at) pha
+(dot) jhu (dot) edu</i> 
 
 <p>
 <p>
@@ -456,5 +518,5 @@ hergestellt.
 </center>
 
 
-#include "$(PDLROOT)/templates/footer_rs.wml"
+#include "$(PDLROOT)/templates/footer_cd.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

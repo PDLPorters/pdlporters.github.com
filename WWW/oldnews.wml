@@ -25,6 +25,11 @@
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
 
+<NEWS de-date = "28.12.2004"
+      en-date = "2004/12/28"
+      en-text = "PDL RESULTS IN THE NEWS:  I am assembling a web page of science results, web pages, and interesting plots that were made with PDL.  Some examples include the discovery of <a href="http://www.space.com/businesstechnology/technology/technovel_sunsound_041214.html">\"ultrasound\" on the Sun</a>, and the <a href="http://www.space.com/scienceastronomy/gemini_survey_040105.html">presence of mature galaxies</a> in the young Universe.  If you have a nifty plot or a nice web page you'd like to show off, please send me a note: deforest (at) boulder (dot) swri (dot) edu. (CD)"
+>	
+
 <NEWS de-date = "6.1.2004"
       en-date = "2004/01/06"
       en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>

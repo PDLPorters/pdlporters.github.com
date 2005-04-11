@@ -458,6 +458,23 @@ la derecha hay un imagen de la España en que varios incendios
 potenciales están marcadas.  Los contornos azules son regiones que
 fueron fotografadas por satélites diferentes.</es>
 
+<de> Am Fernabfragung-Labor der Universität von Vallodolid,
+kombinieren wir Datn von einigen Satelliten, um Realzeitbilder von
+Spanien und von Umlagerungen als allgemeiner Service zu produzieren.
+Unter anderen Dienstleistungen können wir Waldfeuer von den
+Satellitenbildern innerhalb ermitteln.  Dieses soll schnell genug zu
+regionale Behörden alarmieren.  Unsere Rohrleitung schließt 20
+Schritte, einigen in C und in Fortran kompiliert werden und andere in
+Perl und in Perl/PDL. Unsere Resultate werden auf dem Netz
+veröffenlicht, und durch email zu Televisión Española geschickt.  Von
+dort werden ihnen über den nationalen Teletextservice zur Verfügung
+gestellt. Am Recht ist ein Bild von Spanien mit einigen möglichen
+wildfires, die im Rot gekennzeichnet werden.  Ihre Positionen werden
+am weiten Recht verzeichnet.  Die verschieenen Aqua-farbigen umreißen
+sind Regionen, die durch unterschiedliche Satelliten fotografiert
+wurden.
+ </de>
+
 <p><i>-- Joaquin Ferrero, explorer (at) latuv (dot) uva (dot) es</i></p>
 
 <td><a href="forest-lg.jpg"><img src="forest-sm.jpg"></a>

@@ -114,5 +114,28 @@ alt="2D PLplot Example"></A>
 <A HREF="http://plplot.sourceforge.net/examples/demo08.php?lbind=PerlDL"><IMG
 SRC="http://plplot.sourceforge.net/examples-data/demo08/prev-x08.04.png" alt="3D PLplot Example"></A>
 
+<EN><H3>Image Distortion Example</H3></EN>
+
+<EN>Image resampling and co-alignment is handled by the PDL::Transform
+package.  Here is an example of a nonlinear coordinate transformation
+applied to an image of the space shuttle.  The image is being rotated
+in logarithmic azimuthal space.  The transformation is continuous
+everywhere except on a singular ray extending upward from the origin.
+The PDL::Transform code includes optimized resampling to prevent
+introducing artifacts into your data.  You can tell that it's at work
+by comparing the <a href="transform/sampled.mpg">sampled</a> and <a
+href="transform/antialiased.mpg">anti-aliased</a> movies.  <a
+href="transform/transform-commands.txt">Here</a> is the brief script that
+generated the frames.
+
+  </EN>
+
+<TABLE><TR>
+<TD><a href="transform/orig-big.jpg"><img src="transform/orig.jpg"></a>
+<TD><a href="transform/some-warp-big.jpg"><img src="transform/some-warp.jpg"></a>
+<TD><a href="transform/inside-out-big.jpg"><img src="transform/inside-out.jpg"></a>
+</TABLE>
+
+
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

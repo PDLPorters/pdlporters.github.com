@@ -9,21 +9,23 @@ $a=rim('shuttlemir_nasa_big.jpg');
 
 ########## Define coordinate transforms: $t maps to azimuthal space; $ts is a
 #          linear scale for the movie frames
-$t = t_offset([-3.14159,0]) x 
-     t_radial(r0=>100) x 
-     t_linear(pre=>[-250,-200],rot=>90);
+$t = ( t_offset([-3.14159,0]) x 
+       t_radial(r0=>100) x 
+       t_linear(pre=>[-250,-200],rot=>90)
+       );
 $ts = t_linear(scale=>0.33333);
 
 ########## Sub to make movie frames
 $s = sub {
    $method=shift;
    for $i(0..359){
+        print "$i...";
         $b = $a->map( !$t x t_linear(rot=>$i) x $t x $ts,
                       [500,400],
                       {pix=>1, method=>$method, bound=>'m', big=>5 }
                     );
+		    print "wim";
         wim($b,sprintf("frame-$method-%3.3d.png",$i));
-        print "$i...";
    }
 };
 

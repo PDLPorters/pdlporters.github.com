@@ -115,6 +115,8 @@ alt="2D PLplot Example"></A>
 SRC="http://plplot.sourceforge.net/examples-data/demo08/prev-x08.04.png" alt="3D PLplot Example"></A>
 
 <EN><H3>Image Distortion Example</H3></EN>
+<ES><H3>Ejemplo de Distorsión de imagenes</H3></ES>
+<DE><H3>Bildverzerrung Beispiel</H3></DE>
 
 <EN>Image resampling and co-alignment is handled by the PDL::Transform
 package.  Here is an example of a nonlinear coordinate transformation
@@ -127,14 +129,33 @@ by comparing the <a href="transform/sampled.mpg">sampled</a> and <a
 href="transform/antialiased.mpg">anti-aliased</a> movies.  <a
 href="transform/transform-commands.txt">Here</a> is the brief script that
 generated the frames.
-
   </EN>
 
+<ES>El distorsión y co-alineación de las imagenes es maneajado por el
+paquete de PDL::Transform.  Aquí está un ejemplo de una transformación
+de coordinadas nonlineal, aplicada a una imagen de la lanzadera de
+espacio.  La imagen se está rotando en espacio azimuthal logarítmico.
+La transformación es continua por todas partes excepto un rayo
+singular que extíende hacía arriba del crigen.  El código de
+PDL::Transform incluye «resampling» optimizado a evitar el introducir
+de los artefactos en sus datos.  Hay peliculas con «resampling» <a
+href="transform/sampled.mpg">regular</a> y <a
+href="transform/antialiased.mpg">«anti-aliased»</a>, para comparar.
+<a href="transform/transform-commands.txt">Aquí</a> está la escritura
+breve que generó las películas.  </ES>
+
+<DE>
+<I>Helfen Sie uns bitte, indem Sie diesen Punkt in Deutschen übersetzen!</I>
+</DE>
+
+
+<CENTER>
 <TABLE><TR>
 <TD><a href="transform/orig-big.jpg"><img src="transform/orig.jpg"></a>
 <TD><a href="transform/some-warp-big.jpg"><img src="transform/some-warp.jpg"></a>
 <TD><a href="transform/inside-out-big.jpg"><img src="transform/inside-out.jpg"></a>
 </TABLE>
+</CENTER>
 
 
 #include "$(PDLROOT)/templates/footer_rs.wml"

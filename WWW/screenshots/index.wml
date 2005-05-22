@@ -125,9 +125,9 @@ in logarithmic azimuthal space.  The transformation is continuous
 everywhere except on a singular ray extending upward from the origin.
 The PDL::Transform code includes optimized resampling to prevent
 introducing artifacts into your data.  You can tell that it's at work
-by comparing the <a href="transform/sampled.mpg">sampled</a> and <a
-href="transform/antialiased.mpg">anti-aliased</a> movies.  <a
-href="transform/transform-commands.txt">Here</a> is the brief script that
+by comparing the <a href="sampled.mpg">sampled</a> and <a
+href="antialiased.mpg">anti-aliased</a> movies.  <a
+href="transform-commands.txt">Here</a> is the brief script that
 generated the frames.
   </EN>
 
@@ -139,9 +139,9 @@ La transformación es continua por todas partes excepto un rayo
 singular que extíende hacía arriba del crigen.  El código de
 PDL::Transform incluye «resampling» optimizado a evitar el introducir
 de los artefactos en sus datos.  Hay peliculas con «resampling» <a
-href="transform/sampled.mpg">regular</a> y <a
-href="transform/antialiased.mpg">«anti-aliased»</a>, para comparar.
-<a href="transform/transform-commands.txt">Aquí</a> está la escritura
+href="sampled.mpg">regular</a> y <a
+href="antialiased.mpg">«anti-aliased»</a>, para comparar.
+<a href="transform-commands.txt">Aquí</a> está la escritura
 breve que generó las películas.  </ES>
 
 <DE>
@@ -151,9 +151,9 @@ breve que generó las películas.  </ES>
 
 <CENTER>
 <TABLE><TR>
-<TD><a href="transform/orig-big.jpg"><img src="transform/orig.jpg"></a>
-<TD><a href="transform/some-warp-big.jpg"><img src="transform/some-warp.jpg"></a>
-<TD><a href="transform/inside-out-big.jpg"><img src="transform/inside-out.jpg"></a>
+<TD><a href="orig-big.jpg"><img src="orig.jpg"></a>
+<TD><a href="some-warp-big.jpg"><img src="some-warp.jpg"></a>
+<TD><a href="inside-out-big.jpg"><img src="inside-out.jpg"></a>
 </TABLE>
 </CENTER>
 

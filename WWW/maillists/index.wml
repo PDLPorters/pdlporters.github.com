@@ -53,11 +53,16 @@ PDL and one for developers to coordinate their work.</P>
 </LI>
 </OL>
 
-<P> There are hypertext archives of both the 
-<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl">perldl</A> 
-and <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters">
-pdl-porters</A> mailing lists; thanks to 
-<A HREF="mailto:ach@mpe.mpg.de">Achim Bohnet</A>.</P>
+<P> <strong>Archives:</strong> Searchable archives of both the <A
+HREF="http://www.xray.mpe.mpg.de/mailing-lists/perldl">perldl</A> and
+<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/pdl-porters">
+pdl-porters</A> mailing lists are available for the period 1996-2004;
+thanks to <A HREF="mailto:ach@mpe.mpg.de">Achim Bohnet</A>. More
+recent messages (since June 2005) for the <a
+href="http://mailman.jach.hawaii.edu/pipermail/perldl/">perldl</a> and
+<a
+href="http://mailman.jach.hawaii.edu/pipermail/pdl-porters/">pdl-porters</a>
+lists are also available.</P>
 
 #include "$(PDLROOT)/templates/footer_rs.wml"
 #include "$(PDLROOT)/templates/bottom.wml"

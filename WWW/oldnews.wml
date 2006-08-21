@@ -25,6 +25,15 @@
 <TR><TD bgcolor=#FFFF80><CENTER><B>NEWS</B></CENTER></TD></TR>
 
 
+<NEWS de-date = "11.03.2005"
+      en-date = "2005/03/11"
+      es-date = "11.03.2005"
+      en-text = "Updates to the web pages:  a <A HREF="$(PDLROOT)/nifty/index_en.html">success stories</a> page, and Spanish language support.  My spanish is rusty and I barely speak any German at all.  If the language is a bit broken, please let me know how to fix it! deforest (at) boulder (dot) swri (dot) edu. (CD)"
+      de-text = "Updates zu den Webseiten: ein <A HREF="$(PDLROOT)/nifty/index_en.html">Erfolggeschichte</a> Seite, und Spanische Sprachenunterstützung.  Mein Spanisch ist rostig un ich spreche kaum irgenwie Deutsches an allen.  Wenn die Sprache eine gebrochene Spitze ist, erklären Sie mir, wie man bitte sie repariert! deforest (at) boulder (dot) swri (dot) edu. (CD)"
+      es-text = "Actualizaciones a las páginas:  una página de <A HREF="$(PDLROOT)/nifty/index_en.html">historias del éxito</a>, y ayuda en español.  Me español está oxidado y hablo como nada de alemán.  Si la lengua de las páginas es un poquito roto, por favor digame como arreglarlo.   deforest (at) boulder (dot) swri (dot) edu. (CD)"
+>
+
+
 <NEWS de-date = "28.12.2004"
       en-date = "2004/12/28"
       en-text = "PDL RESULTS IN THE NEWS:  I am assembling a web page of science results, web pages, and interesting plots that were made with PDL.  Some examples include the discovery of <a href="http://www.space.com/businesstechnology/technology/technovel_sunsound_041214.html">\"ultrasound\" on the Sun</a>, and the <a href="http://www.space.com/scienceastronomy/gemini_survey_040105.html">presence of mature galaxies</a> in the young Universe.  If you have a nifty plot or a nice web page you'd like to show off, please send me a note: deforest (at) boulder (dot) swri (dot) edu. (CD)"

@@ -146,32 +146,53 @@ Kernfeatures von <B>PDL</B>.</de-p>
 </FONT>
 </CENTER></TD></TR>
 
-<NEWS de-date = "11.03.2005"
-      en-date = "2005/03/11"
-      es-date = "11.03.2005"
-      en-text = "Updates to the web pages:  a <A HREF="$(PDLROOT)/nifty/index_en.html">success stories</a> page, and Spanish language support.  My spanish is rusty and I barely speak any German at all.  If the language is a bit broken, please let me know how to fix it! deforest (at) boulder (dot) swri (dot) edu. (CD)"
-      de-text = "Updates zu den Webseiten: ein <A HREF="$(PDLROOT)/nifty/index_en.html">Erfolggeschichte</a> Seite, und Spanische Sprachenunterstützung.  Mein Spanisch ist rostig un ich spreche kaum irgenwie Deutsches an allen.  Wenn die Sprache eine gebrochene Spitze ist, erklären Sie mir, wie man bitte sie repariert! deforest (at) boulder (dot) swri (dot) edu. (CD)"
-      es-text = "Actualizaciones a las páginas:  una página de <A HREF="$(PDLROOT)/nifty/index_en.html">historias del éxito</a>, y ayuda en español.  Me español está oxidado y hablo como nada de alemán.  Si la lengua de las páginas es un poquito roto, por favor digame como arreglarlo.   deforest (at) boulder (dot) swri (dot) edu. (CD)"
+<NEWS de-date = "20.08.2006"
+      en-date = "2006-08-20"
+      es-date = "20.08.2006"
+       en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL 2.4.3</a> 
+		is available on <a HREF="http://www.sourceforge.net">Sourceforge</A>
+		and <a HREF="www.cpan.net">CPAN</A>.  This is mostly a polishing release.  Highlights:<br>
+		<ul>
+		<li> Many bug fixes;
+		<li> Improved support for: 
+			<ul>
+			<li>64-bit systems 
+			<li>MS Windows 
+			<li>Cygwin;
+			</ul>
+		<li> Improved bad-value handling;
+		<li> Better CPAN compatibility
+		</ul>
+		"
+	de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL 2.4.3</a> ist ab sofort bei <A HREF="HTTP://www.sourceforge.net">Sourceforge</a> erhältlich.
+		Es ist hauptsächlich Polierfreigabe.  Höhepunkte:
+		<ul>
+		<li> Viele Bug sonde regelnt;
+		<li> Verbesserte Unterstützung für: 
+			<ul>
+			<li>64-bitsysteme
+			<li>MS Windows 
+			<li>Cygwin;
+			</ul>
+		<li> Verbesserte Schlechtwert Behandlung;
+		<li> Verbesserte CPAN Kompatibilität
+		</ul>
+		"
+	es-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL 2.4.3</a> está disponible en <a HREF="http://www.sourceforge.net">Sourceforge</A> y <a HREF="www.cpan.net">CPAN</a>. Esto es un lanzamiento sobre todo para pulir.  Tocques de luz:
+		<ul>
+		<li> Muchos arreglos de bugs;
+		<li> Ayuda mejorada para:
+			<ul>
+			<li>sistemas 64-bit
+			<li>MS Windows
+			<li>Cygwin;
+			</ul>
+		<li> Ayuda mejorada para valores malos;
+		<li> Compatibilidad mejor con CPAN.
+		</ul>
+		"
 >
-
-<NEWS de-date = "28.12.2004"
-      en-date = "2004/12/28"
-      en-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.2.tar.gz?download">PDL 2.4.2</A>
-		 is available on
-		 <A HREF="http://www.sourceforge.net">Sourceforge</A>.
-	         Mainly bug fixes and polishing.  Some new features, such
-	         as FITS table I/O.  Details are in the
-                 <A HREF="http://sourceforge.net/project/shownotes.php?release_id=292947">release notes</A>. (CD)"
-      de-text = "<A HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.1.tar.gz?download">PDL 2.4.1</A>
-		 ist  ab sofort bei
-		 <A HREF="http://www.sourceforge.net">Sourceforge</A>
-		 erhältlich. Einige Wanzen waren örtlich fesgelegt und
-		 Eigenschaften wurden poliert.  Einige neue 
-	         Eigenschaften, wie binäre FITS-Tabelle I/O, wurden 
-		 hinzugefügt. Details entnehme
-	         den <A HREF="http://sourceforge.net/project/shownotes.php?release_id=292947">
-		 Freigabe Notizen (AKA Release Notes)</A>. (CD)"
->
+		
 
 </TABLE>
 

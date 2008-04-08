@@ -1,0 +1,107 @@
+<!--#include virtual="/head.html"-->
+<TITLE>PDL - Screenshots / Demos</TITLE>
+</HEAD>
+<BODY>
+
+<div id="navBar">
+<!--#include virtual="/menu.html"-->
+</div><!--end div navBar-->
+
+<div id="main">
+<A NAME="trid"></A>
+<H3> 3D Graphics Examples </H3>
+
+
+<p align="justify">  Here are some pretty pictures generated using the
+<CODE>PDL::Graphics::TriD</CODE> module, follow the links to get full-size
+pictures and the PDL code which produced them.</p>
+
+
+<P ALIGN="center">
+<A HREF="ex1.html"><IMG SRC="ex1thumb.gif" alt="Example 1" width="104" height="105"></A>
+<A HREF="ex2.html"><IMG SRC="ex2thumb.gif" alt="Example 2" width="105" height="105"></A>
+<A HREF="ex3.html"><IMG SRC="ex3thumb.gif" alt="Example 3" width="105" height="105"></A>
+<p align="justify">  Note when displayed with PDL viewing from different angles is as simple
+as rotating the figure with the mouse!</p>
+
+
+<H3> 2D Graphics Examples </H3>
+
+
+For some screenshots of PGPLOT in action check the
+<A HREF="/demos/plot2D.shtml">PGPLOT demo</A>.
+
+
+
+<H3> 2D &amp; 3D Graphics Examples </H3>
+
+
+<A HREF="http://www.plplot.org">PLplot</A> is a scientific plotting
+library for 2D and 3D graphics. PLplot has a rich API allowing fine control
+of every aspects of the plots. The PDL binding for PLplot (in
+<CODE>PDL::Graphics::PLplot</CODE>) comes in two flavors: a high-level,
+object-oriented interface and a low-level interface which is very close to
+the C API of the library. The demos distributed with PLplot have been
+ported to the low-level interface and are available at the <A
+HREF="http://plplot.sourceforge.net/examples/index.html">PLplot examples
+area</A> (two examples are shown below).
+
+
+<P ALIGN="center">
+<A HREF="http://plplot.sourceforge.net/examples/demo16.php?lbind=PerlDL"><IMG
+SRC="http://plplot.sourceforge.net/examples-data/demo16/prev-x16.03.png"
+alt="2D PLplot Example"></A>
+<A HREF="http://plplot.sourceforge.net/examples/demo08.php?lbind=PerlDL"><IMG
+SRC="http://plplot.sourceforge.net/examples-data/demo08/prev-x08.04.png" alt="3D PLplot Example"></A>
+<H3>Image Distortion Example</H3>
+
+
+Image resampling and co-alignment is handled by the PDL::Transform
+package. Here is an example of a nonlinear coordinate transformation
+applied to an image of the space shuttle. The image is being rotated
+in logarithmic azimuthal space. The transformation is continuous
+everywhere except on a singular ray extending upward from the origin.
+The PDL::Transform code includes optimized resampling to prevent
+introducing artifacts into your data. You can tell that it's at work
+by comparing the <a href="sampled.mpg">sampled</a> and <a
+href="antialiased.mpg">anti-aliased</a> movies. <a
+href="transform-commands.txt">Here</a> is the brief script that
+generated the frames.
+  
+
+
+<div align="center">
+<TABLE summary=""><TR>
+<TD><a href="orig-big.jpg"><img src="orig.jpg" alt="" width="188" height="150"></a>
+<TD><a href="some-warp-big.jpg"><img src="some-warp.jpg" alt="" width="188" height="150"></a>
+<TD><a href="inside-out-big.jpg"><img src="inside-out.jpg" alt="" width="188" height="150"></a>
+</TABLE>
+</div>
+<HR>
+<IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
+<SMALL>
+This page was written by 
+
+<A HREF="http://www.schwebel.de">Robert Schwebel</A>
+and various other pdl-porters.
+
+Please send bugs and ideas for this web page to 
+
+<A HREF="mailto:pdl-porters@jach.hawaii.edu">pdl-porters@jach.hawaii.edu</A>.
+<BR>
+Last modified: <!--#flastmod virtual="index.shtml"-->
+</SMALL>
+<p>
+ <a href="http://validator.w3.org/check?uri=referer">
+ <img src="http://www.w3.org/Icons/valid-html401"
+ border="0" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+
+ <a href="http://jigsaw.w3.org/css-validator/check/referer">
+  <img style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!">
+ </a>
+</p>
+</div><!--end div main-->
+</BODY>
+</HTML>

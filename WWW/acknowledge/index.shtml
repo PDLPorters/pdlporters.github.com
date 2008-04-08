@@ -1,0 +1,73 @@
+<!--#include virtual="/head.html"-->
+<TITLE>PDL - Acknowledgement</TITLE>
+</HEAD>
+<BODY>
+
+<div id="navBar">
+<!--#include virtual="/menu.html"-->
+</div><!--end div navBar-->
+
+<div id="main">
+<H2> PDL Acknowledgement</H2>
+
+<P align="justify">If you wish to acknowledge PDL in a scientific paper, please follow these guidlines (copy-and-paste into LaTeX):</p>
+
+<ul>
+<li>In the body of a paper: 
+<blockquote>Portions of the analysis presented here made use of the Perl
+Data Language\footnote{The Perl Data Language (PDL) has been developed
+by K. Glazebrook, J. Brinchmann, J. Cerney, C. DeForest, D. Hunt,
+T. Jenness, T. Luka, R. Schwebel, and C. Soeller and can be obtained
+from http://pdl.perl.org} which provides a high-level numerical
+functionality in the Perl scripting language (Glazebrook & Economou,
+1997).</blockquote></li>
+
+<li>In the acknowledgment section of a paper:
+<blockquote>Portions of the analysis presented here made use of the Perl
+Data Language (PDL) developed by K. Glazebrook, J. Brinchmann,
+J. Cerney, C. DeForest, D. Hunt, T. Jenness, T. Luka, R. Schwebel, and
+C. Soeller and can be obtained from http://pdl.perl.org. PDL provides
+a high-level numerical functionality for the Perl scripting language
+(Glazebrook & Economou, 1997).</blockquote></li>
+</ul>
+
+In your References, include one of the following:
+<ul>
+<li>Glazebrook &amp; Economou 1997, The Perl Journal,
+<strong>5</strong>, 5</li>
+
+<li>Glazebrook &amp; Economou 1997, Dr. Dobb's Journal, Sep 01, <a
+href="http://www.ddj.com/184410442">http://www.ddj.com/184410442</a></li>
+</ul>
+
+<p>The Dr. Dobb's Journal article is a reprint of the Perl Journal
+article. The Perl Journal is <a
+href="http://www.ddj.com/web-development/tpj.jhtml">no longer
+published</a>, but archives of the articles may be found on the <a
+href="http://www.ddj.com">Dr. Dobb's Journal website</a>.</p>
+
+<HR>
+<IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
+<SMALL>
+This page was written by Derek Lamb and various other pdl-porters.
+Please send bugs and ideas for this web page to 
+<A HREF="mailto:pdl-porters@jach.hawaii.edu">pdl-porters@jach.hawaii.edu</A>.
+<BR>
+Last modified: <!--#flastmod virtual="index.shtml"-->
+</SMALL>
+
+<p>
+ <a href="http://validator.w3.org/check?uri=referer">
+ <img src="http://www.w3.org/Icons/valid-html401"
+ border="0" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+
+ <a href="http://jigsaw.w3.org/css-validator/check/referer">
+  <img style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!">
+ </a>
+
+</p>
+</div><!--end div main-->
+</BODY>
+</HTML>

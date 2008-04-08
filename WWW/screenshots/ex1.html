@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+   <TITLE> Example 1 </TITLE>
+</HEAD>
+<BODY BGCOLOR="WHITE">
+ <pre>
+        $size = 25;
+        $x = (xvals zeroes $size+1,$size+1) / $size;
+        $y = (yvals zeroes $size+1,$size+1) / $size;
+        $z = 0.5 + 0.5 * (sin($x*6.3) * sin($y*6.3)) ** 3;   # Bumps
+
+        imag3d [$x,$y,$z]; # Draw a shaded surface
+
+</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="ex1.gif" align="CENTER" alt="" width="419" height="421">
+</body>
+</HTML>

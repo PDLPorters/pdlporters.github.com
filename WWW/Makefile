@@ -1,64 +1,29 @@
 # might barf on non GNU makes
-ifndef WML
-	WML = wml
-endif
+.SUFFIXES: .html .shtml
 
-         ROOT = .
-    FRAMEWORK = $(ROOT)/templates/menue_top.wml \
-		$(ROOT)/templates/menue_bottom.wml \
-                $(ROOT)/templates/top.wml \
-                $(ROOT)/templates/bottom.wml \
-                $(ROOT)/templates/footer.wml
-INC_TEMPLATES = -Itemplates
-
-.SUFFIXES: .html .wml
-
-%.html:	
-		$(WML) $(INC_TEMPLATES) $< -o $@
-
-all:		index_de.html index_en.html index_es.html\
-		oldnews_de.html oldnews_en.html oldnews_es.html\
-		subdirs \
-		link
-
-subdirs:	
-		(cd screenshots && $(MAKE) all)
-		(cd documentation && $(MAKE) all)
-		(cd download && $(MAKE) all)
-		(cd libraries && $(MAKE) all)
-		(cd maillists && $(MAKE) all)
-		(cd development && $(MAKE) all)
-		(cd team && $(MAKE) all)
-		(cd demos && $(MAKE) all)
-	        (cd nifty && $(MAKE) all)
-
-index_de.html:	index.wml $(FRAMEWORK) menue.wml
-index_en.html:	index.wml $(FRAMEWORK) menue.wml
-index_es.html:	index.wml $(FRAMEWORK) menue.wml
-
-oldnews_de.html:oldnews.wml $(FRAMEWORK) menue.wml
-oldnews_en.html:oldnews.wml $(FRAMEWORK) menue.wml
-oldnews_es.html:oldnews.wml $(FRAMEWORK) menue.wml
-
-link:		
-		rm -f index.html
-		cp index_en.html index.html
+all:
 
 clean:		
-		rm -fr *_en.html *_de.html *~
-		(cd screenshots && $(MAKE) clean)
-		(cd documentation && $(MAKE) clean)
-		(cd download && $(MAKE) clean)
-		(cd libraries && $(MAKE) clean)
-		(cd maillists && $(MAKE) clean)
-		(cd development && $(MAKE) clean)
-		(cd team && $(MAKE) clean)
-		(cd demos && $(MAKE) clean)
+		rm -fr *~
+		(cd acknowledge && rm -fr *~)
+		(cd demos && rm -fr *~)
+		(cd development && rm -fr *~)
+		(cd documentation && rm -fr *~)
+		(cd download && rm -fr *~)
+		(cd libraries && rm -fr *~)
+		(cd maillists && rm -fr *~)
+		(cd nifty && rm -fr *~)
+		(cd screenshots && rm -fr *~)
+		(cd team && rm -fr *~)
 
 distclean:
 		rm -fr *~
 
-dist:	all
+realclean: 	distclean
+	   	rm -f pdlwww.tar.gz
+dist:
 	perl util/selectfiles > .mirror
+	cat .mirror |perl util/selectdirs > .dirs
 	echo './.mirror' >> .mirror
+	echo './.dirs' >> .mirror
 	tar -zcf pdlwww.tar.gz  --files-from=.mirror

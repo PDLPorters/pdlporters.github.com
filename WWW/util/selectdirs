@@ -1,0 +1,6 @@
+while(chomp($line=<STDIN>)){
+$line=~/(.+)\//;
+$dirs{$1}='';
+}
+print join("\n",sort keys %dirs),"\n";
+

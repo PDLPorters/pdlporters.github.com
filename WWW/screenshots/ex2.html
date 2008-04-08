@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+   <TITLE> Example 2 </TITLE>
+</HEAD>
+<BODY BGCOLOR="WHITE">
+ <pre>
+        $size = 25;
+        $x = (xvals zeroes $size+1,$size+1) / $size;
+        $y = (yvals zeroes $size+1,$size+1) / $size;
+        $z = 0.5 + 0.5 * (sin($x*6.3) * sin($y*6.3)) ** 3;   # Bumps
+
+        $r = $x; $g = $y; $b = $z;
+        line3d [$x,$y,$z], [$r,$g,$b];  # Draw several colored lines
+
+</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="ex2.gif" align="CENTER" alt="" width="420" height="420">
+</body>
+</HTML>

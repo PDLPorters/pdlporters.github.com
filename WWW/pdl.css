@@ -1,11 +1,40 @@
+/* This Style Sheet contains styles 
+applicable to the entire PDL website */
+
+body {
+  background-color:#ffffff;
+  color:#000000;
+  margin: 0;
+  padding: 0;
+}
+
+#navBar {
+  background-color:#008da5;
+  color:#ffffff;
+  float:left;
+  width:11em;
+  padding: 0 0.2em 0.2em 0;
+  margin: 0;
+  list-style-image:url('/images/M_red.gif');
+}
+
+a.navBar:link{color:#ffffff;}
+a.navBar:visited{color:#ffffff;}
+a.navBar:hover{color:#ff0000;}
+a.navBar:active{color:#ff0000;}
+
+#main{
+  background-color:white;
+  position:absolute;
+  left:11em;
+  width:75%;
+  margin-left:0.5em;
+  margin-top:0;
+}
+
+a:link {color:#24009C}
+a:visited {color: #9C0000}
+a:active {color: #FFFF00}
+
 H1,H2,H3,H4,H5,H6 { font-family: arial,helvetica,sans-serif }
-PRE,TT { font-family: courier,sans-serif }
-
-SPAN.center { text-align: center }
-SPAN.boxspace { font-size: 2pt; }
-
-A.menue { color: #FFFFFF }
-A.menue:visited { color: #FFFFFF }
-A.menue:hover { color: #FF0000 }
-
-FONT.menue { color: #FFFFFF }
+PRE,TT { font-family: courier,monospace }

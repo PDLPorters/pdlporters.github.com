@@ -12,6 +12,12 @@
 
 <TABLE border="1" width="100%" summary="">
 <TR><TD bgcolor="#FFFF80"><div align="center"><B>NEWS</B></div></TD></TR>
+<TR><TD bgcolor="#E0E0E0"><B><I>2006/08/20</I></B><BR></TD><TR><TD bgcolor="#E0E0E0"><A
+HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL
+2.4.3</a> is available on <a
+HREF="http://www.sourceforge.net">Sourceforge</A> and <a
+HREF="http://search.cpan.org/~csoe/PDL-2.4.3/">CPAN</A>. This is
+mostly a polishing release. Highlights: Many bug fixes; Improved support for 64-bit systems, MS Windows, and Cygwin; Improved bad-value handling; Better CPAN compatibility.<BR></TD>
 <TR><TD bgcolor="#E0E0E0"><B><I>2005/03/11</I></B><BR></TD><TR><TD bgcolor="#E0E0E0">Updates to the web pages: 
 a <A HREF="/nifty/index.shtml">success stories</a> page, and Spanish language support. My spanish is rusty and I barely speak any German at all. If the language is a bit broken, please let me know how to fix it! deforest (at) boulder (dot) swri (dot) edu. (CD)<BR></TD>
 <TR><TD bgcolor="#E0E0E0"><B><I>2004/12/28</I></B><BR></TD><TR><TD bgcolor="#E0E0E0">PDL RESULTS IN THE NEWS: I am assembling a web page of science results, web pages, and interesting plots that were made with PDL. Some examples include the discovery of <a href="http://www.space.com/businesstechnology/technology/technovel_sunsound_041214.html">"ultrasound" on the Sun</a>, and the <a href="http://www.space.com/scienceastronomy/gemini_survey_040105.html">presence of mature galaxies</a> in the young Universe. If you have a nifty plot or a nice web page you'd like to show off, please send me a note: deforest (at) boulder (dot) swri (dot) edu. (CD)<BR></TD>

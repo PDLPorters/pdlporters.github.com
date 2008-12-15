@@ -17,25 +17,21 @@
 
 <div class="news">
 <h4 class="news">NEWS</h4>
-<h5 class="news">2006-08-20</h5>
+<h5 class="news">2008-11-13</h5>
 <A
-HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL
-2.4.3</a> is available on <a
+HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.4.tar.gz?download">PDL
+2.4.4</a> is available on <a
 HREF="http://www.sourceforge.net">Sourceforge</A> and <a
-HREF="http://search.cpan.org/~csoe/PDL-2.4.3/">CPAN</A>. This is
-mostly a polishing release. Highlights:
+HREF="http://search.cpan.org/~chm/PDL-2.4.4/">CPAN</A>. Highlights include:
 
 <ul>
-<li>Many bug fixes;</li>
-<li>Improved support for:
- <ul>
- <li>64-bit systems</li>
- <li>MS Windows</li>
- <li>Cygwin;</li>
- </ul>
-<li>Improved bad-value handling;</li>
-<li>Better CPAN compatibility</li>
+<li><A HREF="http://pdl.sourceforge.net/PDLdocs/BadValues.html">Bad value</A> support enabled by default</li>
+<li>Builds out-of-the-box on Cygwin and MS Windows</li>
+<li>Support for Perl 5.10</li>
+<li>Preliminary support for refactored 3D graphics modules</li>
+<li>Many bug fixes, portability improvements, and functionality enhancements</li>
 </ul>
+For more details read the <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&amp;release_id=640220">release notes.</a>
 <h4 class="news" style="font-size:smaller"><a href="oldnews.shtml">old Entries</a></h4>
 </div><!--end div news-->
 
@@ -44,11 +40,11 @@ HREF="http://www.perl.org">Perl</A> the ability to <em>compactly</em> store and
 <em>speedily</em> manipulate the large N-dimensional data arrays which are the
 bread and butter of scientific computing. </p>
 
-<p align="justify"> PDL turns perl in to a free, array-oriented,
+<p align="justify"> PDL turns Perl in to a free, array-oriented,
 numerical language similar to (but, we believe, better than) such
 commerical packages as IDL and MatLab. One can write simple perl
 expressions to manipulate entire numerical arrays all at once. For
-example, using <strong>PDL</strong> the perl variable <strong>$a</strong> can hold a
+example, using <strong>PDL</strong> the Perl variable <strong>$a</strong> can hold a
 1024x1024 floating point image, it only takes 4MB of memory to store
 it and expressions like <strong>$a=sqrt($a)+2</strong> manipulate the whole
 image in a few milliseconds. </p>

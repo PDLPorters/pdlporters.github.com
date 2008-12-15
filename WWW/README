@@ -37,26 +37,30 @@ How to publish these pages
 
   make dist
 
-2) copy to SF
+2) Create a new shell at SF
 
-  scp pdlwww.tar.gz your_user_id@shell.sourceforge.net:.
+  ssh your_user_id,pdl@shell.sourceforge.net create
 
-3) login to shell server at SF
+3) copy to SF
 
-  ssh your_user_id@shell.sourceforge.net
+  scp pdlwww.tar.gz your_user_id,pdl@shell.sourceforge.net:.
 
-4) Make a backup copy of the current pages
+4) login to shell server at SF
+
+  ssh your_user_id,pdl@shell.sourceforge.net
+
+5) Make a backup copy of the current pages
 
   cd /home/groups/p/pd/pdl/htdocs
   rm -rf WWWold
   mkdir WWWold
   cp --parents `cat .mirror` WWWold
 
-5) install files into the SF web area
+6) install files into the SF web area
 
   tar zxf ~/pdlwww.tar.gz
 
-Now an *important* step to let other developers
+7) Now an *important* step to let other developers
 publish, too. Make everything group writable:
 
  chmod -R g+w .
@@ -64,7 +68,7 @@ publish, too. Make everything group writable:
 If you run into permission problems
 please ask for help on the mailing list.
 
-5) check out pages which should now be online at
+8) check out pages which should now be online at
 
   http://pdl.sourceforge.net/
 

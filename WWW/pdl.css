@@ -6,27 +6,29 @@ body {
   color:#000000;
   margin: 0;
   padding: 0;
+  font: 11pt arial,helvetica,sans-serif;
 }
 
 #navBar {
   background-color:#008da5;
   color:#ffffff;
+  font-weight: bold;
   float:left;
-  width:11em;
+  width:10em;
   padding: 0 0.2em 0.2em 0;
   margin: 0;
   list-style-image:url('/images/M_red.gif');
 }
 
-a.navBar:link{color:#ffffff;}
-a.navBar:visited{color:#ffffff;}
-a.navBar:hover{color:#ff0000;}
-a.navBar:active{color:#ff0000;}
+#navBar a {color: #ffffff; text-decoration: none;}
+#navBar a:hover { background: #1AA7BF; }
+#navBar ul { list-style:none; margin:0; padding-left:1em;} /* remove bullets and list indents */
+#navBar h4 {color:#ff8080; margin:.25em 0 0 .5em;}
 
 #main{
   background-color:white;
   position:absolute;
-  left:11em;
+  left:10em;
   width:75%;
   margin-left:0.5em;
   margin-top:0;

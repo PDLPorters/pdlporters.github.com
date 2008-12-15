@@ -5,6 +5,7 @@
   margin:0;
   padding:0;
   min-height:150px;
+  border-top: 1px solid white;
 }
 
 #PDLtitle {color:#000000;}
@@ -34,3 +35,10 @@ text-align:left;
 font-weight:bold;
 margin: 0 0 0 0;
 }
+
+div.news ul {
+margin-top:0;
+padding-left:1.5em;
+}
+
+#main p {text-align:justify;} /*justify paragraphs on the front page only*/

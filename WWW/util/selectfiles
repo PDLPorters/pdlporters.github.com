@@ -7,7 +7,8 @@ use ExtUtils::Manifest;
 # as specified in MANIFEST.SKIP
 
 # use internal functionality in ExtUtils::Manifest
-$skip = ExtUtils::Manifest::_maniskip();
+$skip = ExtUtils::Manifest::_maniskip() if $ExtUtils::Manifest::VERSION<1.54;
+$skip = ExtUtils::Manifest::maniskip() if $ExtUtils::Manifest::VERSION>=1.54;
 $sub = sub {
 	# print STDERR "checking $File::Find::name\n";
         return if $skip->($File::Find::name);

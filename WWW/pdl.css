@@ -17,7 +17,6 @@ body {
   width:10em;
   padding: 0 0.2em 0.2em 0;
   margin: 0;
-  list-style-image:url('/images/M_red.gif');
 }
 
 #navBar a {color: #ffffff; text-decoration: none;}

@@ -45,20 +45,18 @@
 
 
 	   </TD><TD bgcolor="#eeeeee" width="20%" valign="top"><A HREF="http://sourceforge.net/project/showfiles.php?group_id=612">[BINARY]</A><BR>&nbsp;</TD></TR>
-<TR><TD bgcolor="#eeeeee" width="20%" valign="top">CVS Server
+<TR><TD bgcolor="#eeeeee" width="20%" valign="top">Git
                  
 		 </TD><TD bgcolor="#eeeeee" width="60%" valign="top">
-<p align="justify"> The latest source code is available via <A
-                 HREF="http://sourceforge.net/cvs/?group_id=612">CVS</A>,
-                 so you can always check out the latest developer
-                 snapshots. Compressed tar archives of the most recent
-                 <A
-                 HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">snapshot</A>
-                 are available for those who want to save dealing with
-                 the hassle of CVS. Please notice that these snapshots
-                 can be distinguished by a lack of documentation and
-                 may contain very new and untested code. But that's
-                 life at the leading edge...</p>
+
+		 <p align="justify">
+		 The latest source code is available via <A
+		 HREF="https://sourceforge.net/scm/?type=git&group_id=612">
+		 Git</A>, so you can always check out the latest
+		 developer snapshots. Please notice that these
+		 snapshots can be distinguished by a lack of
+		 documentation and may contain very new and untested
+		 code. But that's life at the leading edge...</p>
 
 
 </TD><TD bgcolor="#eeeeee" width="20%" valign="top"><A HREF="http://www.sourceforge.net/project/?form_grp=612">[HOME]</A><BR><A HREF="http://PDL.sourceforge.net/PDLsnap/snapshot.html">[SRC]</A><BR>&nbsp;</TD></TR>

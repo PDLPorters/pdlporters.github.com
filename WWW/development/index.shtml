@@ -9,17 +9,17 @@
 
 <div id="main">
 <H2> PDL Development </H2>
-<P align="justify"> Since version 2.003 the PDL source distribution is
-in a <A HREF="http://sourceforge.net/cvs/?group_id=612">publicly accessible
-CVS repository</A>. The whole
+<P align="justify"> Since April 2009 (after version 2.4.4) the PDL source distribution is
+in a <A HREF="https://sourceforge.net/scm/?type=git&group_id=612">publicly accessible
+Git repository</A>. The whole
 <A HREF="http://www.sourceforge.net/project/?form_grp=612">PDL project</A>
-is now hosted at <A HREF="http://www.sourceforge.net">SourceForge</A>. There
+is hosted at <A HREF="http://www.sourceforge.net">SourceForge</A>. There
 you also find the <A HREF="http://sourceforge.net/bugs/?group_id=612">PDL Bug database</A>
 and the <A HREF="http://sourceforge.net/patch/?group_id=612">PDL patch manager</A> which you
 should use to submit patches for PDL.</P>
 <P align="justify"> The easiest way to get your changes into the most recent
 version of PDL is to become a developer. This status will give you write
-access to the <A HREF="http://sourceforge.net/cvs/?group_id=612">CVS
+access to the <A HREF="https://sourceforge.net/scm/?type=git&group_id=612">Git
 repository</A>. To become a developer you should register as a user with
 <A HREF="http://www.sourceforge.net">SourceForge</A> and contact one of the
 project admins listed on the
@@ -64,12 +64,12 @@ a fix. (Primary responsibility for this task is the pumpking,
 but other devels should be able to help.)</P>
 </LI>
 </OL>
-<H2>Using CVS</H2>
-Not everybody is a CVS expert when he becomes a developer.
-There are various CVS documents available online. Have a look at
-a nice <A HREF="http://www.cyclic.com/CVS/Docs/blandy">concise
-tutorial</A> and the online version of the
-<A HREF="http://cvsbook.red-bean.com/cvsbook.html">CVS book</A>.
+<H2>Using Git</H2>
+Not everybody is a Git expert when he becomes a developer.  There are
+various Git documents available online. Good places to start are the
+<A HREF="http://git-scm.com/documentation">Git documentation</A> and
+the guide to <A HREF="http://p.sf.net/sourceforge/git">Git on
+Sourceforge</A>.
 <HR>
 <IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
 <SMALL>

@@ -10,21 +10,19 @@
 <div id="main">
 <H2> PDL Development </H2>
 <P align="justify"> Since April 2009 (after version 2.4.4) the PDL source distribution is
-in a <A HREF="https://sourceforge.net/scm/?type=git&group_id=612">publicly accessible
+in a <A HREF="https://sourceforge.net/scm/?type=git&amp;group_id=612">publicly accessible
 Git repository</A>. The whole
-<A HREF="http://www.sourceforge.net/project/?form_grp=612">PDL project</A>
+<A HREF="http://www.sourceforge.net/projects/pdl">PDL project</A>
 is hosted at <A HREF="http://www.sourceforge.net">SourceForge</A>. There
 you also find the <A HREF="http://sourceforge.net/bugs/?group_id=612">PDL Bug database</A>
-and the <A HREF="http://sourceforge.net/patch/?group_id=612">PDL patch manager</A> which you
+and the <A HREF="http://sourceforge.net/patch/?group_id=612">PDL patch manager</A> which non-developers
 should use to submit patches for PDL.</P>
 <P align="justify"> The easiest way to get your changes into the most recent
 version of PDL is to become a developer. This status will give you write
-access to the <A HREF="https://sourceforge.net/scm/?type=git&group_id=612">Git
+access to the <A HREF="https://sourceforge.net/scm/?type=git&amp;group_id=612">Git
 repository</A>. To become a developer you should register as a user with
 <A HREF="http://www.sourceforge.net">SourceForge</A> and contact one of the
-project admins listed on the
-<A HREF="http://www.sourceforge.net/project/?form_grp=612">PDL
-project page</A>.</P>
+<A HREF="https://sourceforge.net/projects/pdl#item3rd-1">project admins</A>.</P>
 <H2> Hints for developers </H2>
 <OL>
 <LI> <P align="justify">Before committing a change to the repository you
@@ -69,7 +67,8 @@ Not everybody is a Git expert when he becomes a developer.  There are
 various Git documents available online. Good places to start are the
 <A HREF="http://git-scm.com/documentation">Git documentation</A> and
 the guide to <A HREF="http://p.sf.net/sourceforge/git">Git on
-Sourceforge</A>.
+Sourceforge</A>. Check the FAQ for a guide to the <a href="http://pdl.sourceforge.net/FAQ/#cvs__git__and_ongoing_development">most basic git commands</a>.
+
 <HR>
 <IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
 <SMALL>

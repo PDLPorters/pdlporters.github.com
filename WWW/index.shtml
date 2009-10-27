@@ -17,21 +17,26 @@
 
 <div class="news">
 <h4 class="news">NEWS</h4>
-<h5 class="news">2008-11-13</h5>
+<h5 class="news">2009-10-24</h5>
 <A
-HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.4.tar.gz?download">PDL
-2.4.4</a> is available on <a
-HREF="http://www.sourceforge.net">Sourceforge</A> and <a
-HREF="http://search.cpan.org/~chm/PDL-2.4.4/">CPAN</A>. Highlights include:
+HREF="http://sourceforge.net/projects/pdl/files/PDL/2.4.5/PDL-2.4.5.tar.gz/download">PDL
+2.4.5</a> is available on <a
+HREF="http://sourceforge.net/projects/pdl/">Sourceforge</A> and <a
+HREF="http://search.cpan.org/~chm/PDL-2.4.5/">CPAN</A>. Highlights include:
 
 <ul>
-<li><A HREF="http://pdl.sourceforge.net/PDLdocs/BadValues.html">Bad value</A> support enabled by default</li>
-<li>Builds out-of-the-box on Cygwin and MS Windows</li>
-<li>Support for Perl 5.10</li>
-<li>Preliminary support for refactored 3D graphics modules</li>
-<li>Many bug fixes, portability improvements, and functionality enhancements</li>
+<li>3D graphics modules now run on win32 and Mac OS X systems without
+requiring X11 be installed.  The only prerequisites are the <a href="http://search.cpan.org/~chm/OpenGL-0.60/">OpenGL Perl module</a> and
+FreeGLUT/GLUT.</li>
+<!--li>Release documentation and FAQ have been updated to be more useful
+(and more accurate).</li>
+<li>PDL build, test and run time diagnostic messages have been made
+clearer and more helpful.</li-->
+<li>Many bug fixes since PDL-2.4.4 make this the most reliable PDL
+ever.</li>
+<li>PDL now requires Perl 5.6.2 or greater and has updated <a href="http://pdl.git.sourceforge.net/git/gitweb.cgi?p=pdl/pdl;a=blob;f=DEPENDENCIES;h=999007b05ab841b60d5152191918f36e7b7b1ad7;hb=c62a322b1c8648fc0c6c7a7bbcade6bc1b2350ab">DEPENDENCIES</a> information and code, for improved PDL buildability.</li>
 </ul>
-For more details read the <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&amp;release_id=640220">release notes.</a>
+For more details read the <A HREF="http://pdl.git.sourceforge.net/git/gitweb.cgi?p=pdl/pdl;a=blob;f=Release_Notes;h=58eaeb20e99667e637a4fd61b8e3bff2b7c06b11;hb=c62a322b1c8648fc0c6c7a7bbcade6bc1b2350ab">release notes.</a>
 <h4 class="news" style="font-size:smaller"><a href="oldnews.shtml">old Entries</a></h4>
 </div><!--end div news-->
 

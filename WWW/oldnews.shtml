@@ -12,6 +12,14 @@
 
 <TABLE border="1" width="100%" summary="">
 <TR><TD bgcolor="#FFFF80"><div align="center"><B>NEWS</B></div></TD></TR>
+<TR><TD bgcolor="#E0E0E0"><B><I>2008/11/13</I></B><BR></TD><TR><TD bgcolor="E0E0E0"><A
+HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.4.tar.gz?download">PDL
+2.4.4</a> is available on <a HREF="http://www.sourceforge.net">Sourceforge</A> and <a
+HREF="http://search.cpan.org/~chm/PDL-2.4.4/">CPAN</A>. Highlights include:
+
+<A HREF="http://pdl.sourceforge.net/PDLdocs/BadValues.html">Bad value</A> support enabled by default;
+Builds out-of-the-box on Cygwin and MS Windows; Support for Perl 5.10; Preliminary support for refactored 3D graphics modules; Many bug fixes, portability improvements, and functionality enhancements.
+For more details read the <A HREF="http://sourceforge.net/project/shownotes.php?group_id=612&amp;release_id=640220">release notes.</a></td></tr>
 <TR><TD bgcolor="#E0E0E0"><B><I>2006/08/20</I></B><BR></TD><TR><TD bgcolor="#E0E0E0"><A
 HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.3.tar.gz?download">PDL
 2.4.3</a> is available on <a

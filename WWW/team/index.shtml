@@ -1,83 +1,8 @@
 <!--#include virtual="/head.html"-->
 <TITLE>PDL - The Team</TITLE>
+<meta HTTP-EQUIV="REFRESH" content="0; url=http://sourceforge.net/apps/mediawik\
+i/pdl/index.php?title=Team">
 </HEAD>
 <BODY>
-
-<div id="navBar">
-<!--#include virtual="/menu.html"-->
-</div>
-
-<div id="main">
-<H2> The Team </H2>
-
-
-John Cerney (<A HREF="mailto:j-cerney1@raytheon.com">mail</A>)
-<ul><li>Real life: I develop data-analysis and visualization tools for RF/Microwave test data.</li>
-<li>PerlDL: PDL Pumpking (Incorporation of patches, generating official releases, etc) since 1998.</li>
-</ul>
-
-<A HREF="http://www.boulder.swri.edu/~deforest">Craig DeForest</a> (<A HREF="mailto:deforest@boulder.swri.edu">mail</A>)
-<ul><li>Real life: I am a solar astrophysicist at Southwest Research Institute. I use PDL for image processing, artificial vision, and magnetohydrodynamic modeling.</li>
-<li>PerlDL: Module development & debugging, current release manager, web page development.</li>
-</ul>
-
-<A HREF="http://www.pha.jhu.edu/~kgb/">Karl Glazebrook</a> (<A HREF="mailto:kgb@pha.jhu.edu">mail</A>)
-<ul><li>Real life: Professor at Johns Hopkins University, Dept. of Physics and Astronomy</li>
-<li>PerlDL: Creator of PDL</li>
-</ul>
-
-
-<A HREF="http://www.cosmic.ucar.edu">Doug Hunt</a> (<A HREF="mailto:dhunt@ucar.edu">mail)</A>
-<ul><li>Real life: Software engineer for the COSMIC project (using GPS receivers in low earth orbit for weather and climate measurement). Use perl whenever permitted by law.</li>
-<li>PerlDL: Author of PDL::NetCDF and PDL::Char. Helping with PP optimization of late.</li>
-</ul>
-
-<A HREF="http://www.jach.hawaii.edu/~timj/">Tim Jenness</a> (<A HREF="mailto:tjenness@cpan.org">mail</A>)
-<ul><li>Real life: Software engineer and Support Astronomer at the James Clerk Maxwell Telescope</li>
-<li>PerlDL: Author of PDL::Options, PDL::IO::NDF and miscellaneous other things. My main contribution seems to be cajoling people into doing things like the FITS reader or bad pixel masking :-)</li>
-</ul>
-
-Tuomas J. Lukka (<A HREF="mailto:lukka@iki.fi">mail</A>)
-<ul><li>Real life: Computer Science Researcher, University of Jyv&auml;skyl&auml;</li>
-<li>PerlDL: PP, TriD, etc. Much of the slightly strange but useful stuff in 2.0. Known for missing self-imposed deadlines on releases.</li>
-</ul>
-
-<A HREF="http://www.schwebel.de">Robert Schwebel</a> (<A HREF="mailto:robert@schwebel.de">mail</A>)
-<ul><li>Real life: I'm a hard- and software engineer working for <A HREF="http://www.zeutec.de">Zeutec Optoelektronik</A>, a small german company making spectroscopy components for chemical applications. In private I'm an active amateur astronomer, mainly interested in observation of planets. For more information about what I'm doing please have a look at my <A HREF="http://www.schwebel.de/index_en.html">private homepage</A>.</li>
-<li>PerlDL: I'm no longer maintaining the web pages for PDL, but respond to email questions. As I'm more a PDL user than a hardcore developer<CODE>;-)</CODE> my team activities consist mostly of writing bug reports and enjoying the quick response time of the <em>real</em> developers.</li>
-</ul>
-
-Christian Soeller (<A HREF="mailto:c.soeller@auckland.ac.nz">mail</A>)
-<ul><li>Real life: Member of staff in the Dept. of Physiology, Univ. of Auckland - main interests biophysics and biomedical imaging (confocal/multiphoton)</li>
-<li>PerlDL: Various bits of PDL; occasional Core and PP hacking</li>
-</ul>
-
-<HR>
-<IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
-<SMALL>
-This page was written by 
-
-<A HREF="http://www.schwebel.de">Robert Schwebel</A>
-and various other pdl-porters.
-
-Please send bugs and ideas for this web page to 
-
-<A HREF="mailto:pdl-porters@jach.hawaii.edu">pdl-porters@jach.hawaii.edu</A>.
-<BR>
-Last modified: <!--#flastmod virtual="index.shtml"-->
-</SMALL>
-<p>
- <a href="http://validator.w3.org/check?uri=referer">
- <img src="http://www.w3.org/Icons/valid-html401"
- border="0" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
-
- <a href="http://jigsaw.w3.org/css-validator/check/referer">
-  <img style="border:0;width:88px;height:31px"
-       src="http://jigsaw.w3.org/css-validator/images/vcss"
-       alt="Valid CSS!">
- </a>
-
-</p>
-</div><!--end div main-->
 </BODY>
 </HTML>

@@ -70,11 +70,16 @@ please ask for help on the mailing list.
 
 8) check out pages which should now be online at
 
-  http://pdl.sourceforge.net/
+  http://pdl.sourceforge.net/ and
+  http://pdl.perl.org/
+
 
 If you made a mistake, you can edit the files directly here, and the
 changes will be visible immediately.  Just remember to propagate that
 change back to the copy on your machine so you can commit it to CVS.
-Be aware that these files are mirrored to pdl.perl.org shortly after
-midnight Hawaii Standard Time (GMT - 10 hours), so if you leave any
-mistakes here they WILL make their way to the main PDL website.
+
+**********************************************************************
+Be aware that pdl.sourceforge.net and pdl.perl.org are now (since
+November 2009) the same, so any changes you make here will be visible
+to the whole world immediately!
+**********************************************************************

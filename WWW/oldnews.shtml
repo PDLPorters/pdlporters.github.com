@@ -12,6 +12,16 @@
 
 <TABLE border="1" width="100%" summary="">
 <TR><TD bgcolor="#FFFF80"><div align="center"><B>NEWS</B></div></TD></TR>
+<TR><TD bgcolor="#EOEOEO"><B><I>2009/10/24</I></B><BR></TD><TR><TD bgcolor="#EOEOEO"><A
+HREF="http://sourceforge.net/projects/pdl/files/PDL/2.4.5/PDL-2.4.5.tar.gz/download">PDL
+2.4.5</a> is available on <a
+HREF="http://sourceforge.net/projects/pdl/">Sourceforge</A> and <a
+HREF="http://search.cpan.org/~chm/PDL-2.4.5/">CPAN</A>. Highlights include:
+3D graphics modules now run on win32 and Mac OS X systems without
+requiring X11 be installed.  The only prerequisites are the <a href="http://search.cpan.org/~chm/OpenGL-0.60/">OpenGL Perl module</a> and
+FreeGLUT/GLUT; Many bug fixes since PDL-2.4.4 make this the most reliable PDL
+ever; PDL now requires Perl 5.6.2 or greater and has updated <a href="http://pdl.git.sourceforge.net/git/gitweb.cgi?p=pdl/pdl;a=blob;f=DEPENDENCIES;h=999007b05ab841b60d5152191918f36e7b7b1ad7;hb=c62a322b1c8648fc0c6c7a7bbcade6bc1b2350ab">DEPENDENCIES</a> information and code, for improved PDL buildability.
+For more details read the <A HREF="http://pdl.git.sourceforge.net/git/gitweb.cgi?p=pdl/pdl;a=blob;f=Release_Notes;h=58eaeb20e99667e637a4fd61b8e3bff2b7c06b11;hb=c62a322b1c8648fc0c6c7a7bbcade6bc1b2350ab">release notes.</a></td></tr>
 <TR><TD bgcolor="#E0E0E0"><B><I>2008/11/13</I></B><BR></TD><TR><TD bgcolor="E0E0E0"><A
 HREF="http://prdownloads.sourceforge.net/pdl/PDL-2.4.4.tar.gz?download">PDL
 2.4.4</a> is available on <a HREF="http://www.sourceforge.net">Sourceforge</A> and <a

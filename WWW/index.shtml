@@ -25,7 +25,8 @@ HREF="http://sourceforge.net/projects/pdl/">Sourceforge</A> and <a
 HREF="http://search.cpan.org/~chm/PDL-2.4.6/">CPAN</A>. This is mainly a polishing release with bug fixes and documentation improvements. Highlights are:
 <ul>
 <li>Enhanced 2D and 3D graphics support</li>
-<li>New <a href="http://pdl.git.sourceforge.net/git/gitweb.cgi?p=pdl/pdl;a=blob_plain;f=imag2d.pdl;hb=HEAD">2D image display routine</a></li>
+<li>New <a href="http://search.cpan.org/~chm/PDL-2.4.6/imag2d.pdl">2D 
+image display routine</a></li>
 <li><a href="http://search.cpan.org/~chm/OpenGL-0.62/">OpenGL-0.62</a> now required for 3D graphics</li>
 <li>Build fixes for many platforms</li>
 </ul>

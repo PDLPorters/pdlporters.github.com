@@ -1,0 +1,94 @@
+ 	<div class="slideshow-container">
+	<div class="slideshow">
+		<img src="images/slideshow/slide01.png" width="200" height="200" />
+		<img src="images/slideshow/slide02.png" width="200" height="200" />
+		<img src="images/slideshow/slide03.png" width="200" height="200" class="border" />
+		<a href="http://pdl.sourceforge.net/PDLdocs/NiceSlice.html">
+			<img src="images/slideshow/slide06.png" width="200" height="200" />
+		</a>
+		<img src="images/slideshow/slide04.png" width="200" height="200" class="border" />
+		<img src="images/slideshow/slide05.png" width="200" height="200" />
+		<a href="http://pdl.sourceforge.net/PDLdocs/Graphics/TriD.html">
+			<img src="images/slideshow/slide07.png" width="200" height="200" />
+		</a>
+		<img src="images/slideshow/slide09.jpg" width="200" height="200" />
+		<img src="images/slideshow/slide10.jpg" width="200" height="200" />
+		<a href="http://google.com">
+			<img src="images/slideshow/slide08.png" width="200" height="200" />
+		</a>
+	</div>
+	<center id="toggle-slideshow">pause</center>
+	</div>
+ <p>PDL ("Perl Data Language") gives standard Perl the ability to
+ <em>compactly</em> store and <em>speedily</em> manipulate the large
+ N-dimensional data arrays which are the bread and butter of
+ scientific computing.</em></p>
+
+ <p>PDL turns Perl in to a free, array-oriented, numerical language
+ similar to (but, we believe, better than) such commerical packages
+ as IDL and MatLab. One can write simple perl expressions to manipulate
+ entire numerical arrays all at once. For example, using PDL the Perl
+ variable <tt>$a</tt> can hold a 1024x1024 floating point image, it only
+ takes 4MB of memory to store it and expressions like 
+ <tt>$a = sqrt($a) + 2</tt> manipulate the whole image in a few milliseconds.</p>
+
+ <p>A simple interactive shell (<tt>perldl</tt>) is provided for use
+ from the command line and a module (<tt>PDL</tt>) for use in Perl
+ scripts.</p>
+
+ <p>The PDL distribution for Perl is <em>free Software</em> and provides
+ extensive numerical and semi-numerical functionality with support for
+ two- and three-dimensional visualisation as well as a variety of I/O
+ formats. The goal is to allow PDL to interact with a variety of external
+ numerical packages, graphics and visualisation systems. Easy interfacing
+ to such systems is one of the core design features of PDL.</p>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	function randomCSS() {
+		$("body").removeClass("v01");
+		$("body").removeClass("v02");
+		$("body").removeClass("v03");
+		var rand = Math.random();
+		if (rand < 0.35) {
+			$("body").addClass("v01");
+		} else if (rand < 0.7) {
+			$("body").addClass("v02");
+		} else {
+			$("body").addClass("v03");
+		}
+	}
+	function rotateCSS() {
+		randomCSS();
+		setTimeout(rotateCSS, 15000);
+	}
+	function pauseAnimation() {
+		$('.slideshow').cycle('pause');
+	}
+	function resumeAnimation() {
+		$('.slideshow').cycle('resume');
+	}
+	
+	// 
+	// Main program.
+	// 
+	rotateCSS();
+	
+	$('.slideshow').cycle({
+		fx: 'fade,curtainX,shuffle,zoom,turnDown,scrollRight',
+		shuffle: { top:200, left: 0 },
+		timeout: 5000,
+		random: 1
+	});
+	
+	$('.slideshow-container center').click(function() {
+		if ($(this).html() == 'pause') {
+			$('.slideshow').cycle('pause');
+			$(this).html('resume')
+		} else {
+			$('.slideshow').cycle('resume');
+			$(this).html('pause')
+		}
+	});
+});
+</script>

@@ -29,7 +29,10 @@
  <h1>Perl Data Language</h1>
  <h2>Scientific computing with Perl</h2>
 <div class="main">
- <? include "pages/home.html" ?>
+ <?
+ 	$page = preg_match('/^[-_a-zA-Z]$/',$_GET['page'])) ? $_GET['page'] : 'home';
+ 	include "content/$page.html";
+ ?>
 </div>
 <!-- END CONTENT -->
 

@@ -1,18 +1,19 @@
+<? $wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php"; ?>
 <div class="sidebar">
   <div class="h3"><h3>Quick links</h3></div>
   <div class="ul">
   <ul>
-    <li><a href="">Home</a></li>
-    <li><a href="">Download</a></li>
-    <li><a href="">External Libs</a></li>
+    <li><a href="?page=home">Home</a></li>
+    <li><a href="<?= $wiki_url ?>?title=Download">Download</a></li>
+    <li><a href="<?= $wiki_url ?>?title=Libraries">External Libs</a></li>
   </ul>
   </div>
   
   <div class="h3"><h3>Support</h3></div>
   <div class="ul">
   <ul>
-    <li><a href="">Wiki</a></li>
-    <li><a href="">Mailing list</a></li>
+    <li><a href="<?= $wiki_url ?>">Wiki</a></li>
+    <li><a href="?page=mailing-lists">Mailing list</a></li>
     <li><a href="">Documentation</a></li>
     <li><a href="">FAQ</a></li>
   </ul>
@@ -30,7 +31,7 @@
   <div class="h3"><h3>Credits</h3></div>
   <div class="ul">
   <ul>
-    <li><a href="">The Team</a></li>
+    <li><a href="<?= $wiki_url ?>?title=Team">The Team</a></li>
     <li><a href="">Citation</a></li>
   </ul>
   </div>
@@ -41,8 +42,9 @@
     <li><a href="">Get Started</a></li>
     <li><a href="">Git</a></li>
     <li><a href="">PDL-Git-FAQ</a></li>
-    <li><a href="">Bugs</a></li>
-    <li><a href="">Patches</a></li>
+    <? $tracker = "http://sourceforge.net/tracker/?func=browse&group_id=612" ?>
+    <li><a href="<?= $tracker ?>&atid=100612&status=1">Bugs</a></li>
+    <li><a href="<?= $tracker ?>&atid=300612&status=1">Patches</a></li>
   </ul>
   </div>
 </div>

@@ -51,9 +51,9 @@ function docsLink($page, $linkTitle, $pageTitle) {
   <div class="h3"><h3>Development</h3></div>
   <div class="ul">
   <ul>
-    <li><a href="">Get Started</a></li>
-    <li><a href="">Git</a></li>
-    <li><a href="">PDL-Git-FAQ</a></li>
+    <?= pageLink('development', 'Get Started') ?>
+    <li><a href="https://sourceforge.net/scm/?type=git&group_id=612">Git</a></li>
+    <li><a href="?docs=FAQ&title=Frequently%20Asked%20Questions#cvs__git__and_on_going_development">PDL-Git-FAQ</a></li>
     <? $tracker = "http://sourceforge.net/tracker/?func=browse&group_id=612" ?>
     <li><a href="<?= $tracker ?>&atid=100612&status=1">Bugs</a></li>
     <li><a href="<?= $tracker ?>&atid=300612&status=1">Patches</a></li>

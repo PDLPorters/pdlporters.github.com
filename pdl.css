@@ -12,7 +12,10 @@ body {
 	margin: 0;
 }
 img { border: none }
+dt { font-weight: bold }
+td { vertical-align: top }
 a { text-decoration: none }
+
 
 /* Emphasis */
 .v01 em { color: #400; }

@@ -1,4 +1,7 @@
 <?
+//
+//  Choose a random theme.
+//
 function randomTheme() {
 	$rand = rand(0,100);
 	if ($rand < 35)

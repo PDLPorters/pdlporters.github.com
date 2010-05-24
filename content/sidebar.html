@@ -1,9 +1,13 @@
 <?
 $wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
 
-function pageLink($page, $title) {
+function pageLink($page, $linkTitle) {
 	$class = $page == $_GET['page'] ? 'class="selected"' : '';
-	return "<li $class><a href='?page=$page'>$title</a></li>";
+	return "<li $class><a href='?page=$page'>$linkTitle</a></li>";
+}
+function docsLink($page, $linkTitle, $pageTitle) {
+	$class = $page == $_GET['docs'] ? 'class="selected"' : '';
+	return "<li $class><a href='?docs=$page&title=$pageTitle'>$linkTitle</a></li>";
 }
 ?>
 
@@ -23,7 +27,7 @@ function pageLink($page, $title) {
     <li><a href="<?= $wiki_url ?>">Wiki</a></li>
     <?= pageLink('mailing-lists', 'Mailing list') ?>
     <?= pageLink('docs', 'Documentation') ?>
-    <?= pageLink('faq', 'FAQ') ?>
+    <?= docsLink('FAQ', 'FAQ', 'Frequently Asked Questions') ?>
   </ul>
   </div>
   

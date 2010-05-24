@@ -9,7 +9,7 @@ function randomTheme() {
 	return "v03";
 }
 function formatContents($filename, $title='') {
-	$content = join("\n", file($filename));
+	$content = file_get_contents($filename);
 	$content = str_replace('<div name="index">',
 						'<div class="index" name="index">',	$content);
 	$content = str_replace("\n",'[\n]', $content);
@@ -52,12 +52,20 @@ function formatContents($filename, $title='') {
 <!-- MAIN CONTENT -->
 <div class="main">
  <?
- 	$page = 'home';
- 	if (isset($_GET['page']) && preg_match('/^[-_a-zA-Z0-9]+$/',$_GET['page'])) {
- 		$page = $_GET['page'];
+ 	function issane($string) {
+ 		return preg_match('/^[-_a-zA-Z0-9]+$/',$string);
  	}
  	
- 	require_once "content/$page.html";
+ 	if (isset($_GET['page']) && issane($_GET['page'])) {
+	 	require_once "content/".$_GET['page'].".html";
+	 	
+	} elseif (isset($_GET['docs']) && issane($_GET['docs'])) {
+		echo formatContents("PDLdocs/".$_GET['docs'].".html",$_GET['title']);
+		
+ 	} else {
+	 	require_once "content/home.html";
+ 	}
+ 	
  ?>
 </div>
 <!-- END CONTENT -->

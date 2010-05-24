@@ -20,7 +20,6 @@
 			<img src="images/slideshow/slide08.png" width="200" height="200" />
 		</a>
 	</div>
-	<center id="toggle-slideshow">pause</center>
 	</div>
  <p>PDL ("Perl Data Language") gives standard Perl the ability to
  <em>compactly</em> store and <em>speedily</em> manipulate the large
@@ -48,31 +47,13 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	function pauseAnimation() {
-		$('.slideshow').cycle('pause');
-	}
-	function resumeAnimation() {
-		$('.slideshow').cycle('resume');
-	}
-	
 	// 
-	// Main program.
+	// Start slideshow plugin.
 	// 
 	$('.slideshow').cycle({
 		fx: 'fade,curtainX,zoom,turnDown,scrollRight',
-		shuffle: { top:200, left: 0 },
 		timeout: 25000,
 		random: 1
-	});
-	
-	$('.slideshow-container center').click(function() {
-		if ($(this).html() == 'pause') {
-			$('.slideshow').cycle('pause');
-			$(this).html('resume')
-		} else {
-			$('.slideshow').cycle('resume');
-			$(this).html('pause')
-		}
 	});
 });
 </script>

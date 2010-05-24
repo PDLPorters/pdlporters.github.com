@@ -152,7 +152,7 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	margin-right: 25px;
 	text-align: justify;
 }
-.main ul, .main ol { display: table }
+.main ul, .main ol, .main dl { display: table }
 
 .v01 .main pre span.comment { color: red }
 .v02 .main pre span.comment { color: red }

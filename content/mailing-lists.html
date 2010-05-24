@@ -21,9 +21,19 @@ this form</a> to subscribe.</p>
 
 <h2>Archives</h2>
 
-<? $old_arxiv = "http://www.xray.mpe.mpg.de/mailing-lists" ?>
-<? $curr_arxiv = "http://mailman.jach.hawaii.edu/pipermail" ?>
-<p>Searchable archives of both the <a href="<?= $old_arxiv ?>/perldl">perldl</a>
-and <a href="<?= $old_arxiv ?>/pdl-porters">pdl-porters</a> mailing lists are
-available for the period 1996-2004  thanks to
-<a href="mailto:ach@mpe.mpg.de">Achim Bohnet</a>.
+<? $curr = "http://mailman.jach.hawaii.edu/pipermail" ?>
+<? $old = "http://www.xray.mpe.mpg.de/mailing-lists" ?>
+
+<dl>
+  <dt>Recent archives</dt>
+  <dd>
+    <a href="<?= $curr ?>/perldl/">Perldl archives</a><br/>
+    <a href="<?= $curr ?>/pdl-porters/">PDL-Porters archives</a>
+  </dd>
+  <dt>Old archives</dt>
+  <dd>
+    <a href="<?= $old ?>/perldl">Perldl archives</a><br/>
+    <a href="<?= $old ?>/pdl-porters">PDL-Porters archives</a>
+  </dd>
+</dl>
+

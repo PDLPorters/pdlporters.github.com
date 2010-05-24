@@ -13,6 +13,9 @@ function formatContents($filename, $title='') {
 	$content = str_replace('<div name="index">',
 						'<div class="index" name="index">',	$content);
 	$content = str_replace("\n",'[\n]', $content);
+	$content = str_replace('<a href="./', '<a href="', $content);
+	$content = preg_replace('/<a href="([\/\w]+)\.html">([^<]+)<\/a>/',
+							'<a href="?docs=$1&title=$2">$2</a>', $content);
 	$content = preg_replace('/^.*<body[^>]*>/', '', $content);
 	$content = preg_replace('/<\/body>.*$/', '', $content);
 	$content = str_replace('[\n]', "\n", $content);
@@ -53,7 +56,7 @@ function formatContents($filename, $title='') {
 <div class="main">
  <?
  	function issane($string) {
- 		return preg_match('/^[-_a-zA-Z0-9]+$/',$string);
+ 		return preg_match('/^[-_a-zA-Z0-9\/]+$/',$string);
  	}
  	
  	if (isset($_GET['page']) && issane($_GET['page'])) {

@@ -154,6 +154,10 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 }
 .main ul, .main ol { display: table }
 
+.v01 .main pre span.comment { color: red }
+.v02 .main pre span.comment { color: red }
+.v03 .main pre span.comment { color: green }
+
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {
 	float: left;

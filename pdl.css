@@ -11,6 +11,7 @@ body {
 	padding: 0;
 	margin: 0;
 }
+ul, ol { display: table }
 img { border: none }
 dt { font-weight: bold }
 td { vertical-align: top }
@@ -146,14 +147,6 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	margin-right: 25px;
 	text-align: justify;
 }
-.main .index ol, .main .index ul {
-	margin-left: 155px;
-}
-.main ol, .main ul,
-.main .index ul ul, .main .index ol ul, .main .index ul ol, .main .index ol ol {
-	margin-left: 0px;
-}
-
 
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {

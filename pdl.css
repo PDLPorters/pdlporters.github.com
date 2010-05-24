@@ -11,7 +11,6 @@ body {
 	padding: 0;
 	margin: 0;
 }
-ul, ol { display: table }
 img { border: none }
 dt { font-weight: bold }
 td { vertical-align: top }
@@ -30,9 +29,15 @@ tt {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 }
-.v01 tt { color: #400; background: #ff9; }
-.v02 tt { color: #347; background: #cde; }
-.v03 tt { color: #700; background: #fec; }
+pre {
+	width: 50%;
+	padding: 1em;
+	display: table;
+	border: 2px solid #999;
+}
+.v01 tt, .v01 pre { color: #400; background: #ff9; }
+.v02 tt, .v02 pre { color: #347; background: #cde; }
+.v03 tt, .v03 pre { color: #700; background: #fec; }
 
 
 /*
@@ -147,6 +152,7 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	margin-right: 25px;
 	text-align: justify;
 }
+.main ul, .main ol { display: table }
 
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {

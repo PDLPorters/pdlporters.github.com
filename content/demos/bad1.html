@@ -1,0 +1,196 @@
+<!--#include virtual="/head.html"-->
+<TITLE>PDL - Screenshots / Demos</TITLE>
+<STYLE type="text/css">span.comment{color:red;}</STYLE>
+</HEAD>
+<BODY>
+
+<div id="navBar">
+<!--#include virtual="/menu.html"-->
+</div><!--end div navBar-->
+
+<div id="main">
+<H2> Tour of the bad value support in PDL </H2>
+
+<p align="justify">
+Each piddle contains a flag - accessible via the badflag() method -
+which indicates whether:</p>
+
+<ul>
+<li>the piddle contains no bad values (flag equals 0)</li>
+<li>the piddle *MAY* contain bad values (flag equals 1)</li>
+</ul>
+
+<p align="justify">If the flag is set, then the routines (well, those
+that have been converted) will process these bad values correctly,
+otherwise they are ignored.</p>
+
+<p align="justify">The code has been written so as to provide as
+little overhead as possible; therefore there should be almost no
+difference in the time it takes to process piddles which do not have
+their bad flag set.</p>
+
+<PRE><CODE>
+<span class="comment"># There are 2 ways to see whether bad-value support has been</span>
+<span class="comment"># compiled into your perldl:</span>
+<STRONG>perldl></STRONG> print("You can use bad values.\n") if $PDL::Bad::Status;
+<span class="comment"># or</span>
+<STRONG>perldl></STRONG> use PDL::Config;
+<STRONG>perldl></STRONG> print("You can stil use bad values.\n") if $PDL::Config{WITH_BADVAL};
+<span class="comment"># note that PDL::Bad is included by default when you use </span>
+<span class="comment"># 'use PDL', 'use PDL::Lite', or 'use PDL::LiteF'</span>
+
+You can use bad values.
+You can stil use bad values.
+</CODE></PRE>
+
+<PRE><CODE>
+<span class="comment"># create a piddle</span>
+<STRONG>perldl></STRONG> $a = byte(1,2,3);
+<STRONG>perldl></STRONG> print( "Bad flag (a) == ", $a->badflag(), "\n" );
+<span class="comment"># set bad flag, even though all the data is good</span>
+<STRONG>perldl></STRONG> $a->badflag(1);
+<STRONG>perldl></STRONG> print( "Bad flag (a) == ", $a->badflag(), "\n" );
+<span class="comment"># note the bad flag is infectious</span>
+<STRONG>perldl></STRONG> $b = 2 * $a;
+<STRONG>perldl></STRONG> print( "Bad flag (b) == ", $b->badflag(), "\n\n" );
+
+Bad flag (a) == 0
+Bad flag (a) == 1
+Bad flag (b) == 1
+</CODE></PRE>
+
+<PRE><CODE>
+<span class="comment"># the badflag is also included in the state info of</span>
+<span class="comment"># piddle</span>
+<span class="comment">#</span>
+<STRONG>perldl></STRONG> $c = pdl(2,3); # just a piddle without the badflag set
+<STRONG>perldl></STRONG> print "   Type   Dimension        State          Mem\n";
+<STRONG>perldl></STRONG> print "-------------------------------------------------\n";
+<STRONG>perldl></STRONG> print "a ", $a->info("%-6T %-15D   %-5S  %12M"), "\n";
+<STRONG>perldl></STRONG> print "b ", $b->info("%-6T %-15D   %-5S  %12M"), "\n";
+<STRONG>perldl></STRONG> print "c ", $c->info("%-6T %-15D   %-5S  %12M"), "\n\n";
+
+   Type   Dimension        State          Mem
+-------------------------------------------------
+a Byte   D [3]             PB           0.00Kb
+b Byte   D [3]             PB           0.00Kb
+c Double D [2]             P            0.02Kb
+</CODE></PRE>
+
+<PRE><CODE>
+<STRONG>perldl></STRONG> print "No bad values:   $a\n";
+<span class="comment"># set the middle value bad</span>
+<STRONG>perldl></STRONG> $a->setbadat(1);
+<span class="comment"># now print out</span>
+<STRONG>perldl></STRONG> print "Some bad values: $a\n";
+<STRONG>perldl></STRONG> print "b contains:      $b\n";
+<STRONG>perldl></STRONG> $c = $a + $b;
+<STRONG>perldl></STRONG> print "so a + b =       $c\n\n";
+
+No bad values:   [1 2 3]
+Some bad values: [1 BAD 3]
+b contains:      [2 4 6]
+so a + b =       [3 BAD 9]
+</CODE></PRE>
+
+<PRE><CODE>
+<span class="comment"># The module PDL::Bad contains a number of routines designed</span>
+<span class="comment"># to make using bad values easy.</span>
+<STRONG>perldl></STRONG> print "a contains ", $a->nbad, " bad elements.\n";
+<STRONG>perldl></STRONG> print "The bad value for type #",$a->get_datatype," is ",$a->badvalue,"\n";
+<STRONG>perldl></STRONG> print "It is easy to find whether a value is good: ", isgood($a), "\n\n";
+<STRONG>perldl></STRONG> print "or to remove the bad values\n";
+<STRONG>perldl></STRONG> $a->inplace->setbadtoval(23);
+<STRONG>perldl></STRONG> print "a = $a and \$a->badflag == ", $a->badflag, "\n\n";
+
+a contains 1 bad elements.
+The bad value for type #0 is 255
+It is easy to find whether a value is good: [1 0 1]
+
+or to remove the bad values
+a = [1 23 3] and $a->badflag == 0
+</CODE></PRE>
+
+<PRE><CODE>
+<STRONG>perldl></STRONG> print "We can even label certain values as bad!\n";
+<STRONG>perldl></STRONG> $a = sequence(3,3);
+<STRONG>perldl></STRONG> $a = $a->setbadif( $a % 2 );
+<STRONG>perldl></STRONG> print $a;
+
+We can even label certain values as bad!
+
+[
+ [  0 BAD   2]
+ [BAD   4 BAD]
+ [  6 BAD   8]
+]
+</CODE></PRE>
+
+<PRE><CODE>
+<span class="comment"># the issue of how to cope with dataflow is not fully resolved. At</span>
+<span class="comment"># present, if you change the badflag of a piddle, all its children</span>
+<span class="comment"># are also changed:</span>
+<STRONG>perldl></STRONG> $a = sequence( byte, 2, 3 );
+<STRONG>perldl></STRONG> $a = $a->setbadif( $a == 3 );
+<STRONG>perldl></STRONG> $b = $a->slice("(1),:");
+<STRONG>perldl></STRONG> print "b = $b\tbadflag = ", $b->badflag, "\n";
+<STRONG>perldl></STRONG> $a->inplace->setbadtoval(3);
+<STRONG>perldl></STRONG> print "b = $b\tbadflag = ", $b->badflag, "\n\n";
+
+b = [1 BAD 5]	badflag = 1
+b = [1 3 5]	badflag = 0
+
+</CODE></PRE>
+
+<PRE><CODE>
+<span class="comment"># One area that is likely to cause confusion is the return value from</span>
+<span class="comment"># comparison operators (e.g. all and any) when ALL elements are bad.</span>
+<span class="comment"># Currently, the bad value is returned; however most code will not</span>
+<span class="comment"># be aware of this and just see it as a true or false value (depending</span>
+<span class="comment"># on the numerical value used to store bad values).</span>
+<span class="comment"># There is also the fact that the bad value need not relate to the</span>
+<span class="comment"># type of the input piddle (due to internal conversion to an 'int +').</span>
+<STRONG>perldl></STRONG> $a = ones(3); $a = $a->setbadif( $a == 1 );
+<STRONG>perldl></STRONG> print "Any returns: ", any( $a> 2 ), "\n";
+<STRONG>perldl></STRONG> print "which is the bad value of 'long' (", long->badvalue, ").\n";
+<STRONG>perldl></STRONG> print "Whereas the bad value for \$a is: ", $a->badvalue, "\n";
+
+Any returns: -2147483648
+which is the bad value of 'long' (-2147483648).
+Whereas the bad value for $a is: -1.79769313486232e+308
+</CODE></PRE>
+
+<p align="justify">
+Many of the 'core' routines have been converted to handle bad values.
+However, some (including most of the additional modules) have not,
+either because it does not make sense or its too much work to do!
+</p>
+
+<p align="justify">
+To find out the status of a particular routine, use the 'badinfo'
+command in perldl (this information is also included when you do
+'help'), or the '-b' switch of pdldoc.
+</p>
+
+<HR>
+<IMG SRC="/images/eMail.gif" ALT="" ALIGN="LEFT" width="77" height="37">
+<SMALL>
+This page was written by Doug Burke. Please send bugs and ideas for this web page to 
+<A HREF="mailto:burke@IfA.Hawaii.Edu">burke@IfA.Hawaii.Edu</A>.
+<BR>
+Last modified: <!--#flastmod virtual="bad1.shtml"-->
+</SMALL>
+<p>
+ <a href="http://validator.w3.org/check?uri=referer">
+ <img src="http://www.w3.org/Icons/valid-html401"
+ border="0" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+
+ <a href="http://jigsaw.w3.org/css-validator/check/referer">
+  <img style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss" 
+       alt="Valid CSS!">
+ </a>
+</p>
+</div><!--end div main-->
+</BODY>
+</HTML>

@@ -1,4 +1,12 @@
-<? $wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php"; ?>
+<?
+$wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
+
+function pageLink($page, $title) {
+	$class = $page == $_GET['page'] ? 'class="selected"' : '';
+	return "<li $class><a href='?page=$page'>$title</a></li>";
+}
+?>
+
 <div class="sidebar">
   <div class="h3"><h3>Quick links</h3></div>
   <div class="ul">
@@ -13,9 +21,9 @@
   <div class="ul">
   <ul>
     <li><a href="<?= $wiki_url ?>">Wiki</a></li>
-    <li><a href="?page=mailing-lists">Mailing list</a></li>
+    <?= pageLink('mailing-lists', 'Mailing list') ?>
     <li><a href="">Documentation</a></li>
-    <li><a href="">FAQ</a></li>
+    <?= pageLink('faq', 'FAQ') ?>
   </ul>
   </div>
   

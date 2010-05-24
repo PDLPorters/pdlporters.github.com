@@ -12,6 +12,7 @@ body {
 	margin: 0;
 }
 img { border: none }
+a { text-decoration: none }
 
 /* Emphasis */
 .v01 em { color: #400; }
@@ -58,7 +59,7 @@ div.banner {
 /*
  *  HEADINGS
  */
-h1, h2 {
+h1.title, h2.subtitle {
 	text-align: center;
 }
 h1 { font-size: 200%; padding-bottom: 0; margin-bottom: 0; }
@@ -101,20 +102,25 @@ h2 { font-size: 100%; font-style: italic; }
 .sidebar ul {
 	margin-top: 0px;
 	padding-top: 10px;
-	padding-left: 30px;
+	padding-left: 0px;
 	padding-bottom: 5px;
 	list-style-type: none;
 }
+.sidebar li {
+	padding-left: 30px;
+}
 
 .sidebar a {
+	width: 100%;
 	font-style: italic;
-	text-decoration: none;
 }
-.sidebar a:hover {
-	color: #444;
-	background: white;
+div.sidebar ul li:hover, div.sidebar ul li.selected {
+	color: white !important;
+	background: #555;
 }
-
+div.sidebar ul li:hover a, div.sidebar ul li.selected a {
+	color: white !important;
+}
 
 .v01 .sidebar a, .v01 .sidebar a:visited { color: #d00; }
 .v02 .sidebar a, .v02 .sidebar a:visited { color: blue; }
@@ -133,9 +139,19 @@ h2 { font-size: 100%; font-style: italic; }
  *  MAIN CONTENT
  */
 .main {
+	margin-left: 25px;
 	margin-right: 25px;
 	text-align: justify;
 }
+.main .index ol, .main .index ul {
+	margin-left: 155px;
+}
+.main ol, .main ul,
+.main .index ul ul, .main .index ol ul, .main .index ul ol, .main .index ol ol {
+	margin-left: 0px;
+}
+
+
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {
 	float: left;

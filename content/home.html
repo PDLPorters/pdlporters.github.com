@@ -1,3 +1,5 @@
+ <h1 class='title'>Perl Data Language</h1>
+ <h2 class='subtitle'>Scientific computing with Perl</h2>
  	<div class="slideshow-container">
 	<div class="slideshow">
 		<img src="images/slideshow/slide01.png" width="200" height="200" />
@@ -45,23 +47,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	function randomCSS() {
-		$("body").removeClass("v01");
-		$("body").removeClass("v02");
-		$("body").removeClass("v03");
-		var rand = Math.random();
-		if (rand < 0.35) {
-			$("body").addClass("v01");
-		} else if (rand < 0.7) {
-			$("body").addClass("v02");
-		} else {
-			$("body").addClass("v03");
-		}
-	}
-	function rotateCSS() {
-		randomCSS();
-		setTimeout(rotateCSS, 15000);
-	}
 	function pauseAnimation() {
 		$('.slideshow').cycle('pause');
 	}
@@ -72,12 +57,10 @@ $(document).ready(function() {
 	// 
 	// Main program.
 	// 
-	rotateCSS();
-	
 	$('.slideshow').cycle({
 		fx: 'fade,curtainX,shuffle,zoom,turnDown,scrollRight',
 		shuffle: { top:200, left: 0 },
-		timeout: 5000,
+		timeout: 25000,
 		random: 1
 	});
 	

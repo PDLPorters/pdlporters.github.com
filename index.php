@@ -41,10 +41,29 @@ function formatContents($filename, $title='') {
 <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
 </head>
 <body>
-
-  <!-- BANNER -->
-  <div class="banner"><img src="images/banners/<?= pickBanner() ?>"/></div>
-  <!-- END BANNER -->
+ 
+  <!-- BANNER --> 
+  <div class="banner">
+    <img src="images/banners/pos-0-logo.jpg" height="79px" width="146px"/>
+	<div id="pos1" class="rotation">
+	<img src="images/banners/pos-1-opt-0.jpg" height="79px" width="278px"/>
+	<img src="images/banners/pos-1-opt-1.jpg" height="79px" width="278px"/>
+	<img src="images/banners/pos-1-opt-2.jpg" height="79px" width="278px"/>
+	</div> 
+	<div id="pos2" class="rotation" style="left: 435px">
+	<img src="images/banners/pos-2-opt-0.jpg" height="79px" width="93px"/>
+	<img src="images/banners/pos-2-opt-1.jpg" height="79px" width="93px"/>
+	</div> 
+	<div id="pos3" class="rotation" style="left: 555px">
+	<img src="images/banners/pos-3-opt-0.jpg" height="79px" width="107px"/>
+	<img src="images/banners/pos-3-opt-1.jpg" height="79px" width="107px"/>
+	</div> 
+	<div id="pos4" class="rotation" style="left: 685px">
+	<img src="images/banners/pos-4-opt-0.jpg" height="79px" width="110px"/>
+	<img src="images/banners/pos-4-opt-1.jpg" height="79px" width="110px"/>
+	</div> 
+  </div> 
+  <!-- END BANNER --> 
 
   <!-- SIDE BAR -->
   <div class="sidebar-container">
@@ -71,6 +90,33 @@ function formatContents($filename, $title='') {
   ?>
   </div>
   <!-- END CONTENT -->
+ 
+<script type="text/javascript"> 
+$(document).ready(function() {
+	// 
+	// Banner animation.
+	// 
+	
+	// Change a random part of the banner.
+	function changeBanner() {
+		var rand = Math.random();
+		if (0.00 < rand && rand < 0.25) $('.banner #pos1').cycle('next');
+		if (0.25 < rand && rand < 0.50) $('.banner #pos2').cycle('next');
+		if (0.50 < rand && rand < 0.75) $('.banner #pos3').cycle('next');
+		if (0.75 < rand && rand < 1.00) $('.banner #pos4').cycle('next');
+	}
+	
+	// Change the banner every 5 seconds forever.
+	function rotateBanner() {
+		changeBanner();
+		setTimeout(rotateBanner, 5000);
+	}
+	
+	// Initialize slideshow plugin and start rotation.
+	$('.rotation').cycle({ fx: 'fade', timeout: 0 });
+	rotateBanner();
+});
+</script> 
 
 </body>
 </html>

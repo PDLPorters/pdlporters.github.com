@@ -86,13 +86,18 @@ h1, h2, h3, h4 { color: #347 }
 	margin: 10px;
 	padding: 10px;
 }
+.banner .rotation {
+	display: inline;
+	position: absolute;
+	top: 0px;
+}
 
 /* Sidebar heading with rounded corners. */
 .sidebar h3 {
 	margin: 0;
 	padding: 0;
 	color: white;
-	font-size: 100%;
+	font-size: 90%;
 	text-align: center;
 	font-weight: normal;
 }

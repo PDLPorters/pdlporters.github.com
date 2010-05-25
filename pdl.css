@@ -105,13 +105,16 @@ h1, h2, h3, h4 { color: #347 }
 
 /* Sidebar body with rounded corners. */
 .sidebar ul {
+	font-size: small;
 	margin-top: 0px;
+	margin-left: 0px;
 	padding-top: 10px;
 	padding-left: 0px;
 	padding-bottom: 5px;
 	list-style-type: none;
 }
 .sidebar li {
+	margin-left: 0px;
 	padding-left: 30px;
 }
 
@@ -157,7 +160,6 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	color: blue;
 	cursor: pointer;
 }
-
 
 
 

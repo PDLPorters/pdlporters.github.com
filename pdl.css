@@ -121,7 +121,6 @@ h2 { font-size: 100%; font-style: italic; }
 
 .sidebar a {
 	width: 100%;
-	font-style: italic;
 }
 div.sidebar ul li:hover, div.sidebar ul li.selected {
 	color: white !important;

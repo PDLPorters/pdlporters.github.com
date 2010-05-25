@@ -4,6 +4,11 @@
  */
 
 /*
+ * GET RID OF THIS   -- Legacy from the old PDL site.
+ */
+.main pre span.comment { color: red }
+
+/*
  *  GENERAL
  */
 body {
@@ -11,16 +16,17 @@ body {
 	padding: 0;
 	margin: 0;
 }
-img { border: none }
-dt { font-weight: bold }
-td { vertical-align: top }
-a { text-decoration: none }
+img { border: none; }
+dt { font-weight: bold; }
+td { vertical-align: top; }
+em { color: #347; }
 
+a {
+	color: blue;
+	text-decoration: none;
+}
+a:visited { color: blue; }
 
-/* Emphasis */
-.v01 em { color: #400; }
-.v02 em { color: #347; }
-.v03 em { color: #700; }
 
 /* Code samples. */
 tt {
@@ -35,9 +41,10 @@ pre {
 	display: table;
 	border: 2px solid #999;
 }
-.v01 tt, .v01 pre { color: #400; background: #ff9; }
-.v02 tt, .v02 pre { color: #347; background: #cde; }
-.v03 tt, .v03 pre { color: #700; background: #fec; }
+tt, pre {
+	color: #347;
+	background: #cde;
+}
 
 
 /*
@@ -47,23 +54,8 @@ div.banner {
 	width: 100%;
 	height: 79px;
 	background-repeat: no-repeat;
-}
-.v01 div.banner {
-	background-color: black;
-	background-image: url("images/banner-01.jpg");
-	border-bottom: 7px solid #700;
-}
-.v02 div.banner {
-	background-image: url("images/banner-02.jpg");
 	border-bottom: 3px solid #ccc;
 }
-.v03 div.banner {
-	background-image: url("images/banner-03.jpg");
-	border-bottom: 3px solid #444;
-}
-.v01 div.banner-container { border-bottom: 0px }
-.v02 div.banner-container { border-bottom: 4px solid white }
-.v03 div.banner-container { border-bottom: 4px solid white }
 
 /*
  *  HEADINGS
@@ -71,16 +63,18 @@ div.banner {
 h1.title, h2.subtitle {
 	text-align: center;
 }
-h1 { font-size: 200%; padding-bottom: 0; margin-bottom: 0; }
-h2 { font-size: 100%; font-style: italic; }
+h1 {
+	font-size: 200%;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+h2 {
+	font-size: 100%;
+	font-style: italic;
+}
 
-.v01 h1, .v01 h3, .v01 h4 { color: #400 }
-.v02 h1, .v02 h3, .v02 h4 { color: #347 }
-.v03 h1, .v03 h3, .v03 h4 { color: #700 }
+h1, h2, h3, h4 { color: #347 }
 
-.v01 h2 { color: #700 }
-.v02 h2 { color: #458 }
-.v03 h2 { color: #b00 }
 
 
 /*
@@ -92,6 +86,8 @@ h2 { font-size: 100%; font-style: italic; }
 	margin: 10px;
 	padding: 10px;
 }
+
+/* Sidebar heading with rounded corners. */
 .sidebar h3 {
 	margin: 0;
 	padding: 0;
@@ -100,14 +96,14 @@ h2 { font-size: 100%; font-style: italic; }
 	text-align: center;
 	font-weight: normal;
 }
-.v01 .sidebar h3 { background: url("images/corners/v01-top-left.png") no-repeat left top; }
-.v02 .sidebar h3 { background: url("images/corners/v02-top-left.png") no-repeat left top; }
-.v03 .sidebar h3 { background: url("images/corners/v03-top-left.png") no-repeat left top; }
+.sidebar h3 {
+	background: url("images/corners/top-left.png") no-repeat left top;
+}
+.sidebar div.h3 {
+	background: #347 url("images/corners/top-right.png") no-repeat right top;
+}
 
-.v01 .sidebar div.h3 { background: #400 url("images/corners/v01-top-right.png") no-repeat right top; }
-.v02 .sidebar div.h3 { background: #347 url("images/corners/v02-top-right.png") no-repeat right top; }
-.v03 .sidebar div.h3 { background: #700 url("images/corners/v03-top-right.png") no-repeat right top; }
-
+/* Sidebar body with rounded corners. */
 .sidebar ul {
 	margin-top: 0px;
 	padding-top: 10px;
@@ -130,17 +126,14 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	color: white !important;
 }
 
-.v01 .sidebar a, .v01 .sidebar a:visited { color: #d00; }
-.v02 .sidebar a, .v02 .sidebar a:visited { color: blue; }
-.v03 .sidebar a, .v03 .sidebar a:visited { color: #d00; }
+.sidebar ul {
+	background: url("images/corners/btm-right.png") no-repeat right bottom;
+}
 
-.v01 .sidebar ul { background: url("images/corners/v01-btm-right.png") no-repeat right bottom; }
-.v02 .sidebar ul { background: url("images/corners/v02-btm-right.png") no-repeat right bottom; }
-.v03 .sidebar ul { background: url("images/corners/v03-btm-right.png") no-repeat right bottom; }
+.sidebar div.ul {
+	background: #cde  url("images/corners/btm-left.png") no-repeat left bottom;
+}
 
-.v01 .sidebar div.ul { background: #ff9  url("images/corners/v01-btm-left.png") no-repeat left bottom; }
-.v02 .sidebar div.ul { background: #cde  url("images/corners/v02-btm-left.png") no-repeat left bottom; }
-.v03 .sidebar div.ul { background: #fec  url("images/corners/v03-btm-left.png") no-repeat left bottom; }
 
 
 /*
@@ -152,10 +145,6 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	text-align: justify;
 }
 .main ul, .main ol, .main dl { display: table }
-
-.v01 .main pre span.comment { color: red }
-.v02 .main pre span.comment { color: red }
-.v03 .main pre span.comment { color: green }
 
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {

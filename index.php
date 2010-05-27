@@ -53,6 +53,7 @@ function formatContents($filename, $title='') {
 	<div id="pos2" class="rotation" style="left: 435px">
 	<img src="images/banners/pos-2-opt-0.jpg" height="79px" width="93px"/>
 	<img src="images/banners/pos-2-opt-1.jpg" height="79px" width="93px"/>
+	<img src="images/banners/pos-2-opt-2.jpg" height="79px" width="93px"/>
 	</div> 
 	<div id="pos3" class="rotation" style="left: 555px">
 	<img src="images/banners/pos-3-opt-0.jpg" height="79px" width="107px"/>

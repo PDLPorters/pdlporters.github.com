@@ -1,0 +1,5 @@
+# Ignore old CVS directories
+CVS
+
+# And conversion directories
+cvs2*

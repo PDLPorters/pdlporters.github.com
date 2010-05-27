@@ -110,7 +110,7 @@ h1, h2, h3, h4 { color: #347 }
 
 /* Sidebar body with rounded corners. */
 .sidebar ul {
-	font-size: 80%S;
+	font-size: 80%;
 	margin-top: 0px;
 	margin-left: 0px;
 	padding-top: 10px;

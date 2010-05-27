@@ -1,0 +1,89 @@
+
+<h1 class='title'>PDL Screenshots</h1>
+
+<h2>3D Graphics Examples</h2>
+
+<p>Here are some pretty pictures generated using the
+<tt>PDL::Graphics::TriD</tt> module, follow the links to get full-size
+pictures and the PDL code which produced them.</p>
+
+
+<center>
+<a href="?page=screenshots/ex1">
+	<img src="images/screenshots/ex1thumb.gif" alt="Example 1" width="104" height="105">
+</a>
+<a href="?page=screenshots/ex2">
+	<img src="images/screenshots/ex2thumb.gif" alt="Example 2" width="105" height="105">
+</a>
+<a href="?page=screenshots/ex3">
+	<img src="images/screenshots/ex3thumb.gif" alt="Example 3" width="105" height="105">
+</a>
+</center>
+
+<p>Note when displayed with PDL viewing from different angles is as simple
+as rotating the figure with the mouse!</p>
+
+
+<h2>2D Graphics Examples</h2>
+
+For some screenshots of PGPLOT in action check the
+<a href="?page=demos/plot2D">PGPLOT demo</a>.
+
+
+<h2> 2D &amp; 3D Graphics Examples </h2>
+
+<p><a href="http://www.plplot.org">PLplot</a> is a scientific plotting
+library for 2D and 3D graphics. PLplot has a rich API allowing fine control
+of every aspects of the plots. The PDL binding for PLplot (in
+<tt>PDL::Graphics::PLplot</tt>) comes in two flavors: a high-level,
+object-oriented interface and a low-level interface which is very close to
+the C API of the library. The demos distributed with PLplot have been
+ported to the low-level interface and are available at the <a
+href="http://plplot.sourceforge.net/examples.php">PLplot examples
+area</a> (two examples are shown below).</p>
+
+
+<p>
+<a href="http://plplot.sourceforge.net/examples/demo16.php?lbind=PerlDL">
+	<IMG SRC="http://plplot.sourceforge.net/examples-data/demo16/prev-x16.03.png"
+		alt="2D PLplot Example"></a>
+<a href="http://plplot.sourceforge.net/examples/demo08.php?lbind=PerlDL">
+	<IMG SRC="http://plplot.sourceforge.net/examples-data/demo08/prev-x08.04.png"
+		alt="3D PLplot Example"></a>
+
+<h2>Image Distortion Example</h2>
+
+<p>Image resampling and co-alignment is handled by the <tt>PDL::Transform</tt>
+package. Here is an example of a nonlinear coordinate transformation
+applied to an image of the space shuttle. The image is being rotated
+in logarithmic azimuthal space. The transformation is continuous
+everywhere except on a singular ray extending upward from the origin.
+The <tt>PDL::Transform</tt> code includes optimized resampling to prevent
+introducing artifacts into your data. You can tell that it's at work
+by comparing the <a href="images/screenshots/sampled.mpg">sampled</a> and <a
+href="images/screenshots/antialiased.mpg">anti-aliased</a> movies. <a
+href="images/screenshots/transform-commands.txt">Here</a> is the brief script that
+generated the frames.</p>
+
+
+<table align="center">
+  <tr>
+    <td>
+      <a href="images/screenshots/orig-big.jpg">
+      	<img src="images/screenshots/orig.jpg" alt="" width="188" height="150">
+      </a>
+    </td>
+    <td>
+      <a href="images/screenshots/some-warp-big.jpg">
+        <img src="images/screenshots/some-warp.jpg" alt="" width="188" height="150">
+      </a>
+    </td>
+    <td>
+      <a href="images/screenshots/inside-out-big.jpg">
+        <img src="images/screenshots/inside-out.jpg" alt="" width="188" height="150">
+      </a>
+    </td>
+  </tr>
+</table>
+
+

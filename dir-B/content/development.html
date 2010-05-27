@@ -1,0 +1,71 @@
+<h1 class='title'>PDL Development</h1>
+
+<p> Since April 2009 (after version 2.4.4) the PDL source distribution is
+in a <a href="https://sourceforge.net/scm/?type=git&amp;group_id=612">publicly
+accessible Git repository</a>. The whole
+<a href="http://www.sourceforge.net/projects/pdl">PDL project</a>
+is hosted at <a href="http://www.sourceforge.net">SourceForge</a>. There
+you also find the <a href="http://sourceforge.net/bugs/?group_id=612">PDL Bug
+database</a> and the <a href="http://sourceforge.net/patch/?group_id=612">PDL
+patch manager</a> which non-developers should use to submit patches for PDL.</p>
+
+<p>The easiest way to get your changes into the most recent version of PDL
+is to become a developer. This status will give you write access to the
+<a href="https://sourceforge.net/scm/?type=git&amp;group_id=612">Git
+repository</a>. To become a developer you should register as a user with
+<a href="http://www.sourceforge.net">SourceForge</a> and contact one of the
+<a href="https://sourceforge.net/projects/pdl#item3rd-1">project admins</a>.</p>
+
+<h2>Hints for developers</h2>
+
+<ol>
+ <li>
+  <p>Before committing a change to the repository you should update</p>
+  <ul>
+    <li> <tt>CHANGES</tt> file with a description of the change made</li>
+    <li> <tt>MANIFEST</tt> (using <tt>make manifest</tt>),
+         <tt>MANIFEST.SKIP</tt>, <tt>TODO</tt> files
+         if applicable.</li>
+  </ul>
+ </li>
+ <li>
+   <p>Remember to include POD documentation for any functions you
+   add to the distribution.</p>
+   <ul>
+     <li>See Basic/Core/Core.pm for an example of including POD
+     documentation in .pm files.</li>
+     <li>See Basic/Core/Primitive/Primitive.pd for an example of including
+     POD documentation in PDL .pd files.</li>
+     <li>Read the documentation in PDL::Doc for a detailed description of
+     the PDL documentation conventions.</li>
+   </ul>
+ </li>
+ <li>
+   <p>Make sure you add a test case in the 't' directory for any
+   significant additional capability you add to the PDL
+   package.</p>
+ </li>
+ <li>
+   <p>Don't commit before you successfully built and passed <tt>make test</tt>.
+   But then again, don't keep your changes private for too long to avoid
+   conflicts with other developers.</p>
+ </li>
+ <li>
+   <p>Bugs reported on the list should be entered into the
+   <a href="http://sourceforge.net/bugs/?group_id=612">bug
+   database</a> and bugs closed when a patch has been committed as
+   a fix. (Primary responsibility for this task is the pumpking,
+   but other devels should be able to help.)</p>
+ </li>
+</ol>
+
+<h2>Using Git</h2>
+<p>Not everybody is a Git expert when he becomes a developer.  There are
+various Git documents available online. Good places to start are the
+<a href="http://git-scm.com/documentation">Git documentation</a> and
+the guide to <a href="http://p.sf.net/sourceforge/git">Git on
+Sourceforge</a>. Check the FAQ for a guide to the
+<a href="?docs=FAQ&title=Frequently%20Asked%20Questions#cvs__git__and_on_going_development">
+most basic git commands</a>.</p>
+
+

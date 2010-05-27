@@ -1,0 +1,112 @@
+
+<h1 class='title'>Graphical tour of the bad value support in PDL</h1>
+
+
+<p>This demo is just a bit of eye-candy to show bad values in action,
+and requires PGPLOT support in PDL. It makes use of the image of
+m51 kindly provided by the Hubble Space Telescope.</p>
+
+<p>It also serves to demonstrate that you often don't need to change
+your code to handle bad values, as the routines may 'do it' for you.</p>
+
+<PRE>
+<span class="comment"># read in the image ($m51path has been set up by this demo to
+# contain the location of the file)
+</SPAN>
+<b>perldl></b> $m51 = rfits "$m51path/m51.fits";
+<span class="comment"># display it
+</SPAN>
+<b>perldl></b> $just = { JUSTIFY => 1 };
+<b>perldl></b> imag $m51, $just;
+
+BITPIX = 16 size = 65536 pixels
+Reading 131072bytes
+BSCALE = 1.0000000000E0 &&  BZERO = 0.0000000000E0
+Displaying 256 x 256 image from 24 to 500 ...
+</CODE></PRE>
+
+<a href="images/demos/bad2_1.gif">
+	<img alt="[Thumbnail]" src="images/demos/bad2_thumb1.gif" width="170" height="136">
+	Output
+</a>
+
+<PRE><CODE>
+<span class="comment"># now, let's mask out the central 30 pixels and display it
+</SPAN>
+<b>perldl></b> $masked = $m51->setbadif( $m51->rvals({CENTRE=>[128,128]}) < 30 );
+<span class="comment"># since imag auto-scales the output, the bad values are not displayed
+</SPAN>
+<b>perldl></b> imag $masked, $just;
+<span class="comment"># compare the statistics of the images
+# (as $PDL::verbose = 1, stats prints out the answers itself)
+</SPAN>
+<b>perldl></b> print "Original:\n"; $m51->stats;
+<b>perldl></b> print "Masked:\n";   $masked->stats;
+
+Displaying 256 x 256 image from 24 to 500 ...
+</CODE></PRE>
+
+<a href="images/demos/bad2_2.gif">
+	<img alt="[Thumbnail]" src="images/demos/bad2_thumb2.gif" width="170" height="136"> 
+	Output
+</a>
+
+<pre>
+Original:
+Mean = 104.193572998047, RMS = 67.4254208960541, Median = 88
+Min  = 24, Max = 500
+Masked:
+Mean = 96.1637598444026, RMS = 49.9066302680633, Median = 86
+Min  = 24, Max = 500
+
+<span class="comment"># let's filter it a little bit
+</SPAN>
+<b>perldl></b> use PDL::Image2D;
+<b>perldl></b> $nb = 9;
+<b>perldl></b> $filtered = med2d $masked, ones($nb,$nb), { Boundary => 'Truncate' };
+<span class="comment"># this is a model of the diffuse component of m51
+</SPAN>
+<b>perldl></b> imag $filtered, $just;
+
+Displaying 256 x 256 image from 38 to 313 ...
+</PRE>
+
+<a href="images/demos/bad2_3.gif">
+	<img alt="[Thumbnail]" src="images/demos/bad2_thumb3.gif" width="170" height="136">
+	Output
+</a>
+
+<PRE>
+<CODE>
+<span class="comment"># unsharp masking, to bring out the small-scale detail
+</SPAN>
+<b>perldl></b> $unsharp = $masked - $filtered;
+<b>perldl></b> imag $unsharp, $just;
+
+Displaying 256 x 256 image from -64 to 459 ...
+</CODE></PRE>
+
+<a href="images/demos/bad2_4.gif">
+	<img alt="[Thumbnail]" src="images/demos/bad2_thumb4.gif" width="170" height="136"> 
+	Output
+</a>
+
+<pre>
+<span class="comment"># add on some contours showing the large scale structure of the galaxy
+</SPAN>
+<b>perldl></b> imag $unsharp, $just;
+<b>perldl></b> hold;
+<b>perldl></b> cont $filtered;
+<b>perldl></b> rel;
+
+Displaying 256 x 256 image from -64 to 459 ...
+Graphics on HOLD
+Contouring 256 x 256 image from 38 to 313 in 9 steps
+Graphics RELEASED
+</pre>
+
+<a href="images/demos/bad2_5.gif">
+	<img alt="[Thumbnail]" src="images/demos/bad2_thumb5.gif" width="170" height="136"> 
+	Output
+</a>
+

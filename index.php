@@ -18,8 +18,8 @@ function formatContents($filename, $title='') {
 						'<div class="index" name="index">',	$content);
 	$content = str_replace("\n",'[\n]', $content);
 	$content = str_replace('<a href="./', '<a href="', $content);
-	$content = preg_replace('/<a href="([\/\w]+)\.html">([^<]+)<\/a>/',
-							'<a href="?docs=$1&title=$2">$2</a>', $content);
+	$content = preg_replace('/<a href="([\/\w]+)\.html(\#?\w*)">([^<]+)<\/a>/',
+							'<a href="?docs=$1&title=$3$2">$3</a>', $content);
 	$content = preg_replace('/^.*<body[^>]*>/', '', $content);
 	$content = preg_replace('/<\/body>.*$/', '', $content);
 	$content = str_replace('[\n]', "\n", $content);

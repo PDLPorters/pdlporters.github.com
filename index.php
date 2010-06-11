@@ -17,9 +17,23 @@ function formatContents($filename, $title='') {
 	$content = str_replace('<div name="index">',
 						'<div class="index" name="index">',	$content);
 	$content = str_replace("\n",'[\n]', $content);
+	
+	
+	//
+	//  Fix URLs.
+	//
 	$content = str_replace('<a href="./', '<a href="', $content);
+	
+	// PDL man pages.
 	$content = preg_replace('/<a href="([\/\w]+)\.html(\#?\w*)">([^<]+)<\/a>/',
 							'<a href="?docs=$1&title=$3$2">$3</a>', $content);
+	
+	// External modules -- link to perldoc.perl.org and hope they have it.
+	$content = preg_replace('/<a href="..\/([\/\w]+)\.html(\#?\w*)">/',
+							'<a href="http://perldoc.perl.org/$1.html$2">', $content);
+	
+	
+	
 	$content = preg_replace('/^.*<body[^>]*>/', '', $content);
 	$content = preg_replace('/<\/body>.*$/', '', $content);
 	$content = str_replace('[\n]', "\n", $content);

@@ -3,3 +3,4 @@ CVS
 
 # And conversion directories
 cvs2*
+command.sh

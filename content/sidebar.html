@@ -16,7 +16,7 @@ function docsLink($page, $linkTitle, $pageTitle) {
   <div class="ul">
   <ul>
     <li><a href="?page=home">Home</a></li>
-    <li><a href="<?= $wiki_url ?>?title=Download">Download</a></li>
+    <li><a href="<?= $wiki_url ?>">Wiki</a></li>
     <li><a href="<?= $wiki_url ?>?title=Libraries">External Libs</a></li>
   </ul>
   </div>
@@ -28,6 +28,7 @@ function docsLink($page, $linkTitle, $pageTitle) {
     <?= pageLink('mailing-lists', 'Mailing list') ?>
     <?= pageLink('docs', 'Documentation') ?>
     <?= docsLink('FAQ', 'FAQ', 'Frequently Asked Questions') ?>
+    <li><a href="<?= $wiki_url ?>?title=Colloquia">Colloquia</a></li>
   </ul>
   </div>
   

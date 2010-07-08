@@ -12,53 +12,40 @@ function docsLink($page, $linkTitle, $pageTitle) {
 ?>
 
 <div class="sidebar">
-  <div class="h3"><h3>Quick links</h3></div>
+  <div class="h3"><h3>About PDL</h3></div>
   <div class="ul">
   <ul>
     <li><a href="?page=home">Home</a></li>
-    <li><a href="<?= $wiki_url ?>">Wiki</a></li>
+    <li><a href="http://sourceforge.net/projects/pdl/">Download</a></li>
+    <?= pageLink('screenshots/index', 'Screenshots') ?>
+    <?= pageLink('nifty', 'Success Stories') ?>
+    <?= pageLink('mailing-lists', 'Contact Us') ?>
+  </ul>
+  </div>
+  
+  <div class="h3"><h3>Resources</h3></div>
+  <div class="ul">
+  <ul>
+    <?= docsLink('FAQ', 'FAQ', 'Frequently Asked Questions') ?>
+    <?= pageLink('tutorials', 'Tutorials') ?>
+    <?= pageLink('reference', 'Reference Docs') ?>
+    <?= pageLink('demos/index', 'Demos') ?>
+    <li><a href="<?= $wiki_url ?>?title=Colloquia">Presentations</a></li>
+    <li><a href="<?= $wiki_url ?>">PDL Wiki</a></li>
     <li><a href="<?= $wiki_url ?>?title=Libraries">External Libs</a></li>
   </ul>
   </div>
-  
-  <div class="h3"><h3>Support</h3></div>
-  <div class="ul">
-  <ul>
-    <li><a href="<?= $wiki_url ?>">Wiki</a></li>
-    <?= pageLink('mailing-lists', 'Mailing list') ?>
-    <?= pageLink('docs', 'Documentation') ?>
-    <?= docsLink('FAQ', 'FAQ', 'Frequently Asked Questions') ?>
-    <li><a href="<?= $wiki_url ?>?title=Colloquia">Colloquia</a></li>
-  </ul>
-  </div>
-  
-  <div class="h3"><h3>Usage</h3></div>
-  <div class="ul">
-  <ul>
-    <?= pageLink('nifty', 'Success Stories') ?>
-    <?= pageLink('screenshots/index', 'Screenshots') ?>
-    <?= pageLink('demos/index', 'Demos') ?>
-  </ul>
-  </div>
-  
-  <div class="h3"><h3>Credits</h3></div>
-  <div class="ul">
-  <ul>
-    <li><a href="<?= $wiki_url ?>?title=Team">The Team</a></li>
-    <?= pageLink('citation', 'Citation') ?>
-  </ul>
-  </div>
-  
+    
   <div class="h3"><h3>Development</h3></div>
   <div class="ul">
   <ul>
-    <?= pageLink('development', 'Get Started') ?>
-    <li><a href="https://sourceforge.net/scm/?type=git&group_id=612">Git</a></li>
-    <li><a href="?docs=FAQ&title=Frequently%20Asked%20Questions#cvs__git__and_on_going_development">PDL-Git-FAQ</a></li>
+    <?= pageLink('develop', 'Get Started') ?>
     <? $tracker = "http://sourceforge.net/tracker/?func=browse&group_id=612" ?>
     <li><a href="<?= $tracker ?>&atid=100612&status=1">Bugs</a></li>
     <li><a href="<?= $tracker ?>&atid=300612&status=1">Patches</a></li>
+    <?= pageLink('credits', 'Credits') ?>
   </ul>
   </div>
+  
 </div>
 

@@ -1,0 +1,28 @@
+<h1 class='title'>How do I search for a function?</h1>
+
+<p>Use the PerlDL shell on your computer. For example, use the <tt>help</tt>
+command to learn about xvals:</p>
+
+<pre>
+perldl> help xvals
+</pre>
+
+<p>If you don't know the exact name of the function, use the <tt>apropos</tt>
+command to do a fuzzy seach:</p>
+
+<pre>
+perldl> apropos xval
+mn_init         The function mn_init() does the basic initialization of the
+                fit. The first argument has to be a reference to the function
+                to be minimized.
+xlinvals        X axis values between endpoints (see xvals).
+xlogvals        X axis values logarithmicly spaced between endpoints (see xvals).
+xvals           Fills a piddle with X index values. Uses similar specifications
+                to zeroes and new_from_specification.
+yvals           Fills a piddle with Y index values. See the CAVEAT for xvals.
+zvals           Fills a piddle with Z index values. See the CAVEAT for xvals.
+</pre>
+
+<p>The <tt>apropos</tt> command does a regex search for function names and
+descriptions.</p>
+

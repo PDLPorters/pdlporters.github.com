@@ -1,9 +1,30 @@
-<h1 class='title'>PDL Success Stories</h1>
+<h1 class='title'>PDL Users</h1>
 
-<p>PDL is useful for manipulating many types of data, and has a very
-diverse user community. Here are some interesting results obtained
-with PDL by individuals and laboratories around the world.</p>
+<p>PDL is useful in many fields, and has a diverse user community.
+Below is a map of PDL users, as well as some ineresting work done with PDL
+around the world.</p>
 
+<h2>Users worldwide</h2>
+
+<script  type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAw_GADJMs6pZoBWTmJbVu3RQasz9hqXnwXIRcaPBYcuT978cI1RR7Gbpwm1iFDiiNOLGzibJ8Pi_xdw">
+</script>
+<center>
+<a id='cm_toggle' class="clickable">[Enlarge]</a>
+Are you a PDL user?
+<a href="http://mailman.jach.hawaii.edu/mailman/listinfo/perldl">
+Let us know</a>.
+<table id="cm_mapTABLE">
+	<tbody>
+		<tr id="cm_mapTR"> <!-- 650,300 -->
+			<td style="border: 1px solid black">
+			  <div id="cm_map" style="width:650px; height:300px;"></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+
+<h2>Work done with PDL</h2>
 <dl>
   <dt>Astronomy and Astrophysics</dt>
   <dd>
@@ -249,4 +270,246 @@ They were created under MacOS X.</p>
     </tr>
   </table>
 </center>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	init_cm_map();
+	
+	$('#cm_map').width(260);
+	$('#cm_map').height(120);
+	$('#cm_toggle').click(function () {
+		if ($('#cm_map').width() == 260) {
+			$('#cm_map').width(650);
+			$('#cm_map').height(300);
+			$('#cm_toggle').text('[Shrink]');
+		} else {
+			$('#cm_map').width(260);
+			$('#cm_map').height(120);
+			$('#cm_toggle').text('[Enlarge]');
+		}
+		
+	});
+});
+
+function init_cm_map() {
+	cm_map;
+	cm_mapMarkers = [];
+	cm_mapHTMLS = [];
+
+	// Create a base icon for all of our markers that specifies the
+	// shadow, icon dimensions, etc.
+	cm_baseIcon = new GIcon();
+	cm_baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+	cm_baseIcon.iconSize = new GSize(20, 34);
+	cm_baseIcon.shadowSize = new GSize(37, 34);
+	cm_baseIcon.iconAnchor = new GPoint(9, 34);
+	cm_baseIcon.infoWindowAnchor = new GPoint(9, 2);
+	cm_baseIcon.infoShadowAnchor = new GPoint(18, 25);
+
+	// Params to get the map data from the spreadsheet
+	param_wsId = "od6";
+	param_ssKey = "0Am3SSF48QCE9dERjcko2YWNrSzJVLUZLd1QyaldsYXc";
+	param_useSidebar = false;
+	param_titleColumn = "place";
+	param_descriptionColumn = "discipline";
+	param_latColumn = "latitude";
+	param_lngColumn = "longitude";
+	param_rankColumn = "rank";
+	param_iconType = "green";
+	param_iconOverType = "orange";
+	
+	cm_load();
+}
+
+/**
+ * Loads map and calls function to load in worksheet data.
+ */
+function cm_load() {  
+	if (GBrowserIsCompatible()) {
+	
+		// create the map
+		cm_map = new GMap2(document.getElementById("cm_map"));
+		cm_map.addControl(new GLargeMapControl());
+		cm_map.addControl(new GMapTypeControl());
+		cm_map.setCenter(new GLatLng( 43.907787,-79.359741), 1, G_SATELLITE_MAP);
+		
+		cm_getJSON();
+	}
+	else {
+		alert("Sorry, the Google Maps API is not compatible with this browser");
+	} 
+}
+
+/**
+ * Function called when marker on the map is clicked.
+ * Opens an info window (bubble) above the marker.
+ * @param {Number} markerNum Number of marker in global array
+ */
+function cm_markerClicked(markerNum) {
+	cm_mapMarkers[markerNum].openInfoWindowHtml(cm_mapHTMLS[markerNum]);
+}
+
+/**
+ * Function that sorts 2 worksheet rows from JSON feed
+ * based on their rank column. Only called if column is defined.
+ * @param {rowA} Object Represents row in JSON feed
+ * @param {rowB} Object Represents row in JSON feed
+ * @return {Number} Difference between row values
+ */
+function cm_sortRows(rowA, rowB) {
+	var rowAValue = parseFloat(rowA["gsx$" + param_rankColumn].$t);
+	var rowBValue = parseFloat(rowB["gsx$" + param_rankColumn].$t);
+	
+	return rowAValue - rowBValue;
+}
+
+/** 
+ * Called when JSON is loaded. Creates sidebar if param_sideBar is true.
+ * Sorts rows if param_rankColumn is valid column. Iterates through worksheet rows, 
+ * creating marker and sidebar entries for each row.
+ * @param {JSON} json Worksheet feed
+ */       
+function cm_loadMapJSON(json) {
+	var usingRank = false;
+	
+	if (param_useSidebar == true) {
+		var sidebarTD = document.createElement("td");
+		sidebarTD.setAttribute("width","150");
+		sidebarTD.setAttribute("valign","top");
+		var sidebarDIV = document.createElement("div");
+		sidebarDIV.id = "cm_sidebarDIV";
+		
+		sidebarDIV.style.overflow = "auto";
+		sidebarDIV.style.height = "300px";
+		sidebarDIV.style.fontSize = "11px";
+		sidebarDIV.style.fontFamily = "sans-serif";
+		sidebarDIV.style.lineHeight = "11px";
+		sidebarDIV.style.marginTop = "5px";
+		sidebarTD.appendChild(sidebarDIV);
+		document.getElementById("cm_mapTR").appendChild(sidebarTD);
+	}
+	
+	var bounds = new GLatLngBounds();
+	
+	if(json.feed.entry[0]["gsx$" + param_rankColumn]) {
+		usingRank = true;
+		json.feed.entry.sort(cm_sortRows);
+	}
+
+	for (var i = 0; i < json.feed.entry.length; i++) {
+		var entry = json.feed.entry[i];
+		if (entry["gsx$" + param_latColumn]) {
+			var lat = parseFloat(entry["gsx$" + param_latColumn].$t);
+			var lng = parseFloat(entry["gsx$" + param_lngColumn].$t);
+			var point = new GLatLng(lat,lng);
+			var html = "<div style='font-size:12px; font-family: sans-serif;'>";
+			html += "<b>" + entry["gsx$"+param_titleColumn].$t + "</b>";
+			var label = entry["gsx$"+param_titleColumn].$t + " (" + entry["gsx$"+param_descriptionColumn].$t + ")";
+			var rank = 0;
+			
+			if(usingRank && entry["gsx$" + param_rankColumn]) {
+				rank = parseInt(entry["gsx$"+param_rankColumn].$t);
+			}
+			
+			if(entry["gsx$" + param_descriptionColumn]) {
+				html += "<br/>" + entry["gsx$"+param_descriptionColumn].$t;
+			}
+			html += "</div>";
+			
+			// create the marker
+			var marker = cm_createMarker(point,label,html,rank);
+			cm_map.addOverlay(marker);
+			cm_mapMarkers.push(marker);
+			cm_mapHTMLS.push(html);
+			bounds.extend(point);
+			
+			if(param_useSidebar == true) {
+				var markerA = document.createElement("a");
+				markerA.setAttribute("href","javascript:cm_markerClicked('" + i +"')");
+
+				var sidebarText= "";
+				if(usingRank) {
+					sidebarText += rank + ") ";
+				} 
+				sidebarText += label;
+				markerA.appendChild(document.createTextNode(sidebarText));
+				sidebarDIV.appendChild(markerA);
+				sidebarDIV.appendChild(document.createElement("br"));
+				sidebarDIV.appendChild(document.createElement("br"));
+			}
+		}
+	}
+}
+
+/**
+ * Creates marker with ranked Icon or blank icon,
+ * depending if rank is defined. Assigns onclick function.
+ * @param {GLatLng} point Point to create marker at
+ * @param {String} title Tooltip title to display for marker
+ * @param {String} html HTML to display in InfoWindow
+ * @param {Number} rank Number rank of marker, used in creating icon
+ * @return {GMarker} Marker created
+ */
+function cm_createMarker(point, title, html, rank) {
+	var markerOpts = {};
+	var nIcon = new GIcon(cm_baseIcon);
+	
+	var markers_url = "http://gmaps-samples.googlecode.com/svn/trunk/markers/";
+	if (rank > 0 && rank < 100) {
+		nIcon.imageOut = markers_url + param_iconType + "/marker" + rank + ".png";
+		nIcon.imageOver = markers_url + param_iconOverType + "/marker" + rank + ".png";
+		nIcon.image = nIcon.imageOut; 
+	} 
+	else { 
+		nIcon.imageOut = markers_url + param_iconType + "/blank.png";
+		nIcon.imageOver = markers_url + param_iconOverType + "/blank.png";
+		nIcon.image = nIcon.imageOut;
+	}
+
+	markerOpts.icon = nIcon;
+	markerOpts.title = title;		 
+	var marker = new GMarker(point, markerOpts);
+	
+	GEvent.addListener(marker, "click", function() {
+		marker.openInfoWindowHtml(html);
+	});
+	GEvent.addListener(marker, "mouseover", function() {
+		marker.setImage(marker.getIcon().imageOver);
+	});
+	GEvent.addListener(marker, "mouseout", function() {
+		marker.setImage(marker.getIcon().imageOut);
+	});
+	GEvent.addListener(marker, "infowindowopen", function() {
+		marker.setImage(marker.getIcon().imageOver);
+	});
+	GEvent.addListener(marker, "infowindowclose", function() {
+		marker.setImage(marker.getIcon().imageOut);
+	});
+	return marker;
+}
+
+/**
+ * Creates a script tag in the page that loads in the 
+ * JSON feed for the specified key/ID. 
+ * Once loaded, it calls cm_loadMapJSON.
+ */
+function cm_getJSON() {
+
+	// Retrieve the JSON feed.
+	var script = document.createElement('script');
+	
+	script.setAttribute(
+		'src',
+		'http://spreadsheets.google.com/feeds/list/' + param_ssKey + '/' + param_wsId + '/public/values' + '?alt=json-in-script&callback=cm_loadMapJSON'
+	);
+	script.setAttribute('id', 'jsonScript');
+	script.setAttribute('type', 'text/javascript');
+	document.documentElement.firstChild.appendChild(script);
+}
+
+//setTimeout('cm_load()', 500); 
+
+//]]>
+</script>
 

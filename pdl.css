@@ -26,6 +26,9 @@ a {
 	text-decoration: none;
 }
 a:visited { color: blue; }
+a.clickable {
+	cursor: pointer;
+}
 
 
 /* Code samples. */

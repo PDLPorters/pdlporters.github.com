@@ -48,6 +48,9 @@ function formatContents($filename, $title='') {
 	<title>Perl Data Language</title>
     <link rel="shortcut icon" href="images/favicon.ico"
     	  type="image/vnd.microsoft.icon"  />
+    <link rel="stylesheet" type="text/css"
+          href="http://www.google.com/cse/style/look/espresso.css" />
+    <link rel='stylesheet' type='text/css' href='google-search.css' />
     <link rel='stylesheet' type='text/css' href='pdl.css' />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
@@ -78,13 +81,33 @@ function formatContents($filename, $title='') {
 	<img src="images/banners/pos-4-opt-1.jpg" height="79px" width="110px"/>
 	</div> 
   </div> 
-  <!-- END BANNER --> 
+  <!-- END BANNER -->
 
   <!-- SIDE BAR -->
   <div class="sidebar-container">
     <? include "content/sidebar.html" ?>
   </div>
   <!-- END SIDE BAR -->
+  
+  <!-- END GOOGLE SEARCH -->
+  <table id="cse-container">
+    <tr>
+     <td id="cse"></td>
+     <td id="cse-search-form">Loading</td>
+    </tr>
+  </table>
+  <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+  <script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('005624475199589227813:0cr_qvao0qc');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setSearchFormRoot('cse-search-form');
+    customSearchControl.draw('cse', options);
+  }, true);
+  </script>
+  <!-- END GOOGLE SEARCH -->
 
   <!-- MAIN CONTENT -->
   <div class="main">

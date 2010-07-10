@@ -104,6 +104,7 @@ function formatContents($filename, $title='') {
     customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
     var options = new google.search.DrawOptions();
     options.setSearchFormRoot('cse-search-form');
+    options.setAutoComplete(true);
     customSearchControl.draw('cse', options);
   }, true);
   </script>

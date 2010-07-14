@@ -9,7 +9,6 @@ around the world.</p>
 <script  type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAw_GADJMs6pZoBWTmJbVu3RQasz9hqXnwXIRcaPBYcuT978cI1RR7Gbpwm1iFDiiNOLGzibJ8Pi_xdw">
 </script>
 <center>
-<a id='cm_toggle' class="clickable">[Enlarge]</a>
 Are you a PDL user?
 <a href="http://mailman.jach.hawaii.edu/mailman/listinfo/perldl">
 Let us know</a>.
@@ -273,33 +272,13 @@ They were created under MacOS X.</p>
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-	init_cm_map();
-	
-	$('#cm_map').width(260);
-	$('#cm_map').height(120);
-	$('#cm_toggle').click(function () {
-		if ($('#cm_map').width() == 260) {
-			$('#cm_map').width(650);
-			$('#cm_map').height(300);
-			$('#cm_toggle').text('[Shrink]');
-		} else {
-			$('#cm_map').width(260);
-			$('#cm_map').height(120);
-			$('#cm_toggle').text('[Enlarge]');
-		}
-		
-	});
-});
-
-function init_cm_map() {
-	cm_map;
-	cm_mapMarkers = [];
-	cm_mapHTMLS = [];
+	var cm_map;
+	var cm_mapMarkers = [];
+	var cm_mapHTMLS = [];
 
 	// Create a base icon for all of our markers that specifies the
 	// shadow, icon dimensions, etc.
-	cm_baseIcon = new GIcon();
+	var cm_baseIcon = new GIcon();
 	cm_baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
 	cm_baseIcon.iconSize = new GSize(20, 34);
 	cm_baseIcon.shadowSize = new GSize(37, 34);
@@ -308,19 +287,18 @@ function init_cm_map() {
 	cm_baseIcon.infoShadowAnchor = new GPoint(18, 25);
 
 	// Params to get the map data from the spreadsheet
-	param_wsId = "od6";
-	param_ssKey = "0Am3SSF48QCE9dERjcko2YWNrSzJVLUZLd1QyaldsYXc";
-	param_useSidebar = false;
-	param_titleColumn = "place";
-	param_descriptionColumn = "discipline";
-	param_latColumn = "latitude";
-	param_lngColumn = "longitude";
-	param_rankColumn = "rank";
-	param_iconType = "green";
-	param_iconOverType = "orange";
+	var param_wsId = "od6";
+	var param_ssKey = "0Am3SSF48QCE9dERjcko2YWNrSzJVLUZLd1QyaldsYXc";
+	var param_useSidebar = false;
+	var param_titleColumn = "place";
+	var param_descriptionColumn = "discipline";
+	var param_latColumn = "latitude";
+	var param_lngColumn = "longitude";
+	var param_rankColumn = "rank";
+	var param_iconType = "green";
+	var param_iconOverType = "orange";
 	
 	cm_load();
-}
 
 /**
  * Loads map and calls function to load in worksheet data.

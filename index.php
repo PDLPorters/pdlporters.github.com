@@ -55,11 +55,13 @@ function formatContents($filename, $title='') {
     <link rel="stylesheet" type="text/css"
           href="http://www.google.com/cse/style/look/espresso.css" />
     <link rel='stylesheet' type='text/css' href='google-search.css' />
+    <link rel="stylesheet"type="text/css" 
+          href="css/jquery-ui-1.8.2.custom.css" />	
     <link rel='stylesheet' type='text/css' href='pdl.css' />
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
 		type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-17388934-1']);

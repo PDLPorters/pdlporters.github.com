@@ -155,7 +155,13 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	margin-right: 25px;
 	text-align: justify;
 }
+
 .main ul, .main ol, .main dl { display: table }
+
+.main .tabs ul, .main .tabs ol { display: block }
+.main .tabs a.link { color: blue }
+
+.main .tabs { font-size: 100% }
 
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {
@@ -168,6 +174,5 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	color: blue;
 	cursor: pointer;
 }
-
 
 

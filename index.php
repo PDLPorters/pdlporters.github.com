@@ -38,7 +38,11 @@ function formatContents($filename, $title='') {
 	$content = preg_replace('/<\/body>.*$/', '', $content);
 	$content = str_replace('[\n]', "\n", $content);
 	$content = preg_replace('/\n+/', "\n", $content);
-	return "<h1 class='title'>$title</h1>$content";
+	return  "
+	<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>
+	<h1 class='title'>$title</h1>
+	$content
+	";
 }
 
 ?>

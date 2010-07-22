@@ -79,6 +79,28 @@ h2 {
 h1, h2, h3, h4 { color: #347 }
 
 
+/*
+ *  ICONS TABLE
+ */
+
+.icons td {
+	padding-left: 2em;
+	padding-right: 2em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/*
+ *  NOTES AND WARNINGS
+ */
+
+.note {
+	background: #ff7;
+	border: 1px solid blue;
+	padding: 1em;
+	margin-left: 10em;
+	margin-right: 10em;
+}
 
 /*
  *  SIDEBAR

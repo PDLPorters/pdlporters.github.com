@@ -80,7 +80,7 @@ function formatContents($filename, $title='') {
  
   <!-- BANNER --> 
   <div class="banner">
-    <img src="images/banners/pos-0-logo.jpg" height="79px" width="146px"/>
+    <img src="images/icons/pdl.png" height="79px" width="146px"/>
 	<div id="pos1" class="rotation">
 	<img src="images/banners/pos-1-opt-0.jpg" height="79px" width="278px"/>
 	<img src="images/banners/pos-1-opt-1.jpg" height="79px" width="278px"/>

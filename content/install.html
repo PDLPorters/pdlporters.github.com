@@ -1,0 +1,85 @@
+
+<h1 class='title'>Install PDL</h1>
+
+<? $wiki = "http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_"; ?>
+
+<style type="text/css">
+.install {
+  	list-style-type: none;
+}
+.install li {
+  	margin: 0.5em;
+  	padding: 0.5em;
+  	border: 1px solid #ddd;
+}
+.install a {
+	color: #349;
+  	/*font-weight: bold;
+  	font-size: 135%;*/
+}
+.install img {
+    padding: 10px;
+    padding-right: 30px;
+}
+.install .os-name {
+  	font-weight: bold;
+  	font-size: 135%;
+}
+.install .comment {
+  	font-size: 80%;
+}
+.install td {
+    vertical-align: middle;
+}
+</style>
+
+<ul class="install">
+  <li style="background: #dde">
+    <a href="<?= $wiki.'on_Linux' ?>">
+       <table>
+         <tr>
+           <td><img src="images/icons/linux.png"/></td>
+           <td>
+             <span class='os-name'>Linux</span><br/>
+             <span class='comment'>Ubuntu, Fedora, Mandriva and OpenSUSE</span>
+           </td>
+         </tr>
+       </table>
+    </a>
+  </li>
+  <li style="background: #cec">
+    <a href="<?= $wiki.'on_Windows' ?>">
+       <table>
+         <tr>
+           <td><img src="images/icons/windows.png"/></td>
+           <td>
+             <span class='os-name'>Windows</span><br/>
+             <span class='comment'>For Windows XP or later</span>
+           </td>
+         </tr>
+       </table>
+    </a>
+  </li>
+  <li style="background: #ece">
+    <a href="<?= $wiki.'on_Mac_OS_X' ?>">
+       <table>
+         <tr>
+           <td><img src="images/icons/mac_osx.png"/></td>
+           <td>
+             <span class='os-name'>Mac OS X</span><br/>
+             <span class='comment'>Pre-Built packages and Custom Install</span>
+           </td>
+         </tr>
+       </table>
+    </a>
+  </li>
+  <li style="background: #fe9">
+    <a href="<?= $wiki.'Manually' ?>">
+      <center>
+        <span class='os-name'>Manual Install</span><br/>
+        <span class='comment'>All platforms</span>
+      </center>
+    </a>
+  </li>
+</ul>
+

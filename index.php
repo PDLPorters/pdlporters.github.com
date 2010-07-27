@@ -80,7 +80,9 @@ function formatContents($filename, $title='') {
  
   <!-- BANNER --> 
   <div class="banner">
-    <img src="images/icons/pdl.png" height="79px" width="146px"/>
+    <a href="index.php?page=home">
+      <img src="images/icons/pdl.png" height="79px" width="146px"/>
+    </a>
 	<img src="images/banners/pos-1-opt-<?=rand(0,2)?>.jpg" height="79px" width="278px"/>
 	<img src="images/banners/pos-2-opt-<?=rand(0,2)?>.jpg" height="79px" width="93px"/>
 	<img src="images/banners/pos-4-opt-<?=rand(0,1)?>.jpg" height="79px" width="110px" style="margin-left: 25px"/>

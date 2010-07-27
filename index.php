@@ -33,9 +33,16 @@ function formatContents($filename, $title='') {
 							'<a href="http://perldoc.perl.org/$1.html$2">', $content);
 	
 	
-	
+	// Remove body tags.
 	$content = preg_replace('/^.*<body[^>]*>/', '', $content);
 	$content = preg_replace('/<\/body>.*$/', '', $content);
+	
+	// Replace <a name="foo"> with ids in all headers.
+	for ($i = 1; $i <= 6; $i++)
+		$content = preg_replace('|<h'.$i.'><a name="([^"]+)">([^<]+)</a></h'.$i.'>|',
+		                         '<h'.$i.' id="$1">$2</h'.$i.'>', $content);
+	
+	// Finished.
 	$content = str_replace('[\n]', "\n", $content);
 	$content = preg_replace('/\n+/', "\n", $content);
 	return  "

@@ -90,15 +90,12 @@ function formatContents($filename, $title='') {
 	<img src="images/banners/pos-2-opt-0.jpg" height="79px" width="93px"/>
 	<img src="images/banners/pos-2-opt-1.jpg" height="79px" width="93px"/>
 	<img src="images/banners/pos-2-opt-2.jpg" height="79px" width="93px"/>
-	</div> 
-	<div id="pos3" class="rotation" style="left: 555px">
-	<img src="images/banners/pos-3-opt-0.jpg" height="79px" width="107px"/>
-	<img src="images/banners/pos-3-opt-1.jpg" height="79px" width="107px"/>
-	</div> 
-	<div id="pos4" class="rotation" style="left: 685px">
+	</div>
+	<div id="pos4" class="rotation" style="left: 555px">
 	<img src="images/banners/pos-4-opt-0.jpg" height="79px" width="110px"/>
 	<img src="images/banners/pos-4-opt-1.jpg" height="79px" width="110px"/>
 	</div> 
+    <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">Loading</div>
   </div> 
   <!-- END BANNER -->
 
@@ -112,7 +109,6 @@ function formatContents($filename, $title='') {
   <table id="cse-container">
     <tr>
      <td id="cse"></td>
-     <td id="cse-search-form">Loading</td>
     </tr>
   </table>
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
@@ -158,10 +154,9 @@ $(document).ready(function() {
 	// Change a random part of the banner.
 	function changeBanner() {
 		var rand = Math.random();
-		if (0.00 < rand && rand < 0.25) $('.banner #pos1').cycle('next');
-		if (0.25 < rand && rand < 0.50) $('.banner #pos2').cycle('next');
-		if (0.50 < rand && rand < 0.75) $('.banner #pos3').cycle('next');
-		if (0.75 < rand && rand < 1.00) $('.banner #pos4').cycle('next');
+		if (0.00 < rand && rand < 0.33) $('.banner #pos1').cycle('next');
+		if (0.33 < rand && rand < 0.66) $('.banner #pos2').cycle('next');
+		if (0.66 < rand && rand < 1.00) $('.banner #pos4').cycle('next');
 	}
 	
 	// Change the banner every 5 seconds forever.

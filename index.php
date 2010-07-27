@@ -42,12 +42,17 @@ function formatContents($filename, $title='') {
 		$content = preg_replace('|<h'.$i.'><a name="([^"]+)">([^<]+)</a></h'.$i.'>|',
 		                         '<h'.$i.' id="$1">$2</h'.$i.'>', $content);
 	
+	// Put "top" links on all headings.
+	$top_link = '<span style="font-size: 50%">[<a href="#top">top</a>]</span>';
+	$content = str_replace('</h1>', " $top_link</h1>", $content);
+	
+	
 	// Finished.
 	$content = str_replace('[\n]', "\n", $content);
 	$content = preg_replace('/\n+/', "\n", $content);
 	return  "
 	<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>
-	<h1 class='title'>$title</h1>
+	<h1 id='top' class='title'>$title</h1>
 	$content
 	";
 }

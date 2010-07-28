@@ -1,17 +1,4 @@
 <?
-//
-//  Choose a random banner.
-//
-function pickBanner() {
-	// Banners are identified by a binary number from 0000 to 1111.
-	$binary = '';
-	$binary .= rand(0,1);
-	$binary .= rand(0,1) * rand(0,1); // I like 0 better. :-)
-	$binary .= rand(0,1);
-	$binary .= rand(0,1);
-	
-	return "blue-$binary.jpg";
-}
 function formatContents($filename, $title='') {
 	$content = file_get_contents($filename);
 	$content = str_replace('<div name="index">',

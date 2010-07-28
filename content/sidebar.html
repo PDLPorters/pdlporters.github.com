@@ -2,8 +2,7 @@
 $wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
 
 function homeLink($linkTitle) {
-	$class = $_GET['docs'] ? '' :
-			($_GET['page'] != 'home' ? '' : 'class="selected"');
+	$class = ($_GET['page'] == 'home' || $_GET['page'] == '') ? 'class="selected"' : '';
 	return "<li $class><a href='?page=home'>$linkTitle</a></li>";
 }
 function pageLink($page, $linkTitle) {

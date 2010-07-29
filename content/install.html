@@ -4,82 +4,121 @@
 <? $wiki = "http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_"; ?>
 
 <style type="text/css">
-.install {
-  	list-style-type: none;
+.dashboard {
+	width: 75%;
+	margin-top: 3em;
+	margin-left: 20%;
 }
-.install li {
-  	margin: 0.5em;
-  	padding: 0.5em;
-  	border: 1px solid #ddd;
+.dashboard td {
+	margin: 0;
+	padding: 1em;
 }
-.install a {
+.dashboard .option td {
+	margin: 0;
+	padding: 0;
+}
+.dashboard .option .left {
 	color: #349;
-  	/*font-weight: bold;
-  	font-size: 135%;*/
+	font-size: 115%;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
 }
-.install img {
-    padding: 10px;
-    padding-right: 30px;
-}
-.install .os-name {
-  	font-weight: bold;
-  	font-size: 135%;
-}
-.install .comment {
-  	font-size: 80%;
-}
-.install td {
-    vertical-align: middle;
+.dashboard .option .right {
+	color: blue;
+	font-size: 80%;
+	text-align: left;
+	font-weight: normal;
+	vertical-align: bottom;
 }
 </style>
 
-<ul class="install">
-  <li style="background: #dde">
-    <a href="<?= $wiki.'on_Linux' ?>">
-       <table>
-         <tr>
-           <td><img src="images/icons/linux.png"/></td>
-           <td>
-             <span class='os-name'>Linux</span><br/>
-             <span class='comment'>Ubuntu, Fedora, Mandriva and OpenSUSE</span>
-           </td>
-         </tr>
-       </table>
-    </a>
-  </li>
-  <li style="background: #cec">
-    <a href="<?= $wiki.'on_Windows' ?>">
-       <table>
-         <tr>
-           <td><img src="images/icons/windows.png"/></td>
-           <td>
-             <span class='os-name'>Windows</span><br/>
-             <span class='comment'>For Windows XP or later</span>
-           </td>
-         </tr>
-       </table>
-    </a>
-  </li>
-  <li style="background: #ece">
-    <a href="<?= $wiki.'on_Mac_OS_X' ?>">
-       <table>
-         <tr>
-           <td><img src="images/icons/mac_osx.png"/></td>
-           <td>
-             <span class='os-name'>Mac OS X</span><br/>
-             <span class='comment'>Pre-Built packages and Custom Install</span>
-           </td>
-         </tr>
-       </table>
-    </a>
-  </li>
-  <li style="background: #fe9">
+<table class="dashboard">
+  <tr>
+    <td>
+      <a href="<?= $wiki.'on_Linux' ?>">
+        <table cellspacing="0" cellpadding="0" class="option">
+          <tr>
+            <td class="left" style="font-weight: bold; font-size: 115%">
+        <img src="images/icons/linux.png" alt="Linux"/>
+        <br/>Linux
+            </td>
+            <td class="right">
+              <ul>
+                <li>Ubuntu</li>
+                <li>Fedora</li>
+                <li>Mandriva</li>
+                <li>OpenSUSE</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+    <td>
+      <a href="<?= $wiki.'on_Windows' ?>">
+        <table cellspacing="0" cellpadding="0" class="option">
+          <tr>
+            <td class="left">
+        <img src="images/icons/windows.png" alt="Windows"/>
+        <br/>Windows
+            </td>
+            <td class="right">
+              <ul>
+                <li>XP or later</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+    <td>
+      <a href="<?= $wiki.'on_Mac_OS_X' ?>">
+        <table cellspacing="0" cellpadding="0" class="option">
+          <tr>
+            <td class="left">
+        <img src="images/icons/mac_osx.png" alt="Mac OS X"/>
+        <br/>Mac&nbsp;OS&nbsp;X
+            </td>
+            <td class="right">
+              <ul>
+                <li>Binaries</li>
+                <li>Custom Install</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+<style type="text/css">
+.manual {
+    width: 40%;
+    background: #fe9;
+    border: 1px solid #aaa;
+    margin-top: 3em;
+}
+.manual a {
+	color: #349;
+}
+.os-name {
+  	font-weight: bold;
+  	font-size: 135%;
+}
+comment {
+  	font-size: 80%;
+}
+</style>
+
+<center>
+  <div class="manual">
     <a href="<?= $wiki.'Manually' ?>">
-      <center>
         <span class='os-name'>Manual Install</span><br/>
         <span class='comment'>All platforms</span>
-      </center>
     </a>
-  </li>
-</ul>
+  </div>
+</center>
 

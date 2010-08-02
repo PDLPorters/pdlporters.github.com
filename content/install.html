@@ -1,124 +1,210 @@
 
 <h1 class='title'>Install PDL</h1>
 
-<? $wiki = "http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_"; ?>
-
 <style type="text/css">
-.dashboard {
-	width: 75%;
-	margin-top: 3em;
-	margin-left: 20%;
+.install {
+	margin-top: 2em;
+	border: 2px solid black;
 }
-.dashboard td {
-	margin: 0;
+.install td {
 	padding: 1em;
+	text-align: left;
+	vertical-align: middle;
+	/*border: 1px solid #ccc;*/
 }
-.dashboard .option td {
+.install img {
+	height: 45px;
+}
+.install td.title {
 	margin: 0;
-	padding: 0;
-}
-.dashboard .option .left {
-	color: #349;
-	font-size: 115%;
+	color: #347;
+	font-size: 130%;
 	font-weight: bold;
 	text-align: center;
-	vertical-align: top;
+	border-top: 4px solid #ccc;
 }
-.dashboard .option .right {
-	color: blue;
-	font-size: 80%;
-	text-align: left;
-	font-weight: normal;
-	vertical-align: bottom;
+.install .separator td {
+	border-top: 1px solid #ccc;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#binary').hide();
+	$('#source').hide();
+});
+var select = (function () {
+	var prev = '';
+    return function (id) {
+		if (prev == id) {
+			$('#'+id).slideToggle();
+		} else {
+			if (id == 'source') {
+				$('#binary').slideUp('slow', function () { $('#source').slideDown(); });
+			} else {
+				$('#source').slideUp('slow', function () { $('#binary').slideDown(); });
+			}
+		}
+		prev = id;
+	}
+})();
+</script>
 
-<table class="dashboard">
-  <tr>
-    <td>
-      <a href="<?= $wiki.'on_Linux' ?>">
-        <table cellspacing="0" cellpadding="0" class="option">
-          <tr>
-            <td class="left" style="font-weight: bold; font-size: 115%">
-        <img src="images/icons/linux.png" alt="Linux"/>
-        <br/>Linux
-            </td>
-            <td class="right">
-              <ul>
-                <li>Ubuntu</li>
-                <li>Fedora</li>
-                <li>Mandriva</li>
-                <li>OpenSUSE</li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-      </a>
-    </td>
-    <td>
-      <a href="<?= $wiki.'on_Windows' ?>">
-        <table cellspacing="0" cellpadding="0" class="option">
-          <tr>
-            <td class="left">
-        <img src="images/icons/windows.png" alt="Windows"/>
-        <br/>Windows
-            </td>
-            <td class="right">
-              <ul>
-                <li>XP or later</li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-      </a>
-    </td>
-    <td>
-      <a href="<?= $wiki.'on_Mac_OS_X' ?>">
-        <table cellspacing="0" cellpadding="0" class="option">
-          <tr>
-            <td class="left">
-        <img src="images/icons/mac_osx.png" alt="Mac OS X"/>
-        <br/>Mac&nbsp;OS&nbsp;X
-            </td>
-            <td class="right">
-              <ul>
-                <li>Binaries</li>
-                <li>Custom Install</li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-      </a>
-    </td>
-  </tr>
-</table>
+<h3 style="text-align: center">
+  <a class="clickable" onclick="select('binary')">Pre-Built Binaries</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="clickable" onclick="select('source')">Source Install</a>
+</h3>
 
+<div id="binary">
+	<div style="display: table">
+		<table class="install" cellspacing="0">
+			<tr>
+				<td>Instructions</td>
+				<td>Notes</td>
+			</tr>
+			<tr>
+			  <td colspan="2" class="title">
+				<img src="images/icons/mac_osx.png"/> Mac OS X
+			  </td>
+			</tr>
+			<tr>
+				<td>
+					<p>Install <a href="http://sourceforge.net/projects/pdl/files/">
+					"SciKarl" binary</a>.</p>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+			  <td colspan="2" class="title">
+				<img src="images/icons/linux.png"/> Linux
+			  </td>
+			</tr>
+			<tr>
+				<td>
+					<b>Ubuntu/Debian</b>
+					<pre>apt-get install pdl pgplot5 libpgplot-perl</pre>
+				</td>
+				<td></td>
+			</tr>
+			<tr class="separator">
+				<td>
+					<b>Fedora/RHEL</b>
+					<pre>yum install perl-PDL plplot-perl</pre>
+				</td>
+				<td>Does not include PGPLOT.</td>
+			</tr>
+			<tr class="separator">
+				<td>
+					<b>Mandriva</b>
+					<pre>urpmi perl-PDL</pre>
+				</td>
+				<td>
+					Does not include:
+					<ul>
+						<li>PGPLOT</li>
+						<li>PLplot</li>
+						<li>OpenGL</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="separator">
+				<td>
+					<b>OpenSUSE</b>
+					<pre>yast -i perl-PDL</pre>
+				</td>
+				<td>
+					Does not include:
+					<ul>
+						<li>PGPLOT</li>
+						<li>PLplot</li>
+						<li>OpenGL</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+			  <td colspan="2" class="title">
+				<img src="images/icons/windows.png"/> Windows
+			  </td>
+			</tr>
+			<tr>
+				<td colspan="2">
+If you are using <a href="http://www.activestate.com/activeperl">
+ActiveState Perl</a> with <a href="http://ppm4.activestate.com/">ppm</a>:
+<pre>ppm install Astro-FITS-Header</pre>
+					<b>Perl 5.8</b>
+<pre>
+ppm install http://theoryx5.uwinnipeg.ca/ppms/PGPLOT.ppd
+ppm install http://theoryx5.uwinnipeg.ca/ppms/OpenGL.ppd
+ppm install http://theoryx5.uwinnipeg.ca/ppms/PDL.ppd
+</pre>
+				</td>
+			</tr>
+			<tr class="separator">
+				<td colspan="2">
+					<b>Perl 5.10</b>
+<pre>
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/PGPLOT.ppd
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/OpenGL.ppd
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/PDL.ppd
+</pre>
+				</td>
+			</tr>
+			<tr class="separator">
+				<td colspan="2">
+					<b>Perl 5.12</b>
+<pre>
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/PGPLOT.ppd
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/OpenGL.ppd
+ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/PDL.ppd
+</pre>
+				</td>
+			</tr>
+		</table>
 
-<style type="text/css">
-.manual {
-    width: 40%;
-    background: #fe9;
-    border: 1px solid #aaa;
-    margin-top: 3em;
-}
-.manual a {
-	color: #349;
-}
-.os-name {
-  	font-weight: bold;
-  	font-size: 135%;
-}
-comment {
-  	font-size: 80%;
-}
-</style>
+		<p>PDL installation tested with:</p>
+		<ul>
+			<li>Ubuntu 10.04 LTS.</li>
+			<li>Fedora Core 13.</li>
+			<li>Mandriva ES 5.</li>
+			<li>OpenSUSE 11.3.</li>
+		</ul>
+	</div>
+</div>
 
-<center>
-  <div class="manual">
-    <a href="<?= $wiki.'Manually' ?>">
-        <span class='os-name'>Manual Install</span><br/>
-        <span class='comment'>All platforms</span>
-    </a>
-  </div>
-</center>
+<div id="source">
 
+	<b>Note:</b> Requires standard Perl development environment (gcc, make, etc).
+
+	<table class="install" border="1" cellspacing="0">
+		<tr>
+			<td>Option</td>
+			<td>Instructions</td>
+			<td>Notes</td>
+		</tr>
+		<tr>
+			<td><b>CPAN</b></td>
+			<td>
+				<pre>perl -MCPAN -e shell<br/>cpan&gt; install PDL</pre>
+			</td>
+			<td>Installs all of PDL that is supported by available
+			dependencies.</td>
+		</tr>
+		<tr>
+			<td><b>Manual install</b></td>
+			<td>
+				<p><a href="https://sourceforge.net/projects/pdl/files/">
+				Download sources</a> from SourceForge and extract.</p>
+				<pre>perl Makefile.PL<br/>make<br/>make test<br/>make install</pre>
+			</td>
+			<td>On Windows, replace 'make' with 'dmake'.</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: center">
+				<p><b style="font-size: 110%"><a href="https://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_Manually">
+				Complete Manual Installation</a></b><br/>
+				<span style="font-size: 85%">(If the above methods don't work, go here)</span>
+			</p>
+			</td>
+		</tr>
+	</table>
+</div>

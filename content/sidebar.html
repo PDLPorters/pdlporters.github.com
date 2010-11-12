@@ -2,7 +2,8 @@
 $wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
 
 function homeLink($linkTitle) {
-	$class = ($_GET['page'] == 'home' || $_GET['page'] == '') ? 'class="selected"' : '';
+	$class = ($_GET['page'] == 'home' || ($_GET['page'] == '' && $_GET['docs'] == ''))
+			 ? 'class="selected"' : '';
 	return "<li $class><a href='?page=home'>$linkTitle</a></li>";
 }
 function pageLink($page, $linkTitle) {
@@ -11,7 +12,7 @@ function pageLink($page, $linkTitle) {
 }
 function docsLink($page, $linkTitle, $pageTitle) {
 	$class = $page == $_GET['docs'] ? 'class="selected"' : '';
-	return "<li $class><a href='?docs=$page&title=$pageTitle'>$linkTitle</a></li>";
+	return "<li $class><a href='?docs=$page&amp;title=$pageTitle'>$linkTitle</a></li>";
 }
 ?>
 
@@ -27,12 +28,20 @@ function docsLink($page, $linkTitle, $pageTitle) {
   </ul>
   </div>
   
+  <div class="h3"><h3>Documentation</h3></div>
+  <div class="ul">
+  <ul>
+    <?= docsLink('FAQ', 'FAQ', 'PDL::FAQ - Frequently Asked Questions') ?>
+    <?= docsLink('Tutorials', 'Tutorials', 'PDL::Tutorials') ?>
+    <?= docsLink('Modules', 'Modules', 'PDL::Modules') ?>
+    <?= docsLink('Course', 'Course', 'PDL::Course') ?>
+    <?= docsLink('Index', 'Index', 'PDL::Index') ?>
+  </ul>
+  </div>
+  
   <div class="h3"><h3>Resources</h3></div>
   <div class="ul">
   <ul>
-    <?= docsLink('FAQ', 'FAQ', 'Frequently Asked Questions') ?>
-    <?= pageLink('tutorials', 'Tutorials') ?>
-    <?= pageLink('reference', 'Reference Docs') ?>
     <?= pageLink('demos/index', 'Demos') ?>
     <li><a href="<?= $wiki_url ?>?title=Colloquia">Presentations</a></li>
     <li><a href="<?= $wiki_url ?>">PDL Wiki</a></li>
@@ -44,9 +53,9 @@ function docsLink($page, $linkTitle, $pageTitle) {
   <div class="ul">
   <ul>
     <?= pageLink('develop', 'Get Started') ?>
-    <? $tracker = "http://sourceforge.net/tracker/?func=browse&group_id=612" ?>
-    <li><a href="<?= $tracker ?>&atid=100612&status=1">Bugs</a></li>
-    <li><a href="<?= $tracker ?>&atid=300612&status=1">Patches</a></li>
+    <? $tracker = "http://sourceforge.net/tracker/?func=browse&amp;group_id=612" ?>
+    <li><a href="<?= $tracker ?>&amp;atid=100612&amp;status=1">Bugs</a></li>
+    <li><a href="<?= $tracker ?>&amp;atid=300612&amp;status=1">Patches</a></li>
     <?= pageLink('credits', 'Credits') ?>
   </ul>
   </div>

@@ -29,87 +29,87 @@ want to use, with the prompt:</p>
 <HR>
 <pre>
 <code>
-<b>perldl></b> <span class="comment"># ensure the module is loaded (required for PDL versions>= 2.004)
+<b>pdl></b> <span class="comment"># ensure the module is loaded (required for PDL versions>= 2.004)
 </span>
-<b>perldl></b> use PDL::Graphics::PGPLOT;
-<b>perldl></b> <span class="comment"># The size of the window can be specified
+<b>pdl></b> use PDL::Graphics::PGPLOT;
+<b>pdl></b> <span class="comment"># The size of the window can be specified
 </span>
-<b>perldl></b> $ENV{PGPLOT_XW_WIDTH}=0.3;
-<b>perldl></b> <span class="comment"># You can set your device explicitly
+<b>pdl></b> $ENV{PGPLOT_XW_WIDTH}=0.3;
+<b>pdl></b> <span class="comment"># You can set your device explicitly
 </span>
-<b>perldl></b> dev('/XSERVE');
+<b>pdl></b> dev('/XSERVE');
 
-<b>perldl></b> <span class="comment"># First we define some variables to use for the rest of the demo.
+<b>pdl></b> <span class="comment"># First we define some variables to use for the rest of the demo.
 </span>
-<b>perldl></b> $x=sequence(10);
-<b>perldl></b> $y=2*$x**2;
-<b>perldl></b> <span class="comment"># Now a simple plot with points
+<b>pdl></b> $x=sequence(10);
+<b>pdl></b> $y=2*$x**2;
+<b>pdl></b> <span class="comment"># Now a simple plot with points
 </span>
-<b>perldl></b> points $x, $y;
+<b>pdl></b> points $x, $y;
 </code></pre>
 
 <A HREF="images/demos/pgplot1.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg1.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment"># Here is the same with lines</span>
-<b>perldl></b> line $x, $y;
+<b>pdl></b> <span class="comment"># Here is the same with lines</span>
+<b>pdl></b> line $x, $y;
 </code></pre>
 
 <A HREF="images/demos/pgplot2.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg2.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment"># If you want to overlay one plot you can use the command</span>
-<b>perldl></b> <span class="comment"># 'hold' to put the graphics on hold and 'release' to</span>
-<b>perldl></b> <span class="comment"># revert the effect</span>
-<b>perldl></b> points $x, $y, {SYMBOL=>4};  <span class="comment"># The last argument sets symboltype</span>
-<b>perldl></b> hold;
-<b>perldl></b> <span class="comment"># Now draw lines between the points</span>
-<b>perldl></b> line $x, $y;
-<b>perldl></b> <span class="comment"># Plot errorbars over the points</span>
-<b>perldl></b> $yerr=sqrt($y);
-<b>perldl></b> errb $x, $y, $yerr;
-<b>perldl></b> <span class="comment"># To revert to old behaviour, use release</span>
-<b>perldl></b> release;
+<b>pdl></b> <span class="comment"># If you want to overlay one plot you can use the command</span>
+<b>pdl></b> <span class="comment"># 'hold' to put the graphics on hold and 'release' to</span>
+<b>pdl></b> <span class="comment"># revert the effect</span>
+<b>pdl></b> points $x, $y, {SYMBOL=>4};  <span class="comment"># The last argument sets symboltype</span>
+<b>pdl></b> hold;
+<b>pdl></b> <span class="comment"># Now draw lines between the points</span>
+<b>pdl></b> line $x, $y;
+<b>pdl></b> <span class="comment"># Plot errorbars over the points</span>
+<b>pdl></b> $yerr=sqrt($y);
+<b>pdl></b> errb $x, $y, $yerr;
+<b>pdl></b> <span class="comment"># To revert to old behaviour, use release</span>
+<b>pdl></b> release;
 </code></pre>
 
 <A HREF="images/demos/pgplot3.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg3.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> bin $x, $y;
-<b>perldl></b> <span class="comment"># This plots a binned histogram of the data and as you can</span>
-<b>perldl></b> <span class="comment"># see it made a new plot.</span>
+<b>pdl></b> bin $x, $y;
+<b>pdl></b> <span class="comment"># This plots a binned histogram of the data and as you can</span>
+<b>pdl></b> <span class="comment"># see it made a new plot.</span>
 </code></pre>
 
 <A HREF="images/demos/pgplot4.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg4.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment"># 2D data can also easily be accomodated:</span>
-<b>perldl></b> <span class="comment"># First make a simple image</span>
-<b>perldl></b> $gradient=sequence(40,40);
-<b>perldl></b> <span class="comment"># Then display it.</span>
-<b>perldl></b> imag $gradient;
-<b>perldl></b> <span class="comment"># And overlay a contour plot over it:</span>
-<b>perldl></b> hold;
-<b>perldl></b> cont $gradient;
-<b>perldl></b> release;
+<b>pdl></b> <span class="comment"># 2D data can also easily be accomodated:</span>
+<b>pdl></b> <span class="comment"># First make a simple image</span>
+<b>pdl></b> $gradient=sequence(40,40);
+<b>pdl></b> <span class="comment"># Then display it.</span>
+<b>pdl></b> imag $gradient;
+<b>pdl></b> <span class="comment"># And overlay a contour plot over it:</span>
+<b>pdl></b> hold;
+<b>pdl></b> cont $gradient;
+<b>pdl></b> release;
 
-<b>perldl></b> <span class="comment"># PDL::Graphics::PGPLOT contains several colour tables,</span>
-<b>perldl></b> <span class="comment"># a more extensive collection can be found in </span>
-<b>perldl></b> <span class="comment"># PDL::Graphics::LUT</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># (note: the call to lut_names() can take a few seconds to execute)</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> use PDL::Graphics::LUT;
-<b>perldl></b> @names = lut_names();
-<b>perldl></b> print "Available tables: [ ", @names, " ]\n";
-<b>perldl></b> <span class="comment"># use the first table</span>
-<b>perldl></b> ctab( lut_data($names[0]) );
-<b>perldl></b> use PGPLOT;
-<b>perldl></b> pglabel "", "", "Colour table: $names[0]";
+<b>pdl></b> <span class="comment"># PDL::Graphics::PGPLOT contains several colour tables,</span>
+<b>pdl></b> <span class="comment"># a more extensive collection can be found in </span>
+<b>pdl></b> <span class="comment"># PDL::Graphics::LUT</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># (note: the call to lut_names() can take a few seconds to execute)</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> use PDL::Graphics::LUT;
+<b>pdl></b> @names = lut_names();
+<b>pdl></b> print "Available tables: [ ", @names, " ]\n";
+<b>pdl></b> <span class="comment"># use the first table</span>
+<b>pdl></b> ctab( lut_data($names[0]) );
+<b>pdl></b> use PGPLOT;
+<b>pdl></b> pglabel "", "", "Colour table: $names[0]";
 
 Available tables: [ aips0 backgr bgyrw blue blulut color green heat
 idl11 idl12 idl14 idl15 idl2 idl4 idl5 idl6 isophot light manycol pastel
@@ -122,78 +122,78 @@ staircase stairs8 stairs9 standard ]
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg5.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment"># To change plot specifics you can either use the specific PGPLOT</span>
-<b>perldl></b> <span class="comment"># commands - recommended if you need lots of control over your</span>
-<b>perldl></b> <span class="comment"># plot.</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># Or you can use the new option specifications:</span>
-<b>perldl></b> <span class="comment"># To plot our first graph again with blue color, dashed line</span>
-<b>perldl></b> <span class="comment"># and a thickness of 10 we can do:</span>
-<b>perldl></b> line $x, $y, {COLOR=>5, LINESTYLE=>'dashed', LINEWIDTH=>10};
+<b>pdl></b> <span class="comment"># To change plot specifics you can either use the specific PGPLOT</span>
+<b>pdl></b> <span class="comment"># commands - recommended if you need lots of control over your</span>
+<b>pdl></b> <span class="comment"># plot.</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># Or you can use the new option specifications:</span>
+<b>pdl></b> <span class="comment"># To plot our first graph again with blue color, dashed line</span>
+<b>pdl></b> <span class="comment"># and a thickness of 10 we can do:</span>
+<b>pdl></b> line $x, $y, {COLOR=>5, LINESTYLE=>'dashed', LINEWIDTH=>10};
 </code></pre>
 
 <A HREF="images/demos/pgplot6.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg6.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment"># Now for a more complicated example.</span>
-<b>perldl></b> <span class="comment"># First create some data</span>
-<b>perldl></b> $a=sequence(360)*3.1415/180.;
-<b>perldl></b> $b=sin($a)*transpose(cos($a));
-<b>perldl></b> <span class="comment"># Make a piddle with the wanted contours</span>
-<b>perldl></b> $contours=pdl [0.1,0.5,1.0];
-<b>perldl></b> <span class="comment"># And an array (reference to an array) with labels</span>
-<b>perldl></b> $labels=['A', 'B', 'C'];
-<b>perldl></b> <span class="comment"># Create a contour map of the data - note that we can set the colour of</span>
-<b>perldl></b> <span class="comment"># the labels.</span>
-<b>perldl></b> cont($b, {CONTOURS=>$contours, linest=>'DASHED',
-<b>perldl></b> LINEWIDTH=>3, COLOR=>2, LABELCOL=>4});
-<b>perldl></b> hold;
-<b>perldl></b> pgqlw($linewidth);
-<b>perldl></b> points $a->slice('0:-1:4')*180./3.1415;
-<b>perldl></b> release;
+<b>pdl></b> <span class="comment"># Now for a more complicated example.</span>
+<b>pdl></b> <span class="comment"># First create some data</span>
+<b>pdl></b> $a=sequence(360)*3.1415/180.;
+<b>pdl></b> $b=sin($a)*transpose(cos($a));
+<b>pdl></b> <span class="comment"># Make a piddle with the wanted contours</span>
+<b>pdl></b> $contours=pdl [0.1,0.5,1.0];
+<b>pdl></b> <span class="comment"># And an array (reference to an array) with labels</span>
+<b>pdl></b> $labels=['A', 'B', 'C'];
+<b>pdl></b> <span class="comment"># Create a contour map of the data - note that we can set the colour of</span>
+<b>pdl></b> <span class="comment"># the labels.</span>
+<b>pdl></b> cont($b, {CONTOURS=>$contours, linest=>'DASHED',
+<b>pdl></b> LINEWIDTH=>3, COLOR=>2, LABELCOL=>4});
+<b>pdl></b> hold;
+<b>pdl></b> pgqlw($linewidth);
+<b>pdl></b> points $a->slice('0:-1:4')*180./3.1415;
+<b>pdl></b> release;
 </code></pre>
 
 <A HREF="images/demos/pgplot7.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg7.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># More examples of changing the plot defaults</span>
-<b>perldl></b> <span class="comment"># </span>
-<b>perldl></b> $a = 1+sequence(10);
-<b>perldl></b> $b = $a*2;
-<b>perldl></b> $bord_opt = { TYPE => 'RELATIVE', VALUE => 0.1 };
-<b>perldl></b> line log10($a), $b, { AXIS => 'LOGX', BORDER => $bord_opt };
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># More examples of changing the plot defaults</span>
+<b>pdl></b> <span class="comment"># </span>
+<b>pdl></b> $a = 1+sequence(10);
+<b>pdl></b> $b = $a*2;
+<b>pdl></b> $bord_opt = { TYPE => 'RELATIVE', VALUE => 0.1 };
+<b>pdl></b> line log10($a), $b, { AXIS => 'LOGX', BORDER => $bord_opt };
 </code></pre>
 
 <A HREF="images/demos/pgplot8.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg8.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># We can also create vector maps of data</span>
-<b>perldl></b> <span class="comment"># This requires one array for the horizontal component and</span>
-<b>perldl></b> <span class="comment"># one for the vertical component</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> $horizontal=sequence(10,10);
-<b>perldl></b> $vertical=transpose($horizontal)+random(10,10)*$horizontal/10.;
-<b>perldl></b> $arrow={ARROW=> {FS=>1, ANGLE=>25, VENT=>0.7, SIZE=>3}};
-<b>perldl></b> vect $horizontal, $vertical, {ARROW=>$arrow, COLOR=>RED};
-<b>perldl></b> hold;
-<b>perldl></b> cont $vertical-$horizontal, {COLOR=>YELLOW};
-<b>perldl></b> release;
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># We can also create vector maps of data</span>
+<b>pdl></b> <span class="comment"># This requires one array for the horizontal component and</span>
+<b>pdl></b> <span class="comment"># one for the vertical component</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> $horizontal=sequence(10,10);
+<b>pdl></b> $vertical=transpose($horizontal)+random(10,10)*$horizontal/10.;
+<b>pdl></b> $arrow={ARROW=> {FS=>1, ANGLE=>25, VENT=>0.7, SIZE=>3}};
+<b>pdl></b> vect $horizontal, $vertical, {ARROW=>$arrow, COLOR=>RED};
+<b>pdl></b> hold;
+<b>pdl></b> cont $vertical-$horizontal, {COLOR=>YELLOW};
+<b>pdl></b> release;
 </code></pre>
 
 <A HREF="images/demos/pgplot9.gif">
 	<IMG ALT="[Thumbnail]" SRC="images/demos/pg9.gif" width="170" height="136"> Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># To draw [filled] polygons, the command poly is handy:</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> $x=sequence(10)/5;
-<b>perldl></b> poly $x, $x**2, {FILL=>HATCHED, COLOR=>BLUE};
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># To draw [filled] polygons, the command poly is handy:</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> $x=sequence(10)/5;
+<b>pdl></b> poly $x, $x**2, {FILL=>HATCHED, COLOR=>BLUE};
 </code></pre>
 
 <A HREF="images/demos/pgplot10.gif">
@@ -201,16 +201,16 @@ staircase stairs8 stairs9 standard ]
 	Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># the latest feature of PDL are complex numbers</span>
-<b>perldl></b> <span class="comment"># so let's play with a simple example</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> use PDL::Complex;
-<b>perldl></b> $z50 = zeroes(50);
-<b>perldl></b> $c = $z50->xlinvals(0,7)+i*$z50->xlinvals(2,4);
-<b>perldl></b> line im sin $c; hold;      <span class="comment"># the imaginary part</span>
-<b>perldl></b> line re sin $c;            <span class="comment"># real</span>
-<b>perldl></b> line abs sin $c; release;  <span class="comment"># and the modulus</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># the latest feature of PDL are complex numbers</span>
+<b>pdl></b> <span class="comment"># so let's play with a simple example</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> use PDL::Complex;
+<b>pdl></b> $z50 = zeroes(50);
+<b>pdl></b> $c = $z50->xlinvals(0,7)+i*$z50->xlinvals(2,4);
+<b>pdl></b> line im sin $c; hold;      <span class="comment"># the imaginary part</span>
+<b>pdl></b> line re sin $c;            <span class="comment"># real</span>
+<b>pdl></b> line abs sin $c; release;  <span class="comment"># and the modulus</span>
 </code></pre>
   
 <A HREF="images/demos/pgplot11.gif">
@@ -218,13 +218,13 @@ staircase stairs8 stairs9 standard ]
 	Output</A>
 
 <pre><code>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> <span class="comment"># more complex numbers</span>
-<b>perldl></b> <span class="comment">#</span>
-<b>perldl></b> use PDL::Complex;
-<b>perldl></b> $c =  zeroes(300)->xlinvals(0,12)+i*zeroes(300)->xlinvals(2,10);
-<b>perldl></b> $sin = sin $c;
-<b>perldl></b> line $sin->im, $sin->re;   <span class="comment"># look at the result in the complex plane</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> <span class="comment"># more complex numbers</span>
+<b>pdl></b> <span class="comment">#</span>
+<b>pdl></b> use PDL::Complex;
+<b>pdl></b> $c =  zeroes(300)->xlinvals(0,12)+i*zeroes(300)->xlinvals(2,10);
+<b>pdl></b> $sin = sin $c;
+<b>pdl></b> line $sin->im, $sin->re;   <span class="comment"># look at the result in the complex plane</span>
 </code></pre>
 
 <A HREF="images/demos/pgplot12.gif">

@@ -20,13 +20,13 @@ their bad flag set.</p>
 
 <pre>
 <span class="comment"># There are 2 ways to see whether bad-value support has been
-# compiled into your perldl:
+# compiled into your PDL shell:
 </span>
-<b>perldl></b> print("You can use bad values.\n") if $PDL::Bad::Status;
+<b>pdl></b> print("You can use bad values.\n") if $PDL::Bad::Status;
 <span class="comment"># or
 </span>
-<b>perldl></b> use PDL::Config;
-<b>perldl></b> print("You can stil use bad values.\n") if $PDL::Config{WITH_BADVAL};
+<b>pdl></b> use PDL::Config;
+<b>pdl></b> print("You can stil use bad values.\n") if $PDL::Config{WITH_BADVAL};
 <span class="comment"># note that PDL::Bad is included by default when you use
 # 'use PDL', 'use PDL::Lite', or 'use PDL::LiteF'
 </span>
@@ -38,16 +38,16 @@ You can stil use bad values.
 <pre>
 <span class="comment"># create a piddle
 </span>
-<b>perldl></b> $a = byte(1,2,3);
-<b>perldl></b> print( "Bad flag (a) == ", $a->badflag(), "\n" );
+<b>pdl></b> $a = byte(1,2,3);
+<b>pdl></b> print( "Bad flag (a) == ", $a->badflag(), "\n" );
 <span class="comment"># set bad flag, even though all the data is good
 </span>
-<b>perldl></b> $a->badflag(1);
-<b>perldl></b> print( "Bad flag (a) == ", $a->badflag(), "\n" );
+<b>pdl></b> $a->badflag(1);
+<b>pdl></b> print( "Bad flag (a) == ", $a->badflag(), "\n" );
 <span class="comment"># note the bad flag is infectious
 </span>
-<b>perldl></b> $b = 2 * $a;
-<b>perldl></b> print( "Bad flag (b) == ", $b->badflag(), "\n\n" );
+<b>pdl></b> $b = 2 * $a;
+<b>pdl></b> print( "Bad flag (b) == ", $b->badflag(), "\n\n" );
 
 Bad flag (a) == 0
 Bad flag (a) == 1
@@ -58,12 +58,12 @@ Bad flag (b) == 1
 <span class="comment"># the badflag is also included in the state info of
 # piddle
 </span>
-<b>perldl></b> $c = pdl(2,3); # just a piddle without the badflag set
-<b>perldl></b> print "   Type   Dimension        State          Mem\n";
-<b>perldl></b> print "-------------------------------------------------\n";
-<b>perldl></b> print "a ", $a->info("%-6T %-15D   %-5S  %12M"), "\n";
-<b>perldl></b> print "b ", $b->info("%-6T %-15D   %-5S  %12M"), "\n";
-<b>perldl></b> print "c ", $c->info("%-6T %-15D   %-5S  %12M"), "\n\n";
+<b>pdl></b> $c = pdl(2,3); # just a piddle without the badflag set
+<b>pdl></b> print "   Type   Dimension        State          Mem\n";
+<b>pdl></b> print "-------------------------------------------------\n";
+<b>pdl></b> print "a ", $a->info("%-6T %-15D   %-5S  %12M"), "\n";
+<b>pdl></b> print "b ", $b->info("%-6T %-15D   %-5S  %12M"), "\n";
+<b>pdl></b> print "c ", $c->info("%-6T %-15D   %-5S  %12M"), "\n\n";
 
    Type   Dimension        State          Mem
 -------------------------------------------------
@@ -73,16 +73,16 @@ c Double D [2]             P            0.02Kb
 </pre>
 
 <pre>
-<b>perldl></b> print "No bad values:   $a\n";
+<b>pdl></b> print "No bad values:   $a\n";
 <span class="comment"># set the middle value bad
 </span>
-<b>perldl></b> $a->setbadat(1);
+<b>pdl></b> $a->setbadat(1);
 <span class="comment"># now print out
 </span>
-<b>perldl></b> print "Some bad values: $a\n";
-<b>perldl></b> print "b contains:      $b\n";
-<b>perldl></b> $c = $a + $b;
-<b>perldl></b> print "so a + b =       $c\n\n";
+<b>pdl></b> print "Some bad values: $a\n";
+<b>pdl></b> print "b contains:      $b\n";
+<b>pdl></b> $c = $a + $b;
+<b>pdl></b> print "so a + b =       $c\n\n";
 
 No bad values:   [1 2 3]
 Some bad values: [1 BAD 3]
@@ -94,12 +94,12 @@ so a + b =       [3 BAD 9]
 <span class="comment"># The module PDL::Bad contains a number of routines designed
 # to make using bad values easy.
 </span>
-<b>perldl></b> print "a contains ", $a->nbad, " bad elements.\n";
-<b>perldl></b> print "The bad value for type #",$a->get_datatype," is ",$a->badvalue,"\n";
-<b>perldl></b> print "It is easy to find whether a value is good: ", isgood($a), "\n\n";
-<b>perldl></b> print "or to remove the bad values\n";
-<b>perldl></b> $a->inplace->setbadtoval(23);
-<b>perldl></b> print "a = $a and \$a->badflag == ", $a->badflag, "\n\n";
+<b>pdl></b> print "a contains ", $a->nbad, " bad elements.\n";
+<b>pdl></b> print "The bad value for type #",$a->get_datatype," is ",$a->badvalue,"\n";
+<b>pdl></b> print "It is easy to find whether a value is good: ", isgood($a), "\n\n";
+<b>pdl></b> print "or to remove the bad values\n";
+<b>pdl></b> $a->inplace->setbadtoval(23);
+<b>pdl></b> print "a = $a and \$a->badflag == ", $a->badflag, "\n\n";
 
 a contains 1 bad elements.
 The bad value for type #0 is 255
@@ -110,10 +110,10 @@ a = [1 23 3] and $a->badflag == 0
 </pre>
 
 <pre>
-<b>perldl></b> print "We can even label certain values as bad!\n";
-<b>perldl></b> $a = sequence(3,3);
-<b>perldl></b> $a = $a->setbadif( $a % 2 );
-<b>perldl></b> print $a;
+<b>pdl></b> print "We can even label certain values as bad!\n";
+<b>pdl></b> $a = sequence(3,3);
+<b>pdl></b> $a = $a->setbadif( $a % 2 );
+<b>pdl></b> print $a;
 
 We can even label certain values as bad!
 
@@ -129,12 +129,12 @@ We can even label certain values as bad!
 # present, if you change the badflag of a piddle, all its children
 # are also changed:
 </span>
-<b>perldl></b> $a = sequence( byte, 2, 3 );
-<b>perldl></b> $a = $a->setbadif( $a == 3 );
-<b>perldl></b> $b = $a->slice("(1),:");
-<b>perldl></b> print "b = $b\tbadflag = ", $b->badflag, "\n";
-<b>perldl></b> $a->inplace->setbadtoval(3);
-<b>perldl></b> print "b = $b\tbadflag = ", $b->badflag, "\n\n";
+<b>pdl></b> $a = sequence( byte, 2, 3 );
+<b>pdl></b> $a = $a->setbadif( $a == 3 );
+<b>pdl></b> $b = $a->slice("(1),:");
+<b>pdl></b> print "b = $b\tbadflag = ", $b->badflag, "\n";
+<b>pdl></b> $a->inplace->setbadtoval(3);
+<b>pdl></b> print "b = $b\tbadflag = ", $b->badflag, "\n\n";
 
 b = [1 BAD 5]	badflag = 1
 b = [1 3 5]	badflag = 0
@@ -150,10 +150,10 @@ b = [1 3 5]	badflag = 0
 # There is also the fact that the bad value need not relate to the
 # type of the input piddle (due to internal conversion to an 'int +').
 </span>
-<b>perldl></b> $a = ones(3); $a = $a->setbadif( $a == 1 );
-<b>perldl></b> print "Any returns: ", any( $a> 2 ), "\n";
-<b>perldl></b> print "which is the bad value of 'long' (", long->badvalue, ").\n";
-<b>perldl></b> print "Whereas the bad value for \$a is: ", $a->badvalue, "\n";
+<b>pdl></b> $a = ones(3); $a = $a->setbadif( $a == 1 );
+<b>pdl></b> print "Any returns: ", any( $a> 2 ), "\n";
+<b>pdl></b> print "which is the bad value of 'long' (", long->badvalue, ").\n";
+<b>pdl></b> print "Whereas the bad value for \$a is: ", $a->badvalue, "\n";
 
 Any returns: -2147483648
 which is the bad value of 'long' (-2147483648).
@@ -168,7 +168,7 @@ either because it does not make sense or its too much work to do!
 
 <p>
 To find out the status of a particular routine, use the 'badinfo'
-command in perldl (this information is also included when you do
+command in the PDL shell (this information is also included when you do
 'help'), or the '-b' switch of pdldoc.
 </p>
 

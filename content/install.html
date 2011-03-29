@@ -2,209 +2,476 @@
 <h1 class='title'>Install PDL</h1>
 
 <style type="text/css">
-.install {
-	margin-top: 2em;
-	border: 2px solid black;
-}
-.install td {
+#general-note, .howto {
+	margin-top: 15px;
+	margin-left: 210px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	border: 4px solid #ccc;
 	padding: 1em;
-	text-align: left;
-	vertical-align: middle;
-	/*border: 1px solid #ccc;*/
 }
-.install img {
-	height: 45px;
-}
-.install td.title {
+#general-note h3, #general-note p {
 	margin: 0;
-	color: #347;
-	font-size: 130%;
-	font-weight: bold;
-	text-align: center;
-	border-top: 4px solid #ccc;
-}
-.install .separator td {
-	border-top: 1px solid #ccc;
+	padding: 0;
 }
 </style>
+
+<div id="general-note">
+	<h3>New to Perl?</h3>
+	<p>No worries! If you are using Linux or Mac OS X, you should
+	already have Perl installed. If you are a Windows user, you
+	can use <a href="http://strawberryperl.com/">Strawberry Perl</a>
+	or <a href="http://www.activestate.com/activeperl">Active Perl</a>.
+</div>
+
 <script type="text/javascript">
 $(document).ready(function () {
-	$('#binary').hide();
-	$('#source').hide();
-});
-var select = (function () {
-	var prev = '';
-    return function (id) {
-		if (prev == id) {
-			$('#'+id).slideToggle();
+	$('#easy').hide();
+	$('#last').hide();
+	$('.howto').hide();
+	
+	//  Install Type
+	$('#install input').change(function () {
+		$('.howto').hide();
+		if ($(this).val() == "easy") {
+			$('#last').slideUp('slow', function () {$('#easy').slideDown();});
 		} else {
-			if (id == 'source') {
-				$('#binary').slideUp('slow', function () { $('#source').slideDown(); });
-			} else {
-				$('#source').slideUp('slow', function () { $('#binary').slideDown(); });
-			}
+			$('#easy').slideUp('slow', function () {$('#last').slideDown();});
 		}
-		prev = id;
+	});
+	
+	//
+	//  Install Instructions
+	//
+	var prev_id = false;
+	
+	function show_howto(show_id) {
+		if (prev_id) {
+			$(prev_id).slideUp('slow', function () {$(show_id).slideDown();});
+		} else {
+			$(show_id).slideDown();
+		}
+		
+		prev_id = show_id;
 	}
-})();
+	
+	//  Easy Install
+	$('#easy input').change(function () {
+		show_howto('#easy-'+$(this).val());
+	});
+	
+	//  Last Install
+	$('#last input').change(function () {
+		show_howto('#last-'+$(this).val());
+	});
+});
 </script>
 
-<h3 style="text-align: center">
-  <a class="clickable" onclick="select('binary')">Pre-Built Binaries</a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="clickable" onclick="select('source')">Source Install</a>
-</h3>
+<table>
+	<tr>
+		<td>
+			<div id="install">
+				<h3>I am looking for ...</h3>
+				<input type="radio" name="type" value="easy" id="radio-easy"/>
+				<label for="radio-easy">The easiest possible install.</label>
+				<br/>
+				<input type="radio" name="type" value="last" id="radio-last1"/>
+				<label for="radio-last1">The latest version of PDL.</label>
+				<br/>
+				<input type="radio" name="type" value="last" id="radio-last2"/>
+				<label for="radio-last2">A customized installation.</label>
+			</div>
+		</td>
+		<td>
+			<div id="easy">
+				<h3>Pre-Built Binaries</h3>
+				<h4>My platform is ...</h4>
+				<table>
+					<tr>
+						<td>
+				<input type="radio" name="os" value="win" id="radio-easy-win"/>
+				<label for="radio-easy-win">Windows.</label><br/>
+				<input type="radio" name="os" value="deb" id="radio-easy-deb"/>
+				<label for="radio-easy-deb">Ubuntu / Debian.</label><br/>
+				<input type="radio" name="os" value="fed" id="radio-easy-fed"/>
+				<label for="radio-easy-fed">Fedora.</label>
+						</td>
+						<td>
+				<input type="radio" name="os" value="mac" id="radio-easy-mac"/>
+				<label for="radio-easy-mac">Mac OS X.</label><br/>
+				<input type="radio" name="os" value="man" id="radio-easy-man"/>
+				<label for="radio-easy-man">Mandriva.</label><br/>
+				<input type="radio" name="os" value="sus" id="radio-easy-sus"/>
+				<label for="radio-easy-sus">OpenSUSE.</label>
+						</td>
+					</tr>
+				</table>
+			</div>
 
-<div id="binary">
-	<div style="display: table">
-		<table class="install" cellspacing="0">
-			<tr>
-				<td>Instructions</td>
-				<td>Notes</td>
-			</tr>
-			<tr>
-			  <td colspan="2" class="title">
-				<img src="images/icons/mac_osx.png"/> Mac OS X
-			  </td>
-			</tr>
-			<tr>
-				<td>
-					<p>Install <a href="http://sourceforge.net/projects/pdl/files/">
-					"SciKarl" binary</a>.</p>
-				</td>
-				<td></td>
-			</tr>
-			<tr>
-			  <td colspan="2" class="title">
-				<img src="images/icons/linux.png"/> Linux
-			  </td>
-			</tr>
-			<tr>
-				<td>
-					<b>Ubuntu/Debian</b>
-					<pre>apt-get install pdl pgplot5 libpgplot-perl</pre>
-				</td>
-				<td></td>
-			</tr>
-			<tr class="separator">
-				<td>
-					<b>Fedora/RHEL</b>
-					<pre>yum install perl-PDL plplot-perl</pre>
-				</td>
-				<td>Does not include PGPLOT.</td>
-			</tr>
-			<tr class="separator">
-				<td>
-					<b>Mandriva</b>
-					<pre>urpmi perl-PDL</pre>
-				</td>
-				<td>
-					Does not include:
-					<ul>
-						<li>PGPLOT</li>
-						<li>PLplot</li>
-						<li>OpenGL</li>
-					</ul>
-				</td>
-			</tr>
-			<tr class="separator">
-				<td>
-					<b>OpenSUSE</b>
-					<pre>yast -i perl-PDL</pre>
-				</td>
-				<td>
-					Does not include:
-					<ul>
-						<li>PGPLOT</li>
-						<li>PLplot</li>
-						<li>OpenGL</li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-			  <td colspan="2" class="title">
-				<img src="images/icons/windows.png"/> Windows
-			  </td>
-			</tr>
-			<tr>
-				<td colspan="2">
-If you are using <a href="http://www.activestate.com/activeperl">
-ActiveState Perl</a> with <a href="http://ppm4.activestate.com/">ppm</a>:
-<pre>ppm install Astro-FITS-Header</pre>
-					<b>Perl 5.8</b>
+			<div id="last">
+				<h3>Source Installation</h3>
+				<h4>My platform is ...</h4>
+				<table>
+					<tr>
+						<td>
+		<input type="radio" name="os" value="win" id="radio-last-win"/>
+		<label for="radio-last-win">Windows.</label><br/>
+		<input type="radio" name="os" value="deb" id="radio-last-deb"/>
+		<label for="radio-last-deb">Ubuntu / Debian.</label><br/>
+		<input type="radio" name="os" value="fed" id="radio-last-fed"/>
+		<label for="radio-last-fed">Fedora.</label><br/>
+		<input type="radio" name="os" value="man" id="radio-last-man"/>
+		<label for="radio-last-man">Mandriva.</label><br/>
+						</td>
+						<td>
+		<input type="radio" name="os" value="mac" id="radio-last-mac"/>
+		<label for="radio-last-mac">Mac OS X.</label><br/>
+		<input type="radio" name="os" value="cpn" id="radio-last-cpn"/>
+		<label for="radio-last-cpn">CPAN (all platforms).</label><br/>
+		<input type="radio" name="os" value="src" id="radio-last-src"/>
+		<label for="radio-last-src">Manual install (all platforms).</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<!-- ===============================
+		EASY INSTALL INSTRUCTIONS
+	 ===============================	-->
+<div class="howto" id="easy-mac">
+	<h3>Easiest install - Mac O X</h3>
+	<p>Install <a href="http://sourceforge.net/projects/pdl/files/">
+	"SciKarl" binary</a>.</p>
+</div>
+<div class="howto" id="easy-deb">
+	<h3>Easiest install - Ubuntu / Debian</h3>
+	<pre>apt-get install pdl pgplot5 libpgplot-perl</pre>
+</div>
+<div class="howto" id="easy-fed">
+	<h3>Easiest install - Fedora</h3>
+	<pre>yum install perl-PDL plplot-perl</pre>
+	<p><b>Note:</b> Does not include PGPLOT.</p>
+</div>
+<div class="howto" id="easy-man">
+	<h3>Easiest install - Mandriva</h3>
+	<pre>urpmi perl-PDL</pre>
+	<p><b>Note:</b> Does not include PGPLOT, PLplot, OpenGL.</p>
+</div>
+<div class="howto" id="easy-sus">
+	<h3>Easiest install - OpenSUSE</h3>
+	<pre>yast -i perl-PDL</pre>
+	<p><b>Note:</b> Does not include PGPLOT, PLplot, OpenGL.</p>
+</div>
+<div class="howto" id="easy-win">
+	<h3>Easiest install - Windows</h3>
+	
+	<p>If you are using <a href="http://strawberryperl.com/">Strawberry
+	Perl</a> or <a href="http://www.activestate.com/activeperl">Active
+	Perl</a>:</p>
+
+	<pre>ppm install Astro-FITS-Header</pre>
+	
+	<b>Perl 5.8</b>
 <pre>
 ppm install http://theoryx5.uwinnipeg.ca/ppms/PGPLOT.ppd
 ppm install http://theoryx5.uwinnipeg.ca/ppms/OpenGL.ppd
 ppm install http://theoryx5.uwinnipeg.ca/ppms/PDL.ppd
 </pre>
-				</td>
-			</tr>
-			<tr class="separator">
-				<td colspan="2">
-					<b>Perl 5.10</b>
+	<hr/>
+	<b>Perl 5.10</b>
 <pre>
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/PGPLOT.ppd
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/OpenGL.ppd
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/10xx/PDL.ppd
 </pre>
-				</td>
-			</tr>
-			<tr class="separator">
-				<td colspan="2">
-					<b>Perl 5.12</b>
+	<hr/>
+	<b>Perl 5.12</b>
 <pre>
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/PGPLOT.ppd
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/OpenGL.ppd
 ppm install http://cpan.uwinnipeg.ca/PPMPackages/12xx/PDL.ppd
 </pre>
-				</td>
-			</tr>
-		</table>
-
-		<p>PDL installation tested with:</p>
-		<ul>
-			<li>Ubuntu 10.04 LTS.</li>
-			<li>Fedora Core 13.</li>
-			<li>Mandriva ES 5.</li>
-			<li>OpenSUSE 11.3.</li>
-		</ul>
-	</div>
 </div>
 
-<div id="source">
+<!-- ===============================
+	   LATEST INSTALL INSTRUCTIONS
+	 ===============================	-->
+<? $PDL = "PDL"; ?>
+<? $Wiki = 	"http://sourceforge.net/apps/mediawiki/pdl/index.php?"
+		.	"title=Installing_PDL_on_" ?>
 
-	<b>Note:</b> Requires standard Perl development environment (gcc, make, etc).
+<div class="howto" id="last-win">
+	<h3>Source install - Windows</h3>
+	
+	<ol>
+		<li><a href="http://www.cygwin.com/">Install Cygwin</a></li>
+		<li>See <a href="<?= $Wiki ?>Cygwin">"Installing PDL on
+		Cygwin"</a> on the wiki.</li>
+	</ol>
+</div>
 
-	<table class="install" border="1" cellspacing="0">
-		<tr>
-			<td>Option</td>
-			<td>Instructions</td>
-			<td>Notes</td>
-		</tr>
-		<tr>
-			<td><b>CPAN</b></td>
-			<td>
-				<pre>perl -MCPAN -e shell<br/>cpan&gt; install PDL</pre>
-			</td>
-			<td>Installs all of PDL that is supported by available
-			dependencies.</td>
-		</tr>
-		<tr>
-			<td><b>Manual install</b></td>
-			<td>
-				<p><a href="https://sourceforge.net/projects/pdl/files/">
-				Download sources</a> from SourceForge and extract.</p>
-				<pre>perl Makefile.PL<br/>make<br/>make test<br/>make install</pre>
-			</td>
-			<td>On Windows, replace 'make' with 'dmake'.</td>
-		</tr>
-		<tr>
-			<td colspan="3" style="text-align: center">
-				<p><b style="font-size: 110%"><a href="https://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_Manually">
-				Complete Manual Installation</a></b><br/>
-				<span style="font-size: 85%">(If the above methods don't work, go here)</span>
-			</p>
-			</td>
-		</tr>
-	</table>
+
+<div class="howto" id="last-deb">
+	<h3>Source install - Ubuntu / Debian</h3>
+
+<p>
+<b>Tested:</b> Ubuntu 10.04 LTS (Lucid Lynx).<br/>
+<b>Tested:</b> Debian 5.05 Stable (Lenny).
+</p>
+
+<dl>
+  <dt>Notes:</dt>
+  <dd>
+  Ubuntu users: Run these commands with <tt>sudo</tt>.<br/>
+  Debian users: Run these commands as root.
+  </dd>
+</dl>
+
+<b>Required:</b> Build system (Debian only)
+<pre>apt-get install gcc make</pre>
+
+Recommended: PGPLOT library (Debian: <a href="http://packages.debian.org/search?keywords=pgplot">
+enable lenny/non-free and squeeze/contrib</a>)
+<pre>apt-get install libpgplot-perl</pre>
+
+Recommended: PLplot library (Problems with Debian)
+<pre>apt-get install libplplot-dev</pre>
+
+Recommended: Improved PDL shell
+<pre>
+apt-get install libdevel-repl-perl
+cpan Devel::REPL
+</pre>
+
+Recommended: Proj4 library (Debian: <a href="http://packages.debian.org/search?keywords=libproj-dev">
+enable squeeze/main</a>)
+<pre>apt-get install libproj-dev</pre>
+
+Optional: Minuit and Slatec libraries
+<pre>apt-get install gfortran libextutils-f77-perl</pre>
+
+Optional: NetPBM image utilities
+<pre>apt-get install netpbm</pre>
+
+Optional: GD image library
+<pre>apt-get install libgd2-xpm-dev</pre>
+
+Optional: GNU Scientific Library
+<pre>apt-get install libgsl0-dev</pre>
+
+Optional: FFTW library
+<pre>apt-get install fftw-dev</pre>
+
+Optional: HDF4 library (Debian: <a href="http://packages.debian.org/search?keywords=libhdf4-dev">
+enable squeeze/main</a>)
+<pre>apt-get install libhdf4-dev</pre>
+
+Install PDL.
+<pre>cpan <?= $PDL ?></pre>
+
+<p><b>Note</b>: The pgplot test opens a window and you have
+to close it. If the install seems to "hang", look for an open
+pgplot window.</p>
+
+<p><b>Missing:</b> NDF support.</p>
+</div>
+
+
+<div class="howto" id="last-fed">
+	<h3>Source install - Fedora</h3>
+
+<p><b>Tested:</b> Fedora Core 13.</p>
+<p><b>Note:</b> You must run the following commands a root.</p>
+
+<b>Required</b>: Build environment.
+<pre>yum install cpan gcc</pre>
+
+Recommended: 3D Graphics
+<pre>
+yum install libXi-devel libXmu-devel freeglut-devel
+cpan Test::More
+cpan OpenGL
+</pre>
+
+Recommended: PLplot library
+<pre>yum install plplot-devel</pre>
+
+Recommended: Improved PDL shell
+<pre>
+yum install perl-Devel-REPL perl-Term-ReadLine-Gnu
+cpan Devel::REPL
+</pre>
+
+Recommended: Proj4 library
+<pre>yum install proj-devel proj-nad</pre>
+
+Optional: Minuit and Slatec libraries (you must disable SELinux).
+<pre>yum install gcc-gfortran perl-ExtUtils-F77</pre>
+
+Optional: NetPBM image utilities
+<pre>yum install netpbm-progs</pre>
+
+Optional: GD image library
+<pre>yum install gd-devel</pre>
+
+Optional: GNU Scientific Library
+<pre>yum install gsl-devel</pre>
+
+Optional: FFTW library
+<pre>yum install fftw2-devel</pre>
+
+Install PDL.
+<pre>cpan <?= $PDL ?></pre>
+
+<p><b>Missing:</b> PGPLOT, HDF4 and NDF support.</p>
+ 
+<h3>Common Problems</h3>
+
+<p>If you installed gfortran and ExtUtils::F77 but did not get the
+Slatec and Minuit libraries, try disabling SELinux (and install PDL
+again).</p>
+
+<pre>
+/usr/sbin/setenforce 0
+
+## Disable SELinux at boot - set SELINUX=disabled in the config file.
+vi /etc/selinux/config
+</pre>
+</div>
+
+
+<div class="howto" id="last-man">
+	<h3>Source install - Mandriva</h3>
+
+<p><b>Tested:</b> Mandriva 2010 Spring.</p>
+<p><b>Note:</b> You must run the following commands a root.</p>
+
+<b>Required</b>: Build environment.
+<pre>urpmi gcc make perl-devel</pre>
+
+Recommended: PLplot
+<ol>
+  <li><tt>urpmi cmake gcc-c++ gcc-gfortran</tt></li>
+  <li>Download the latest version from 
+  <a href="http://www.plplot.org">http://www.plplot.org</a></li>
+  <li>Unpack the tar.gz file</li>
+  <li>
+<pre>
+mkdir build_dir
+cd build_dir
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ../plplot-5.9.6             
+make            
+make install 
+</pre>
+  </li>
+</ol>
+
+Optional: Minuit and Slatec libraries
+<pre>urpmi gcc-gfortran perl-ExtUtils-F77</pre>
+
+Optional: NetPBM image utilities
+<pre>urpmi netpbm</pre>
+
+Optional: GNU Scientific Library
+<pre>urpmi libgsl-devel</pre>
+
+Optional: FFTW library
+<pre>urpmi fftw2-devel</pre>
+
+Install PDL
+<pre>cpan <?= $PDL ?></pre>
+
+
+<p><b>Missing:</b> OpenGL, PGPLOT, PDL2 shell, Proj4, GD, HDF4
+and NDF support.</p>
+
+<h3>Common problems</h3>
+
+<p>Mandriva's packages for Proj4, GD and HDF4 are known to have problems
+with PDL. You might see an error like:</p>
+
+<pre>
+make[3]: *** [SD.o] Error 1
+make[3]: Leaving directory `/root/.cpan/build/PDL-2.4.6_992-20Qukl/IO/HDF/SD'
+...
+make: *** [subdirs] Error 2
+ CHM/PDL-2.4.6_992.tar.gz
+ /usr/bin/make -- NOT OK
+</pre>
+
+<p>If this happens, you have two options:</p>
+
+<ul>
+  <li>You can remove the offending libraries and run
+  <tt>cpan <?= $PDL ?></tt> again.</li>
+  
+  <li>You can use the commands below to configure the installer
+  to ignore these libraries:
+	<pre>
+perl -MCPAN -e shell
+
+cpan> look <?= $PDL ?>
+
+# Disable PROJ
+perl -pi -e 's|WITH_PROJ => undef|WITH_PROJ => 0|' perldl.conf
+
+# Disable HDF4
+perl -pi -e 's|WITH_HDF => undef|WITH_HDF => 0|' perldl.conf
+
+# Disable GD
+perl -pi -e 's|WITH_GD => undef|WITH_GD => 0|' perldl.conf
+
+# Install
+perl Makefile.PL
+make
+make test
+make install
+exit
+cpan> exit
+	</pre>
+  </li>
+</ul>
+
+</div>
+
+
+<div class="howto" id="last-mac">
+	<h3>Source install - Mac OS X</h3>
+	See <a href="<?=$Wiki?>Mac_OS_X#Custom_Installation_of_PDL">
+	"Installing PDL on Mac OS X"</a> on the wiki.
+</div>
+
+
+<div class="howto" id="last-cpn">
+	<h3>Source install - CPAN (all platforms)</h3>
+
+<pre>
+perl -MCPAN -e shell
+cpan&gt; install <?= $PDL ?>
+</pre>
+
+<p><b>Note:</b> Installs all of PDL that is supported by available
+dependencies.</p>
+</div>
+
+
+<div class="howto" id="last-src">
+	<h3>Source install - Manual install (all platforms)</h3>
+	
+	<p><a href="https://sourceforge.net/projects/pdl/files/">
+	Download sources</a> from SourceForge and extract.</p>
+	
+	<pre>perl Makefile.PL<br/>make<br/>make test<br/>make install</pre>
+	
+	<p><b>Note 1:</b> On Windows, replace 'make' with 'dmake'.
+	If you have trouble, or want more details, visit the <a href="https://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_Manually">
+	complete manual installation page</a> on the wiki.</p>
+	
+	<p><b>Note 2:</b>
+	<a href="http://search.cpan.org/search?query=PDL&mode=all">
+	Search CPAN</a> as an alternate way to get the latest release
+	and information about PDL.</p>
 </div>

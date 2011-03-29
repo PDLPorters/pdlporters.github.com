@@ -1,3 +1,5 @@
 RewriteEngine on
 rewritecond %{http_host} ^pdl.sourceforge.net [nc]
 rewriterule ^(.*)$ http://pdl.perl.org/$1 [r=301,nc]
+
+Redirect permanent /PDLdocs/Intro.html http://pdl.perl.org/PDLdocs/PDL.html

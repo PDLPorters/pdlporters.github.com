@@ -1,0 +1,10 @@
+rsync.excludes*
+.git
+.hg*
+*gimp*
+old-site
+future
+PDLdocsOld
+PDLdocs
+css
+*.DS_Store*

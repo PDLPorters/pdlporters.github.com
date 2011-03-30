@@ -152,7 +152,7 @@ $(document).ready(function () {
 </div>
 <div class="howto" id="easy-fed">
 	<h3>Easiest install - Fedora</h3>
-	<pre>yum install perl-PDL plplot-perl</pre>
+	<pre>yum install perl-PDL perl-PDL-Graphics-PLplot plplot-perl</pre>
 	<p><b>Note:</b> Does not include PGPLOT.</p>
 </div>
 <div class="howto" id="easy-man">
@@ -288,17 +288,15 @@ pgplot window.</p>
 <div class="howto" id="last-fed">
 	<h3>Source install - Fedora</h3>
 
-<p><b>Tested:</b> Fedora Core 13.</p>
+<p><b>Tested:</b> Fedora Core 13 & 14.</p>
 <p><b>Note:</b> You must run the following commands a root.</p>
 
 <b>Required</b>: Build environment.
-<pre>yum install cpan gcc</pre>
+<pre>yum install gcc</pre>
 
 Recommended: 3D Graphics
 <pre>
-yum install libXi-devel libXmu-devel freeglut-devel
-cpan Test::More
-cpan OpenGL
+yum install libXi-devel libXmu-devel freeglut-devel perl-OpenGL
 </pre>
 
 Recommended: PLplot library
@@ -307,14 +305,13 @@ Recommended: PLplot library
 Recommended: Improved PDL shell
 <pre>
 yum install perl-Devel-REPL perl-Term-ReadLine-Gnu
-cpan Devel::REPL
 </pre>
 
 Recommended: Proj4 library
 <pre>yum install proj-devel proj-nad</pre>
 
 Optional: Minuit and Slatec libraries (you must disable SELinux).
-<pre>yum install gcc-gfortran perl-ExtUtils-F77</pre>
+<pre>yum install compat-gcc-34-g77 perl-ExtUtils-F77</pre>
 
 Optional: NetPBM image utilities
 <pre>yum install netpbm-progs</pre>
@@ -322,16 +319,21 @@ Optional: NetPBM image utilities
 Optional: GD image library
 <pre>yum install gd-devel</pre>
 
-Optional: GNU Scientific Library
+<!--Optional: GNU Scientific Library
 <pre>yum install gsl-devel</pre>
-
+-->
 Optional: FFTW library
 <pre>yum install fftw2-devel</pre>
 
-Install PDL.
-<pre>cpan <?= $PDL ?></pre>
+Optional: HDF4 Library
+<pre>yum install hdf-devel</pre>
 
-<p><b>Missing:</b> PGPLOT, HDF4 and NDF support.</p>
+Now install CPAN and then PDL
+<pre>
+yum install perl-CPAN
+cpan <?= $PDL ?></pre>
+
+<p><b>Missing:</b> PGPLOT (but see below) and NDF support.</p>
  
 <h3>Common Problems</h3>
 
@@ -345,6 +347,18 @@ again).</p>
 ## Disable SELinux at boot - set SELINUX=disabled in the config file.
 vi /etc/selinux/config
 </pre>
+
+PGPLOT is not distributed by Fedora as it is not free software. But if
+you install the RPM Fusion Non-free Yum repository (look under
+"Command Line Setup Using
+RPM" <a href="http://rpmfusion.org/Configuration">here</a>, then you
+may simply run
+<pre>
+yum install pgplot-devel
+cpan PGPLOT
+cpan PDL
+</pre>
+
 </div>
 
 

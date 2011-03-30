@@ -138,6 +138,10 @@ $(document).ready(function () {
 	</tr>
 </table>
 
+<? $PDL = "PDL"; ?>
+<? $Wiki = 	"http://sourceforge.net/apps/mediawiki/pdl/index.php?"
+		.	"title=Installing_PDL_on_" ?>
+
 <!-- ===============================
 		EASY INSTALL INSTRUCTIONS
 	 ===============================	-->
@@ -194,7 +198,7 @@ ppm install http://www.sisyphusion.tk/ppm/PDL.ppd
 </pre>
 
 <p>For more details
-see <a href="http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_on_Windows">Installing
+see <a href="<?= $Wiki ?>Windows">Installing
 PDL on Windows</a> on the wiki
 or <a href="http://search.cpan.org/src/CHM/PDL-2.4.8/win32/INSTALL">win32/INSTALL</a>
 file in the PDL source distribution.</p>
@@ -204,9 +208,6 @@ file in the PDL source distribution.</p>
 <!-- ===============================
 	   LATEST INSTALL INSTRUCTIONS
 	 ===============================	-->
-<? $PDL = "PDL"; ?>
-<? $Wiki = 	"http://sourceforge.net/apps/mediawiki/pdl/index.php?"
-		.	"title=Installing_PDL_on_" ?>
 
 <div class="howto" id="last-win">
 	<h3>Source install - Windows</h3>
@@ -288,7 +289,7 @@ pgplot window.</p>
 <div class="howto" id="last-fed">
 	<h3>Source install - Fedora</h3>
 
-<p><b>Tested:</b> Fedora Core 13 & 14.</p>
+<p><b>Tested:</b> Fedora Core 13 &amp; 14.</p>
 <p><b>Note:</b> You must run the following commands a root.</p>
 
 <b>Required</b>: Build environment.
@@ -351,7 +352,7 @@ vi /etc/selinux/config
 PGPLOT is not distributed by Fedora as it is not free software. But if
 you install the RPM Fusion Non-free Yum repository (look under
 "Command Line Setup Using
-RPM" <a href="http://rpmfusion.org/Configuration">here</a>, then you
+RPM" <a href="http://rpmfusion.org/Configuration">here</a>), then you
 may simply run
 <pre>
 yum install pgplot-devel

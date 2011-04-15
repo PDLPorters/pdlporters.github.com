@@ -220,4 +220,33 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 	cursor: pointer;
 }
 
+/*
+ * NEWS BOX
+ */
+
+.news {
+   float: right;
+   width:18em;
+   padding: 0 .5em 0 .5em;
+   border: solid;
+   margin: 0px 0px 0.5em 1em;
+}
+
+.news dl {
+   width:100%;
+   overflow:hidden;
+}
+
+.news dt {
+   float:left;
+   width:7em;
+}
+
+.news dd {
+   margin-left:7em;
+}
+
+.news dt,dd {
+   padding-bottom: 0.75em;
+}
 

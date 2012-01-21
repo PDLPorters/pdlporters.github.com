@@ -104,6 +104,10 @@ $(document).ready(function () {
 				<input type="radio" name="os" value="sus" id="radio-easy-sus"/>
 				<label for="radio-easy-sus">OpenSUSE.</label>
 						</td>
+						<td>
+				<input type="radio" name="os" value="gen" id="radio-easy-gen"/>
+				<label for="radio-easy-gen">Gentoo.</label>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -158,6 +162,18 @@ $(document).ready(function () {
 	<h3>Easiest install - Fedora</h3>
 	<pre>yum install perl-PDL perl-PDL-Graphics-PLplot plplot-perl</pre>
 	<p><b>Note:</b> Does not include PGPLOT.</p>
+</div>
+<div class="howto" id="easy-gen">
+	<h3>Easiest install - Gentoo Linux</h3>
+	<p>Update the available list of packages by typing on a terminal as root</p>
+
+	<pre>emerge --sync</pre>
+
+	<p>Install the relevant PDL Gentoo packages by typing (again as root)</p>
+
+	<pre>emerge dev-perl/PDL</pre>
+
+	<p><b>Note:</b> There is a known issue with writing 16bit PNG/PNM/PGM/PPM images.</p>
 </div>
 <div class="howto" id="easy-man">
 	<h3>Easiest install - Mandriva</h3>

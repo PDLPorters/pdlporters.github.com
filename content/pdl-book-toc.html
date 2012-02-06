@@ -1,0 +1,274 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PDL Book</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:rurban@x-ray.at" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#pdl_book">PDL Book</a></li>
+	<li><a href="#table_of_contents">Table of Contents</a></li>
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="pdl_book">PDL Book</a></h1>
+<p>The first release of the PDL Book in PDF format is
+now available at
+<a href="http://sourceforge.net/projects/pdl/files/PDL/2.4.10/PDL-Book-20120205.pdf/download">http://sourceforge.net/projects/pdl/files/PDL/2.4.10/PDL-Book-20120205.pdf/download</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="table_of_contents">Table of Contents</a></h1>
+<pre>
+  
+  1.  The Beginnings of PDL - p.1
+  1.1  The case for a high-level approach - p.2
+  1.2  The case for a free Data Language - p.2
+  1.3  So why Perl? - p.3
+  
+  2.  First Steps with PDL - p.5
+  2.1  Alright, let's do something - p.5
+  2.2  Whirling through the Whirlpool - p.7
+  2.3  Measuring the brightness of M51 - p.9
+  2.4  Twinkle, twinkle, little star - p.11
+  2.5  Getting Complex with M51 - p.15
+  2.6  Roundoff - p.17
+  
+  3.  Constructing PDLs - p.18
+  3.1  The basic constructor, pdl() - p.18
+  3.2  Array allocation: zeroes() and ones() - p.18
+  3.3  Index PDLs: xvals, yvals, rvals, sequence, ndcoords - p.18
+  3.4  Specialty constructors - p.19
+  3.5  Getting values into and out of PDLs - p.20
+  3.5.1  Construction: slurping Perl arrays - p.20
+  3.5.2  Assignment with .= - p.20
+  3.5.3  Importing data directly from memory: get_dataref - p.20
+  3.5.4  Conversion to Perl types: at and list - p.21
+  3.6  Data Types and Contexts - p.21
+  3.6.1  Refresher on Perl Data Types &amp; Contexts - p.22
+  3.6.2  PDL Data Types - p.22
+  3.6.3  PDLs and Perl Contexts - p.23
+  3.6.4  BAD Values - p.23
+  3.7  Dataflow - p.23
+  3.8  Threading - p.24
+  3.8.1  Threading rules - p.25
+  3.8.2  Conrolling threading and dimension order: xchg, mv, reorder, flat, clump, and reshape - p.25
+  3.8.3  Dummy Dimensions - p.26
+  3.8.4  Collapse/Reduce Operators and Reduction - p.26
+  3.8.5  PDL Headers - p.27
+  
+  4.  Selection and Location in PDLs - p.28
+  4.1  A quick tour of selection - p.28
+  4.2  Selection Operators - p.30
+  4.2.1  NiceSlice - array subfield syntax - p.30
+  4.2.2  NiceSlice Examples - p.30
+  4.2.3  Slice - string-conrolled subfields of a PDL - p.31
+  4.2.4  Dice - pull arbitrary rows from a PDL - p.31
+  4.2.5  Index - select elements from a 1-D PDL - p.31
+  4.2.6  IndexND - select elements from an N-D PDL - p.32
+  4.2.7  Range - select subfields from an N-D PDL - p.32
+  4.3  Location Operators - p.35
+  4.3.1  The where operator - p.35
+  4.3.2  The which operator - p.36
+  4.3.3  The whichND operator - p.36
+  
+  5.  Operating on PDLs - p.37
+  5.1  Expressions with PDLs - p.37
+  5.1.1  PDLs as boolean values; logicals and masks - p.38
+  5.1.2  Collapse/reduce: Summarizing by row - p.39
+  5.1.3  Arithmetic collapse: prodover and sumover - p.39
+  5.1.4  Logical collapse: andover and orover - p.39
+  5.1.5  Statistical collapse: average and statsover - p.39
+  5.1.6  General purpose collapse/reduction: reduce - p.40
+  5.2  Combination operators: PDLs and Perl lists - p.40
+  5.2.1  Global glomming / shredding: pdl and list - p.40
+  5.2.2  Gathering/scattering: cat and dog - p.40
+  5.2.3  Extending a PDL: append - p.41
+  5.2.4  Finer control - use glue - p.41
+  5.3  Interpolation - p.41
+  5.3.1  Interpolate virtually any regular grid: interpND - p.41
+  5.3.2  Interpolate on a 1-D irregular grid: interpol, interpolate - p.42
+  
+  6.  Slicing, Dicing and Threading dims with PDL - p.44
+  6.1  Finding piddle dimensions. - p.44
+  6.2  The slice function - regular subsets along axes - p.44
+  6.2.1  The basic slicing specification. - p.45
+  6.2.2  Modifying slices. - p.46
+  6.2.3  Does a slice consume memory? - p.46
+  6.2.4  Advanced slice syntax - p.46
+  6.2.5  PDL's Method notation - p.47
+  6.3  The dice and dice_axis functions - irregular subsets along axes - p.47
+  6.4  Using mv, xchg and reorder - transposing dimensions - p.48
+  6.5  Combining dimensions with clump - p.48
+  6.6  Adding dimensions with dummy - p.49
+  6.7  Completely general subsets of data with index , which - p.50
+  6.8  PDL threading and signatures - p.52
+  6.8.1  Threading - p.52
+  6.8.2  A simple example - p.52
+  6.8.3  Why bother? - p.53
+  6.8.4  More examples - p.54
+  6.8.5  Why threading and why call it threading ? - p.54
+  6.8.6  The general case: PDL functions and their signature - p.56
+  6.8.7  You can write your own threading routines - p.60
+  6.8.8  Matching threading dimensions - p.60
+  
+  7.  Writing your own functions into PDL - p.64
+  7.1  Using PDL Functions - p.64
+  7.2  Moving Functions into Separate Files - p.64
+  7.3  Getting PDL to look for your functions in other places - p.65
+  7.4  Documenting your Functions - p.65
+  
+  8.  Plotting and Labelling Data and Images using PGPLOT - p.66
+  8.1  Introducing PDL::Graphics::PGPLOT - p.66
+  8.2  An overview of 2D plotting commands - p.68
+  8.3  Options in plot commands - p.69
+  8.4  Hard-copies and plot options - p.73
+  8.4.1  Setting default values for options - p.73
+  8.4.2  Setting up the plot area - p.73
+  8.5  Drawing lines and plotting points - p.76
+  8.6  Plotting error-bars - p.78
+  8.7  Drawing lines - p.80
+  8.8  Plotting histograms - p.81
+  8.9  Drawing polygons - p.82
+  8.10  Displaying images - p.83
+  8.11  Transforms - p.85
+  8.12  Colour bar/wedge - p.86
+  8.13  Contour plots and vector fields - p.87
+  8.14  Drawing simple shapes - p.89
+  8.15  Text and legends - p.92
+  8.15.1  Non-alphanumeric symbols - p.93
+  8.16  Labelling your figures in PGPLOT - p.93
+  8.17  Using colour - p.95
+  8.18  Threading in PDL::Graphics::PGPLOT - p.97
+  8.19  Recording and playing back plot commands - p.98
+  8.19.1  Redoing a plot with slightly different data - p.100
+  8.19.2  Using recording in scripts - p.101
+  8.20  The object oriented approach - p.101
+  8.20.1  Why use the OO interface - p.102
+  8.20.2  Usage of the OO interface - p.102
+  8.21  Using PGPLOT commands directly - p.104
+  
+  9.  Graphics with PLplot - p.106
+  9.1  Introducing PDL::Graphics::PLplot - p.106
+  9.2  Plotting a simple parabola - p.107
+  9.3  Object Oriented Examples - p.108
+  9.3.1  Axis labelling and titles - p.108
+  9.4  Interactive crosshairs with the wxwidgets output device - p.109
+  9.5  setting the DEV and FILE options, and using the aliased option for new() - p.110
+  9.6  Outputting postscript - p.111
+  9.7  Tools for plotting points - p.111
+  9.8  A Symbols example - p.111
+  9.9  Plotting multiple curves - p.112
+  9.9.1  Plotting multiple curves with a multi-dimensional piddle - p.112
+  9.9.2  Colorizing multiple data sets - p.113
+  9.9.3  Plotting multiple curves with differently colored calls to xyplot - p.115
+  9.9.4  A multiple curve with xyplot - p.116
+  9.9.5  Solving curve clipping on multiple xyplots with the BOX option - p.117
+  9.9.6  Plotting multiple curves with stripplot - p.118
+  9.9.7  Stripplots and reading DATA with rcols - p.119
+  9.9.8  Multiple plots with SUBPAGE - p.120
+  9.10  Boxes and Viewports - p.121
+  9.10.1  Using Insets - p.122
+  9.11  Basics of viewports - p.123
+  9.12  Surface dimensions - p.123
+  9.13  Viewport positioning - p.123
+  9.13.1  The clipping box - p.124
+  9.13.2  Page size - p.124
+  9.13.3  Viewport upper right - p.125
+  9.13.4  Viewport centered - p.126
+  9.13.5  Viewport extreme bounds - p.127
+  9.13.6  Viewport multiple plots - p.128
+  9.13.7  The basic box - p.129
+  9.13.8  The tweaked box - p.130
+  9.13.9  Box with 2 plots - p.131
+  9.13.10  Multiple plots, changing the box within a single viewport - p.132
+  9.13.11  Box and viewport summary - p.133
+  9.14  Other types of plot - p.133
+  9.14.1  Shadeplot - p.133
+  9.14.2  Histogram - p.134
+  9.14.3  Histogram height - p.135
+  9.14.4  Bargraph - p.136
+  9.14.5  Bargraph color and bar height - p.137
+  9.14.6  Bargraph with labelling - p.138
+  9.15  Using the MEM device - p.139
+  9.15.1  Creating a MEM memory buffer - p.139
+  9.15.2  Plotting over an image with the MEM device - p.140
+  9.16  Functional programming style examples - p.141
+  9.16.1  Simple line plot and multiple windows demo x01 - p.141
+  9.16.2  Multiple window and color map 0 demo x02 - p.142
+  9.16.3  Polar plot demo x03 - p.142
+  9.16.4  Log plot demo x04 - p.143
+  9.16.5  Histogram demo x05 - p.143
+  9.16.6  Font demo x06 - p.144
+  9.16.7  Font demo x07 - p.144
+  9.16.8  3-d plot demo x08 - p.145
+  9.16.9  Contour plot demo x09 - p.145
+  9.16.10  Window positioning demo x10 - p.146
+  9.16.11  Mesh plot demo x11 - p.146
+  9.16.12  Bar chart demo x12 - p.147
+  9.16.13  simple pie chart x13 - p.147
+  9.16.14  Shade plot demo x15 - p.148
+  9.16.15  plshade demo, using color fill x16 - p.148
+  9.16.16  A simple stripchart with four pens x17 - p.149
+  9.16.17  3-d line and point plot demo x18 - p.149
+  9.16.18  Backdrop plotting of world, US maps. x19 - p.150
+  9.16.19  Grid data demo x21 - p.150
+  9.16.20  Simple vector plot x22 - p.151
+  9.16.21  Displays Greek letters and mathematically interesting Unicode ranges x23 - p.151
+  9.16.22  Unicode Pace Flag x24 - p.152
+  9.16.23  Drawing polygons x25 - p.152
+  9.16.24  Frequency Amplitude and Phase x26 - p.153
+  9.16.25  Spirograph curves - epitrochoids, cycolids, roulettes x27 - p.153
+  9.16.26  plmtex3, plptex3 demo x28 - p.154
+  9.16.27  Plots using date / time formatting for axes x29 - p.154
+  9.16.28  Alpha color values demonstration x30 - p.155
+  9.16.29  Using pllegend including unicode symbols x33 - p.155
+  9.17  Typesetting, greek letters, symbols - p.156
+  9.17.1  A basic typsetting example - p.157
+  9.17.2  psfrag - p.158
+  9.18  annotations and TEXTPOSITION - p.158
+  9.18.1  TEXTPOSITION 3 argument form - p.158
+  9.18.2  TEXTPOSITION 4 argument form - p.159
+  9.19  Legends - p.160
+  
+  10.  3D Graphics with OpenGL - p.162
+  10.1  Introduction - p.162
+  10.2  Parametric Graphics - p.164
+  10.3  Types of 3D Graphical Objects - p.168
+  10.4  More than one Image - p.172
+  10.5  Putting it all together---cool hacks - p.174
+  
+  11.  The PDL PreProcessor - p.178
+  11.1  Basics - p.178
+  11.2  Getting Started - p.178
+  11.3  Returning Values - p.181
+  11.3.1  Exercise Set 1 - p.182
+  11.3.2  Specifying Dimensions and Using Explicit Looping - p.183
+  11.3.3  Exercise Set 2 - p.190
+  11.3.4  Tips - p.190
+  11.4  Recap - p.195
+  11.5  Appendix A: Installing Inline::Pdlpp - p.196
+  11.6  Appendix B: Solutions to Exercises - p.196
+  11.6.1  Excercise Set 1 - p.196
+  11.6.2  Exercise Set 2 - p.198
+  
+  12.  PDL Book Credits - p.200</pre>
+
+</body>
+
+</html>

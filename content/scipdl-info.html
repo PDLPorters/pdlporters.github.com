@@ -1,0 +1,234 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Courier;
+	panose-1:2 7 4 9 2 2 5 2 4 4;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Times-Roman;
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+.MsoChpDefault
+	{font-size:11.0pt;}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.0pt 842.0pt;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US style='text-justify-trim:punctuation'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Read
+Me for SciPDL</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><i><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Matthew
+Kenworthy, Leiden, The Netherlands, 2012 Feb 07</span></i></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>This is
+a binary PDL install for Mac OS X, targeted at Intel Macs with Snow Leopard and
+built on 10.7.3. The installs go in to the Mac OS X system standard places </span><span
+style='font-size:12.0pt;font-family:Courier'>/usr/local/...</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> and</span><span
+style='font-size:12.0pt;font-family:Courier'>/Libary/Perl...</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> for locally
+installed software and modules. Installed files are listed in:</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+/Library/Perl/5.12/darwin-thread-multi-2level/PDL/README.installed_files.txt</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Overall
+Notes and Philosophy</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>This is
+intended to be a pre-compiled binary installation which installs just about
+everything needed to get a typical astronomer user of PDL off and running. The
+principle components are PDL and PGPLOT (a graphics library for scientific 2D
+plots) and a 3D graphics library.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>You can
+learn about PDL at the web site PDL - The Perl Data Language -</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'><a
+href="http://pdl.perl.org/"><span style='color:#0000EE'>http://pdl.perl.org</span></a></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Everything
+is as &quot;statically linked&quot; as possible in order to minimise
+dependencies and collisions. For example although parts of this are compiled
+using Fortran so you don't need a compiler installed - not even a C compiler
+for that matter.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>The only
+prerequisite is to have X11 installed which comes on the OS X install disk with
+your computer.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Note a
+clean OS X installation leaves these locations empty so it is fair to assume
+everything here is safe from OS X upgrades.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>The C
+compiler is </span><span style='font-size:12.0pt;font-family:Courier'>gcc</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> and the Fortran
+compiler is </span><span style='font-size:12.0pt;font-family:Courier'>gfortran</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>PDL
+v2.4.10</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>&quot;The
+Perl Data Language&quot; - This is the latest release at the time of writing.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>This
+version is built with </span><span style='font-size:12.0pt;font-family:Courier'>PGPLOT</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'>, </span><span
+style='font-size:12.0pt;font-family:Courier'>TriD</span><span style='font-size:
+12.0pt;font-family:"Times-Roman","serif"'>, </span><span style='font-size:12.0pt;
+font-family:Courier'>BadVal</span><span style='font-size:12.0pt;font-family:
+"Times-Roman","serif"'>, </span><span style='font-size:12.0pt;font-family:Courier'>FFTW</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'>, </span><span
+style='font-size:12.0pt;font-family:Courier'>GSL</span><span style='font-size:
+12.0pt;font-family:"Times-Roman","serif"'> support.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Currently
+does not have </span><span style='font-size:12.0pt;font-family:Courier'>Karma</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'>, </span><span
+style='font-size:12.0pt;font-family:Courier'>PLPLOT</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> support.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Type </span><span
+style='font-size:12.0pt;font-family:Courier'>perldl</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> to launch the
+interactive shell or </span><span style='font-size:12.0pt;font-family:Courier'>use
+PDL;</span><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'> in
+a perl script.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>perl-PGPLOT
+v2.21</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Perl
+module which links perl with pgplot. This version is an unreleased testbed I
+have with experimental gfortran support.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>pgplot
+v5.3.1</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>These
+are the C and Fortran libraries for the scientific graphics library. This is
+installed in </span><span style='font-size:12.0pt;font-family:Courier'>/usr/local/pgplot</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> with links in </span><span
+style='font-size:12.0pt;font-family:Courier'>/usr/local/bin</span><span
+style='font-size:12.0pt;font-family:"Times-Roman","serif"'> and </span><span
+style='font-size:12.0pt;font-family:Courier'>/usr/local/lib</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>I
+compiled it with the <i>X11</i>, <i>Postscript</i>, and </span><span
+style='font-size:12.0pt;font-family:Courier'>PNG</span><span style='font-size:
+12.0pt;font-family:"Times-Roman","serif"'> drivers.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>ExtUtils::F77
+v1.17</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>This is
+required for compiling perl modules which call Fortran and is included for
+completeness. This is an experimental unreleased new version with gfortran
+support.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Term::ReadLine</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Miscellaneous
+Perl Modules</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+Inline                          v0.46</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+Parse::RecDescent               v1.965</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>These
+are required to build PDL and are included for completeness.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Extra
+Perl modules</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+Astro::FITS::Header             v3.03</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+Astro::FITS::CFITSIO            v1.07</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>These
+are convenient to have.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><b><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>Non-Perl
+Stuff</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:12.0pt;font-family:Courier'>   
+CFITSIO                         v3.28</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;line-height:normal;text-autospace:
+none'><span style='font-size:12.0pt;font-family:"Times-Roman","serif"'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>

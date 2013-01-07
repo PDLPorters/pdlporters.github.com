@@ -1,5 +1,6 @@
 var param_page = $.url().param('page');
 var param_docs = $.url().param('docs');
+var param_title = $.url().param('title');
 
 function transformLinks () {
   var wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
@@ -61,7 +62,10 @@ function loadMain () {
 
 function loadPod (module) {
   $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
-    var pod = $(data);
+    var pod = $(
+      "<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>"
+      + "<h1 class='title'>" + param_title + "</h1><div class='pod'>" + data + "</div>"
+    );
     pod.find('a[href*="metacpan.org"]').each(function(index){
       var url = $(this).url(true);
       if ( ! url.segment(-2) === 'module' ) {

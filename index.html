@@ -1,3 +1,4 @@
+<!--
 <?
 function formatDocs($filename, $title='') {
 	$content = file_get_contents($filename);
@@ -49,6 +50,8 @@ function formatDocs($filename, $title='') {
 }
 
 ?>
+-->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head profile="http://www.w3.org/2005/10/profile">
@@ -60,10 +63,11 @@ function formatDocs($filename, $title='') {
     <link rel="stylesheet" type="text/css" 
           href="css/jquery-ui-1.8.2.custom.css" />	
     <link rel='stylesheet' type='text/css' href='pdl.css' />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
-		type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="js/purl.js"></script>
+<script type="text/javascript" src="js/pdl-www.js"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-17388934-1']);
@@ -85,34 +89,32 @@ function formatDocs($filename, $title='') {
     <a href="index.php?page=home">
       <img src="images/icons/pdl.png" alt="PDL" height="79px" width="146px"/>
     </a>
-	<img src="images/banners/pos-1-opt-<?=rand(0,2)?>.jpg" alt="Banner image1" height="79px" width="278px"/>
-	<img src="images/banners/pos-2-opt-<?=rand(0,2)?>.jpg" alt="Banner image2" height="79px" width="93px"/>
-	<img src="images/banners/pos-4-opt-<?=rand(0,1)?>.jpg" alt="Banner image3" height="79px" width="110px" style="margin-left: 25px"/>
+    <img src="images/banners/pos-1-opt-0.jpg" alt="Banner image1" height="79px" width="278px"/>
+    <img src="images/banners/pos-2-opt-0.jpg" alt="Banner image2" height="79px" width="93px"/>
+    <img src="images/banners/pos-4-opt-0.jpg" alt="Banner image3" height="79px" width="110px" style="margin-left: 25px"/>
 
-<form method="get" action="https://www.google.com/search" style="position: absolute; top: 10px; left: 700px">
-<fieldset>
-<legend>Search PDL site and docs</legend>
-<input type="text" name="q" size="25"/>
-<input type="hidden" name="sitesearch" value="pdl.perl.org"/>
-<input type="submit" value="Search"/>
-</fieldset>
-</form>
+    <form method="get" action="https://www.google.com/search" style="position: absolute; top: 10px; left: 700px">
+    <fieldset>
+    <legend>Search PDL site and docs</legend>
+    <input type="text" name="q" size="25"/>
+    <input type="hidden" name="sitesearch" value="pdl.perl.org"/>
+    <input type="submit" value="Search"/>
+    </fieldset>
+    </form>
 
-</div>
+  </div> 
   <!-- END BANNER -->
 
   <!-- SIDE BAR -->
   <div class="sidebar-container">
-    <? include "content/sidebar.html" ?>
+    <div class="sidebar" id="sidebar"></div>
   </div>
+  <script type="text/javascript"> $('#sidebar').load("content/sidebar.html") </script>
   <!-- END SIDE BAR -->
   
-  <!-- END GOOGLE SEARCH -->
-
-
   <!-- MAIN CONTENT -->
-  <div class="main">
-  <?
+  <div class="main" id="main">
+  <!-- <?
  	function issane($string) {
  		return preg_match('/^[-_a-zA-Z0-9\/]+$/',$string);
  	}
@@ -126,11 +128,10 @@ function formatDocs($filename, $title='') {
  	} else {
 	 	require_once "content/home.html";
  	}
-  ?>
+  ?> -->
   </div>
 
   <!-- END CONTENT -->
 
 </body>
 </html>
-

@@ -62,12 +62,8 @@ function loadMain () {
 function loadPod (module) {
   $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
     var pod = $(data);
-    pod.find('a').each(function(index){
-      return; // disable the parser
+    pod.find('a[href*="metacpan.org"]').each(function(index){
       var url = $(this).url(true);
-      if ( ! url.attr('host') === 'metacpan.org' ) {
-        return
-      }
       if ( ! url.segment(-2) === 'module' ) {
         return
       } 

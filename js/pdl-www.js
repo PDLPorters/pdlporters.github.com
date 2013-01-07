@@ -72,6 +72,7 @@ function loadPod (module) {
 }
 
 $(function () {
+  $('#sidebar').load("content/sidebar.html")
   transformLinks();
   loadMain();
 });

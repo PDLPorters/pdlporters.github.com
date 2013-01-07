@@ -1,65 +1,45 @@
-<?
-$wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
-
-function homeLink($linkTitle) {
-	$class = ($_GET['page'] == 'home' || ($_GET['page'] == '' && $_GET['docs'] == ''))
-			 ? 'class="selected"' : '';
-	return "<li $class><a href='?page=home'>$linkTitle</a></li>";
-}
-function pageLink($page, $linkTitle) {
-	$class = $page == $_GET['page'] ? 'class="selected"' : '';
-	return "<li $class><a href='?page=$page'>$linkTitle</a></li>";
-}
-function docsLink($page, $linkTitle, $pageTitle) {
-	$class = $page == $_GET['docs'] ? 'class="selected"' : '';
-	return "<li $class><a href='?docs=$page&amp;title=$pageTitle'>$linkTitle</a></li>";
-}
-?>
-
-<div class="sidebar">
-  <div class="h3"><h3>About PDL</h3></div>
-  <div class="ul">
+<div class="h3"><h3>About PDL</h3></div>
+<div class="ul">
   <ul>
-    <?= homeLink('Home') ?>
-    <?= pageLink('install', 'Get PDL') ?>
-    <?= pageLink('screenshots/index', 'Screenshots') ?>
-    <?= pageLink('users', 'PDL Users') ?>
-    <?= pageLink('mailing-lists', 'Mailing Lists') ?>
+    <li class="homeLink" title="Home"></li>
+    <li class="pageLink" page="install" title="Get PDL"></li>
+    <li class="pageLink" page="screenshots/index" title="Screenshots"></li>
+    <li class="pageLink" page="users" title="PDL Users"></li>
+    <li class="pageLink" page="mailing-lists" title="Mailing Lists"></li>
   </ul>
-  </div>
-  
-  <div class="h3"><h3>Documentation</h3></div>
-  <div class="ul">
-  <ul>
-    <?= docsLink('FAQ', 'FAQ', 'PDL::FAQ - Frequently Asked Questions') ?>
-    <?= docsLink('Tutorials', 'Tutorials', 'PDL::Tutorials') ?>
-    <?= docsLink('Modules', 'Modules', 'PDL::Modules') ?>
-    <?= docsLink('Course', 'Course', 'PDL::Course') ?>
-    <?= docsLink('Index', 'Index', 'PDL::Index') ?>
-  </ul>
-  </div>
-  
-  <div class="h3"><h3>Resources</h3></div>
-  <div class="ul">
-  <ul>
-    <?= pageLink('demos/index', 'Demos') ?>
-    <li><a href="<?= $wiki_url ?>?title=Colloquia">Presentations</a></li>
-    <li><a href="<?= $wiki_url ?>">PDL Wiki</a></li>
-    <li><a href="<?= $wiki_url ?>?title=Libraries">External Libs</a></li>
-  </ul>
-  </div>
-    
-  <div class="h3"><h3>Development</h3></div>
-  <div class="ul">
-  <ul>
-    <?= pageLink('develop', 'Get Started') ?>
-    <li><a href="http://pdl.git.sourceforge.net/">Browse Git</a></li>
-    <? $tracker = "http://sourceforge.net/tracker/?func=browse&amp;group_id=612" ?>
-    <li><a href="<?= $tracker ?>&amp;atid=100612&amp;status=1">Bugs</a></li>
-    <li><a href="<?= $tracker ?>&amp;atid=300612&amp;status=1">Patches</a></li>
-    <?= pageLink('credits', 'Credits') ?>
-  </ul>
-  </div>
-  <a href="http://sourceforge.net/projects/pdl"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=612&amp;type=16" width="150" height="40" alt="Get Perl Data Language at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>  
 </div>
+
+<div class="h3"><h3>Documentation</h3></div>
+<div class="ul">
+  <ul>
+    <li class="docsLink" docs="FAQ" linkTitle="FAQ" pageTitle="PDL::FAQ - Frequently Asked Questions"></li>
+    <li class="docsLink" docs="Tutorials" linkTitle="Tutorials" pageTitle="PDL::Tutorials"></li>
+    <li class="docsLink" docs="Modules" linkTitle="Modules" pageTitle="PDL::Modules"></li>
+    <li class="docsLink" docs="Course" linkTitle="Course" pageTitle="PDL::Course"></li>
+    <li class="docsLink" docs="Index" linkTitle="Index" pageTitle="PDL::Index"></li>
+  </ul>
+</div>
+
+<div class="h3"><h3>Resources</h3></div>
+<div class="ul">
+  <ul>
+    <li class="pageLink" page="demos/index" title="Demos"></li>
+    <li class="wikiLink" query="title=Colloquia" title="Presentations"></li>
+    <li class="wikiLink" title="PDL Wiki"></li>
+    <li class="wikiLink" query="title=Libraries" title="External Libs"></li>
+  </ul>
+</div>
+
+<div class="h3"><h3>Development</h3></div>
+<div class="ul">
+  <ul>
+    <li class="pageLink" page="develop" title="Get Started"></li>
+    <li><a href="http://pdl.git.sourceforge.net/">Browse Git</a></li>
+    <li><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=612&amp;atid=100612&amp;status=1">Bugs</a></li>
+    <li><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=612&amp;atid=300612&amp;status=1">Patches</a></li>
+    <li class="pageLink" page="credits" title="Credits"></li>
+  </ul>
+</div>
+
+<a href="http://sourceforge.net/projects/pdl"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=612&amp;type=16" width="150" height="40" alt="Get Perl Data Language at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a> 
 

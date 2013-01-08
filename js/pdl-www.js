@@ -1,3 +1,7 @@
+function getRandomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var param_page = $.url().param('page');
 var param_docs = $.url().param('docs');
 var param_title = $.url().param('title');
@@ -75,7 +79,16 @@ function loadPod (module) {
   });
 }
 
+function setBannerImages () { 
+  $('#banner-images').replaceWith(
+    '<img src="images/banners/pos-1-opt-' + getRandomInt(0,2) + '.jpg" alt="Banner image1" height="79px" width="278px"/>'
+    + '<img src="images/banners/pos-2-opt-' + getRandomInt(0,2) + '.jpg" alt="Banner image2" height="79px" width="93px"/>'
+    + '<img src="images/banners/pos-4-opt-' + getRandomInt(0,1) + '.jpg" alt="Banner image3" height="79px" width="110px" style="margin-left: 25px"/>'
+  );
+}
+
 $(function () {
+  setBannerImages();
   $('#sidebar').load("content/sidebar.html", function () { transformLinks() } );
   loadMain();
 });

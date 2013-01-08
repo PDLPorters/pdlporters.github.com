@@ -25,7 +25,7 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
+$(function () {
 	$('#easy').hide();
 	$('#last').hide();
 	$('.howto').hide();
@@ -142,10 +142,6 @@ $(document).ready(function () {
 	</tr>
 </table>
 
-<? $PDL = "PDL"; ?>
-<? $Wiki = 	"http://sourceforge.net/apps/mediawiki/pdl/index.php?"
-		.	"title=Installing_PDL_on_" ?>
-
 <!-- ===============================
 		EASY INSTALL INSTRUCTIONS
 	 ===============================	-->
@@ -214,7 +210,7 @@ ppm install http://www.sisyphusion.tk/ppm/PDL.ppd
 </pre>
 
 <p>For more details
-see <a href="<?= $Wiki ?>Windows">Installing
+see <a href="http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_on_Windows">Installing
 PDL on Windows</a> on the wiki
 or <a href="http://search.cpan.org/src/CHM/PDL-2.4.8/win32/INSTALL">win32/INSTALL</a>
 file in the PDL source distribution.</p>
@@ -230,7 +226,7 @@ file in the PDL source distribution.</p>
 	
 	<ol>
 		<li><a href="http://www.cygwin.com/">Install Cygwin</a></li>
-		<li>See <a href="<?= $Wiki ?>Cygwin">"Installing PDL on
+		<li>See <a href="http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_on_Cygwin">"Installing PDL on
 		Cygwin"</a> on the wiki.</li>
 	</ol>
 </div>
@@ -292,7 +288,7 @@ enable squeeze/main</a>)
 <pre>apt-get install libhdf4-dev</pre>
 
 Install PDL.
-<pre>cpan <?= $PDL ?></pre>
+<pre>cpan PDL</pre>
 
 <p><b>Note</b>: The pgplot test opens a window and you have
 to close it. If the install seems to "hang", look for an open
@@ -348,7 +344,7 @@ Optional: HDF4 Library
 Now install CPAN and then PDL
 <pre>
 yum install perl-CPAN
-cpan <?= $PDL ?></pre>
+cpan PDL</pre>
 
 <p><b>Missing:</b> PGPLOT (but see below) and NDF support.</p>
  
@@ -418,7 +414,7 @@ Optional: FFTW library
 <pre>urpmi fftw2-devel</pre>
 
 Install PDL
-<pre>cpan <?= $PDL ?></pre>
+<pre>cpan PDL</pre>
 
 
 <p><b>Missing:</b> OpenGL, PGPLOT, PDL2 shell, Proj4, GD, HDF4
@@ -442,14 +438,14 @@ make: *** [subdirs] Error 2
 
 <ul>
   <li>You can remove the offending libraries and run
-  <tt>cpan <?= $PDL ?></tt> again.</li>
+  <tt>cpan PDL</tt> again.</li>
   
   <li>You can use the commands below to configure the installer
   to ignore these libraries:
 	<pre>
 perl -MCPAN -e shell
 
-cpan> look <?= $PDL ?>
+cpan> look PDL
 
 # Disable PROJ
 perl -pi -e 's|WITH_PROJ => undef|WITH_PROJ => 0|' perldl.conf
@@ -476,7 +472,7 @@ cpan> exit
 
 <div class="howto" id="last-mac">
 	<h3>Source install - Mac OS X</h3>
-	See <a href="<?=$Wiki?>Mac_OS_X#Custom_Installation_of_PDL">
+	See <a href="http://sourceforge.net/apps/mediawiki/pdl/index.php?title=Installing_PDL_on_Mac_OS_X#Custom_Installation_of_PDL">
 	"Installing PDL on Mac OS X"</a> on the wiki.
 </div>
 
@@ -486,7 +482,7 @@ cpan> exit
 
 <pre>
 perl -MCPAN -e shell
-cpan&gt; install <?= $PDL ?>
+cpan&gt; install PDL
 </pre>
 
 <p><b>Note:</b> Installs all of PDL that is supported by available

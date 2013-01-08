@@ -9,8 +9,6 @@ var param_title = $.url().param('title');
 function transformLinks () {
   var wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
 
-  console.log( "Page: " + param_page + " Docs: " + param_docs );
-
   $('li.homeLink').each(function (index) {
     var title = $(this).attr('title');
 
@@ -66,6 +64,9 @@ function loadMain () {
 
 function loadPod (module) {
   $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
+    if (! param_title) {
+      param_title = module;
+    }
     var pod = $(
       "<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>"
       + "<h1 class='title'>" + param_title + "</h1><div class='pod'>" + data + "</div>"

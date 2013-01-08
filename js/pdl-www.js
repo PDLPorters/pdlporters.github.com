@@ -79,6 +79,7 @@ function loadPod (module) {
       $(this).attr( 'href', '?docs=' + name + '&amp;title=' + name );
     });
     $('#main').html(pod);
+    $('div.pod').after('<h2>Thanks</h2><p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>');
   });
 }
 

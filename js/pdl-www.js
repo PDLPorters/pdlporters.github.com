@@ -69,32 +69,32 @@ function docLink (doc, pageTitle, linkTitle) {
 }
 
 function searchSuccess (data) {
-  var max_score = data.hits.max_score
+  var max_score = data.hits.max_score;
   var hits = data.hits.hits;
   console.log( data );
-  var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>';
-  html += '<p>Found ' + data.hits.total + ' hits</p><hr>';
+  var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>'
+             + '<p>Found ' + data.hits.total + ' hits</p><hr>';
   $.each( hits, function (index, item) {
-    var name = item.fields.documentation;
-    if ( ! name ) {
-      name = item.fields.module[0].name;
+    var fields = item.fields;
+    if ( ! fields ) {
+      return;
     }
+    var name = fields.documentation || fields.module[0].name;
     html += '<p>(' + fracToPercent( item._score / max_score ) + ') '
-         + docLink( name ) 
-         + ' - ' + item.fields.abstract
-         + '</p>';
+         + docLink( name ) + ' - ' + item.fields.abstract + '</p>';
   });
   $('#main').html( html );
 }
 
 function doSearch (query) {
   var mysearch = {
-    "query" : { "field" : { "pod.analyzed" : query }},
+    "query" : { "multi_match" : { "query" : query, "fields" : [ "pod.analyzed", "module.name.name" ] }},
     "filter" : { "and" : [
       { "term" : { "distribution" : "PDL" } },
       { "term" : { "status" : "latest" } }
     ]},
-    "fields" : [ "documentation", "abstract", "module" ]
+    "fields" : [ "documentation", "abstract", "module" ],
+    "size" : 20
   };
   $.ajax({
     type : "GET",

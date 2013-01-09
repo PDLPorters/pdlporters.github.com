@@ -7,6 +7,7 @@ function getRandomInt (min, max) {
 var param_page = $.url().param('page');
 var param_docs = $.url().param('docs');
 var param_title = $.url().param('title');
+var param_query = $.url().param('query');
 
 function transformLinks () {
   var wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
@@ -54,8 +55,26 @@ function transformLinks () {
   });
 }
 
+function doQuery (query) {
+  var mysearch = {
+    "query" : { "field" : { "pod.analyzed" : query }},
+    "filter" : { "and" : [
+      { "term" : { "distribution" : "PDL" } },
+      { "term" : { "status" : "latest" } }
+    ]}
+  };
+  var success = function (data) {
+    console.log(data.hits.hits[0]);
+    $('#main').html('<p>done</p>');
+  };
+  $.post( 'http://api.metacpan.org/v0/file/_search', mysearch, success )
+  .error( function() { console.log("Error attempting to search metacpan") } );
+}
+
 function loadMain () {
-  if (param_page) {
+  if (param_query) {
+    doQuery(param_query);
+  } else if (param_page) {
     $('#main').load("content/" + param_page + ".html");
   } else if (param_docs) {
     loadPod(param_docs);

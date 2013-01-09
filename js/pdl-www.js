@@ -72,8 +72,12 @@ function searchSuccess (data) {
   var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>';
   html += '<p>Found ' + data.hits.total + ' hits</p><hr>';
   $.each( hits, function (index, item) {
+    var name = item.fields.documentation;
+    if ( ! name ) {
+      name = item.fields.module[0].name;
+    }
     html += '<p>(' + fracToPercent( item._score / max_score ) + ') '
-         + docLink( item.fields.documentation ) 
+         + docLink( name ) 
          + ' - ' + item.fields.abstract
          + '</p>';
   });
@@ -87,7 +91,7 @@ function doSearch (query) {
       { "term" : { "distribution" : "PDL" } },
       { "term" : { "status" : "latest" } }
     ]},
-    "fields" : [ "documentation", "abstract" ]
+    "fields" : [ "documentation", "abstract", "module" ]
   };
   $.ajax({
     type : "GET",

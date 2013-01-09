@@ -69,12 +69,13 @@ function docLink (doc, pageTitle, linkTitle) {
 }
 
 function searchSuccess (data) {
+  var max_score = data.hits.max_score
   var hits = data.hits.hits;
   console.log( data );
   var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>';
   html += '<p>Found ' + data.hits.total + ' hits</p><hr>';
   $.each( hits, function (index, item) {
-    html += '<p>(' + fracToPercent( item._score ) + ') '
+    html += '<p>(' + fracToPercent( item._score / max_score ) + ') '
          + docLink( item.fields.documentation ) 
          + ' - ' + item.fields.abstract
          + '</p>';

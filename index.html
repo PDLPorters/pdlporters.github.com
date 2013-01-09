@@ -38,7 +38,13 @@
       <img src="images/icons/pdl.png" alt="PDL" height="79px" width="146px"/>
     </a>
     <div id="banner-images"></div>
-    <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">Loading</div>
+    <!-- <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">Loading</div> -->
+    <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">
+      <form action="/"> 
+        <input type="text" name="search" placeholder="Documentation Search">
+        <input type="submit" value="search">
+      </form>
+    </div>
   </div> 
   <!-- END BANNER -->
 
@@ -49,6 +55,7 @@
   <!-- END SIDE BAR -->
   
   <!-- GOOGLE SEARCH -->
+  <!--
   <table id="cse-container">
     <tr>
      <td id="cse"></td>
@@ -66,6 +73,7 @@
     customSearchControl.draw('cse', options);
   }, true);
   </script>
+  -->
   <!-- END GOOGLE SEARCH -->
 
   <!-- MAIN CONTENT -->

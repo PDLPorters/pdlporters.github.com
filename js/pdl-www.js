@@ -1,13 +1,16 @@
 // needs jQuery and purl.js
 
 function getRandomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function fracToPercent (frac) {
+  return Math.floor( 100 * frac ) + "%";  
 }
 
 var param_page = $.url().param('page');
 var param_docs = $.url().param('docs');
 var param_title = $.url().param('title');
-var param_query = $.url().param('query');
+var param_search = $.url().param('search');
 
 function transformLinks () {
   var wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
@@ -51,29 +54,55 @@ function transformLinks () {
       $(this).addClass("selected");
     }
     var title = $(this).attr('title');
-    $(this).html("<a href='?docs=" + docs + "&amp;title=" + pageTitle + "'>" + linkTitle + "</a>");
+    $(this).html( docLink(docs, pageTitle, linkTitle) );
   });
 }
 
-function doQuery (query) {
+function docLink (doc, pageTitle, linkTitle) {
+  if ( ! linkTitle ) {
+    linkTitle = doc;
+  }
+  if ( ! pageTitle ) {
+    pageTitle = linkTitle;
+  }
+  return "<a href='?docs=" + doc + "&amp;title=" + pageTitle + "'>" + linkTitle + "</a>"
+}
+
+function searchSuccess (data) {
+  var hits = data.hits.hits;
+  console.log( data );
+  var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>';
+  html += '<p>Found ' + data.hits.total + ' hits</p><hr>';
+  $.each( hits, function (index, item) {
+    html += '<p>(' + fracToPercent( item._score ) + ') '
+         + docLink( item.fields.documentation ) 
+         + ' - ' + item.fields.abstract
+         + '</p>';
+  });
+  $('#main').html( html );
+}
+
+function doSearch (query) {
   var mysearch = {
     "query" : { "field" : { "pod.analyzed" : query }},
     "filter" : { "and" : [
       { "term" : { "distribution" : "PDL" } },
       { "term" : { "status" : "latest" } }
-    ]}
+    ]},
+    "fields" : [ "documentation", "abstract" ]
   };
-  var success = function (data) {
-    console.log(data.hits.hits[0]);
-    $('#main').html('<p>done</p>');
-  };
-  $.post( 'http://api.metacpan.org/v0/file/_search', mysearch, success )
-  .error( function() { console.log("Error attempting to search metacpan") } );
+  $.ajax({
+    type : "GET",
+    url : 'http://api.metacpan.org/v0/file/_search', 
+    data : 'source=' + JSON.stringify(mysearch),
+    dataType: "jsonp",
+    success : searchSuccess,
+  }).error( function() { console.log("Error attempting to search metacpan") } );
 }
 
 function loadMain () {
-  if (param_query) {
-    doQuery(param_query);
+  if (param_search) {
+    doSearch(param_search);
   } else if (param_page) {
     $('#main').load("content/" + param_page + ".html");
   } else if (param_docs) {

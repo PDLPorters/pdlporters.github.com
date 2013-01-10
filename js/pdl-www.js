@@ -18,7 +18,7 @@ function transformLinks () {
   $('li.homeLink').each(function (index) {
     var title = $(this).attr('title');
 
-    if (param_page === 'home' || ( !param_page && !param_docs )) {
+    if (param_page === 'home' || ( !param_page && !param_docs && !param_search )) {
       $(this).addClass("selected");
     }
     $(this).html("<a href='?page=home'>" + title + "</a>");
@@ -87,7 +87,9 @@ function doSearch (query) {
   var mysearch = {
     "query" : { "filtered" : {
       "query" : { 
-        "multi_match" : { "query" : query, "fields" : [ "pod.analyzed", "module.name" ] }
+        "query_string" : { 
+          "query" : query, 
+          "fields" : [ "pod.analyzed", "module.name" ] }
       },
       "filter" : { "and" : [
         { "term" : { "distribution" : "PDL" } },

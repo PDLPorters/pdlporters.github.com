@@ -88,11 +88,15 @@ function searchSuccess (data) {
 
 function doSearch (query) {
   var mysearch = {
-    "query" : { "multi_match" : { "query" : query, "fields" : [ "pod.analyzed", "module.name.name" ] }},
-    "filter" : { "and" : [
-      { "term" : { "distribution" : "PDL" } },
-      { "term" : { "status" : "latest" } }
-    ]},
+    "query" : { "filtered" : {
+      "query" : { 
+        "multi_match" : { "query" : query, "fields" : [ "pod.analyzed", "module.name" ] }
+      },
+      "filter" : { "and" : [
+        { "term" : { "distribution" : "PDL" } },
+        { "term" : { "status" : "latest" } }
+      ]}
+    }},
     "fields" : [ "documentation", "abstract", "module" ],
     "size" : 20
   };

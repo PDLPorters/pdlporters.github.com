@@ -92,7 +92,8 @@ function doSearch (query) {
       "query" : { 
         "query_string" : { 
           "query" : query, 
-          "fields" : [ "pod.analyzed", "module.name" ] }
+          "fields" : [ "pod.analyzed", "module.name" ] 
+        }
       },
       "filter" : { "and" : [
         { "term" : { "distribution" : "PDL" } },

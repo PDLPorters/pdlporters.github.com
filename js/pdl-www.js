@@ -84,6 +84,10 @@ function searchSuccess (data) {
 }
 
 function doSearch (query) {
+  /*$('#main').html(
+    '<p>Searching for ' + query 
+    + ' on <a href="http://metacpan.org">MetaCPAN</a></p>'
+  );*/
   var mysearch = {
     "query" : { "filtered" : {
       "query" : { 
@@ -122,6 +126,10 @@ function loadMain () {
 }
 
 function loadPod (module) {
+  /*$('#main').html(
+    '<p>Loading documentation for ' + module 
+    + ' from <a href="http://metacpan.org">MetaCPAN</a></p>'
+  );*/
   $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
     if (! param_title) {
       param_title = module;

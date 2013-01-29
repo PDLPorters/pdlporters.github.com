@@ -134,10 +134,14 @@ function loadPod (module) {
     if (! param_title) {
       param_title = module;
     }
-    var pod = $(
+
+    // by using parseHTML we remove script tags
+    var pod = $($.parseHTML(
       "<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>"
       + "<h1 class='title'>" + param_title + "</h1><div class='pod'>" + data + "</div>"
-    );
+    ));
+
+    // change pod links
     pod.find('a[href*="metacpan.org"]').each(function(index){
       var url = $(this).url(true);
       if ( ! url.segment(-2) === 'module' ) {
@@ -146,6 +150,7 @@ function loadPod (module) {
       var name = url.segment(-1);
       $(this).attr( 'href', '?docs=' + name + '&amp;title=' + name );
     });
+
     $('#main').html(pod);
     $('div.pod').after('<h2>Thanks</h2><p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>');
   });

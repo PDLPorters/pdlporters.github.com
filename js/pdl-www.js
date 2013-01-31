@@ -21,14 +21,14 @@ function transformLinks () {
     if (param_page === 'home' || ( !param_page && !param_docs && !param_search )) {
       $(this).addClass("selected");
     }
-    $(this).html("<a href='?page=home'>" + title + "</a>");
+    $(this).html('<a href="?page=home">' + title + '</a>');
   });
 
   $('li.wikiLink').each(function (index) {
     var title = $(this).attr('title');
     var query = $(this).attr('query');
     var title = $(this).attr('title');
-    $(this).html("<a href=" + wiki_url + query + ">" + title + "</a>");
+    $(this).html('<a href="' + wiki_url + query + '">' + title + '</a>');
   });
 
   $('li.pageLink').each(function (index) {
@@ -39,7 +39,7 @@ function transformLinks () {
       $(this).addClass("selected");
     }
     var title = $(this).attr('title');
-    $(this).html("<a href='?page=" + page + "'>" + title + "</a>");
+    $(this).html('<a href="?page=' + page + '">' + title + '</a>');
   });
 
   $('li.docsLink').each(function (index) {
@@ -62,7 +62,7 @@ function docLink (doc, pageTitle, linkTitle) {
   if ( ! pageTitle ) {
     pageTitle = linkTitle;
   }
-  return "<a href='?docs=" + doc + "&amp;title=" + pageTitle + "'>" + linkTitle + "</a>"
+  return '<a href="?docs=' + doc + '&title=' + pageTitle + '">' + linkTitle + '</a>'
 }
 
 function searchSuccess (data) {
@@ -137,8 +137,8 @@ function loadPod (module) {
 
     // by using parseHTML we remove script tags
     var pod = $($.parseHTML(
-      "<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>"
-      + "<h1 class='title'>" + param_title + "</h1><div class='pod'>" + data + "</div>"
+      '<b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>'
+      + '<h1 class="title">' + param_title + '</h1><div class="pod">' + data + '</div>'
     ));
 
     // change pod links
@@ -149,14 +149,7 @@ function loadPod (module) {
         return
       } 
       var name = url.segment(-1);
-      var target = '?docs=' + name + '&amp;title=' + name;
-
-      var frag = url.attr('fragment');
-      if ( frag ) {
-        target += '#' + frag;
-      }
-
-      $(this).attr( 'href', target );
+      $(this).attr( 'href', '?docs=' + name + '&title=' + name );
     });
 
     $('#main').html(pod);

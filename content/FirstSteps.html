@@ -1,0 +1,610 @@
+<head>
+<title>The PDL Book</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body style="background-color: white">
+
+<p>
+</p>
+<hr />
+<h1><a name="first_steps_with_pdl">First Steps with PDL</a></h1>
+<p><em>&quot;Maybe there are a few civilizations out there that have decided to stay
+home, piddle around and send out some radio waves once in a while.&quot;</em></p>
+<p><em>- Annette Foglino, Space: Is Anyone Out There? Most astronomers say yes, Life, 1 Jul 1989.</em></p>
+<p>It can be very frustrating to read an introductory book which takes a
+long time teaching you the very basics of a topic, in a &quot;Janet and John&quot;
+style.  While you wish to learn, you are anxious to see something a bit
+more exciting and interesting to see what the language can do.</p>
+<p>Fortunately our task in this book on PDL is made very much easier by the
+high-level of the language. We can take a tour through PDL, looking at
+the advanced features it offers without getting involved in complexity.</p>
+<p>The aim of this section is to cover a breadth of PDL features rather
+than any in depth, to give the reader a flavour of what he or she can do
+using the language and a useful reference for getting started doing real
+work. Later sections will focus on looking at the features introduced
+here, in more depth.</p>
+<p>
+</p>
+<h2><a name="alright__let_s_do_something">Alright, let's <em>do</em> something</a></h2>
+<p>We'll assume PDL is correctly installed and set up on
+your computer system (see <a href="http://pdl.perl.org/">http://pdl.perl.org/</a> for details
+of obtaining and installing PDL).</p>
+<p>For interactive use PDL comes with a program called <code>perldl</code>. This allows
+you to type raw PDL (and perl) commands and see the result right away. It
+also allows command line recall and editing (via the arrow keys) on most
+systems.</p>
+<p>So we begin by running the <code>perldl</code> program from the system
+command line. On a Mac/UNIX/Linux system we would simply type <code>perldl</code>
+in a terminal window. On a Windows system we would type <code>perldl</code>
+in a command prompt window. If PDL is installed correctly this is
+all that is required to bring up <code>perldl</code>.</p>
+<pre>
+  myhost% perldl
+  perlDL shell v1.357
+   PDL comes with ABSOLUTELY NO WARRANTY. For details, see the file
+   'COPYING' in the PDL distribution. This is free software and you
+   are welcome to redistribute it under certain conditions, see
+   the same file for details.
+  ReadLines, NiceSlice, MultiLines  enabled
+  Reading PDL/default.perldlrc...
+  Found docs database /usr/lib/perl5/.../PDL/pdldoc.db
+  Type 'help' for online help
+  Type 'demo' for online demos
+  Loaded PDL v2.006 (supports bad values)
+  pdl&gt;</pre>
+<p>We get a whole bunch of informational messages about what it is loading for
+startup and the help system. Note; the startup is <em>completely</em> configurable,
+an advanced user can completely customize which PDL modules
+are loaded. We are left with the <code>pdl</code>&gt; prompt at which we can type commands. This kind
+of interactive program is called a 'shell'.  There is also <code>pdl2</code>
+which is a newer version of the PDL shell with additional features.
+It is still under development but completely usable.</p>
+<p>Let's create something, and display it:</p>
+<pre>
+  pdl&gt; use PDL::Graphics::Simple
+  pdl&gt; imag (sin(rvals(200,200)+1))</pre>
+<p>The result should look like the image below - a two dimensional <code>sin</code> function.
+<code>rvals</code> is a handy PDL function for creating an image whose pixel values are
+the radial distance from the central pixel of the image.  With these arguments
+it creates a 200 by 200 'radial' image.  (Try '<code>imag(rvals(200,200))</code>' and you
+will see better what we mean!) <code>sin()</code> is the mathematical sine function, this
+already exists in perl but in the case of PDL is applied to all 40000 pixels at
+once, a topic we will come back to. The <code>imag()</code> function displays the image.
+You will see the syntax of perl/PDL is algebraic - by which we mean it is very
+similar to C and FORTRAN in how expressions are constructed.  (In fact much
+more like C than FORTRAN). It is interesting to reflect on how much C code
+would be required to generate the same display, even given the existence of
+some convenient graphics library.</p>
+<table>
+	<caption align="bottom">Figure of a two dimensional <code>sin</code> function.</caption>
+	<tr><td><img WIDTH=300 src="images/sepia-small/whirl-sync.png"></td></tr>
+</table>
+	<p>That's all fine. But what if we wanted to achieve the same results in a standalone
+perl script? Well it is pretty simple:</p>
+<pre>
+  use PDL;
+  use PDL::Graphics::Simple;
+  imag (sin(rvals(200,200)+1));</pre>
+<p>That's it. This is a complete perl/PDL program. One could run it by typing 
+<code>perl filename</code>. (In fact there are many ways of running it, most systems
+allows it to be setup so you can just type <em>filename</em>. See your local
+Perl documentation - then the <code>perlrun</code> manual page.)</p>
+<p>Two comments:</p>
+<ol>
+<li>
+<p>The statements are all terminated by the '<code>;</code>' character. Perl is like C
+in this regard. When entering code at the <code>pdl</code> command line the final
+'<code>;</code>' may be omitted if you wish, note you can also use it to put multiple
+statements on one line. In our examples from now on we'll often omit the 
+<code>pdl</code> prompt for clarity.</p>
+</li>
+<li>
+<p>The directive <code>use PDL;</code> tells Perl to load the PDL module, which makes
+available all the standard PDL extensions. (Advanced users 
+will be interested in knowing
+there are other ways of starting PDL which allows one to select which bits
+of it you want).</p>
+</li>
+</ol>
+<p>
+</p>
+<h2><a name="whirling_through_the_whirlpool">Whirling through the Whirlpool</a></h2>
+<p>Enough about the mechanics of using PDL, let's look at some real data! To work
+through these examples exactly you can download any needed input files from
+<a href="http://sourceforge.net/projects/pdl/files/PDL/PDL%20Book%20Example%20Data%20Set/">http://sourceforge.net/projects/pdl/files/PDL/PDL%20Book%20Example%20Data%20Set/</a>
+and we'll assume you are running any of these examples in the same
+directory as you have downloaded the input data files.</p>
+<p>We'll be playing with an image of the famous spiral galaxy discovered by
+Charles Messier, known to astronomers as M51 and commonly as the Whirlpool
+Galaxy. This is a 'nearby' galaxy, a mere 25 million light years from Earth.
+The image file is stored in the 'FITS' format, a common astronomical format,
+which is one of the many formats standard PDL can read. (FITS stores more
+shades of gray than GIF or JPEG, but PDL can read these formats too).</p>
+<pre>
+  pdl&gt; $a = rfits(&quot;m51_raw.fits&quot;);   # m51_raw.fits is in current directory
+  Reading IMAGE data...
+  BITPIX =  -32  size = 262144 pixels 
+  Reading  1048576  bytes
+  BSCALE =  &amp;&amp;  BZERO =</pre>
+<p>This looks pretty simple. As you can probably guess by now <code>rfits</code> is the PDL
+function to read a FITS file. This is stored in the perl variable <code>$a</code>.</p>
+<p><strong>This is an important PDL concept: PDL stores its data arrays in simple perl
+variables</strong> (<code>$a, $x, $y, $MyData</code>, etc.).  PDL data arrays are special arrays
+which use a more efficient, compact storage than standard perl arrays (<code>@a,
+@x, ...</code>) and are much faster to access for numerical computations. To avoid
+confusion it is convenient to introduce a special name for them, we call them
+<em>piddles</em> (short for 'PDL variables') to distinguish them from ordinary Perl
+'arrays', which are in fact really lists.  We'll say more about this later.</p>
+<p>Before we start seriously playing around with M51 it is worth noting that we
+can also say:</p>
+<pre>
+  pdl&gt; $a = rfits &quot;m51_raw.fits&quot;;</pre>
+<p>Note we have now left off the brackets on the <code>rfits</code> function. Perl is rather
+simpler than C and allows one to omit the brackets on a function all together.
+It assumes all the items in a list are function arguments and can be pretty
+convenient. If you are calling more than one function it is however better to
+use some brackets so the meaning is clear. For the rules on this 'list
+operator' syntax see the Perl syntax documentation.  From now on we'll mostly
+use the list operator syntax for conciseness</p>
+<p>Let's look at M51:</p>
+<pre>
+  pdl&gt; imag $a;
+  pdl&gt imag $a,0,1000; # More contrast
+  pdl&gt imag $a,0,300;  # Even more contrast
+</pre>
+
+<p>A couple of bright spots can be seen, but where is the galaxy? It's the faint
+blob in the middle: by default the display range is autoscaled linearly from
+the faintest to the brightest pixel, and only the bright star slightly to the
+bottom right of the center can be seen without contrast enhancement. We can
+easily change that by specifying the black/white data values (Note: <code>#</code> starts
+a Perl comment and can be ignored - i.e. no need to type the stuff after it!):</p>
+
+<table>
+	<caption align="bottom">Figure of the raw image <code>m51_raw.fits</code> shown
+		with progressively greater contrast using the <code>imag</code> command.</caption>
+	<tr>
+		<td><img WIDTH=300 src="images/sepia-small/whirl-m51-default.png"></td>
+		<td><img WIDTH=300 src="images/sepia-small/whirl-m51-1000.png"></td>
+		<td><img WIDTH=300 src="images/sepia-small/whirl-m51-300.png"></td>
+	</tr>
+</table>
+
+
+
+<p>You can see that <code>imag</code> takes additional arguments to specify the display
+range. In fact <code>imag</code> takes quite a few arguments, many of them optional. By
+typing '<code>help imag</code>' at the <code>pdl</code> prompt we can find out all about the
+function.</p>
+<p>It is certainly a spiral galaxy with a few foreground stars thrown in for good
+measure. But what is that horrible stripey pattern running from bottom right to
+top left? That certainly is not part of the galaxy? Well no. What we have here
+is the uneven sensitivity of the detector used to record the image, a common
+artifact in digital imaging. We can correct for this using an image of a
+uniformly illuminated screen, what is commonly known as a 'flatfield'.</p>
+<pre>
+  pdl&gt; $flat = rfits &quot;m51_flatfield.fits&quot;;
+  pdl&gt; imag $flat;</pre>
+<p>This is shown in the next figure. Because the image is of a uniform field,
+the actual image reflects the detector sensitivity. To correct our M51
+image, we merely have to divide the image by the flatfield:</p>
+<table>
+	<caption align="bottom">Figure: The 'flatfield' image showing the detector sensitivity of the raw data.</caption>
+	<tr><td> <img WIDTH=300 src="images/sepia-small/whirl-flat.png"> </td></tr>
+</table>
+
+<pre>
+  pdl&gt; $gal = $a / $flat;
+  pdl&gt; imag $gal,0,300;  
+  pdl&gt; wfits $gal, 'fixed_gal.fits'; # Save our work as a FITS file</pre>
+
+<p>Well that's a lot better.  But think what we have
+just done. Both <code>$a</code>  and <code>$flat</code> are <em>images</em>, with 512 pixels by
+512 pixels. <strong>The divide operator '<code>/</code>' has been applied over all
+262144 data values in the piddles <code>$a</code>  and <code>$flat</code>.</strong> And it was
+pretty fast too - these are what are known as <em>vectorized</em>
+operations. In PDL each of these is implemented by heavily optimized
+C code, which is what makes PDL very efficient for procession of
+large chunks of data. If you did the same operation using normal
+perl arrays rather than piddles it would be about ten to twenty times slower
+(and use ten times more memory). In fact we can
+do whatever arithmetic operations we like on image piddles:</p>
+<table>
+	<caption align="bottom">Figure: The M51 image corrected for the flatfield.</caption>
+	<tr><td> <img WIDTH=300 src="images/sepia-small/whirl-flattened.png"> </td></tr>
+</table>
+
+<pre>
+  pdl&gt; $funny = log(($gal/300)**2 - $gal/100  + 4); 
+  pdl&gt; imag $funny; # Surprise!</pre>
+
+<p>Or on 1-D line piddles. On on 3-D cubic piddles. In fact piddles can support an infinite
+number of dimensions (though your computers memory won't).</p>
+<p><strong>This the key to PDL: the ability to process large chunks of data at once.</strong></p>
+<p>
+</p>
+<h2><a name="measuring_the_brightness_of_m51">Measuring the brightness of M51</a></h2>
+<p>How might we extract some useful
+scientific information out of this image? A simple
+quantity an astronomer might want to know is how the brightness of the
+the 'disk' of the galaxy (the outer region which contains the spiral
+arms) compares with the 'bulge' (the compact inner nucleus). Well
+let's find out the total sum of all the light in the image:</p>
+<pre>
+  pdl&gt; print sum($gal);
+  17916010</pre>
+<p><code>sum</code> just sums up all the data values in all the pixels in the 
+image - in this case the answer is 17916010. If the image is linear
+(which it is) and if it was calibrated (i.e. we knew the relation
+between data numbers and brightness units) we could work out the
+total brightness. Let's turn it round - we know that M51 has
+a luminosity of about 1E36 Watts, so we can work out what
+one data value corresponds to in physical units:</p>
+<pre>
+  pdl&gt; p 10**36/sum($gal)
+  5.58159992096455e+28</pre>
+<p>This is also about 200 solar luminosities, (Note we have switched to using <code>p</code>
+as a shorthand for <code>print</code> - which only works in the <code>pdl</code> and <code>pdl2</code> shells)
+which gives 4 billion solar luminosities for the whole galaxy.</p>
+<p>OK we do not need PDL for this simple arithmetic, let's get back to
+computations that involve the whole image.
+How can we get the sum of a piece of an image, e.g. near the centre? 
+Well in PDL there is more than one way to do it (Perl aficionados call
+this phenomenon TIMTOWTDI). In this case, because we really want
+the brightness in a circular aperture, we'll use the <code>rvals</code>
+function:</p>
+<pre>
+  pdl&gt; $r = rvals $gal;
+  pdl&gt; imag $r;
+  ...</pre>
+<p>Remember <code>rvals</code>? It replaces all the pixels in an image with its distance
+from the centre. We can turn this into a <em>mask</em> with a simple
+operation like:</p>
+<pre>
+  pdl&gt; $mask = $r&lt;50;
+  pdl&gt; imag $mask;
+  ...</pre>
+
+
+<table>
+	<caption align="bottom">Figure: Using  <code>rvals</code> to generate a mask image
+		to isolate the galaxy bulge and disk.  Top row: radial gradient
+		image <code>$r</code>, and radial gradient masked with less than operator
+		<code>$r < 50</code>.  Bottom row: Bulge and disk of the galaxy.
+	</caption>
+	<tr>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-maska.png"> </td>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-maskb.png"> </td>
+	</tr>
+	<tr>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-maskc.png"> </td>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-maskd.png"> </td>
+	</tr>
+</table>
+
+
+<p>The Perl <em>less than operator</em> is applied to all pixels in the image.
+You can see the result is an image which is 0 on the outskirts and 1 in
+the area of the nucleus. We can then simply use the mask image to
+isolate in a simple way the bulge and disk components (lower row) and it
+is then very easy to find the brightness of both pieces of the M51
+galaxy:</p>
+<pre>
+ pdl&gt; $bulge = $mask * $gal
+ pdl&gt; imag $bulge,0,300
+ ...
+ pdl&gt; print sum $bulge;
+ 3011125
+ 
+ pdl&gt; $disk = $gal * (1-$mask)
+ pdl&gt; imag $disk,0,300
+ ...
+ pdl&gt; print sum $disk
+ 14904884</pre>
+<p>You can see that the disk is about 5 times brighter than the bulge in
+total, despite its more diffuse appearance. This is typical for
+spiral galaxies. We might ask a different question: how does the average
+<em>surface brightness</em>, the brightness per unit area on the sky,
+compare between bulge and disk? This is again quite straight forward:</p>
+<pre>
+  pdl&gt; print sum($bulge)/sum($mask);
+  pdl&gt; print sum($disk)/sum(1-$mask);</pre>
+<p>We work out the area by simply summing up the 0,1 pixels in the mask
+image. The answer is the bulge has about 7 times the surface
+brightness than the disk - something we might have guessed from
+looking at the above figure, which tells astronomers its stellar density is
+much higher.</p>
+<p>Of course PDL being so powerful, we could have figured this out in one line:</p>
+<pre>
+  pdl&gt; print ( avg($gal-&gt;where(rvals($gal)&lt;50)) / avg($gal-&gt;where(rvals($gal)&gt;=50)) )
+  6.56590509414673</pre>
+<p>
+</p>
+<h2><a name="twinkle__twinkle__little_star">Twinkle, twinkle, little star</a></h2>
+<p>Let's look at something else, we'll zoom in on a small piece of the image:</p>
+<pre>
+  pdl&gt; $section = $gal(337:357,178:198);
+  pdl&gt; imag $section; # the bright star</pre>
+<p>Here we are introducing something new - we can see that PDL supports
+<em>extensions</em> to the Perl syntax. We can say <code>$var(a:b,c:d...)</code> to specify
+<em>multidimensional slices</em>. In this case we have produced a sub-image ranging
+from pixel 337 to 357 along the first dimension, and 178 through 198 along the
+second. Remember pdl data dimension indexes start from zero.  We'll talk some
+more about <em>slicing and dicing</em> later on. This sub-image happens to contain
+a bright star.</p>
+<p>At this point you will probably be able to work out for yourself the amount of
+light coming from this star, compared to the whole galaxy. (Answer: about 2%)
+But let's look at something more involved: the radial profile of the star.
+Since stars are a long way away they are almost point sources, but our camera
+will blur them out into little disks, and for our analysis we might want an
+exact figure for this blurring.</p>
+<p>We want to plot all the brightness of all the pixels in this section, against
+the distance from the centre. (We've chosen the section to be conveniently
+centered on the star, you could think if you want about how you might determine
+the centroid automatically using the <code>xvals</code> and <code>yvals</code> functions). Well it
+is simple enough to get the distance from the centre:</p>
+<pre>
+  pdl&gt; $r = rvals $section;</pre>
+<p>But to produce a one-dimensional plot of one against the other we need to
+reduce the 2D data arrays to one dimension. (i.e our 21 by 21 image section
+becomes a 441 element vector). This can be done using the PDL <code>clump</code>
+function, which 'clumps' together an arbitrary number of dimensions:</p>
+<pre>
+  pdl&gt; $rr  = $r-&gt;clump(2); # Clump first two dimensions
+  pdl&gt; $sec = $section-&gt;clump(2);
+  
+  pdl&gt; points $rr, $sec;  # Radial plot</pre>
+<p>You should see a nice graph with points like those
+in the figure below showing the drop-off from the bright centre of the star.
+The blurring is usually measured
+by the 'Full Width Half Maximum' (FWHM) - or in plain terms how
+fat the profile is across when it drops by half. Looking at the plot
+it looks like this is about 2-3 pixels - pretty compact!</p>
+
+<table>
+	<caption align="bottom">Figure: Radial light profile of the bright star with fitted curve. </caption>
+	<tr> <td> <img WIDTH=300 src="images/sepia-small/whirl-star-radial.png"> </td> </tr>
+</table>
+
+
+<p>Well we don't just want a guess - let's fit the profile with a function.
+These blurring functions are usually represented by the <code>Gaussian</code>
+function. PDL comes with a whole variety of general purpose and
+special purpose fitting functions which people have written for
+their own purposes (and so will you we hope!). Fitting Gaussians
+is something that happens rather a lot and there is surprisingly
+enough a special function for this very purpose. (One could use
+more general fitting packages like <code>PDL::Fit::LM</code> or
+<code>PDL::Opt::Simplex</code> but that would require more care).</p>
+<pre>
+  pdl&gt; use PDL::Fit::Gaussian;</pre>
+<p>This loads in the module to do this. PDL, like Perl, is modular. We
+don't load all the available modules by default just a convenient
+subset. How can we find useful PDL functions and modules? Well
+<code>help</code> tells us more about what we already know, to find out
+about what we don't know use <code>apropos</code>:</p>
+<pre>
+  pdl&gt; apropos gaussian
+  PDL::Fit::Gaussian ...
+                                Module: routines for fitting gaussians
+  PDL::Gaussian   Module: Gaussian distributions.
+  fitgauss1d      Fit 1D Gassian to data piddle
+  fitgauss1dr     Fit 1D Gassian to radial data piddle
+  gefa            Factor a matrix using Gaussian elimination.
+  grandom         Constructor which returns piddle of Gaussian random numbers
+  ndtri           The value for which the area under the Gaussian probability density function (integrated from minus
+                                infinity) is equal to the argument (cf erfi). Works inplace.</pre>
+<p>This tells us a whole lot about various functions and modules to do with
+Gaussians. Note that we can abbreviate <code>help</code> and <code>apropos</code>
+with '<code>?</code>' and '<code>??</code>' when using the <code>pdl</code> or <code>pdl2</code> shells.</p>
+<p>Let's fit a Gaussian:</p>
+<pre>
+  pdl&gt; use PDL::Fit::Gaussian;
+  pdl&gt; ($peak, $fwhm, $background) = fitgauss1dr($rr, $sec); 
+  pdl&gt; p $peak, $fwhm, $background;</pre>
+<p><code>fitgauss1dr</code> is a function in the module <a href="/PDL/Fit/Gaussian.html">the PDL::Fit::Gaussian manpage</a> which fits
+a Gaussian constrained to be radial (i.e. whose peak is at the origin).
+You can see that, unlike C and FORTRAN, Perl functions can return
+more than one result value. This is pretty convenient. You can see the
+FWHM is more like 2.75 pixels. Let's generate a fitted curve with this
+functional form.</p>
+<pre>
+  pdl&gt; $rrr = sequence(2000)/100;  # Generate radial values 0,0.01,0,02..20
+       
+  # Generate Gaussian with given FWHM</pre>
+<pre>
+  pdl&gt; $fit = $peak * exp(-2.772 * ($rrr/$fwhm)**2) + $background;</pre>
+<p>Note the use of a new function, <code>sequence(N)</code>, which 
+generates a new piddle with N values ranging 0..(N-1).
+We are simply using this to generate the horizontal axis values
+for the plot.  Now let's overlay it on the previous plot.</p>
+<pre>
+  pdl&gt; hold; # This command stops new plots starting new pages
+  pdl&gt; line $rrr, $fit, {Colour=&gt;2} ; # Line plot</pre>
+<p>The last <code>line</code> command shows the PDL syntax for optional function
+arguments. This is based on the Perl's built in hash syntax. We'll say
+more about this later in <a href="/PDL/Book/PGPLOT.html">the PDL::Book::PGPLOT manpage</a>.  The result should look a
+lot like the figure above.  Not too bad. We could perhaps do a bit
+better by exactly centroiding the image but it will do for now.</p>
+<p>Let's make a <em>simulation</em> of the 2D stellar image. This is equally
+easy:</p>
+<pre>
+  pdl&gt; $fit2d = $peak * exp(-2.772 * ($r/$fwhm)**2);
+  pdl&gt; release; # Back to new page for new plots;
+  pdl&gt; imag $fit2d;
+  ...
+  pdl&gt; wfits $fit2d, 'fake_star.fits'; # Save our work</pre>
+<p>But the figure below is a
+boring. So far we have been using simple 2D graphics from the
+<code>PDL::Graphics::Simple</code> library. In fact PDL has more
+than one graphics library (some see this as a flaw, some
+as a feature!). Using the <code>PDL::Graphics::TriD</code> library
+which does OpenGL graphics we can look at our simulated
+star in 3D (see the right hand panel);</p>
+
+<table>
+	<caption align="bottom">Figure: Two different views of the 2D simulated Point Spread Function.</caption>
+	<tr>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-starsima.png"> </td>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-starsimb.png"> </td>
+	</tr>
+</table>
+
+
+<pre>
+   pdl&gt; use PDL::Graphics::TriD; # Load the 3D graphics module
+   pdl&gt; imag3d [$fit2d];</pre>
+<p>If you do this on your computer you should be able to look at the graphic from
+different sides by simply dragging in the plot window with the mouse! You can
+also zoom in and out with the right mouse button.  Note that <code>imag3d</code> has it's
+a rather different syntax for processing it's arguments - for very good reasons
+- we'll explore 3D graphics further in <a href="/PDL/Book/TriD.html">the PDL::Book::TriD manpage</a>.</p>
+<pre>
+   To continue: Select the TriD window and type q</pre>
+<p>Finally here's something interesting. Let's take our fake star and place it
+elsewhere on the galaxy image.</p>
+<pre>
+  pdl&gt; $newsection = $gal(50:70,70:90);
+  pdl&gt; $newsection +=  $fit2d;
+  pdl&gt; imag $gal,0,300;</pre>
+<p>We have a bright new star where none existed before! The C-style <code>+=</code>
+increment operator is worth noting - it actually modifies the contents of
+<code>$newsection</code> in-place. And because <code>$newsection</code> is a <em>slice</em> of <code>$gal</code>
+the change also affects <code>$gal</code>. This is an important property of slices - any
+change to the slice affects the <em>parent</em>. This kind of parent/child
+relationship is a powerful property of many PDL functions, not just slicing.
+What's more in many cases it leads to memory efficiency, when this kind of
+linear slice is stored we only store the start/stop/step and not a new copy of
+the actual data.</p>
+<p>Of course sometimes we DO want a new copy of the actual data, for example if we
+plan to do something evil to it. To do this we could use the alternative form:</p>
+<pre>
+  pdl&gt; $newsection = $newsection +  $fit2d</pre>
+<p>Now a new version of <code>$newsection</code>  is created which has nothing to 
+do with the original <code>$gal</code>. In fact there is more than one way to do
+this as we will see in later chapters.</p>
+<p>Just to amuse ourselves, lets write a short script to cover M51 with dozens of fake
+stars of random brightnesses:</p>
+<pre>
+   use PDL;
+   use PDL::Graphics::Simple;
+   use PDL::NiceSlice;  # must use in each program file</pre>
+<pre>
+   srand(42); # Set the random number seed
+   $gal  = rfits &quot;fixed_gal.fits&quot;;
+   $star = rfits &quot;fake_star.fits&quot;;
+   
+   sub addstar {
+      ($x,$y) = @_;
+      $xx = $x+20; $yy = $y+20;
+      # Note use of slice on the LHS!
+      $gal($x:$xx,$y:$yy) += $star * rand(2);
+   }</pre>
+<pre>
+   for (1..100) {
+      $x1 = int(rand(470)+10);
+      $y1 = int(rand(470)+10);
+      addstar($x1,$y1);
+   }
+   imag $gal,0,1000;</pre>
+<p>This ought to give the casual reader some flavour of the Perl syntax - quite simple
+and quite like C except that the entities being manipulated here are entire
+arrays of data, not single numbers. The result is shown, for amusement,
+in the figure below and takes virtually no time to compute.</p>
+
+<table>
+	<caption align="bottom">Figure: M51 covered in fake stars.</caption>
+	<tr> <td> <img WIDTH=300 src="images/sepia-small/whirl-fakestars.png"> </td> </tr>
+</table>
+
+
+<p>
+</p>
+<h2><a name="getting_complex_with_m51">Getting Complex with M51</a></h2>
+<p>To conclude this frantic whirl through the possibilities of PDL, let's look at
+a moderately complex (sic) example. We'll take M51 and try to enhance it to reveal the
+large-scale structure, and then subtract this to reveal small-scale structure.</p>
+<p>Just to show off we'll use a method based on the Fourier transform - don't
+worry if you don't know much about these, all you need to know is that the
+Fourier transform turns the image into an 'inverse' image, with
+complex numbers, where each pixel
+represents the strength of wavelengths of different scales in the image. 
+Let's do it:</p>
+<pre>
+  pdl&gt; use PDL::FFT; # Load Fast Fourier Transform package
+  pdl&gt; $gal = rfits &quot;fixed_gal.fits&quot;;</pre>
+<p>Now <code>$gal</code> contains real values, to do the Fourier transform it has to
+have complex values. We create a variable <code>$imag</code> to hold the imaginary
+component and set to zero.(For reasons of efficiency complex numbers
+are represented in PDL by separate real and imaginary arrays - more about this
+in Chapter 2.)</p>
+<pre>
+  pdl&gt; $imag = $gal * 0;       # Create imaginary component, equal to zero
+  pdl&gt; fftnd $gal, $imag;      # Perform Fourier transform</pre>
+<p><code>fftnd</code> performs a Fast Fourier Transform, in-place, on arbitrary-dimensioned data (i.e.
+it is 'N-dimensional').  You can display <code>$gal</code>  after the FFT but you won't see
+much. If at this point we ran <code>ifftnd</code> to invert it we would get the original
+<code>$gal</code>  back.</p>
+<p>If we want to enhance the large-scale structure we want to make a filter to only
+let through low-frequencies:</p>
+<pre>
+  pdl&gt; $tmp = rvals($gal)&lt;10;        # Radially-symmetric filter function
+  pdl&gt; use PDL::ImageND;             # provides kernctr()
+  pdl&gt; $filter = kernctr $tmp, $tmp; # Shift origin to 0,0
+  pdl&gt; imag $filter;</pre>
+
+<table>
+	<caption align="bottom"> Figure: The result of <code>kernctr()</code> </caption>
+	<tr> <td> <img WIDTH=300 src="images/sepia-small/gal-filter.png"> </td> </tr>
+</table>
+
+<p>You can see from the image that <code>$filter</code> is zero everywhere except near the origin <code>(0,0)</code> (and the 3 reflected corners).  As a result it only lets through low-frequency wavelengths. So we multiply by the filter and  FFT back to see the result (<code>cmul</code> is complex multiplication):</p>
+
+<pre>
+  pdl&gt; ($gal2, $imag2) = cmul $gal, $imag, $filter, 0;
+  pdl&gt; ifftnd $gal2, $imag2;
+  pdl&gt; imag $gal2,0,300;</pre>
+
+
+<table>
+	<caption align="bottom">Figure: Fourier filtered smoothed image
+		and contrast enhanced image with the smoothed image subtracted. </caption>
+	<tr>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-ffta.png"> </td>
+		<td> <img WIDTH=300 src="images/sepia-small/whirl-fftb.png"> </td>
+	</tr>
+</table>
+
+
+<p>Well that looks quite a bit different!  Just about all the
+high-frequency information has vanished. To see the high-frequency
+information we can just subtract our filtered image from the original to
+form the right hand image.</p>
+
+<pre>
+  pdl&gt; $orig = rfits &quot;fixed_gal.fits&quot;;
+  pdl&gt; imag $orig-$gal2,0,100;</pre>
+<p>
+</p>
+<h2><a name="roundoff">Roundoff</a></h2>
+<p>Well that is probably enough abuse of Messier 51. We have demonstrated the ease
+of simple and complex data processing with PDL and how PDL fits neatly in to
+the Perl syntax as well as extending it.  You have come across basic
+arithmetical operations and a scattering of useful functions - and learned how
+to find more.  You certainly ought now to have a good feel of what PDL is all
+about.  In the next chapter we'll take a more comprehensive look at the basic
+parts of PDL that all keen PDL users should know.</p>
+
+<h3><a name="pdlbook">Where to Read More</a></h3>
+<p> We hope this excerpt from the
+<a href="http://sourceforge.net/projects/pdl/files/PDL_2013/PDL-Book/">PDL Book</a>
+has given you a taste of what PDL is capable of.  Please download the full text to
+find out more.</p>
+
+<p>As always your one-stop-shop for all things PDL is at
+<a href="http://pdl.perl.org">http://pdl.perl.org</a>.</p>
+
+</body>
+
+</html>

@@ -21,7 +21,7 @@ function transformLinks () {
     if (param_page === 'home' || ( !param_page && !param_docs && !param_search )) {
       $(this).addClass("selected");
     }
-    $(this).html("<a href='?page=home'>" + title + "</a>");
+    $(this).html('<a href="?page=home">' + title + '</a>');
   });
 
   $('li.wikiLink').each(function (index) {
@@ -31,7 +31,7 @@ function transformLinks () {
     query = query ? "?" + query : "";
 
     var title = $(this).attr('title');
-    $(this).html("<a href=" + wiki_url + query + ">" + title + "</a>");
+    $(this).html('<a href="' + wiki_url + query + '">' + title + '</a>');
   });
 
   $('li.pageLink').each(function (index) {
@@ -42,7 +42,7 @@ function transformLinks () {
       $(this).addClass("selected");
     }
     var title = $(this).attr('title');
-    $(this).html("<a href='?page=" + page + "'>" + title + "</a>");
+    $(this).html('<a href="?page=' + page + '">' + title + '</a>');
   });
 
   $('li.docsLink').each(function (index) {
@@ -65,7 +65,7 @@ function docLink (doc, pageTitle, linkTitle) {
   if ( ! pageTitle ) {
     pageTitle = linkTitle;
   }
-  return "<a href='?docs=" + doc + "&amp;title=" + pageTitle + "'>" + linkTitle + "</a>"
+  return '<a href="?docs=' + doc + '&title=' + pageTitle + '">' + linkTitle + '</a>'
 }
 
 function searchSuccess (data) {
@@ -140,8 +140,8 @@ function loadPod (module) {
 
     // by using parseHTML we remove script tags
     var pod = $($.parseHTML(
-      "<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>"
-      + "<h1 class='title'>" + param_title + "</h1><div class='pod'>" + data + "</div>"
+      '<b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>'
+      + '<h1 class="title">' + param_title + '</h1><div class="pod">' + data + '</div>'
     ));
 
     // change pod links
@@ -164,6 +164,8 @@ function loadPod (module) {
 
     $('#main').html(pod);
     $('div.pod').after('<h2>Thanks</h2><p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>');
+
+    loadMathJax();
   });
 }
 
@@ -173,6 +175,13 @@ function setBannerImages () {
     + '<img src="images/banners/pos-2-opt-' + getRandomInt(0,2) + '.jpg" alt="Banner image2" height="79px" width="93px"/>'
     + '<img src="images/banners/pos-4-opt-' + getRandomInt(0,1) + '.jpg" alt="Banner image3" height="79px" width="110px" style="margin-left: 25px"/>'
   );
+}
+
+function loadMathJax () {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 $(function () {

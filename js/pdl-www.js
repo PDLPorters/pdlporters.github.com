@@ -144,11 +144,19 @@ function loadPod (module) {
     // change pod links
     pod.find('a[href*="metacpan.org"]').each(function(index){
       var url = $(this).url(true);
+
       if ( ! url.segment(-2) === 'module' ) {
         return
       } 
       var name = url.segment(-1);
-      $(this).attr( 'href', '?docs=' + name + '&amp;title=' + name );
+      var target = '?docs=' + name + '&amp;title=' + name;
+
+      var frag = url.attr('fragment');
+      if ( frag ) {
+        target += '#' + frag;
+      }
+
+      $(this).attr( 'href', target );
     });
 
     $('#main').html(pod);

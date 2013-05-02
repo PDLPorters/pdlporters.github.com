@@ -54,10 +54,10 @@ function docsLink($page, $linkTitle, $pageTitle) {
   <div class="ul">
   <ul>
     <?= pageLink('develop', 'Get Started') ?>
-    <li><a href="http://pdl.git.sourceforge.net/">Browse Git</a></li>
-    <? $tracker = "http://sourceforge.net/tracker/?func=browse&amp;group_id=612" ?>
-    <li><a href="<?= $tracker ?>&amp;atid=100612&amp;status=1">Bugs</a></li>
-    <li><a href="<?= $tracker ?>&amp;atid=300612&amp;status=1">Patches</a></li>
+    <li><a href="https://sourceforge.net/p/pdl/_list/git/">Browse Git</a></li>
+    <? $tracker = "http://sourceforge.net/p/pdl/" ?>
+    <li><a href="<?= $tracker ?>bugs/">Bugs</a></li>
+    <li><a href="<?= $tracker ?>patches">Patches</a></li>
     <?= pageLink('credits', 'Credits') ?>
   </ul>
   </div>

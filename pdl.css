@@ -243,10 +243,11 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 }
 
 .news dd {
-   margin-left:7em;
+   margin-left:2em;
+   padding-bottom:0.75em;
 }
 
 .news dt,dd {
-   padding-bottom: 0.75em;
+//   padding-bottom: 0.75em;
 }
 

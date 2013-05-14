@@ -7,9 +7,30 @@ function formatDocs($filename, $title='') {
 	$content = preg_replace('/<a href="([\/\w]+)\.html(\#?\w*)">([^<]+)<\/a>/',
 							'<a href="?docs=$1&amp;title=$3$2">$3</a>', $content);
 	
+	$content = preg_replace('/<a href="(PP-Inline)\.html(\#?\w*)">([^<]+)<\/a>/',
+				'<a href="?docs=$1&amp;title=$3$2">$3</a>',$content);
+
+	// External modules -- link to search.cpan.org: they WILL have it!
+	// Note that this is not perfect.  There's some complication because we don't know how many / to replace with ::. My REGEX-fu is probably not up to snuff.
+	// It assumes that starting the URL with ../ means that it is out of the PDL namespace, and therefore an external module.  But if the current doc is (say) PDL::IO::FITS and we want to link to PDL::Core, then there will be some leading ../ but still within the namespace.  There's only so much DAL can do with PHP--I think the problem is with pod2html, honestly.  Anyway, it's no worse than the previous solution (kept, but commented, below). Note that this way there is no way to specifically go to any anchored section on the page, because of the CPAN redirect, so we just drop it. Ultimately we should just link to metacpan, but they have no docs for modules that come from .pd files, so we're stuck for now.
+	if (preg_match_all('/<a href="..\/([\/\w]+)\.html(\#?\w*)">/',$content,$matches,PREG_SET_ORDER)) {
+	  //	  print "<pre>I matched " . count($matches) . " times!\n";
+	  for ($i=0; $i<count($matches);$i++){
+	    $string = $matches[$i][1];
+	    $pkg_delim = preg_replace('|/|','::',$string);
+	    //print "replacing $string with $pkg_delim\n";
+	    $content = preg_replace("|<a href=\"..\/($string)\.html(\#?\w*)\">([^<]+)<\/a>|",
+			 "<a href=\"http://search.cpan.org/perldoc?$pkg_delim\">$3</a>",$content);
+	  }
+	} //else {
+	  //print "I didn't match!\n";
+	//}
+	//print "</pre>";
+
+	// This was the original version, which was also not perfect.
 	// External modules -- link to perldoc.perl.org and hope they have it.
-	$content = preg_replace('/<a href="..\/([\/\w]+)\.html(\#?\w*)">/',
-							'<a href="http://perldoc.perl.org/$1.html$2">', $content);
+	//	$content = preg_replace('/<a href="..\/([\/\w]+)\.html(\#?\w*)">/',
+		//		'<a href="http://perldoc.perl.org/$1.html$2">', $content);
 	
 	// Remove body tags.
 	$content = preg_replace('/^.*<body[^>]*>/', '', $content);

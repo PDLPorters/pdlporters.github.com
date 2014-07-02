@@ -1,5 +1,5 @@
 <?
-$wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
+$wiki_url = "http://sourceforge.net/p/pdl/wiki/";
 
 function homeLink($linkTitle) {
 	$class = ($_GET['page'] == 'home' || ($_GET['page'] == '' && $_GET['docs'] == ''))
@@ -8,11 +8,11 @@ function homeLink($linkTitle) {
 }
 function pageLink($page, $linkTitle) {
 	$class = $page == $_GET['page'] ? 'class="selected"' : '';
-	return "<li $class><a href='?page=$page'>$linkTitle</a></li>";
+	return "<li $class><a href='?page=$page'>$linkTitle</a></li>\n";
 }
 function docsLink($page, $linkTitle, $pageTitle) {
 	$class = $page == $_GET['docs'] ? 'class="selected"' : '';
-	return "<li $class><a href='?docs=$page&amp;title=$pageTitle'>$linkTitle</a></li>";
+	return "<li $class><a href='?docs=$page&amp;title=$pageTitle'>$linkTitle</a></li>\n";
 }
 ?>
 
@@ -44,9 +44,9 @@ function docsLink($page, $linkTitle, $pageTitle) {
   <div class="ul">
   <ul>
     <?= pageLink('demos/index', 'Demos') ?>
-    <li><a href="<?= $wiki_url ?>?title=Colloquia">Presentations</a></li>
+    <li><a href="<?= $wiki_url ?>Colloquia">Presentations</a></li>
     <li><a href="<?= $wiki_url ?>">PDL Wiki</a></li>
-    <li><a href="<?= $wiki_url ?>?title=Libraries">External Libs</a></li>
+    <li><a href="<?= $wiki_url ?>Libraries">External Libs</a></li>
   </ul>
   </div>
     

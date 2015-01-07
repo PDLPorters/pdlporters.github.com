@@ -12,62 +12,6 @@ var param_docs = $.url().param('docs');
 var param_title = $.url().param('title');
 var param_search = $.url().param('search');
 
-function transformLinks () {
-  var wiki_url = "http://sourceforge.net/apps/mediawiki/pdl/index.php";
-
-  $('li.homeLink').each(function (index) {
-    var title = $(this).attr('title');
-
-    if (param_page === 'home' || ( !param_page && !param_docs && !param_search )) {
-      $(this).addClass("selected");
-    }
-    $(this).html('<a href="?page=home">' + title + '</a>');
-  });
-
-  $('li.wikiLink').each(function (index) {
-    var title = $(this).attr('title');
-    var query = $(this).attr('query');
-
-    query = query ? "?" + query : "";
-
-    var title = $(this).attr('title');
-    $(this).html('<a href="' + wiki_url + query + '">' + title + '</a>');
-  });
-
-  $('li.pageLink').each(function (index) {
-    var title = $(this).attr('title');
-    var page = $(this).attr('page');
-
-    if (page === param_page) {
-      $(this).addClass("selected");
-    }
-    var title = $(this).attr('title');
-    $(this).html('<a href="?page=' + page + '">' + title + '</a>');
-  });
-
-  $('li.docsLink').each(function (index) {
-    var pageTitle = $(this).attr('pageTitle');
-    var linkTitle = $(this).attr('linkTitle');
-    var docs = $(this).attr('docs');
-
-    if (docs === param_docs) {
-      $(this).addClass("selected");
-    }
-    var title = $(this).attr('title');
-    $(this).html( docLink(docs, pageTitle, linkTitle) );
-  });
-}
-
-function docLink (doc, pageTitle, linkTitle) {
-  if ( ! linkTitle ) {
-    linkTitle = doc;
-  }
-  if ( ! pageTitle ) {
-    pageTitle = linkTitle;
-  }
-  return '<a href="?docs=' + doc + '&title=' + pageTitle + '">' + linkTitle + '</a>'
-}
-
 function searchSuccess (data) {
   var max_score = data.hits.max_score;
   var hits = data.hits.hits;
@@ -186,6 +130,6 @@ function loadMathJax () {
 
 $(function () {
   setBannerImages();
-  $('#sidebar').load("content/sidebar.html", function () { transformLinks() } );
+  $('#sidebar').load("content/sidebar.html");
   loadMain();
 });

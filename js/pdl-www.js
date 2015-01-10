@@ -1,5 +1,30 @@
 // requires jQuery, URI.js and rivets
 
+function loadMain () {
+  setBannerImages();
+
+  // load sidebar content, it populates a sidebar variable
+  $.getScript(
+    'content/sidebar.js',
+    function(){ rivets.bind($('#sidebar'), {sections: sidebar}) }
+  );
+
+  // the "router"
+  var search = q('search');
+  if (search) {
+    return doSearch(search);
+  }
+
+  var docs = q('docs');
+  if (docs) {
+    return loadPod(docs);
+  }
+
+  var page = q('page') || 'home';
+  $('#main').load("content/" + page + ".html");
+}
+$(loadMain);
+
 function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -94,21 +119,6 @@ function doSearch (query) {
   }).error( function() { console.log("Error attempting to search metacpan") } );
 }
 
-function loadMain () {
-  var page = q('page');
-  var docs = q('docs');
-  var search = q('search');
-  if (search) {
-    doSearch(search);
-  } else if (page) {
-    $('#main').load("content/" + page + ".html");
-  } else if (docs) {
-    loadPod(docs);
-  } else {
-    $('#main').load("content/home.html");
-  }
-}
-
 function loadPod (module) {
   /*$('#main').html(
     '<p>Loading documentation for ' + module
@@ -165,12 +175,3 @@ function loadMathJax () {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-$(function () {
-  setBannerImages();
-  // load sidebar content, it populates a sidebar variable
-  $.getScript(
-    'content/sidebar.js',
-    function(){ rivets.bind($('#sidebar'), {sections: sidebar}) }
-  );
-  loadMain();
-});

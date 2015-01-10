@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head profile="http://www.w3.org/2005/10/profile">
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>Perl Data Language</title>
-    <link rel="shortcut icon" href="images/favicon.ico"
-    	  type="image/vnd.microsoft.icon"  />
-    <link rel="stylesheet" type="text/css"
-          href="http://www.google.com/cse/style/look/espresso.css" />
-    <link rel='stylesheet' type='text/css' href='google-search.css' />
-    <link rel="stylesheet" type="text/css" 
-          href="css/jquery-ui-1.8.2.custom.css" />	
-    <link rel='stylesheet' type='text/css' href='pdl.css' />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.7.1/rivets.bundled.min.js"></script>
-<script type="text/javascript" src="js/purl.js"></script>
-<script type="text/javascript" src="js/pdl-www.js"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-17388934-1']);
-  _gaq.push(['_trackPageview']);
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perl Data Language</title>
 
-  (function() {
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" type="text/css" href="http://www.google.com/cse/style/look/espresso.css" />
+  <link rel='stylesheet' type='text/css' href='google-search.css' />
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.2.custom.css" />
+  <link rel='stylesheet' type='text/css' href='pdl.css' />
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.7.1/rivets.bundled.min.js"></script>
+  <script type="text/javascript" src="js/purl.js"></script>
+  <script type="text/javascript" src="js/pdl-www.js"></script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-17388934-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </head>
 <body>
- 
-  <!-- BANNER --> 
+
+  <!-- BANNER -->
   <div class="banner">
     <a href="/">
       <img src="images/icons/pdl.png" alt="PDL" height="79px" width="146px"/>
@@ -41,12 +40,12 @@
     <div id="banner-images"></div>
     <!-- <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">Loading</div> -->
     <div id="cse-search-form" style="position: absolute; top: 20px; left: 700px">
-      <form action="/"> 
+      <form action="/">
         <input type="text" name="search" placeholder="Documentation Search">
         <input type="submit" value="search">
       </form>
     </div>
-  </div> 
+  </div>
   <!-- END BANNER -->
 
   <!-- SIDE BAR -->
@@ -54,7 +53,7 @@
     <div class="sidebar" id="sidebar"></div>
   </div>
   <!-- END SIDE BAR -->
-  
+
   <!-- GOOGLE SEARCH -->
   <!--
   <table id="cse-container">

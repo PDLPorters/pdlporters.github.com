@@ -59,7 +59,7 @@ function searchSuccess (data) {
     }
     var name = fields.documentation || fields.module[0].name;
     html += '<p>(' + fracToPercent( item._score / max_score ) + ') '
-         + docLink( name ) + ' - ' + item.fields.abstract + '</p>';
+         + '<a href="?docs=' + name + '">' + name + '</a>' + ' - ' + item.fields.abstract + '</p>';
   });
   $('#main').html( html );
 }

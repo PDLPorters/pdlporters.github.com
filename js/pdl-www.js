@@ -1,4 +1,4 @@
-// needs jQuery and purl.js
+// requires jQuery, purl.js and rivets
 
 function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

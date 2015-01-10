@@ -1,4 +1,4 @@
-// requires jQuery, purl.js and rivets
+// requires jQuery, URI.js and rivets
 
 function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -7,12 +7,7 @@ function fracToPercent (frac) {
   return Math.floor( 100 * frac ) + "%";
 }
 
-var param_page = $.url().param('page');
-var param_docs = $.url().param('docs');
-var param_title = $.url().param('title');
-var param_search = $.url().param('search');
-
-function q(query) { return $.url().param(query) }
+function q(query) { return (new URI()).query(true)[query] }
 
 var HomeLink = function() {
   this.href  = '?page=home';
@@ -100,12 +95,15 @@ function doSearch (query) {
 }
 
 function loadMain () {
-  if (param_search) {
-    doSearch(param_search);
-  } else if (param_page) {
-    $('#main').load("content/" + param_page + ".html");
-  } else if (param_docs) {
-    loadPod(param_docs);
+  var page = q('page');
+  var docs = q('docs');
+  var search = q('search');
+  if (search) {
+    doSearch(search);
+  } else if (page) {
+    $('#main').load("content/" + page + ".html");
+  } else if (docs) {
+    loadPod(docs);
   } else {
     $('#main').load("content/home.html");
   }
@@ -116,26 +114,33 @@ function loadPod (module) {
     '<p>Loading documentation for ' + module
     + ' from <a href="http://metacpan.org">MetaCPAN</a></p>'
   );*/
+  var title = q('title');
   $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
-    if (! param_title) {
-      param_title = module;
+    if (! title) {
+      title = module;
     }
 
     // by using parseHTML we remove script tags
     var pod = $($.parseHTML(
       '<b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>'
-      + '<h1 class="title">' + param_title + '</h1><div class="pod">' + data + '</div>'
+      + '<h1 class="title">' + title + '</h1><div class="pod">' + data + '</div>'
     ));
 
     // change pod links
-    pod.find('a[href*="metacpan.org"]').each(function(index){
-      var url = $(this).url(true);
+    pod.find('a:uri(domain = metacpan.org):uri(directory *= /pod/)').each(function(index){
+      var url = $(this).uri();
+      var target = new URI();
+      target.fragment(''); // clear any existing fragment
 
-      if ( ! url.segment(-2) === 'module' ) {
-        return
+      var name = url.filename();
+      target.query({docs:name, title:name});
+
+      var frag = url.fragment();
+      if ( frag ) {
+        target.fragment(frag);
       }
-      var name = url.segment(-1);
-      $(this).attr( 'href', '?docs=' + name + '&title=' + name );
+
+      $(this).uri(target);
     });
 
     $('#main').html(pod);

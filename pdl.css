@@ -1,6 +1,6 @@
 /* * * * * * * * * * * * * * * *
  *   CSS for PDL Website.
- * 
+ *
  */
 
 /*
@@ -12,9 +12,9 @@
  *  GENERAL
  */
 body {
-	font-family: verdana, arial, sans-serif;
-	padding: 0;
-	margin: 0;
+  font-family: verdana, arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 img { border: none; }
 dt { font-weight: bold; }
@@ -22,31 +22,31 @@ td { vertical-align: top; }
 em { color: #347; }
 
 a {
-	color: blue;
-	text-decoration: none;
+  color: blue;
+  text-decoration: none;
 }
 a:visited { color: blue; }
 a.clickable {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 
 /* Code samples. */
 tt {
-	font-weight: bold;
-	font-size: 110%;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+  font-weight: bold;
+  font-size: 110%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 pre {
-	width: 50%;
-	padding: 1em;
-	display: table;
-	border: 2px solid #999;
+  width: 50%;
+  padding: 1em;
+  display: table;
+  border: 2px solid #999;
 }
 tt, pre {
-	color: #347;
-	background: #cde;
+  color: #347;
+  background: #cde;
 }
 
 
@@ -54,34 +54,34 @@ tt, pre {
  *  BANNER
  */
 div.banner {
-	width: 100%;
-	height: 79px;
-	background-repeat: no-repeat;
-	border-bottom: 3px solid #ccc;
+  width: 100%;
+  height: 79px;
+  background-repeat: no-repeat;
+  border-bottom: 3px solid #ccc;
 }
 
 .banner .rotation {
-	display: inline;
-	position: absolute;
-	top: 0px;
+  display: inline;
+  position: absolute;
+  top: 0px;
 }
 
 /*
  *  HEADINGS
  */
 h1.title, h2.subtitle {
-	margin-top: 0;
-	padding-top: 0;
-	text-align: center;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
 }
 h1 {
-	font-size: 200%;
-	padding-bottom: 0;
-	margin-bottom: 0;
+  font-size: 200%;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 h2 {
-	font-size: 130%;
-	font-style: italic;
+  font-size: 130%;
+  font-style: italic;
 }
 
 h1, h2, h3, h4 { color: #347 }
@@ -91,19 +91,19 @@ h1, h2, h3, h4 { color: #347 }
  *  POD DOCUMENTATION
  */
 .pod h1, .pod h2, .pod .index a {
-	/* text-transform: lowercase; */
-	/* text-transform: capitalize; */
+  /* text-transform: lowercase; */
+  /* text-transform: capitalize; */
 }
 .pod h1 {
-	font-size: 120%;
-	font-style: italic;
+  font-size: 120%;
+  font-style: italic;
 }
 .pod h2 {
-	font-size: 100%;
+  font-size: 100%;
 }
 .pod p {
-	padding-top: 0;
-	margin-top: 10px;
+  padding-top: 0;
+  margin-top: 10px;
 }
 
 
@@ -112,10 +112,10 @@ h1, h2, h3, h4 { color: #347 }
  */
 
 .icons td {
-	padding-left: 2em;
-	padding-right: 2em;
-	text-align: center;
-	vertical-align: middle;
+  padding-left: 2em;
+  padding-right: 2em;
+  text-align: center;
+  vertical-align: middle;
 }
 
 /*
@@ -123,73 +123,65 @@ h1, h2, h3, h4 { color: #347 }
  */
 
 .note {
-	background: #ff7;
-	border: 1px solid blue;
-	padding: 1em;
-	margin-left: 10em;
-	margin-right: 10em;
+  background: #ff7;
+  border: 1px solid blue;
+  padding: 1em;
+  margin-left: 10em;
+  margin-right: 10em;
 }
 
 /*
  *  SIDEBAR
  */
 .sidebar {
-	float: left;
-	width: 160px;
-	margin: 10px;
-	padding: 10px;
+  float: left;
+  width: 160px;
+  margin: 10px;
+  padding: 10px;
 }
 
 /* Sidebar heading with rounded corners. */
 .sidebar h3 {
-	margin: 0;
-	padding: 0;
-	color: white;
-	font-size: 90%;
-	text-align: center;
-	font-weight: normal;
-}
-.sidebar h3 {
-	background: url("images/corners/top-left.png") no-repeat left top;
-}
-.sidebar div.h3 {
-	background: #347 url("images/corners/top-right.png") no-repeat right top;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 90%;
+  text-align: center;
+  font-weight: normal;
+  background: #347;
+  border-radius: 15px 15px 0 0;
 }
 
 /* Sidebar body with rounded corners. */
 .sidebar ul {
-	font-size: 80%;
-	margin-top: 0px;
-	margin-left: 0px;
-	padding-top: 10px;
-	padding-left: 0px;
-	padding-bottom: 5px;
-	list-style-type: none;
+  font-size: 80%;
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-bottom: 5px;
+  list-style-type: none;
+  background: #cde;
+  border-radius: 0 0 15px 15px;
 }
 .sidebar li {
-	margin-left: 0px;
-	padding-left: 30px;
+  margin-left: 0px;
+  padding-left: 30px;
 }
-
 .sidebar a {
-	width: 100%;
-	display: block;
-}
-div.sidebar ul li:hover, div.sidebar ul li.selected {
-	color: white !important;
-	background: #555;
-}
-div.sidebar ul li:hover a, div.sidebar ul li.selected a {
-	color: white !important;
+  width: 100%;
+  display: block;
 }
 
-.sidebar ul {
-	background: url("images/corners/btm-right.png") no-repeat right bottom;
+/* sidebar hover behavior */
+.sidebar ul li:hover, div.sidebar ul li.selected {
+  color: white !important;
+  background: #555;
+}
+.sidebar ul li:hover a, div.sidebar ul li.selected a {
+  color: white !important;
 }
 
-.sidebar div.ul {
-	background: #cde  url("images/corners/btm-left.png") no-repeat left bottom;
-}
 
 
 
@@ -197,9 +189,9 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
  *  MAIN CONTENT
  */
 .main {
-	margin-left: 25px;
-	margin-right: 25px;
-	text-align: justify;
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: justify;
 }
 
 .main ul, .main ol, .main dl { display: table }
@@ -211,14 +203,14 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 
 .slideshow img.border { border: 2px solid #555 }
 .slideshow-container {
-	float: left;
-	margin-top: 0px;
-	margin-right: 20px;
-	margin-bottom: 20px;
+  float: left;
+  margin-top: 0px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 .slideshow-container center {
-	color: blue;
-	cursor: pointer;
+  color: blue;
+  cursor: pointer;
 }
 
 /*

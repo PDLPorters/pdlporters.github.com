@@ -115,43 +115,34 @@ function doSearch (query) {
   }).error( function() { console.log("Error attempting to search metacpan") } );
 }
 
-function loadPod (module) {
-  /*$('#main').html(
-    '<p>Loading documentation for ' + module
-    + ' from <a href="http://metacpan.org">MetaCPAN</a></p>'
-  );*/
-  var title = q('title');
-  $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
-    if (! title) {
-      title = module;
+rivets.formatters.transformLinks = function(input) {
+  var pod = $($.parseHTML(input));
+
+  // change pod links
+  pod.find('a:uri(domain = metacpan.org):uri(directory *= /pod/)').each(function(index){
+    var url = $(this).uri();
+    var target = new URI();
+    target.fragment(''); // clear any existing fragment
+
+    var name = url.filename();
+    target.query({docs:name, title:name});
+
+    var frag = url.fragment();
+    if ( frag ) {
+      target.fragment(frag);
     }
 
-    // by using parseHTML we remove script tags
-    var pod = $($.parseHTML(
-      '<b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>'
-      + '<h1 class="title">' + title + '</h1><div class="pod">' + data + '</div>'
-    ));
+    $(this).uri(target);
+  });
 
-    // change pod links
-    pod.find('a:uri(domain = metacpan.org):uri(directory *= /pod/)').each(function(index){
-      var url = $(this).uri();
-      var target = new URI();
-      target.fragment(''); // clear any existing fragment
+  return pod.prop('outerHTML');
+};
 
-      var name = url.filename();
-      target.query({docs:name, title:name});
-
-      var frag = url.fragment();
-      if ( frag ) {
-        target.fragment(frag);
-      }
-
-      $(this).uri(target);
-    });
-
-    $('#main').html(pod);
-    $('div.pod').after('<h2>Thanks</h2><p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>');
-
+function loadPod (module) {
+  var title = q('title');
+  $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
+    pod.title = title || module;
+    pod.pod = '<div>' + data + '</div>';
     loadMathJax();
   });
 }

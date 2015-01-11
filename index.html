@@ -67,7 +67,21 @@
   </div>
   <!-- END SIDE BAR -->
   <!-- MAIN CONTENT -->
-  <div class="main" id="main"></div>
+  <div class="main" id="main">
+
+    <div id="search" rv-show="search.total">
+      <h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>
+      <p>Found { search.total } hits</p><hr>
+      <p rv-each-result="search.results">
+        ({result.score}%) <a rv-href="result.href" rv-text="result.name"></a> - { result.abstract }
+      </p>
+    </div>
+    <script>
+      var search = {total: 0, results: []};
+      $(function(){ rivets.bind($('#search'), {search: search}) });
+    </script>
+
+  </div>
 
   <!-- END CONTENT -->
 

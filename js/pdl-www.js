@@ -28,9 +28,6 @@ $(loadMain);
 function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function fracToPercent (frac) {
-  return Math.floor( 100 * frac ) + "%";
-}
 
 function q(query) { return (new URI()).query(true)[query] }
 
@@ -75,25 +72,24 @@ function searchSuccess (data) {
   var max_score = data.hits.max_score;
   var hits = data.hits.hits;
   console.log( data );
-  var html = '<h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>'
-             + '<p>Found ' + data.hits.total + ' hits</p><hr>';
+
+  search.total = data.hits.total;
+  search.results = [];
   $.each( hits, function (index, item) {
     var fields = item.fields;
-    if ( ! fields ) {
-      return;
-    }
+    if ( ! fields ) { return }
     var name = fields.documentation || fields.module[0].name;
-    html += '<p>(' + fracToPercent( item._score / max_score ) + ') '
-         + '<a href="?docs=' + name + '">' + name + '</a> - ' + item.fields.abstract + '</p>';
+    var out  = {
+      name:  name,
+      score: Math.floor( 100 * (item._score / max_score) ),
+      href: '?docs=' + name,
+      abstract: item.fields.abstract,
+    };
+    search.results.push(out);
   });
-  $('#main').html( html );
 }
 
 function doSearch (query) {
-  /*$('#main').html(
-    '<p>Searching for ' + query
-    + ' on <a href="http://metacpan.org">MetaCPAN</a></p>'
-  );*/
   var mysearch = {
     "query" : { "filtered" : {
       "query" : {

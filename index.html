@@ -78,9 +78,20 @@
     </div>
     <script>
       var search = {total: 0, results: []};
-      $(function(){ rivets.bind($('#search'), {search: search}) });
+      $(function(){ rivets.bind($('#search'), {'search': search}) });
     </script>
 
+    <div id="pod-viewer" rv-show="pod.title">
+      <b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>
+      <h1 class="title" rv-text="pod.title"></h1>
+      <div class="pod" rv-html="pod.pod | transformLinks"></div>
+      <h2>Thanks</h2>
+      <p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>
+    </div>
+    <script>
+      var pod = {title: '', pod: ''};
+      $(function(){ rivets.bind($('#pod-viewer'), {'pod': pod}) });
+    </script>
   </div>
 
   <!-- END CONTENT -->

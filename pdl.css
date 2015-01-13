@@ -163,6 +163,7 @@ h1, h2, h3, h4 { color: #347 }
   list-style-type: none;
   background: #cde;
   border-radius: 0 0 15px 15px;
+  overflow: hidden;
 }
 .sidebar li {
   margin-left: 0px;

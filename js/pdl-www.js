@@ -108,7 +108,7 @@ function doSearch (query) {
   };
   $.ajax({
     type : "GET",
-    url : 'http://api.metacpan.org/v0/file/_search',
+    url : '//api.metacpan.org/v0/file/_search',
     data : 'source=' + JSON.stringify(mysearch),
     dataType: "jsonp",
     success : searchSuccess,
@@ -140,7 +140,7 @@ rivets.formatters.transformLinks = function(input) {
 
 function loadPod (module) {
   var title = q('title');
-  $.get('http://api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
+  $.get('//api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
     pod.title = title || module;
     pod.pod = '<div>' + data + '</div>';
     loadMathJax();
@@ -158,7 +158,7 @@ function setBannerImages () {
 function loadMathJax () {
   var script = document.createElement("script");
   script.type = "text/javascript";
-  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  script.src  = "//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 

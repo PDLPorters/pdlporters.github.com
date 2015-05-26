@@ -8,3 +8,4 @@ PDLdocsOld
 PDLdocs
 css
 *.DS_Store*
+*.sh

@@ -2,6 +2,8 @@
 function formatDocs($filename, $title='') {
 	$content = file_get_contents($filename);
 	$content = str_replace("\n",'[\n]', $content);
+
+	$escaped_title = htmlspecialchars($title);
 	
 	// Fix links to man pages.
 	$content = preg_replace('/<a href="([\/\w]+)\.html(\#?\w*)">([^<]+)<\/a>/',
@@ -41,7 +43,7 @@ function formatDocs($filename, $title='') {
 	$content = preg_replace('/\n+/', "\n", $content);
 	return  "
 	<b>See also:</b> <a href='?page=function-ref'>How do I search for a function?</a>
-	<h1 class='title'>$title</h1>
+	<h1 class='title'>$escaped_title</h1>
 	<div class='pod'>$content</div>
 	";
 }

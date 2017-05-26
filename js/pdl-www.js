@@ -12,12 +12,12 @@ function loadMain () {
   // the "router"
   var search = q('search');
   if (search) {
-    return doSearch(search);
+    return vm.$refs.search.search(search);
   }
 
   var docs = q('docs');
   if (docs) {
-    return loadPod(docs);
+    return vm.$refs.docs.load_pod_for_module(docs);
   }
 
   var page = q('page') || 'home';
@@ -68,85 +68,6 @@ var ExternalLink = function(title, link) {
   this.selected = false;
 }
 
-function searchSuccess (data) {
-  var max_score = data.hits.max_score;
-  var hits = data.hits.hits;
-  console.log( data );
-
-  search.total = data.hits.total;
-  search.results = [];
-  $.each( hits, function (index, item) {
-    var fields = item.fields;
-    if ( ! fields ) { return }
-    var name = fields.documentation || fields.module[0].name;
-    var out  = {
-      name:  name,
-      score: Math.floor( 100 * (item._score / max_score) ),
-      href: '?docs=' + name,
-      abstract: item.fields.abstract,
-    };
-    search.results.push(out);
-  });
-}
-
-function doSearch (query) {
-  var mysearch = {
-    "query" : { "filtered" : {
-      "query" : {
-        "query_string" : {
-          "query" : query,
-          "fields" : [ "pod.analyzed", "module.name" ]
-        }
-      },
-      "filter" : { "and" : [
-        { "term" : { "distribution" : "PDL" } },
-        { "term" : { "status" : "latest" } }
-      ]}
-    }},
-    "fields" : [ "documentation", "abstract", "module" ],
-    "size" : 20
-  };
-  $.ajax({
-    type : "GET",
-    url : '//api.metacpan.org/v0/file/_search',
-    data : 'source=' + JSON.stringify(mysearch),
-    dataType: "jsonp",
-    success : searchSuccess,
-  }).error( function() { console.log("Error attempting to search metacpan") } );
-}
-
-rivets.formatters.transformLinks = function(input) {
-  var pod = $($.parseHTML(input));
-
-  // change pod links
-  pod.find('a:uri(domain = metacpan.org):uri(directory *= /pod/)').each(function(index){
-    var url = $(this).uri();
-    var target = new URI();
-    target.fragment(''); // clear any existing fragment
-
-    var name = url.filename();
-    target.query({docs:name, title:name});
-
-    var frag = url.fragment();
-    if ( frag ) {
-      target.fragment(frag);
-    }
-
-    $(this).uri(target);
-  });
-
-  return pod.prop('outerHTML');
-};
-
-function loadPod (module) {
-  var title = q('title');
-  $.get('//api.metacpan.org/pod/' + module + '?content-type=text/html', function (data) {
-    pod.title = title || module;
-    pod.pod = '<div>' + data + '</div>';
-    loadMathJax();
-  });
-}
-
 function setBannerImages () {
   $('#banner-images').replaceWith(
     '<img src="images/banners/pos-1-opt-' + getRandomInt(0,2) + '.jpg" alt="Banner image1" height="79px" width="278px"/>'
@@ -155,10 +76,4 @@ function setBannerImages () {
   );
 }
 
-function loadMathJax () {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src  = "//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-  document.getElementsByTagName("head")[0].appendChild(script);
-}
 

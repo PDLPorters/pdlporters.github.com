@@ -6,7 +6,7 @@ use Cwd;
 app->static->paths->[0] = getcwd;
 
 get '/' => sub {
-  shift->render_static('index.html');
+  shift->reply->static('index.html');
 };
 
 app->start;

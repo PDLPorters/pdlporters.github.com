@@ -13,6 +13,9 @@
   <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.7.1/rivets.bundled.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.min.js"></script> -->
   <script type="text/javascript" src="js/URI.min.js"></script>
   <script type="text/javascript" src="js/jquery.URI.min.js"></script>
   <script type="text/javascript" src="js/pdl-www.js"></script>
@@ -69,32 +72,168 @@
   <!-- MAIN CONTENT -->
   <div class="main" id="main">
 
-    <div id="search" rv-show="search.total">
-      <h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>
-      <p>Found { search.total } hits</p><hr>
-      <p rv-each-result="search.results">
-        ({result.score}%) <a rv-href="result.href" rv-text="result.name"></a> - { result.abstract }
-      </p>
-    </div>
-    <script>
-      var search = {total: 0, results: []};
-      $(function(){ rivets.bind($('#search'), {'search': search}) });
-    </script>
+    <search-results ref="search"></search-results>
+    <pod-viewer ref="docs"></pod-viewer>
 
-    <div id="pod-viewer" rv-show="pod.title">
-      <b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>
-      <h1 class="title" rv-text="pod.title"></h1>
-      <div class="pod" rv-html="pod.pod | transformLinks"></div>
-      <h2>Thanks</h2>
-      <p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>
-    </div>
-    <script>
-      var pod = {title: '', pod: ''};
-      $(function(){ rivets.bind($('#pod-viewer'), {'pod': pod}) });
-    </script>
   </div>
 
   <!-- END CONTENT -->
 
+  <!-- APPLICATION -->
+  <template id="search-results-template">
+    <div id="search" v-if="results.total">
+      <h2>Search provided by <a href="http://metacpan.org">MetaCPAN</a></h2>
+      <p>Found {{ results.total }} hits</p><hr>
+      <p v-for="result in results.records">
+        <a :href="result.href">{{ result.name }}</a> - {{ result.abstract }}
+      </p>
+    </div>
+  </template>
+
+  <script>
+    Vue.component('search-results', {
+      template: '#search-results-template',
+      data: function() {
+        return {
+          raw_results: {},
+        };
+      },
+      computed: {
+        results: function() {
+          var ret = {
+            total: 0,
+            records: [],
+          };
+          var data = this.raw_results;
+
+          if ('results' in data) {
+            ret.total = data.total;
+
+            $.each( data.results, function (index, outer) {
+              var item = outer[0];
+              if ( !item ) return;
+              var name = item.documentation || item.module[0].name;
+              var out  = {
+                name:  name,
+                href: '?docs=' + name,
+                abstract: item.abstract,
+              };
+              ret.records.push(out);
+            });
+          }
+
+          return ret;
+        },
+
+      },
+      methods: {
+        search: function(query) {
+          var self = this;
+          $.ajax({
+            type : "GET",
+            url : 'https://fastapi.metacpan.org/v1/search/web',
+            data : {q: query, size: 20, collapsed: 0},
+            //dataType: "jsonp",
+            success : function(data) {
+              console.log( data );
+              self.raw_results = data;
+            },
+          }).error( function() { console.log("Error attempting to search metacpan") } );
+        }
+      }
+    });
+  </script>
+
+  <template id="pod-viewer-template">
+    <div id="pod-viewer" v-if="display_title">
+      <b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>
+      <h1 class="title">{{ display_title }}</h1>
+      <div class="pod" v-html="display_html"></div>
+      <h2>Thanks</h2>
+      <p>This documentation was obtained via <a href="http://metacpan.org">MetaCPAN</a></p>
+    </div>
+  </template>
+
+  <script>
+    Vue.component('pod-viewer', {
+      template: '#pod-viewer-template',
+      props: {
+        title: {
+          type: String,
+          default: '',
+        },
+        module: {
+          type: String,
+          default: '',
+        },
+      },
+      data: function() {
+        return {
+          current_module: '',
+          pod: '',
+        };
+      },
+      computed: {
+        display_title: function() {
+          return this.title || this.current_module;
+        },
+        display_html: function () {
+          var input = this.pod;
+          if (!input) return '';
+
+          var pod = $($.parseHTML(input));
+
+          // change pod links
+          pod.find('a:uri(domain = metacpan.org):uri(directory *= /pod/)').each(function(index){
+            var url = $(this).uri();
+            var target = new URI();
+            target.fragment(''); // clear any existing fragment
+
+            var name = url.filename();
+            target.query({docs:name, title:name});
+
+            var frag = url.fragment();
+            if ( frag ) {
+              target.fragment(frag);
+            }
+
+            $(this).uri(target);
+          });
+
+          return pod.prop('outerHTML');
+
+        },
+      },
+      methods: {
+        load_pod_for_module: function (module) {
+          module = module || this.module || this.current_module;
+          this.current_module = module;
+          var self = this;
+          $.get('https://fastapi.metacpan.org/v1/pod/' + module + '?content-type=text/html', function (data) {
+            self.pod = '<div>' + data + '</div>';
+            self.render_math();
+          });
+        },
+
+        render_math: function () {
+          if ('MathJax' in window) {
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+            return;
+          }
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src  = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+          document.getElementsByTagName("head")[0].appendChild(script);
+        },
+      },
+    });
+
+    var vm = new Vue({
+      el: '#main',
+      data: {
+        query: (new URI).query(true),
+      },
+    });
+  </script>
 </body>
 </html>

@@ -98,8 +98,7 @@
   <!-- MAIN CONTENT -->
   <div class="main" id="main">
 
-    <search-results ref="search"></search-results>
-    <pod-viewer ref="docs"></pod-viewer>
+    <app-body :params="params"></app-body>
 
   </div>
 
@@ -119,6 +118,12 @@
   <script>
     Vue.component('search-results', {
       template: '#search-results-template',
+      props: {
+        query: {
+          type: String,
+          required: false,
+        },
+      },
       data: function() {
         return {
           raw_results: {},
@@ -155,6 +160,9 @@
       methods: {
         search: function(query) {
           var self = this;
+          self.raw_results = {};
+          query = query || this.query;
+          if (!query) return;
           $.ajax({
             type : "GET",
             url : 'https://fastapi.metacpan.org/v1/search/web',
@@ -166,12 +174,14 @@
             },
           }).error( function() { console.log("Error attempting to search metacpan") } );
         }
-      }
+      },
+      mounted: function() { this.search() },
+      watch: { query: 'search' },
     });
   </script>
 
   <template id="pod-viewer-template">
-    <div id="pod-viewer" v-if="display_title">
+    <div id="pod-viewer">
       <b>See also:</b> <a href="?page=function-ref">How do I search for a function?</a>
       <h1 class="title">{{ display_title }}</h1>
       <div class="pod" v-html="display_html"></div>
@@ -252,12 +262,65 @@
           document.getElementsByTagName("head")[0].appendChild(script);
         },
       },
+      mounted: function() { this.load_pod_for_module() },
+      watch: { module: 'load_pod_for_module' },
+    });
+
+    Vue.component('page-container', {
+      template: '<div id="page"></div>',
+      props: {
+        page: {
+          type: String,
+          required: true,
+        },
+      },
+      methods: {
+        load: function () {
+          // this cheats because it has to evaluate scripts in the loaded file
+          $('#page').load('content/' + this.page + '.html');
+        },
+      },
+      mounted: function() { this.load() },
+      watch: { page: 'load' },
+    });
+
+    Vue.component('app-body', {
+      props: {
+        params: {
+          type: Object,
+          required: true,
+        },
+      },
+      render: function (h) {
+        // the "router"
+        var query = this.params['search'];
+        if (query) {
+          return h('search-results', { props: { query: query } });
+        }
+
+        var module = this.params['docs'];
+        if (module) {
+          return h('pod-viewer', {
+            props: {
+              module: module,
+              title: this.params['title'] || '',
+            },
+          });
+        }
+
+        var page = this.params['page'] || 'home';
+        if (page) {
+          return h('page-container', { props: { page: page } });
+        }
+
+        return h('p', 'Page not understood');
+      },
     });
 
     var vm = new Vue({
       el: '#main',
       data: {
-        query: (new URI).query(true),
+        params: (new URI).query(true),
       },
     });
   </script>

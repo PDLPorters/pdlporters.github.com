@@ -9,19 +9,6 @@ function loadMain () {
     function(){ rivets.bind($('#sidebar'), {sections: sidebar}) }
   );
 
-  // the "router"
-  var search = q('search');
-  if (search) {
-    return vm.$refs.search.search(search);
-  }
-
-  var docs = q('docs');
-  if (docs) {
-    return vm.$refs.docs.load_pod_for_module(docs);
-  }
-
-  var page = q('page') || 'home';
-  $('#main').load("content/" + page + ".html");
 }
 $(loadMain);
 

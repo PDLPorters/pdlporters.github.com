@@ -291,26 +291,26 @@
           required: true,
         },
       },
-      render: function (h) {
+      computed: {
         // the "router"
-        var query = this.params['search'];
-        if (query) {
-          return h('search-results', { props: { query: query } });
-        }
-
-        var module = this.params['docs'];
-        if (module) {
-          return h('pod-viewer', {
-            props: {
-              module: module,
-              title: this.params['title'] || '',
-            },
-          });
-        }
-
-        var page = this.params['page'] || 'home';
-        if (page) {
-          return h('page-container', { props: { page: page } });
+        page_type: function() {
+          if (this.params.search) return 'search';
+          if (this.params.docs)   return 'docs';
+          if (!this.params.page)  this.params.page = 'home';
+          return 'page';
+        },
+      },
+      render: function (h) {
+        // render the "route"
+        if (this.page_type == 'search') {
+          return h('search-results', { props: { query: this.params.search } });
+        } else if (this.page_type == 'docs') {
+          return h('pod-viewer', { props: {
+            module: this.params.docs,
+            title: this.params.title || '',
+          }});
+        } else if (this.page_type == 'page') {
+          return h('page-container', { props: { page: this.params.page } });
         }
 
         return h('p', 'Page not understood');

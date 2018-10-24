@@ -4,17 +4,13 @@
   <tbody>
     <tr>
       <td>
-      	<a href="#bug"><img src="images/icons/bug.png"/></a>
+	<a href="#bug"><img src="images/icons/bug.png" alt="A bug"/></a>
       </td>
       <td>
-      	<a href="#bug"><img src="images/icons/bulb.png"/></a>
+	<a href="#bug"><img src="images/icons/bulb.png" alt="A light bulb" /></a>
       </td>
       <td>
-      	<a href="#devel">
-      	<img width="100px" src="images/icons/git.png"/><br/>
-        <img width="45px" src="images/icons/mercurial.png"/>
-        <img width="45px" src="images/icons/bazaar.png"/>
-      	</a>
+	<a href="#devel"><img src="images/icons/git.png" alt="Git icon"/></a>
       </td>
     </tr>
     <tr>
@@ -30,299 +26,57 @@
     </tr>
   </tbody>
 </table>
-</center>
 
 <h2 id="bug">Report a bug</h2>
 
-<p>To report a bug, first <a href="https://sourceforge.net/account/login.php">
-login to SourceForge</a> (or register an account) and then go to the
-<a href="http://sourceforge.net/p/pdl/bugs/">bugs database</a>.</p>
+<p>To report a bug, open a "New issue" on <a href="https://github.com/PDLPorters/pdl/issues">PDL's GitHub page</a>.  You may have to sign in or sign up for a GitHub account before reporting a new bug.</p>
 
 
 <h2 id="feature">Request a feature</h2>
 
-<p>To request a feature, first <a href="https://sourceforge.net/account/login.php">
-login to SourceForge</a> (or register an account) and then go to the
-<a href="http://sourceforge.net/p/pdl/feature-requests/">feaure request
-tracker</a> and click on "Create Ticket".</p>
+<p>To request a feature, open a "New issue" on <a href="https://github.com/PDLPorters/pdl/issues">PDL's GitHub page</a>.  You may have to sign in or sign up for a GitHub account before requesting a new feature.</p>
 
 
 <h2 id="devel">Help with development</h2>
 
-<p>PDL's source code is stored in a <a href="http://git-scm.com/">Git</a>
-repository, but you can also use <a href="http://mercurial.selenic.com/">
-Mercurial</a> or <a href="http://bazaar.canonical.com">Bazaar</a> (via plugins)
-to contribute to PDL.</p>
+<p>For over 20 years, PDL development was hosted by SourceForge. With the release of PDL 2.019 in May 2018, development is now hosted at GitHub.  However, the project still uses a few items at SourceForge.</p>
 
-<ul>
-  <li>
-  	<a href="http://sourceforge.net/p/pdl/code/ci/master/tree/">Browse Git repository online</a>.
-  </li>
-  <li>
-    <a href="http://mailman.jach.hawaii.edu/mailman/listinfo//pdl-porters">
-    Join the developers mailing list</a>.
-  </li>
-</ul>
-
-
-<script type="text/javascript">
-$(function() {
-	$("#tabs").tabs();
-});
-</script>
-
-<div id="tabs" class="tabs">
-<ul>
-	<li><a href="#tabs-git">Git</a></li>
-	<li><a href="#tabs-hg">Mercurial</a></li>
-	<li><a href="#tabs-bzr">Bazaar</a></li>
-</ul>
-
-<!-- ==============  GIT =============== -->
-
-<div id="tabs-git">
-  <div class="note">
-    <b>Note:</b> Windows users may want to use
-    <a href="http://code.google.com/p/msysgit/">msysGit</a>.
-  </div>
-  <dl>
-    <dt>Non-developers</dt>
-    <dd>
-      <pre>git clone git://git.code.sf.net/p/pdl/code pdl-code</pre>
-    
-      <p>(Use the <a href="http://sourceforge.net/p/pdl/patches/">patch
-      manager</a> to submit patches).</p>
-    </dd>
-  
-    <dt>Developers</dt>
-    <dd>
-    <pre>git clone ssh://USERNAME@git.code.sf.net/p/pdl/code pdl-code</pre>
-    </dd>
-    
-    <dt>See also</dt>
-    <dd>
-      <ul>
-        <li><a class="link" href="#help">Basic commands</a></li>
-        <li><a class="link" href="#hints">Hints for developers</a></li>
-        <li><a href="http://git-scm.com/documentation">Git documentation</a></li>
-      </ul>
-    </dd>
-  </dl>
-</div>
-
-<!-- ==============  MERCURIAL =============== -->
-
-<div id="tabs-hg">
-  <div class="note">
-    <b>Note:</b> You must install the <a href="http://hg-git.github.com/">Hg-Git
-    </a> extension.
-  </div>
-  <dl>
-    <dt>Non-developers</dt>
-    <dd>
-      <pre>hg clone git://git.code.sf.net/p/pdl/code pdl-code</pre>
-    
-      <p>(Use the <a href="http://sourceforge.net/p/pdl/patches/">patch
-      manager</a> to submit patches).</p>
-    </dd>
-  
-    <dt>Developers</dt>
-    <dd>
-<pre>hg clone git+ssh://USERNAME@git.code.sf.net/p/pdl/code pdl-code</pre>
-    </dd>
-    
-    <dt>See also</dt>
-    <dd>
-      <ul>
-        <li><a class="link" href="#help">Basic commands</a></li>
-        <li><a class="link" href="#hints">Hints for developers</a></li>
-        <li><a href="http://hgbook.red-bean.com/">Mercurial documentation</a></li>
-      </ul>
-    </dd>
-  </dl>
-</div>
-
-<!-- ==============  BAZAAR =============== -->
-
-<div id="tabs-bzr">
-  <div class="note">
-    <b>Note:</b> You must install the
-    <a href="http://wiki.bazaar.canonical.com/ForeignBranches/Git">Bzr-Git</a>
-    plugin.
-  </div>
-  <dl>
-    <dt>Non-developers</dt>
-    <dd>
-      <pre>bzr branch git://git.code.sf.net/p/pdl/code pdl-code</pre>
-    
-      <p>(Use the <a href="http://sourceforge.net/p/pdl/patches/">patch
-      manager</a> to submit patches).</p>
-    </dd>
-  
-    <dt>Developers</dt>
-    <dd>
-<pre>bzr branch git+ssh://USERNAME@git.code.sf.net/p/pdl/code pdl-code</pre>
-    </dd>
-    
-    <dt>See also</dt>
-    <dd>
-      <ul>
-        <li><a class="link" href="#help">Basic commands</a></li>
-        <li><a class="link" href="#hints">Hints for developers</a></li>
-        <li><a href="http://doc.bazaar.canonical.com">Bazaar documentation</a></li>
-      </ul>
-    </dd>
-  </dl>
-</div>
-
-
-</div>  <!-- == END TABS == -->
-
-<h2 id="help">Basic commands</h2>
-
-<style type="text/css">
-  .basic {
-  	border: 1px solid #555;
-  }
-  .basic th {
-  	text-align: center;
-  }
-  .basic td {
-  	width: 30%;
-  	padding: 1em;
-  }
-  .basic td.item {
-    text-align: center;
-    border-top: 2px solid #ccc;
-  }
-  .basic td.hg { border-left: 2px solid #ccc; }
-</style>
-<table class="basic" cellspacing="0px">
-  <tbody>
-    <tr>
-      <th>Git</th>
-      <th>Mercurial</th>
-      <th>Bazaar</th>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Commit changes to your repository</td>
-    </tr>
-    <tr>
-      <td>
-    <pre>
-git add file1 file2 ...
-git commit -a</pre>
-(You must "<tt>add</tt>" before every commit or use "<tt>-a</tt>").
-      </td>
-      <td class="hg">
-   <pre>
-hg add file1 file2 ...
-hg commit</pre>
-      </td>
-      <td class="hg">
-   <pre>
-bzr add file1 file2 ...
-bzr commit</pre>
-      </td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Pull and merge any changes others have made</td>
-    </tr>
-    <tr>
-      <td>
-   <pre>
-git fetch
-git merge</pre>
-      </td>
-      <td class="hg">
-   <pre>
-hg pull
-hg merge</pre>
-      </td>
-      <td class="hg">
-   <pre>
-bzr pull
-bzr merge</pre>
-      </td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Push your changes back to the shared server.</td>
-    </tr>
-    <tr>
-      <td><pre>git push</pre></td>
-      <td class="hg"><pre>hg push</pre></td>
-      <td class="hg"><pre>bzr dpush</pre></td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Undo changes since the previous commit.</td>
-    </tr>
-    <tr>
-      <td><pre>git reset --hard ORIG_HEAD</pre></td>
-      <td class="hg"><pre>hg revert .</pre></td>
-      <td class="hg"><pre>bzr revert</pre></td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">
-      	<b>TIP:</b> Interactively select changes to commit.
-      </td>
-    </tr>
-    <tr>
-      <td><pre>git add --patch</pre></td>
-      <td class="hg">
-   <pre>
-hg record</pre>
-       <p>(See: 
-       <a href="http://mercurial.selenic.com/wiki/RecordExtension">record
-       extension</a>).</p>
-      </td>
-      <td class="hg">N/A but the <tt>shelve</tt> can help.</td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Create a branch</td>
-    </tr>
-    <tr>
-      <td>
-<pre>
-git branch Kiwi
-git checkout Kiwi
-</pre></td>
-      <td class="hg">
-<pre>
-hg branch Kiwi
-</pre></td>
-      <td class="hg"><pre>bzr branch Kiwi</pre></td>
-    </tr>
-    <tr>
-      <td class="item" colspan="3">Push a branch to the server</td>
-    </tr>
-    <tr>
-      <td>
-<pre>
-git config branch.Kiwi.remote origin
-git config branch.Kiwi.merge refs/heads/Kiwi
-</pre></td>
-      <td class="hg">
-<pre>
-hg push
-</pre>
-(Pushes all branches).
-      </td>
-      <td class="hg">
-<pre>
-bzr push
-</pre>
-(Pushes current branch).
-      </td>
-    </tr>
-  </tbody>
+<table class="devel">
+  <tr>
+    <th>Tool</th>
+    <th>GitHub</th>
+    <th>SourceForge</th>
+  </tr>
+  <tr>
+    <td>Mailing Lists</td>
+    <td>No</td>
+    <td><a href="https://sourceforge.net/p/pdl/mailman/">pdl-general and pdl-devel mailing lists</a></td>
+  </tr>
+  <tr>
+    <td>Bugs, Feature requests</td>
+    <td><a href="https://github.com/PDLPorters/pdl/issues">New issues</a></td>
+    <td>No (<a href="https://sourceforge.net/p/pdl/_list/tickets">historical only</a>)</td>
+  </tr>
+  <tr>
+    <td>Source Code</td>
+    <td><a href="https://github.com/PDLPorters">PDL and related modules</a></td>
+    <td><a href="https://sourceforge.net/p/pdl/pdl-www/ci/master/tree/">pdl.perl.org website</a></td>
+  </tr>
+  <tr>
+    <td>Large derivative files</td>
+    <td><a href="https://github.com/PDLPorters/pdl/releases">Attached to Releases</a></td>
+    <td>No (<a href="https://sourceforge.net/projects/pdl/files/">historical only</a>)</td>
+  </tr>
 </table>
-
-
 
 
 <h2 id="hints">Hints for developers</h2>
 
 <ol>
+ <li>If you are not familiar with Git, there are many online
+ resources, tutorials,
+ and <a href="https://services.github.com/on-demand/resources/cheatsheets/">cheat
+ sheets</a> from which to learn.</li>
  <li>
   <p>Before committing a change to the repository you should update</p>
   <ul>
@@ -349,20 +103,22 @@ bzr push
    package.</p>
  </li>
  <li>
-   <p>Don't commit before you successfully built and passed <tt>make test</tt>.
-   But then again, don't keep your changes private for too long to avoid
-   conflicts with other developers.</p>
+   <p>Don't commit before you successfully built and passed <tt>make
+   test</tt>.  Use Git branches and GitHub's Pull Requests to test
+   your changes on a wide variety of platforms, Perl versions, and
+   environment combinations before merging your changes into the
+   master branch.</p>
  </li>
  <li>
-   <p>Use branches for long-running projects. Git and Mercurial both have
+   <p>Use branches for long-running projects. Git has
    excellent support for branching and merging. Use it!</p>
  </li>
  <li>
    <p>Bugs reported on the list should be entered into the
-   <a href="http://sourceforge.net/p/pdl/bugs/">bug
-   database</a> and bugs closed when a patch has been committed as
-   a fix. (Primary responsibility for this task is the pumpking,
-   but other devels should be able to help.)</p>
+   <a href="https://github.com/PDLPorters/pdl/issues">issue
+   tracker</a> and bugs closed when a patch has been committed as a
+   fix. (Primary responsibility for this task is the pumpking, but
+   other devels should be able to help.)</p>
  </li>
 </ol>
 

@@ -248,6 +248,31 @@ div.sidebar ul li:hover a, div.sidebar ul li.selected a {
 }
 
 .news dt,dd {
-//   padding-bottom: 0.75em;
+/*   padding-bottom: 0.75em;*/
 }
 
+/*
+ * For a table in develop.html
+*/
+table.devel {
+    border: 5px solid black;
+    margin: 20px;
+    text-align: left;
+    border-collapse: collapse;
+    border-style: solid;
+}
+
+.devel th {
+    padding: 10px;
+    border-top: 2px solid #888;
+    border-bottom: 2px solid #888;
+    border-right: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+}
+
+.devel td {
+    padding: 10px;
+    border-right: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #444;
+}

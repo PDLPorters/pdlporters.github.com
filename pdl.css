@@ -276,3 +276,17 @@ table.devel {
     border-left: 1px solid #aaa;
     border-bottom: 1px solid #444;
 }
+
+/* install.html styles */
+#general-note, .howto {
+	margin-top: 15px;
+	margin-left: 210px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	border: 4px solid #ccc;
+	padding: 1em;
+}
+#general-note h3, #general-note p {
+	margin: 0;
+	padding: 0;
+}

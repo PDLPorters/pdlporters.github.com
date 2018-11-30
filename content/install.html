@@ -197,36 +197,29 @@ $(document).ready(function () {
 </div>
 <div class="howto" id="easy-win">
 	<h3>Easiest install - Windows</h3>
-	
-	<p>To install via ppm for <a href="http://strawberryperl.com/">Strawberry
-	Perl</a> (32-bit only) and <a href="http://www.activestate.com/activeperl">ActiveState
-	Perl</a> (32-bit and 64-bit):</p>
+
+	<p><a href="http://strawberryperl.com/">Strawberry Perl</a> produces a portable <a href="http://strawberryperl.com/releases.html">PDL edition</a> that includes Perl, PDL and related modules and external libraries.</p>
+
+	<p>If you already have a version of Perl that uses the <pre>ppm</pre> utility (<a href="http://strawberryperl.com/">Strawberry Perl</a> or <a href="http://www.activestate.com/activeperl">ActiveState Perl</a>, you can install via <pre>ppm</pre>:</p>
 
 <pre>
 ppm install Astro-FITS-Header
 ppm install Convert-UU
 </pre>
-	
+
 Then install the OpenGL, PGPLOT and PDL modules from the sisyphusion repo by running:
 
-  For 32-bit builds of perl (versions 5.8 and later):
 <pre>
 ppm install http://www.sisyphusion.tk/ppm/OpenGL.ppd
 ppm install http://www.sisyphusion.tk/ppm/PGPLOT.ppd
 ppm install http://www.sisyphusion.tk/ppm/PDL.ppd
 </pre>
-  For 64-bit builds of perl, ppm packages are provided only for perl versions 5.10 and later.
-  Also, there are no PGPLOT packages for these builds - so just run:
 
-<pre>
-ppm install http://www.sisyphusion.tk/ppm/OpenGL.ppd
-ppm install http://www.sisyphusion.tk/ppm/PDL.ppd
-</pre>
-
-<p>For more details
-see <a href="<?= $Wiki ?>Windows">Installing
-PDL on Windows</a> on the wiki
-or <a href="http://search.cpan.org/src/CHM/PDL-2.4.8/win32/INSTALL">win32/INSTALL</a>
+<p>If you have problems with uninstalled prerequisites
+see <a href="http://www.sisyphusion.tk/faq.html">the sisyphusion
+FAQ</a>.  For more details see <a href="<?= $Wiki
+?>Windows">Installing PDL on Windows</a> on the wiki or
+the <a href="https://github.com/PDLPorters/pdl/blob/master/win32/INSTALL">win32/INSTALL</a>
 file in the PDL source distribution.</p>
 
 </div>
@@ -517,7 +510,7 @@ dependencies.</p>
 	complete manual installation page</a> on the wiki.</p>
 	
 	<p><b>Note 2:</b>
-	<a href="http://search.cpan.org/search?query=PDL&amp;mode=all">
-	Search CPAN</a> as an alternate way to get the latest release
+	<a href="https://metacpan.org/pod/PDL">
+	MetaCPAN</a> as an alternate way to get the latest release
 	and information about PDL.</p>
 </div>

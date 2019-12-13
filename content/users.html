@@ -1,29 +1,11 @@
 <h1 class='title'>PDL Users</h1>
 
 <p>PDL is useful in many fields, and has a diverse user community.
-Below is a map of PDL users, as well as some ineresting work done with PDL
-around the world.</p>
+Below are examples of some interesting work done with PDL around the world.</p>
 
-<h2>Users worldwide</h2>
-
-<script  type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAw_GADJMs6pZoBWTmJbVu3RQasz9hqXnwXIRcaPBYcuT978cI1RR7Gbpwm1iFDiiNOLGzibJ8Pi_xdw">
-</script>
-<center>
-Are you a PDL user?
-<a href="http://spreadsheets.google.com/ccc?key=0Am3SSF48QCE9dERjcko2YWNrSzJVLUZLd1QyaldsYXc&hl=en#gid=0">
-Let us know</a>.
-<table id="cm_mapTABLE">
-	<tbody>
-		<tr id="cm_mapTR"> <!-- 650,300 -->
-			<td style="border: 1px solid black">
-			  <div id="cm_map" style="width:650px; height:300px;"></div>
-			</td>
-		</tr>
-	</tbody>
-</table>
-</center>
-
+<!--
 <h2>Some PDL success stories</h2>
+-->
 <dl>
   <dt>Astronomy and Astrophysics</dt>
   <dd>
@@ -131,8 +113,7 @@ of high speed galactic winds that I discovered.</p>
 <p> As a professional astrophysicist, I have analyzed countless types of data
 using PDL. Here is one example: In 1997 I collected some very deep-field
 images of the <a href="http://www.stsci.edu/ftp/science/hdf/hdf.html">Hubble
-Deep Field</a> using the <a href="http://www.aao.gov.au/local/www/jbh/ttf/">
-Taurus Tunable Filter</a> and the 4m
+Deep Field</a> using the Taurus Tunable Filter and the 4m
 <a href="http://www.ing.iac.es/Astronomy/telescopes/wht/">William Herschel
 Telescope</a> in La Palma. The tunable filter produces 3-D data
 (x,y,wavelength) that are difficult to analyze with conventional astronomical
@@ -143,9 +124,8 @@ rapid prototyping, and "glue" features of PDL and Perl were all used to the max.
 
 
 <p> This figure is from a <a href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2004AJ....128.2652G&amp;db_key=AST&amp;high=425327f64719038">
-paper</a> that I and some colleagues published in the <a
-href="http://www.journals.uchicago.edu/AJ/journal/">Astronomical
-Journal</a>, showing emission line galaxies that we found in the data
+paper</a> that I and some colleagues published in the Astronomical
+Journal, showing emission line galaxies that we found in the data
 cube (using another PDL script). Such galaxies have excess emission
 at one wavelength due to nebular emission from young stars creating an
 ionized nebula. Each row shows a single galaxy at several different
@@ -175,7 +155,7 @@ in 2004 when the final paper was submitted!</p>
 <table>
   <tr>
     <td>
-      <p>The UN-ECE's <a href="www.emep.int">EMEP</a> program monitors
+      <p>The UN-ECE's <a href="https://www.emep.int">EMEP</a> program monitors
       long-range air pollutants such as acid rain and ozone, over the whole
       of Europe. The results are used to create international laws and
       accords such as the Gothenborg protocol. Our FORTRAN code models
@@ -186,8 +166,7 @@ in 2004 when the final paper was submitted!</p>
       country-based data from the physical grid, and preparing statistics
       required a powerful, memory-efficient, flexible data language. PDL
       gave us exactly what we needed. We even used it to generate
-      <a href="http://www.emep.int/reports/2004/Country_Reports">automated
-      reports</a> for each of 50 countries.</p>
+      automated reports for each of 50 countries.</p>
 
       <p><em>--Heiko Klein, Heiko.Klein (at) gmx (dot) net</em>
     </td>
@@ -217,10 +196,8 @@ in 2004 when the final paper was submitted!</p>
       public service. Among other services, we can detect forest fires from
       satellite images within a few minutes, in time to alert regional
       authorities. Our pipeline includes 20 steps, some compiled in C and
-      FORTRAN and others in Perl and Perl/PDL. Our results are published <a
-      href="http://www.latuv.uva.es/modisql">on the web</a> and emailed to
-      <a href="http://www.rtve.es/tve/teletexto/500/548_0001.htm">
-      Televisi&oacute;n Espa&ntilde;ola</a> where they are made available via
+      FORTRAN and others in Perl and Perl/PDL. Our results are published on the web and emailed to
+      Televisi&oacute;n Espa&ntilde;ola where they are made available via
       the national teletext service. <p> At right is an image of spain with
       several potential wildfires marked in red. Their locations are listed at
       far right. The various aqua-colored outlines are regions that were
@@ -241,7 +218,7 @@ in 2004 when the final paper was submitted!</p>
 
 <h3 id="brain">Visualization of my brain</h3>
 
-<p><a href="http://www.jonaskaplan.com/tools.html">perlfMRI</a> is
+<p><a href="http://www.jonaskaplan.com/perlfmri.php">perlfMRI</a> is
 a very simple tool I created for viewing functional MRI data, written
 entirely in perl with PDL. What's nice about it is that it lets you
 simultaneously view three planes through the brain and to rotate them

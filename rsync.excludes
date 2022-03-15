@@ -2,6 +2,7 @@ rsync.excludes*
 .git
 .hg*
 *gimp*
+.*.sw*
 old-site
 future
 PDLdocsOld

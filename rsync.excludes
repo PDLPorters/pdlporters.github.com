@@ -7,6 +7,5 @@ old-site
 future
 PDLdocsOld
 PDLdocs
-css
 *.DS_Store*
 *.sh

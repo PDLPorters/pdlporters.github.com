@@ -56,8 +56,6 @@ function formatDocs($filename, $title='') {
 	<title>Perl Data Language</title>
     <link rel="shortcut icon" href="images/favicon.ico"
     	  type="image/vnd.microsoft.icon"  />
-    <link rel="stylesheet" type="text/css"
-          href="http://www.google.com/cse/style/look/espresso.css" />
     <link rel='stylesheet' type='text/css' href='google-search.css' />
     <link rel="stylesheet" type="text/css" 
           href="css/jquery-ui-1.8.2.custom.css" />	

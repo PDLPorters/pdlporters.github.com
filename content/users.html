@@ -39,15 +39,15 @@ Below are examples of some interesting work done with PDL around the world.</p>
 <p>I and my graduate student use PDL to track thousands of magnetic features
 on the Sun. The churning surface of the Sun is covered by magnetic north and
 south poles that are constantly emerging, moving, recombining, and dissipating.
-Special telescopes called <em><a href="http://soi.stanford.edu">magnetographs
+Special telescopes called <em><a href="https://soi.stanford.edu">magnetographs
 </a></em> can view these poles as black and white spots, allowing us to probe
 the Sun's dynamo. PDL's Transform package made it easy for us to remove
-perspective effects from <a href="http://sohowww.nascom.nasa.gov">spacecraft
+perspective effects from <a href="https://sohowww.nascom.nasa.gov">spacecraft
 data</a>, and to write an artificial vision application to identify
 every magnetic feature in the field of view.</p>
 
 <p>What's more, PDL is free -- so we can distribute
-<a href="http://www.boulder.swri.edu/swamis">our software</a> for anyone to use.</p>
+<a href="https://www.boulder.swri.edu/swamis">our software</a> for anyone to use.</p>
 
 <p><em>--Craig DeForest, deforest (at) boulder (dot) swri (dot) edu</em></p>
 
@@ -90,7 +90,7 @@ every magnetic feature in the field of view.</p>
 <h3 id="galaxy-gas">High speed galactic winds</h3>
 
 <p>I did much of the data analysis for my Ph.D. thesis using PDL, and got an 
-<a href="http://www.umich.edu/news/index.html?Releases/2004/Jan04/r010604">
+<a href="https://www.umich.edu/news/index.html?Releases/2004/Jan04/r010604">
 AAS press release</a> out of it. I never imagined being able to manipulate
 3-D radio science datacubes in Perl until I met PDL. Thanks!</p>
 
@@ -112,9 +112,9 @@ of high speed galactic winds that I discovered.</p>
 
 <p> As a professional astrophysicist, I have analyzed countless types of data
 using PDL. Here is one example: In 1997 I collected some very deep-field
-images of the <a href="http://www.stsci.edu/ftp/science/hdf/hdf.html">Hubble
+images of the <a href="https://www.stsci.edu/ftp/science/hdf/hdf.html">Hubble
 Deep Field</a> using the Taurus Tunable Filter and the 4m
-<a href="http://www.ing.iac.es/Astronomy/telescopes/wht/">William Herschel
+<a href="https://www.ing.iac.es/Astronomy/telescopes/wht/">William Herschel
 Telescope</a> in La Palma. The tunable filter produces 3-D data
 (x,y,wavelength) that are difficult to analyze with conventional astronomical
 software. I reduced my data entirely with home-brew PDL scripts that identified
@@ -123,7 +123,7 @@ rapid prototyping, and "glue" features of PDL and Perl were all used to the max.
 </p>
 
 
-<p> This figure is from a <a href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2004AJ....128.2652G&amp;db_key=AST&amp;high=425327f64719038">
+<p> This figure is from a <a href="https://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2004AJ....128.2652G&amp;db_key=AST&amp;high=425327f64719038">
 paper</a> that I and some colleagues published in the Astronomical
 Journal, showing emission line galaxies that we found in the data
 cube (using another PDL script). Such galaxies have excess emission
@@ -190,7 +190,7 @@ in 2004 when the final paper was submitted!</p>
 <table>
   <tr>
     <td>
-      <p>At the <a href="http://www.latuv.uva.es">Remote Sensing Laboratory
+      <p>At the <a href="https://www.latuv.uva.es">Remote Sensing Laboratory
       of the University of Valladolid</a>, we combine data from several
       satellites to produce real-time images of Spain and surroundings as a
       public service. Among other services, we can detect forest fires from
@@ -218,7 +218,7 @@ in 2004 when the final paper was submitted!</p>
 
 <h3 id="brain">Visualization of my brain</h3>
 
-<p><a href="http://www.jonaskaplan.com/perlfmri.php">perlfMRI</a> is
+<p><a href="https://www.jonaskaplan.com/perlfmri.php">perlfMRI</a> is
 a very simple tool I created for viewing functional MRI data, written
 entirely in perl with PDL. What's nice about it is that it lets you
 simultaneously view three planes through the brain and to rotate them
@@ -256,7 +256,7 @@ They were created under MacOS X.</p>
 	// Create a base icon for all of our markers that specifies the
 	// shadow, icon dimensions, etc.
 	var cm_baseIcon = new GIcon();
-	cm_baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+	cm_baseIcon.shadow = "https://www.google.com/mapfiles/shadow50.png";
 	cm_baseIcon.iconSize = new GSize(20, 34);
 	cm_baseIcon.shadowSize = new GSize(37, 34);
 	cm_baseIcon.iconAnchor = new GPoint(9, 34);
@@ -410,7 +410,7 @@ function cm_createMarker(point, title, html, rank) {
 	var markerOpts = {};
 	var nIcon = new GIcon(cm_baseIcon);
 	
-	var markers_url = "http://gmaps-samples.googlecode.com/svn/trunk/markers/";
+	var markers_url = "https://gmaps-samples.googlecode.com/svn/trunk/markers/";
 	if (rank > 0 && rank < 100) {
 		nIcon.imageOut = markers_url + param_iconType + "/marker" + rank + ".png";
 		nIcon.imageOver = markers_url + param_iconOverType + "/marker" + rank + ".png";
@@ -456,7 +456,7 @@ function cm_getJSON() {
 	
 	script.setAttribute(
 		'src',
-		'http://spreadsheets.google.com/feeds/list/' + param_ssKey + '/' + param_wsId + '/public/values' + '?alt=json-in-script&callback=cm_loadMapJSON'
+		'https://spreadsheets.google.com/feeds/list/' + param_ssKey + '/' + param_wsId + '/public/values' + '?alt=json-in-script&callback=cm_loadMapJSON'
 	);
 	script.setAttribute('id', 'jsonScript');
 	script.setAttribute('type', 'text/javascript');

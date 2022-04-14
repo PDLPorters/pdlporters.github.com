@@ -42,7 +42,7 @@ var DocsLink = function(title, doc, extra) {
   this.selected = q('docs') === this.doc;
 };
 
-var wiki_url = "http://sourceforge.net/p/pdl/wiki/";
+var wiki_url = "https://sourceforge.net/p/pdl/wiki/";
 var WikiLink = function(title, query) {
   this.title = title;
   this.href  = wiki_url + (query ? query : '');

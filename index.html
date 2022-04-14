@@ -108,12 +108,11 @@
             records: [],
           };
           var data = this.raw_results;
-
           if ('results' in data) {
             ret.total = data.total;
 
             $.each( data.results, function (index, outer) {
-              var item = outer[0];
+              var item = outer.hits[0];
               if ( !item ) return;
               var name = item.documentation || item.module[0].name;
               var out  = {
@@ -139,9 +138,7 @@
             type : "GET",
             url : 'https://fastapi.metacpan.org/v1/search/web',
             data : {q: query, size: 20, collapsed: 0},
-            //dataType: "jsonp",
             success : function(data) {
-              console.log( data );
               self.raw_results = data;
             },
           }).error( function() { console.log("Error attempting to search metacpan") } );

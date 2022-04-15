@@ -211,6 +211,7 @@
       methods: {
         load_pod_for_module: function (module) {
           module = module || this.module || this.current_module;
+          if (module.indexOf('PDL::') != 0) module = 'PDL::' + module;
           this.current_module = module;
           var self = this;
           $.get('https://fastapi.metacpan.org/v1/pod/' + module + '?content-type=text/html', function (data) {

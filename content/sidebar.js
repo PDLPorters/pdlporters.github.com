@@ -37,6 +37,7 @@ sidebar = [
       new ExternalLink('Bugs', 'https://github.com/PDLPorters/pdl/issues'),
       new ExternalLink('Pull Requests', 'https://github.com/PDLPorters/pdl/pulls'),
       new PageLink('Credits', 'credits'),
+      new ExternalLink('Website issues', 'https://github.com/PDLPorters/pdlporters.github.com/issues'),
     ],
   },
 ];

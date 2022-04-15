@@ -32,14 +32,11 @@ var PageLink = function(title, page) {
   this.selected = q('page') === this.page;
 };
 
-var DocsLink = function(title, doc, extra) {
+var DocsLink = function(doc, title) {
+  if (!title) title = doc.substr(5);
   this.title = title;
   this.doc = doc;
-  this.href  = '?docs=' + doc;
-  if (extra) {
-    this.href += '&title=' + doc + ' - ' + extra;
-  }
-  this.selected = q('docs') === this.doc;
+  this.href  = 'https://metacpan.org/pod/' + doc;
 };
 
 var wiki_url = "https://github.com/PDLPorters/pdl/wiki/";

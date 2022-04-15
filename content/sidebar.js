@@ -13,11 +13,11 @@ sidebar = [
     title: 'Documentation',
     pages: [
       new PageLink('PDL Book', 'FirstSteps'),
-      new DocsLink('FAQ', 'PDL::FAQ', 'Frequently Asked Questions'),
-      new DocsLink('Tutorials', 'PDL::Tutorials'),
-      new DocsLink('Modules', 'PDL::Modules'),
-      new DocsLink('Course', 'PDL::Course'),
-      new DocsLink('Index', 'PDL::Index'),
+      new DocsLink('PDL::FAQ', 'Frequently Asked Questions'),
+      new DocsLink('PDL::Tutorials'),
+      new DocsLink('PDL::Modules'),
+      new DocsLink('PDL::Course'),
+      new DocsLink('PDL::Index'),
     ],
   },
   {

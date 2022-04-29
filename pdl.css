@@ -216,7 +216,7 @@ h1, h2, h3, h4 { color: #347 }
 .news {
    float: right;
    width:18em;
-   padding: 0 .5em 0 .5em;
+   padding: 0 .5em 0.5em;
    border: solid;
    margin: 0px 0px 0.5em 1em;
 }

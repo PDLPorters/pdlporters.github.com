@@ -81,7 +81,7 @@
       <h2>Search provided by <a href="https://metacpan.org">MetaCPAN</a></h2>
       <p>Found {{ results.total }} hits</p><hr>
       <p v-for="result in results.records">
-        <a :href="result.href">{{ result.name }}</a> - {{ result.abstract }}
+        <a href="result.href">{{ result.name }}</a> - {{ result.abstract }}
       </p>
     </div>
   </template>

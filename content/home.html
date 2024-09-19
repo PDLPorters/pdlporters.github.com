@@ -46,7 +46,23 @@
 	<div class="news">
 	  <h3>Recent News</h3>
 	  <dl>
-	  
+
+            <dt>2024-09-06</dt>
+            <dd>
+              <a href="https://metacpan.org/release/ETJ/PDL-LinearAlgebra-0.40/view/lib/PDL/LinearAlgebra.pm">PDL::LinearAlgebra 0.40</a> has been released to CPAN:
+              <ul>
+                  <li>better LAPACK detection on Linux, Strawberry Perl, and MacOS
+                  <li>fix mtoeplitz
+                  <li><code>$real x $native_complex</code> fixed
+              </ul>
+            </dd>
+
+	    <dt>2024-04-15</dt>
+	    <dd><a href="https://github.com/PDLPorters/SciPDL">New location for SciPDL</a>, a drag-and-drop PDL installer for MacOS 10.9+</dd>
+
+	    <dt>2024-02-24</dt>
+	    <dd><a href="https://metacpan.org/release/ETJ/PDL-FFTW3-0.19/view/GENERATED/PDL/FFTW3.pm">PDL::FFTW3 0.19</a> has been released to CPAN.</dd>
+
             <dt>2022-10-26</dt>
             <dd><a href="https://sourceforge.net/p/pdl/mailman/message/37726642/">Announcing</a> the release
             of <a href="https://metacpan.org/release/ETJ/PDL-2.081">PDL 2.081 to CPAN</a>:
@@ -57,60 +73,20 @@
                     <li>allow [o] on OtherPars, which helps towards PDL::OpenCV
                 </ul>
                 </dd>
-            
-            <dt>2022-05-28</dt>
-            <dd><a href="https://sourceforge.net/p/pdl/mailman/message/37659628/">Announcing</a> the release
-            of <a href="https://metacpan.org/release/ETJ/PDL-2.080">PDL 2.080 to CPAN</a>:
-                <ul>
-                    <li>Use of Text::Balanced 2.05, incorporating PDL's performance patches
-                    <li>PDL::IO::STL fixed to work on big-endian systems
-                    <li>pp_add_macros enhanced to parse and pass multiple arguments
-                    <li>most of PDL::VectorValued incorporated – thank you Bryan Jurish!
-                    <li>Fix histogram to not segfault when min == max
-                </ul>
-                </dd>
-            
-            <dt>2022-05-03</dt>
-            <dd><a href="https://sourceforge.net/p/pdl/mailman/message/37648860/">Announcing</a> the release
-            of <a href="https://metacpan.org/release/ETJ/PDL-2.079">PDL 2.079 to CPAN</a>:
-                <ul>
-                    <li>Badflag propagation is much more automatic
-                    <li>PDL::Dataflow doc brought up to date
-                    <li>PDL::IO::STL added to read 3d-printable items
-                    <li>PDL::Graphics::TriD::trigrid3d completed
-                    <li>A <a href="https://perlmonks.org/?node_id=11116094">bug</a> that affected Windows with parallel processing has been fixed
-                    <li>PDL::Image2D::crop added
-                </ul>
-                </dd>
-	  
-            <dt>2022-04-11</dt>
-            <dd>
-              <a href="https://metacpan.org/release/ETJ/PDL-LinearAlgebra-0.29/view/lib/PDL/LinearAlgebra.pm">PDL::LinearAlgebra 0.29</a> has been released to CPAN, fixing issues from the important release of 0.27 which had:
-              <ul>
-                  <li>memory-management bugs fixed
-                  <li>msolve etc now handle native-complex
-              </ul>
-            </dd>
 
-            <dt>2021-12-21</dt>
+            <dt>2022-01-11</dt>
 	    <dd><a href="https://metacpan.org/release/ETJ/Gimp-2.37/view/lib/Gimp.pm">Gimp-Perl 2.37</a> has been released to CPAN.</dd>
-
-	    <dt>2021-10-04</dt>
-	    <dd><a href="https://metacpan.org/release/ETJ/PDL-FFTW3-0.18/view/GENERATED/PDL/FFTW3.pm">PDL::FFTW3 0.18</a> has been released to CPAN.</dd>
 
 	    <dt>2021-02-16</dt>
 	    <dd><a href="https://metacpan.org/release/KGB/ExtUtils-F77-1.26/view/F77.pm">ExtUtils::F77 1.26</a> has been released to CPAN.</dd>
-
-	    <dt>2018-10-24</dt>
-	    <dd>SciPDL, a drag-and-drop PDL installer for MacOS 10.9+, is now <a href="https://github.com/PDLPorters/pdl/releases">available for PDL 2.019</a>.</dd>
 
 	    <dt>2017-02-25</dt>
 	    <dd><a href="https://sourceforge.net/p/pogl/mailman/message/35688713/">Announcing</a> the second release of <a href="https://metacpan.org/release/CHM/OpenGL-Modern-0.04/view/lib/OpenGL/Modern.pm">OpenGL::Modern 0.04</a> to CPAN.</dd>
 
           </dl>
-          
+
           <p>The <a href="https://metacpan.org/dist/PDL/changes">complete version history of PDL</a> is available in MetaCPAN.</p>
-          
+
 	</div>
 
  <p>PDL ("Perl Data Language") gives standard Perl the ability to

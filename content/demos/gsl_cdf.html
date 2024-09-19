@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gsl_cdf - GSL cumulative distribution functions</title>
+</head>
+<body>
+<h1>gsl_cdf - GSL cumulative distribution functions</h1>
+
+This demo illustrates the <a href="https://metacpan.org/pod/PDL::GSL::CDF">PDL::GSL::CDF</a> module.
+It shows the power of PDL with a concise way to generate a table of
+more extreme small p-values, and the associated Z scores.
+<pre>
+use <a href="https://metacpan.org/pod/PDL::GSL::CDF">PDL::GSL::CDF</a>;
+$pvalue = ipow(pdl(10),-(sequence(32) + 1));
+$z = gsl_cdf_ugaussian_Qinv($pvalue);
+$pdl = $pvalue->cat($z)->transpose;
+print $pdl->splitdim(1,8)->mv(2,1)->clump(-2)->string("%4.4g");
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   0.1  1.282  1e-09  5.998  1e-17  8.494  1e-25  10.42]
+ [  0.01  2.326  1e-10  6.361  1e-18  8.757  1e-26  10.64]
+ [ 0.001   3.09  1e-11  6.706  1e-19  9.013  1e-27  10.85]
+ [0.0001  3.719  1e-12  7.034  1e-20  9.262  1e-28  11.06]
+ [ 1e-05  4.265  1e-13  7.349  1e-21  9.505  1e-29  11.26]
+ [ 1e-06  4.753  1e-14  7.651  1e-22  9.742  1e-30  11.46]
+ [ 1e-07  5.199  1e-15  7.941  1e-23  9.973  1e-31  11.66]
+ [ 1e-08  5.612  1e-16  8.222  1e-24   10.2  1e-32  11.86]
+]
+</pre>
+
+<hr/>
+And more extreme high Z scores, and the associated p-values.
+<pre>
+$z = sequence(24) + 1;
+$pvalue = gsl_cdf_ugaussian_Q($z);
+$pdl = $z->cat($pvalue)->transpose;
+print $pdl->splitdim(1,8)->mv(2,1)->clump(-2)->string("%4.4g");
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [         1     0.1587          9  1.129e-19         17  4.106e-65]
+ [         2    0.02275         10   7.62e-24         18  9.741e-73]
+ [         3    0.00135         11  1.911e-28         19  8.527e-81]
+ [         4  3.167e-05         12  1.776e-33         20  2.754e-89]
+ [         5  2.867e-07         13  6.117e-39         21  3.279e-98]
+ [         6  9.866e-10         14  7.794e-45         22  1.44e-107]
+ [         7   1.28e-12         15  3.671e-51         23 2.331e-117]
+ [         8  6.221e-16         16  6.389e-58         24  1.39e-127]
+]
+</pre>
+</body>
+</html>

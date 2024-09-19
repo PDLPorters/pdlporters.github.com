@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>func - Interpolation etc</title>
+</head>
+<body>
+<h1>func - Interpolation etc</h1>
+
+This demo illustrates the <a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> module.
+<a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> objects encapsulate data to interpolate, integrate,
+and get gradients of (differentiate).
+<pre>
+  use <a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> qw(pchip spline); # load, and import convenience functions
+  $w = pgswin(); # <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a> window
+</pre>
+
+<hr/>
+set up a step function, similar to
+<a href="https://uk.mathworks.com/help/matlab/ref/pchip.html">https://uk.mathworks.com/help/matlab/ref/pchip.html</a>
+<pre>
+  $x = sequence(7) - 3;
+  $y = pdl q[-1 -1 -1 0 1 1 1];
+</pre>
+The convenience function "pchip" uses SLATEC's PCHIP with all
+the default settings
+<pre>
+  $xi = zeroes(100)->xlinvals(-3,3);
+  $yi = pchip($x, $y, $xi);
+  $yi_s = spline($x, $y, $xi);
+  $w->plot(with => 'line', key => 'spline', $xi, $yi_s,
+    with => 'line', key => 'pchip', $xi, $yi,
+    with => 'points', $x, $y,
+    {legend=>'tl'});
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/func/output-1.png"/>
+
+<hr/>
+Now a more undulating function, where PCHIP is less effective
+<pre>
+  $x2 = sequence(16);
+  $y2 = bessj1($x2);
+  $xi2 = zeroes(100)->xlinvals(0,15);
+  $yi2 = pchip($x2, $y2, $xi2);
+  $yi2_s = spline($x2, $y2, $xi2);
+  $w->plot(with => 'line', key => 'spline', $xi2, $yi2_s,
+    with => 'line', key => 'pchip', $xi2, $yi2,
+    with => 'points', $x2, $y2,
+    {legend=>'tr'});
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/func/output-2.png"/>
+
+<hr/>
+And because it's PDL, it can broadcast seamlessly
+<pre>
+  $y3 = cat( $x2*$x2+43.3, $x2*$x2*$x2-23 ); # dim 16,2
+  $yi3 = pchip($x2, $y3, $xi2);
+</pre>
+even though <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a> can't (yet)
+<pre>
+  my @y3d = $y3->dog;
+  my @yi3d = $yi3->dog;
+  $w->plot(with => 'points', $x2, $y3d[0],
+    with => 'points', $x2, $y3d[1],
+    with => 'line', $xi2, $yi3d[0],
+    with => 'line', $xi2, $yi3d[1]);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/func/output-3.png"/>
+
+<hr/>
+ This concludes the <a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> demo.
+<p/>
+ Be sure to check the documentation for <a href="https://metacpan.org/pod/PDL::Func,">PDL::Func,</a> to see further
+ possibilities.
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gsl_rng - GSL randomness functions</title>
+</head>
+<body>
+<h1>gsl_rng - GSL randomness functions</h1>
+
+This demo illustrates the <a href="https://metacpan.org/pod/PDL::GSL::RNG">PDL::GSL::RNG</a> module.
+It shows the power of PDL with a concise way to generate graphs of
+different random number distributions.
+<pre>
+use <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>;
+use <a href="https://metacpan.org/pod/PDL::GSL::RNG">PDL::GSL::RNG</a>;
+$x = zeroes(100)->xlinvals(-5,5);
+$w = pgswin();
+</pre>
+Exponential Power Distribution
+<pre>
+$w->plot(
+  with=>'lines', key=>'a=1 b=2.5', $x, ran_exppow_pdf($x, 1, 2.5),
+  with=>'lines', key=>'a=1 b=0.5', $x, ran_exppow_pdf($x, 1, 0.5),
+  {le=>'tr', yrange=>[0,0.8], title=>'Exponential Power Distribution',
+    xlabel=>'x', ylabel=>'p(x)'}
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/output-1.png"/>
+
+<hr/>
+Cauchy Distribution
+<pre>
+$w->plot(
+  with=>'lines', key=>'a=1', $x, ran_cauchy_pdf($x, 1),
+  with=>'lines', key=>'a=2', $x, ran_cauchy_pdf($x, 2),
+  {le=>'tr', yrange=>[0,0.4], title=>'Cauchy Distribution',
+    xlabel=>'x', ylabel=>'p(x)'}
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/output-2.png"/>
+
+<hr/>
+Rayleigh Tail Distribution
+<pre>
+$x = zeroes(100)->xlinvals(0,5);
+$w->plot(
+  with=>'lines', key=>'a=1 sigma=1', $x, ran_rayleigh_tail_pdf($x, 1, 1),
+  with=>'lines', key=>'a=0.5 sigma=2', $x, ran_rayleigh_tail_pdf($x, 0.5, 2),
+  {le=>'tr', yrange=>[0,1.1], title=>'Rayleigh Tail Distribution',
+    xlabel=>'x', ylabel=>'p(x)'}
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/output-3.png"/>
+
+<hr/>
+Gamma Distribution
+<pre>
+$x = zeroes(100)->xlinvals(0,5);
+$w->plot(
+  with=>'lines', key=>'a=1 b=1', $x, ran_gamma_pdf($x, 1, 1),
+  with=>'lines', key=>'a=2 b=1', $x, ran_gamma_pdf($x, 2, 1),
+  with=>'lines', key=>'a=3 b=1', $x, ran_gamma_pdf($x, 3, 1),
+  {le=>'tr', yrange=>[0,1], title=>'Gamma Distribution',
+    xlabel=>'x', ylabel=>'p(x)'}
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/output-4.png"/>
+
+<hr/>
+Bivariate Gaussian Distribution
+inspired by <a href="https://www.perlmonks.org/?node_id=11104262">https://www.perlmonks.org/?node_id=11104262</a>
+<pre>
+$points = pdl '[219 88 2.7; 38 95 1.7; 45 268 0.8]';
+($XSIZE, $YSIZE) = (300, 300);
+($xcoord, $ycoord, $weight) = $points       # xyw nweights
+  ->slice(",*$XSIZE,*$YSIZE,")              # xyw nx ny nweights
+  ->using(0..2);                            # nx ny nweights
+$xbase = xvals($XSIZE)->slice(",*$YSIZE");  # nx ny
+$ybase = xvals($YSIZE)->slice("*$XSIZE,");  # nx ny
+for (1..90) {
+  $h = (
+    $weight * ran_bivariate_gaussian_pdf(
+      $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
+    )                                           # nx ny nweights
+  )->mv(-1,0)->sumover;                         # nx ny
+  $w->plot(with=>'image', $h, {title=>'Bivariate Gaussian Distribution',j=>1});
+}
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/vid-1.gif"/>
+
+<hr/>
+Same, but with a colourful heatmap (if you have the right libraries)
+<pre>
+sub as_heatmap {
+  my ($d) = @_;
+  my $max = $d->max;
+  die "as_heatmap: can't work if max == 0" if $max == 0;
+  $d /= $max; # negative OK
+  my $hue   = (1 - $d)*240;
+  $d = cat($hue, pdl(1), pdl(1));
+  (hsv_to_rgb($d->mv(-1,0)) * 255)->byte->mv(0,-1);
+}
+if (eval 'use <a href="https://metacpan.org/pod/PDL::Graphics::ColorSpace">PDL::Graphics::ColorSpace</a>; 1') {
+  for (1..90) {
+    $h = (
+      $weight * ran_bivariate_gaussian_pdf(
+        $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
+      )                                           # nx ny nweights
+    )->mv(-1,0)->sumover;                         # nx ny
+    $w->plot(
+      with=>'image', as_heatmap($h),
+      {title=>'Bivariate Gaussian Distribution (heatmap)',j=>1}
+    );
+  }
+}
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/gsl_rng/vid-2.gif"/>
+
+<hr/>
+See <a href="https://www.gnu.org/software/gsl/doc/html/randist.html">https://www.gnu.org/software/gsl/doc/html/randist.html</a> for more.
+</body>
+</html>

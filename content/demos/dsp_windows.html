@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dsp_windows - DSP windowing</title>
+</head>
+<body>
+<h1>dsp_windows - DSP windowing</h1>
+
+This demo illustrates the <a href="https://metacpan.org/pod/PDL::DSP::Windows">PDL::DSP::Windows</a> module,
+which provides many window functions for digital signal processing
+<pre>
+use <a href="https://metacpan.org/pod/PDL::DSP::Windows">PDL::DSP::Windows</a>;
+$w = pgswin(multi=>[1,2]); # <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a> window
+</pre>
+
+<hr/>
+The Hamming window
+<pre>
+$dspw = <a href="https://metacpan.org/pod/PDL::DSP::Windows->new(50,">PDL::DSP::Windows->new(50,</a> 'hamming');
+$dspw->plot($w); $dspw->plot_freq($w);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/dsp_windows/output-1.png"/>
+
+<hr/>
+The "exact" Hamming window
+<pre>
+$dspw = <a href="https://metacpan.org/pod/PDL::DSP::Windows->new(50,">PDL::DSP::Windows->new(50,</a> 'hamming_ex');
+$dspw->plot($w); $dspw->plot_freq($w);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/dsp_windows/output-2.png"/>
+
+<hr/>
+The Hann window
+<pre>
+$dspw = <a href="https://metacpan.org/pod/PDL::DSP::Windows->new(50,">PDL::DSP::Windows->new(50,</a> 'hann');
+$dspw->plot($w); $dspw->plot_freq($w);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/dsp_windows/output-3.png"/>
+
+<hr/>
+The Welch window
+<pre>
+$dspw = <a href="https://metacpan.org/pod/PDL::DSP::Windows->new(50,">PDL::DSP::Windows->new(50,</a> 'welch');
+$dspw->plot($w); $dspw->plot_freq($w);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/dsp_windows/output-4.png"/>
+
+<hr/>
+The Bartlett window
+<pre>
+$dspw = <a href="https://metacpan.org/pod/PDL::DSP::Windows->new(50,">PDL::DSP::Windows->new(50,</a> 'bartlett');
+$dspw->plot($w); $dspw->plot_freq($w);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/dsp_windows/output-5.png"/>
+
+<hr/>
+This concludes the demo.
+<p/>
+Be sure to check the documentation for <a href="https://metacpan.org/pod/PDL::DSP::Windows,">PDL::DSP::Windows,</a> to see further
+possibilities.
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pdl - Introduction -- a tour of PDL</title>
+</head>
+<body>
+<h1>pdl - Introduction -- a tour of PDL</h1>
+
+Welcome to a short tour of PDL's capabilities.
+<p/>
+This tour shows some of the main selling points
+of PDL. However, because we want this script to
+run everywhere, it doesn't show off modules which
+require external modules for use, including those
+supporting 3D graphics. You can list all the demos
+available on your system by doing "demo" at the
+'pdl>' prompt.
+<p/>
+Note that your own scripts must start with
+<p/>
+        use PDL;
+<p/>
+to work properly, so that you can simply say
+<p/>
+        perl script.pl
+<p/>
+or you can just try some of the commands illustrated
+in the demos by just retyping them at the perldl or pdl
+'pdl>' command prompt.
+
+<hr/>
+<pre>
+$x = zeroes 5,5; # 5x5 matrix
+print $x;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [0 0 0 0 0]
+ [0 0 0 0 0]
+ [0 0 0 0 0]
+ [0 0 0 0 0]
+ [0 0 0 0 0]
+]
+</pre>
+
+<hr/>
+Now, don't think that the number of dimensions is limited
+to two:
+<pre>
+$m = zeroes(3,2,2); # 3x2x2 cube
+print $m;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [
+  [0 0 0]
+  [0 0 0]
+ ]
+ [
+  [0 0 0]
+  [0 0 0]
+ ]
+]
+</pre>
+
+<hr/>
+<pre>
+$x ++;      # Operators like increment work..
+print $x;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+ [1 1 1 1 1]
+]
+</pre>
+
+<hr/>
+xvals and yvals (yes, there is also zvals...)
+give you ndarrays which give the coordinate value.
+<pre>
+$y = xvals $x;
+print $y;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [0 1 2 3 4]
+ [0 1 2 3 4]
+ [0 1 2 3 4]
+ [0 1 2 3 4]
+ [0 1 2 3 4]
+]
+</pre>
+
+<hr/>
+So you can do things like
+<pre>
+$y = $x + 0.1 * xvals($x) + 0.01 * yvals($x);
+print $y;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   1  1.1  1.2  1.3  1.4]
+ [1.01 1.11 1.21 1.31 1.41]
+ [1.02 1.12 1.22 1.32 1.42]
+ [1.03 1.13 1.23 1.33 1.43]
+ [1.04 1.14 1.24 1.34 1.44]
+]
+</pre>
+
+<hr/>
+Arithmetic operations work:
+<pre>
+$x = xvals(10) / 5;
+print $x,"\n";
+print ((sin $x),"\n");
+</pre>
+<h4>Output</h4>
+<pre>
+[0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8]
+[0 0.198669330795061 0.389418342308651 0.564642473395035 0.717356090899523 0.841470984807897 0.932039085967226 0.98544972998846 0.999573603041505 0.973847630878195]
+</pre>
+
+<hr/>
+You can also take slices:
+<pre>
+print $y;
+print $y->slice(":,2:3");  # rows 2 and 3
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   1  1.1  1.2  1.3  1.4]
+ [1.01 1.11 1.21 1.31 1.41]
+ [1.02 1.12 1.22 1.32 1.42]
+ [1.03 1.13 1.23 1.33 1.43]
+ [1.04 1.14 1.24 1.34 1.44]
+]
+
+[
+ [1.02 1.12 1.22 1.32 1.42]
+ [1.03 1.13 1.23 1.33 1.43]
+]
+</pre>
+
+<hr/>
+<pre>
+print $y->slice("2:3,:");  # or columns 2 and 3
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [ 1.2  1.3]
+ [1.21 1.31]
+ [1.22 1.32]
+ [1.23 1.33]
+ [1.24 1.34]
+]
+</pre>
+
+<hr/>
+<pre>
+print $y;
+print $y->diagonal(0,1),"\n"; # 0 and 1 are the dimensions
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   1  1.1  1.2  1.3  1.4]
+ [1.01 1.11 1.21 1.31 1.41]
+ [1.02 1.12 1.22 1.32 1.42]
+ [1.03 1.13 1.23 1.33 1.43]
+ [1.04 1.14 1.24 1.34 1.44]
+]
+[1 1.11 1.22 1.33 1.44]
+</pre>
+
+<hr/>
+One of the really nifty features is that the
+slices are actually references back to the original
+ndarray:
+<pre>
+$diag = $y->diagonal(0,1);
+print $y;
+print $diag,"\n";
+$diag+=100;
+print "AFTER:\n";
+print $diag,"\n";
+print "Now, guess what \$y looks like?\n";
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   101    1.1    1.2    1.3    1.4]
+ [  1.01 101.11   1.21   1.31   1.41]
+ [  1.02   1.12 101.22   1.32   1.42]
+ [  1.03   1.13   1.23 101.33   1.43]
+ [  1.04   1.14   1.24   1.34 101.44]
+]
+[101 101.11 101.22 101.33 101.44]
+AFTER:
+[101 101.11 101.22 101.33 101.44]
+Now, guess what $y looks like?
+</pre>
+
+<hr/>
+Yes, it has changed:
+<pre>
+print $y;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   101    1.1    1.2    1.3    1.4]
+ [  1.01 101.11   1.21   1.31   1.41]
+ [  1.02   1.12 101.22   1.32   1.42]
+ [  1.03   1.13   1.23 101.33   1.43]
+ [  1.04   1.14   1.24   1.34 101.44]
+]
+</pre>
+
+<hr/>
+Another example (we only modify elements 0,2 and 4 of
+each row):
+<pre>
+$t = $y->slice("0:4:2"); $t += 50;
+print $y;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   151    1.1   51.2    1.3   51.4]
+ [ 51.01 101.11  51.21   1.31  51.41]
+ [ 51.02   1.12 151.22   1.32  51.42]
+ [ 51.03   1.13  51.23 101.33  51.43]
+ [ 51.04   1.14  51.24   1.34 151.44]
+]
+</pre>
+
+<hr/>
+There are lots of useful functions in e.g. <a href="https://metacpan.org/pod/PDL::Primitive">PDL::Primitive</a>
+and <a href="https://metacpan.org/pod/PDL::Slices">PDL::Slices</a> - we can't show you all but here are some
+examples:
+<pre>
+print $y;
+print $y->sum, "\n";
+print $y->sumover,"\n"; # Only over first dim.
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   151    1.1   51.2    1.3   51.4]
+ [ 51.01 101.11  51.21   1.31  51.41]
+ [ 51.02   1.12 151.22   1.32  51.42]
+ [ 51.03   1.13  51.23 101.33  51.43]
+ [ 51.04   1.14  51.24   1.34 151.44]
+]
+1280.5
+[256 256.05 256.1 256.15 256.2]
+</pre>
+
+<hr/>
+<pre>
+print $y->transpose;
+print $y->minimum,"\n"; # over first dim.
+print $y->min,"\n";
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [   151  51.01  51.02  51.03  51.04]
+ [   1.1 101.11   1.12   1.13   1.14]
+ [  51.2  51.21 151.22  51.23  51.24]
+ [   1.3   1.31   1.32 101.33   1.34]
+ [  51.4  51.41  51.42  51.43 151.44]
+]
+[1.1 1.31 1.12 1.13 1.14]
+1.1
+</pre>
+
+<hr/>
+<pre>
+print $y->random;
+</pre>
+<h4>Output</h4>
+<pre>
+[
+ [        0.47347055         0.32024337         0.67342983         0.38057787         0.98985595]
+ [        0.86153101         0.76617741        0.069531386         0.44541038         0.26869431]
+ [        0.44684925         0.79884564         0.48338415         0.27909375         0.86272075]
+ [        0.84051458         0.84044556         0.34819875         0.48254643        0.029448586]
+ [        0.97609542         0.63718662         0.80349816        0.069538432         0.52532639]
+]
+</pre>
+
+<hr/>
+Here are some more advanced tricks for selecting
+parts of 1-D vectors:
+<pre>
+$x = (xvals 12)/3;
+$i = which(sin($x) > 0.5);   # Indices of those sines > 0.5
+print $x,"\n";
+print $i,"\n";
+print $x->index($i),"\n";
+</pre>
+and we can have the effect of the last command in one
+go using 'where' instead of 'which' and 'index' as in
+<pre>
+print $x->where(sin($x) > 0.5),"\n";
+</pre>
+and finally take the sin of these elements
+(to show that these are indeed the correct ones)
+<pre>
+print sin($x->index($i)),"\n";
+</pre>
+<h4>Output</h4>
+<pre>
+[0 0.333333333333333 0.666666666666667 1 1.33333333333333 1.66666666666667 2 2.33333333333333 2.66666666666667 3 3.33333333333333 3.66666666666667]
+[2 3 4 5 6 7]
+[0.666666666666667 1 1.33333333333333 1.66666666666667 2 2.33333333333333]
+[0.666666666666667 1 1.33333333333333 1.66666666666667 2 2.33333333333333]
+[0.618369803069737 0.841470984807897 0.971937901363313 0.995407957751765 0.909297426825682 0.723085881738325]
+</pre>
+
+<hr/>
+We hope you enjoyed these demos illustrating some
+of the basic capabilities of PDL.
+<p/>
+We encourage you to play with these commands in
+the perldl or pdl2 shell and use its online help support
+to find out more about these and other commands and
+features of PDL.
+<p/>
+Just type 'help' to get started.
+</body>
+</html>

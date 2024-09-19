@@ -190,8 +190,6 @@ h1, h2, h3, h4 { color: #347 }
   text-align: justify;
 }
 
-.main ul, .main ol, .main dl { display: table }
-
 .main .tabs ul, .main .tabs ol { display: block }
 .main .tabs a.link { color: blue }
 
@@ -222,8 +220,7 @@ h1, h2, h3, h4 { color: #347 }
 }
 
 .news dl {
-   width:100%;
-   overflow:hidden;
+   text-align: left;
 }
 
 .news dt {

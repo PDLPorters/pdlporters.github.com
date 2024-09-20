@@ -186,6 +186,56 @@
  are provided for use from the command line along with the <tt>PDL</tt> module
  for use in Perl scripts.</p>
 
+<h2>Integration with other libraries</h2>
+
+To name but a few, there are PDL bindings to:
+
+<ul>
+<li><a href="https://metacpan.org/pod/PDL::GSL::RNG">the GNU Scientific Library</a> (link is to the random-number generation module)
+<li><a href="https://metacpan.org/pod/PDL::OpenCV">OpenCV</a>
+<li><a href="https://metacpan.org/pod/PDL::Graphics::TriD">OpenGL</a>
+<li><a href="https://metacpan.org/pod/PDL::LinearAlgebra">LAPACK</a>
+<li><a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">Gnuplot</a>
+</ul>
+
+For more, select the "External Libs" link in the left-hand sidebar.
+
+<h2>High performance</h2>
+
+A <a
+href="https://chrisarg.github.io/Killing-It-with-PERL/2024/07/06/The-Quest-For-Performance-Part-I-InlineC-OpenMP-PDL.html">recent
+performance comparison</a> showed PDL highly competitive with (faster
+than) NumPy even with Numba, for numerical tasks. This
+is in part due to the automatic "out of the box" <a
+href="https://metacpan.org/pod/PDL::ParallelCPU">POSIX threading in
+PDL</a>. As another mechanism for parallel computing, there is also
+<a
+href="https://metacpan.org/pod/PDL::Parallel::threads">PDL::Parallel::threads</a>,
+which works with Perl's "ithreads" implementation for more explicit
+parallelism. The LAPACK binding (see above) is yet another way to achieve
+fast performance.
+
+<p>For fast graphics performance, there is the OpenGL binding (see above).</p>
+
+<h2>Modern development</h2>
+
+PDL is developed using <tt>git</tt>, on <a
+href="https://github.com/PDLPorters/pdl">GitHub</a>. Every commit
+gets continuous integration (CI) testing against
+<a
+href="https://github.com/PDLPorters/devops/blob/master/data/project.yml">over
+50 downstream modules</a>, and on Windows, MacOS, Linux, and FreeBSD.
+
+<h2>Widely available</h2>
+
+As well as being installable from CPAN, PDL is packaged by <a
+href="https://repology.org/project/perl:pdl/packages">Debian
+and most other free OSes</a>, and a <a
+href="https://strawberryperl.com/releases.html">special edition of
+Strawberry Perl</a>.
+
+<p>For more, select the "Get PDL" link in the top dashboard.</p>
+
 <script type="text/javascript">
 	// Start slideshow plugin.
 	$('.slideshow').cycle({
@@ -194,4 +244,3 @@
 		random: 1
 	});
 </script>
-

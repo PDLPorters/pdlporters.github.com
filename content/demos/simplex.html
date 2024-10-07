@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>simplex - Simplex optimisation</title>
+</head>
+<body>
+<h1>simplex - Simplex optimisation</h1>
+
+This demo illustrates the <a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a> module.
+You must have <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a> installed to run it.
+<p/>
+The simplex algorithm finds the optimum "point" (coordinates) in a space
+you define, which can have any number (called "n" here) of dimensions.
+<p/>
+The algorithm takes either a fully-formed cloud of n+1 points, or a
+single starting point, in which case it constructs the cloud for you
+using the "initsize" parameter. It also takes a function that will take a
+series of points in your space, and returns the "value" at each of those
+points. From that, it works out which point of the simplex to move to be
+closer to the optimum point, which has the lowest value of your function.
+<p/>
+It also takes other, less important parameters, which you'll see,
+including a "logging" function which you can use to report progress,
+or plot data.
+
+<hr/>
+Load the necessary modules, set up a plotting window.
+<pre>
+use <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>;
+use <a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a>;
+$w = pgswin();
+</pre>
+Try a simple ellipsoid; the multiplier makes the algorithm prioritise
+the first (X) dimension, as you'll see on the plot.
+<pre>
+$w->plot(with=>'lines', [0], [1], {xrange=>[-15,5],yrange=>[-15,5]});
+my $mult = pdl 4,1;
+sub func { (($mult * $_[0]) ** 2)->sumover }
+sub logs {
+  $w->oplot(with=>'lines', $_[0]->glue(1,$_[0]->slice(",0"))->using(0,1));
+}
+simplex(pdl(-10,-10), 0.5, 0.01, 30,
+  \&func,
+  \&logs
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/simplex/vid-1.gif"/>
+
+<hr/>
+Now the first of two examples contributed by Alison Offer.
+These values are for both.
+<pre>
+$minsize = 1.e-6; # convergence: if simplex points are this far apart, stop
+$maxiter = 100; # max number of iterations: if done these many, stop
+</pre>
+Now we minimise polynomial: (x-3)^2 + 2*(x-3)*(y-2.5) + 3*(y-2.5)^2
+<pre>
+$w->plot(with=>'lines', [0], [1], {xrange=>[-1,5],yrange=>[-1,4]}); # reset
+$init = pdl [ 0 , 1 ];
+$initsize = 2;
+($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
+  sub {
+    my ($x, $y) = $_[0]->using(0,1);
+    ($x-3)**2 + 2*($x-3)*($y-2.5) + 3*($y-2.5)**2;
+  },
+  \&logs
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/simplex/vid-2.gif"/>
+
+<hr/>
+Now to minimise least squares Gaussian fit to data + noise:
+32 *exp (-((x-10)/6)^2) + noise
+<pre>
+$factor = 3; # noise factor
+</pre>
+data : gaussian + noise
+<pre>
+$j = sequence(20); srandom(5);
+$data = 32*exp(-(($j-10)/6)**2) + $factor * (random(20) - 0.5);
+$init = pdl [ 33, 9, 12 ];
+$initsize = 2;
+</pre>
+The plotting will flatten, i.e. ignore, the third dimension in the vectors.
+<pre>
+$w->plot(with=>'lines', [0], [1], {xrange=>[30,36],yrange=>[7,12]}); # reset
+($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
+  sub {
+    my ($x, $y, $z) = map $_[0]->slice($_), 0..2;
+    (($data - $x*exp(-(($j-$y)/$z)**2))**2)->sumover;
+  },
+  \&logs
+);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/simplex/vid-3.gif"/>
+
+<hr/>
+That concludes the demo of <a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a>. There are other optimisation
+modules for PDL, including <a href="https://metacpan.org/pod/PDL::Opt::GLPK">PDL::Opt::GLPK</a>, <a href="https://metacpan.org/pod/PDL::Opt::NonLinear">PDL::Opt::NonLinear</a>,
+<a href="https://metacpan.org/pod/PDL::Opt::QP">PDL::Opt::QP</a>, <a href="https://metacpan.org/pod/PDL::Opt::ParticleSwarm">PDL::Opt::ParticleSwarm</a>.
+</body>
+</html>

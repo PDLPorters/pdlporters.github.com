@@ -23,32 +23,54 @@
 </table>
 </div>
 <br/>
- 	<div class="slideshow-container">
+        <div class="slideshow-container">
 
-	<div class="slideshow">
-		<img src="images/slideshow/slide01.png" alt="Funny M51 Galaxy" width="200" height="200" />
-		<img src="images/slideshow/slide02.png" alt="3D wire drawing" width="200" height="200" />
-		<img src="images/slideshow/slide03.png" alt="2D plot example" width="200" height="200" class="border" />
-		<a href="https://metacpan.org/pod/PDL::NiceSlice">
-				<img src="images/slideshow/slide06.png" alt="use NiceSlice;" width="200" height="200" />
-		</a>
-		<img src="images/slideshow/slide04.png" alt="Perldl prompt" width="200" height="200" class="border" />
-		<img src="images/slideshow/slide05.png" alt="3D surface plot" width="200" height="200" />
-		<a href="https://metacpan.org/pod/PDL::Graphics::TriD">
-				<img src="images/slideshow/slide07.png" alt="3D graphics with OpenGL" width="200" height="200" />
-		</a>
-		<img src="images/slideshow/slide09.jpg" alt="3D brain MRI" width="200" height="200" />
-		<img src="images/slideshow/slide10.jpg" alt="Galaxy and contours"  width="200" height="200" />
-		<img src="images/slideshow/slide11.jpg" alt="Old PDL logo" width="200" height="200" />
-	</div>
-	</div>
+        <div class="slideshow">
+                <img src="images/slideshow/slide01.png" alt="Funny M51 Galaxy" width="200" height="200" />
+                <img src="images/slideshow/slide02.png" alt="3D wire drawing" width="200" height="200" />
+                <img src="images/slideshow/slide03.png" alt="2D plot example" width="200" height="200" class="border" />
+                <a href="https://metacpan.org/pod/PDL::NiceSlice">
+                                <img src="images/slideshow/slide06.png" alt="use NiceSlice;" width="200" height="200" />
+                </a>
+                <img src="images/slideshow/slide04.png" alt="Perldl prompt" width="200" height="200" class="border" />
+                <img src="images/slideshow/slide05.png" alt="3D surface plot" width="200" height="200" />
+                <a href="https://metacpan.org/pod/PDL::Graphics::TriD">
+                                <img src="images/slideshow/slide07.png" alt="3D graphics with OpenGL" width="200" height="200" />
+                </a>
+                <img src="images/slideshow/slide09.jpg" alt="3D brain MRI" width="200" height="200" />
+                <img src="images/slideshow/slide10.jpg" alt="Galaxy and contours"  width="200" height="200" />
+                <img src="images/slideshow/slide11.jpg" alt="Old PDL logo" width="200" height="200" />
+        </div>
+        </div>
 
-	<div class="news">
-	  <h3>Recent News</h3>
-	  <dl>
+        <div class="news">
+          <h3>Recent News</h3>
+          <dl>
+
+            <dt>2024-10-07</dt>
+            <dd>Demos for
+            <a href="https://pdl.perl.org/?page=demos/proj">PDL::Transform::Proj4</a> and
+            <a href="https://pdl.perl.org/?page=demos/simplex">PDL::Opt::Simplex</a> have been added to the site.
+            </dd>
+
+            <dt>2024-09-30</dt>
+            <dd><a href="https://metacpan.org/release/ETJ/PDL-Minuit-0.001">PDL::Minuit 0.001</a> has been released to CPAN, marking its independence; it will not feature in the next release of main PDL.</dd>
+
+            <dt>2024-09-30</dt>
+            <dd><a href="https://metacpan.org/release/ETJ/PDL-Graphics-IIS-0.001">PDL::Graphics::IIS 0.001</a> has been released to CPAN, marking its independence; it will not feature in the next release of main PDL.</dd>
+
+            <dt>2024-09-29</dt>
+            <dd>Announcing the release of <a href="https://metacpan.org/release/ETJ/PDL-2.093">PDL 2.093 to CPAN</a>:
+                <ul>
+                  <li>fix minmax with NaNs
+                  <li>enhance Transform::Cartography::clean_lines
+                  <li>IO::Pic use IO::GD for JPEG if available, so Windows can read them
+                  <li>Primitive::matmult can handle bad values
+                </ul>
+                </dd>
 
             <dt>2024-09-19</dt>
-	    <dd><a href="https://metacpan.org/release/ETJ/Gimp-2.38/view/lib/Gimp.pm">Gimp-Perl 2.38</a> has been released to CPAN.</dd>
+            <dd><a href="https://metacpan.org/release/ETJ/Gimp-2.38/view/lib/Gimp.pm">Gimp-Perl 2.38</a> has been released to CPAN.</dd>
 
             <dt>2024-09-18</dt>
             <dd>
@@ -93,18 +115,6 @@
               </ul>
             </dd>
 
-            <dt>2024-08-23</dt>
-            <dd>Announcing the release
-            of <a href="https://metacpan.org/release/ETJ/PDL-2.090">PDL 2.090 to CPAN</a>:
-                <ul>
-                    <li>change dataflow to work one-shot each time like "inplace"
-                    <li>add demo of GSL::RNG
-                    <li>fix MatrixOps::eigens for asymmetric case inc complex eigenvectors
-                    <li>fix GSL problem on Windows
-                    <li>wfits fixed to handle multi-line HISTORY
-                </ul>
-                </dd>
-
             <dt>2024-04-25</dt>
             <dd><a href="https://metacpan.org/release/ETJ/PDL-Opt-NonLinear-0.09/view/GENERATED/PDL/Opt/NonLinear.pm">PDL::Opt::NonLinear 0.09</a> has been released to CPAN.</dd>
 
@@ -128,17 +138,17 @@
             <dt>2024-04-22</dt>
             <dd><a href="https://metacpan.org/release/ETJ/PDL-Graphics-Simple-1.011/view/lib/PDL/Graphics/Simple.pm">PDL::Graphics::Simple 1.011</a> has been released to CPAN.</dd>
 
-	    <dt>2024-04-15</dt>
-	    <dd><a href="https://github.com/PDLPorters/SciPDL">New location for SciPDL</a>, a drag-and-drop PDL installer for MacOS 10.9+</dd>
+            <dt>2024-04-15</dt>
+            <dd><a href="https://github.com/PDLPorters/SciPDL">New location for SciPDL</a>, a drag-and-drop PDL installer for MacOS 10.9+</dd>
 
             <dt>2024-03-26</dt>
             <dd><a href="https://metacpan.org/release/SOMMREY/PDL-Opt-GLPK-0.07/view/GENERATED/PDL/Opt/GLPK.pm">PDL::Opt::GLPK 0.07</a> has been released to CPAN.</dd>
 
-	    <dt>2024-02-24</dt>
-	    <dd><a href="https://metacpan.org/release/ETJ/PDL-FFTW3-0.19/view/GENERATED/PDL/FFTW3.pm">PDL::FFTW3 0.19</a> has been released to CPAN.</dd>
+            <dt>2024-02-24</dt>
+            <dd><a href="https://metacpan.org/release/ETJ/PDL-FFTW3-0.19/view/GENERATED/PDL/FFTW3.pm">PDL::FFTW3 0.19</a> has been released to CPAN.</dd>
 
             <dt>2023-03-26</dt>
-	    <dd><a href="https://metacpan.org/pod/PDL::OpenCV">PDL::OpenCV 0.001</a> has been released to CPAN.</dd>
+            <dd><a href="https://metacpan.org/pod/PDL::OpenCV">PDL::OpenCV 0.001</a> has been released to CPAN.</dd>
 
             <dt>2023-01-12</dt>
             <dd>
@@ -159,20 +169,20 @@
               </ul>
             </dd>
 
-	    <dt>2022-04-27</dt>
-	    <dd><a href="https://metacpan.org/release/ETJ/PDL-NetCDF-4.24/view/GENERATED/PDL/NetCDF.pm">PDL::NetCDF 4.24</a> has been released to CPAN.</dd>
+            <dt>2022-04-27</dt>
+            <dd><a href="https://metacpan.org/release/ETJ/PDL-NetCDF-4.24/view/GENERATED/PDL/NetCDF.pm">PDL::NetCDF 4.24</a> has been released to CPAN.</dd>
 
-	    <dt>2021-02-16</dt>
-	    <dd><a href="https://metacpan.org/release/KGB/ExtUtils-F77-1.26/view/F77.pm">ExtUtils::F77 1.26</a> has been released to CPAN.</dd>
+            <dt>2021-02-16</dt>
+            <dd><a href="https://metacpan.org/release/KGB/ExtUtils-F77-1.26/view/F77.pm">ExtUtils::F77 1.26</a> has been released to CPAN.</dd>
 
-	    <dt>2017-02-25</dt>
-	    <dd><a href="https://sourceforge.net/p/pogl/mailman/message/35688713/">Announcing</a> the second release of <a href="https://metacpan.org/release/CHM/OpenGL-Modern-0.04/view/lib/OpenGL/Modern.pm">OpenGL::Modern 0.04</a> to CPAN.</dd>
+            <dt>2017-02-25</dt>
+            <dd><a href="https://sourceforge.net/p/pogl/mailman/message/35688713/">Announcing</a> the second release of <a href="https://metacpan.org/release/CHM/OpenGL-Modern-0.04/view/lib/OpenGL/Modern.pm">OpenGL::Modern 0.04</a> to CPAN.</dd>
 
           </dl>
 
           <p>The <a href="https://metacpan.org/dist/PDL/changes">complete version history of PDL</a> is available in MetaCPAN.</p>
 
-	</div>
+        </div>
 
  <p>PDL ("Perl Data Language") gives standard Perl the ability to
  <em>compactly</em> store and <em>speedily</em> manipulate the large
@@ -238,10 +248,10 @@ Strawberry Perl</a>.
 <p>For more, select the "Get PDL" link in the top dashboard.</p>
 
 <script type="text/javascript">
-	// Start slideshow plugin.
-	$('.slideshow').cycle({
-		fx: 'fade,curtainX,turnDown,scrollRight',
-		timeout: 25000,
-		random: 1
-	});
+        // Start slideshow plugin.
+        $('.slideshow').cycle({
+                fx: 'fade,curtainX,turnDown,scrollRight',
+                timeout: 25000,
+                random: 1
+        });
 </script>

@@ -11,6 +11,9 @@ data:
     - date: 2024-11-29
     - date: 2024-11-30
     - date: 2018-12-01
+      title: Introduction
+      href: '/blog/2024/12/01/introduction/'
+      image: '/blog/2024/12/01/introduction/banner.jpg'
     - date: 2024-12-02
     - date: 2024-12-03
     - date: 2024-12-04

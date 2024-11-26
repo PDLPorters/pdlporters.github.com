@@ -1,11 +1,31 @@
-![Red door with number 1](/advent/2024/1/banner.jpg "The Old Rodney, The Wharfage, Ironbridge by ell brown is licensed under CC BY 2.0")
-# What is Perl Data Langauge?
+---
+title: Day 1: What is Perl Data Langauge?
+disable_content_template: 1
+tags:
+    - advent
+    - slicing
+    - 'bad values'
+author: Boyd Duffee
+images:
+  banner:
+    src: '/advent/2024/1/banner.jpg'
+    alt: 'Door number 1'
+    data:
+      attribution: |-
+        <a href="https://www.flickr.com/photos/39415781@N06/4484079702">The Old Rodney, The Wharfage, Ironbridge - red door and faded old pub signs</a>" by <a href="https://www.flickr.com/photos/39415781@N06">ell brown</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a>
+data:
+  bio: duffee
+  description: 'Getting started with PDL (Perl Data Language)'
+---
 
 If you have a bunch of numerical data that you need crunched fast, you need [PDL](https://pdl.perl.org/) !
+---
 
-PDL stores its values in a "vectorized data structure" which is compact in memory, usually in `double`s and pre-declared sizes.
+PDL stores its values in a "vectorized data structure" which is compact in memory,
+usually in `double`s and pre-declared sizes.
 This allows for fast traversal and manipulation.
-The underlying code is written in C for speed, with access to the internal structure for those who feel the need to tinker.
+The underlying code is written in C for speed, with access to the internal structure
+for those who feel the need to tinker.
 
 A PDL object is sometimes refered to as an **ndarray** (N-dimensional array) to conform with usage in other languages.
 Simply put, PDL gives you the ability to process large chunks of data at once.

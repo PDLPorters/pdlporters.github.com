@@ -39,7 +39,7 @@ site:
     #
     # If the base_url contains a path, all internal links will be
     # rewritten appropriately.
-    base_url: 'https://pdl.perl.org'
+    base_url: 'https://pdl.perl.org/advent/'
 
     # apps: These are the applications in this site. The name of the app,
     # "blog", "page", or "static", is used to refer to it in commands.

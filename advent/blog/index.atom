@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-01T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/01/introduction/</id>
+        <title>Day 1: What is Perl Data Language?</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/01/introduction/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you have a bunch of numerical data that you need crunched fast, you need <a href="https://pdl.perl.org/">PDL</a> !</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/01/introduction/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/introduction/">introduction</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/slicing/">slicing</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/bad-values/">bad values</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-01T00:00:00Z</updated>
+        <category term="introduction" />
+        <category term="slicing" />
+        <category term="bad values" />
+    </entry>
+</feed>
+

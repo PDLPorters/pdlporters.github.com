@@ -24,6 +24,7 @@ sidebar = [
   {
     title: 'Resources',
     pages: [
+      new ExternalLink('Advent 2024', 'advent/index.html'),
       new PageLink('Demos', 'demos/index'),
       new WikiLink('Presentations', 'Colloquia'),
       new WikiLink('PDL Wiki'),

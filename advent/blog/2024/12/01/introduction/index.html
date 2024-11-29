@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/01/introduction/" property="og:url">
+  <meta content="Day 1: What is Perl Data Language?" property="og:title">
+    <meta content="Getting started with PDL (Perl Data Language)" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 1: What is Perl Data Language? - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/blog">Blog</a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 1: What is Perl Data Language?</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-01">Dec  1, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Door number 1" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>If you have a bunch of numerical data that you need crunched fast, you need <a href="https://pdl.perl.org/">PDL</a> !</p>
+
+              </section>
+              <section id="section-2">
+                  <p>PDL stores its values in a &quot;vectorized data structure&quot; which is compact in memory,
+usually in <code>double</code>s and pre-declared sizes.
+This allows for fast traversal and manipulation.
+The underlying code is written in C for speed, with access to the internal structure
+for those who feel the need to tinker.</p>
+
+<p>A PDL object is sometimes refered to as an <strong>ndarray</strong> (N-dimensional array) to conform with usage in other languages.
+Simply put, PDL gives you the ability to process large chunks of data at once.</p>
+
+<h2>Getting Started</h2>
+
+<p>If you&#39;re starting from scratch, the first thing to do is to <a href="https://pdl.perl.org/?page=install">install PDL</a>
+(and if you&#39;re going for the latest version, my personal preference is the
+<a href="https://metacpan.org/pod/App::cpanminus">cpanminus</a> tool to install it with using <code>cpanm</code> in place of <code>cpan</code>).</p>
+
+<p>Once installed, run either the <code>perldl</code> or the <code>pdl2</code> command to get the PDL shell so we can start playing</p>
+
+<pre><code>pdl&gt; $x = ones(5)               # a 1D array of 5 ones
+pdl&gt; p $x
+[1 1 1 1 1]
+
+pdl&gt; $y = 5 * $x + sequence(5)  # multiply every element of $x by 5 and add [0 1 2 3 4]
+pdl&gt; p $y
+[5 6 7 8 9]
+
+pdl&gt; $z = sequence(2,2)         # a 2x2 matrix
+pdl&gt; p $z
+[
+ [0 1]
+ [2 3]
+]
+</code></pre>
+
+<p>Let me unpack a bit of that for you ...</p>
+
+<h3>Data In</h3>
+
+<p>You can make a PDL object (or NDArray) out of any sensible perl array like</p>
+
+<pre><code>$vector = pdl( 0, 1, 2, 3, 4 );
+$matrix = pdl( [1..3],[4..6]);
+</code></pre>
+
+<p>There are also more helper functions than just <code>ones</code> and <code>sequence</code> for quickly getting started.
+The functions <code>zeroes</code>, <code>random</code>, <code>nan</code> and <code>inf</code> do what you think they might.
+For fun, try out <code>xvals(3,3,3)</code>, <code>yvals(3,3,3)</code> and <code>zvals(3,3,3)</code> to see what they do.</p>
+
+<p>You can also read in data from files in a number of formats, like CSV, HDF, Matlab and various image formats.
+For the astronomers out there, the <code>rfits</code> command for FITS images</p>
+
+<pre><code>$image = rfits $file;
+</code></pre>
+
+<p>will also give you access to the FITS header data recorded when the image was taken.</p>
+
+<h3>Data manipulation</h3>
+
+<p>Did you notice the lack of looping when we defined <code>$y</code> above?
+PDL tries hard to <em>Do What You Mean</em> with NDArray operations and usually takes care of the looping for you.
+So <code>5 * $x</code> multiplies every element by 5 and if two NDArrays are the same size,
+it will operate on each element at the same index,
+so <code>$c = $a + $b</code> is the same as <strong>c<sub>ijk</sub> = a<sub>ijk</sub> + b<sub>ijk</sub></strong>
+for all <code>i</code>, <code>j</code> and <code>k</code>.</p>
+
+<p>Because it does the obvious thing,
+it might catch you out when your Algebra brain thinks about multiplying matrices or dot products.
+I&#39;ll get to that <a href="https://metacpan.org/pod/PDL::MatrixOps">in another blog post.</a></p>
+
+<h2>Features</h2>
+
+<h3>Slicing, Dicing and Indexing</h3>
+
+<p>People always want to do strange things to data,
+the same way otherwise normal people drag perfectly happy trees indoors to decorate when the nights get cold and dark.
+You want to carve up your data like a <a href="https://www.youtube.com/watch?v=ey794pYaYCU">Wild Haggis</a>
+and PDL lets you extract or operate on <a href="https://metacpan.org/pod/PDL::Slices">specific indices</a> (or <em>not</em> those indices)
+of your ndarrays.</p>
+
+<p>You can move stuff around with <code>mv()</code>, exchange two dimensions with <code>xchg()</code>, shift elements along with <code>rotate()</code>
+or just <code>reorder()</code> all the dimensions at once.</p>
+
+<p>Here&#39;s an example of creating a circular mask to remove the bright bulge of a galaxy
+in order to calculate the total luminosity of its spiral arms.</p>
+
+<pre><code>$galaxy = rfits &quot;m51.fits&quot;;
+$radial = rvals $galaxy;   # values increase radially
+$mask = $radial&lt;50;        # a solid circle around the centre, with radius of 50
+$disk = $galaxy * (1 - $mask);
+$luminosity = sum $disk;
+</code></pre>
+
+<p>which would look like
+<img alt="The Whirlpool Galaxy with a mask over the central bulge" src="https://pdl.perl.org/content/book/firststeps/sepia/crop/whirl-maskd.png"></p>
+
+<p>See the <a href="https://pdl.perl.org/?page=book/index#Whirling-through-the-Whirlpool">PDL Book</a>
+for a complete discussion on doing photometry with masks.</p>
+
+<p>Don&#39;t like the slicing syntax? Try <a href="https://metacpan.org/pod/PDL::NiceSlice">PDL::NiceSlice</a></p>
+
+<h3>Bad Values</h3>
+
+<p>Do you have missing or unreliable data?
+The first two ideas you think of how to handle this problem are probably wrong. Using
+<a href="https://metacpan.org/pod/PDL::Bad">Bad Values</a> is the right way to mark points that shouldn&#39;t be used in calculations.
+Most PDL functions are aware of Bad Values and will propagate them correctly for you.
+I will go further into this topic in a later post.</p>
+
+<h3>REPL included</h3>
+
+<p>As seen above,
+PDL comes with a built-in <a href="https://metacpan.org/pod/perldl">Read-Eval-Print Loop</a>
+(the <code>perldl</code> or <code>pdl2</code> shells) for you to explore the language as well as your data.
+Every statement is evaluated as soon has you hit Enter and the shell has a few shortcuts,
+such as <strong><code>p</code></strong> to pretty print a data structure soon to be joined by <strong><code>x</code></strong> which will <strong>Data::Dumper</strong> your data.</p>
+
+<h3>And so much more!</h3>
+
+<p>That&#39;s not even the tip of the iceberg. Also available are:</p>
+
+<ul>
+<li>Even More <a href="https://metacpan.org/pod/PDL::Stats">Statistical tools</a> which include
+<ul>
+<li><a href="https://metacpan.org/pod/PDL::Stats::Kmeans">Kmeans clustering</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Stats::GLM">Linear Modeling</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Stats::TS">Time Series analysis</a></li>
+</ul></li>
+<li>The <a href="https://metacpan.org/pod/PDL::Opt::Simplex">Simplex optimization algorithm</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Fit::LM">Nonlinear least squares fitting routines</a></li>
+<li>An interface to the <a href="https://metacpan.org/pod/PDL::FFTW3">Fastest Fourier Transform in the West v3</a></li>
+<li>An interface to some routines of the <a href="https://metacpan.org/pod/PDL::LinearAlgebra">BLAS and LAPACK library</a></li>
+</ul>
+
+<p>to name a few.</p>
+
+<h2>PDL Culture</h2>
+
+<h3>The Early Days of PDL</h3>
+
+<p>PDL has been around a long time, released before Numpy.
+But whereas, pythonistas load numpy at the drop of a hat, Perl has a lot of alternatives before bringing out the big guns.
+My personal view is that when PDL was released in 1996, a bunch of people jumped on it,
+got it into a state where you could do everything with it and when it hit version 2.4, they kinda moved on to their own stuff.
+They&#39;d spent too much time getting stuff done and not enough time telling everybody about it.
+To be fair, at the time the modes of information transfer were maillists and websites which are harder to stumble across.
+YouTube hadn&#39;t even got started by then, let alone a growing repository of tutorials at your fingertips.</p>
+
+<h3>Current state of PDL</h3>
+
+<p>Since 2019, the project has been driven by a Release Early, Release Often mantra and is currently at 2.095 (Nov 2024).
+Ed and the PDL Porters have been smashing bugs and improving performance.</p>
+
+<p>Questions following this talk at the <a href="https://www.youtube.com/watch?v=mUco0dlxZbI">London Perl Workshop</a>
+start with <em>Is it like Numpy?</em> at 9:40. The short answer is <em>Yes, but better</em> ;)</p>
+
+<p>Oh, and it also plays well with (meaning it has bindings for)
+<a href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a>, <a href="https://opencv.org/">OpenCV</a>, <a href="https://www.opengl.org/">OpenGL</a>, <a href="https://en.wikipedia.org/wiki/LAPACK">LAPACK</a> and <a href="http://gnuplot.info/">Gnuplot</a>,
+amongst others.
+And now there&#39;s an easy install of <a href="https://github.com/PDLPorters/SciPDL">PDL on MacOS</a>. What&#39;s not to like!</p>
+
+<h2>A Few Resources</h2>
+
+<p>Here&#39;s a few webpages to keep you busy while you&#39;re waiting for the next Advent post.</p>
+
+<ul>
+<li>Main website https://pdl.perl.org/</li>
+<li><a href="https://pdl.perl.org/?page=book/index">The PDL Book</a></li>
+<li><a href="https://gitlab.com/duffee/pdl-100">100 PDL Exercises</a> with some answers still left to find</li>
+</ul>
+
+<p>Happy Number Crunching!</p>
+
+              </section>
+              <small><p><a href="https://www.flickr.com/photos/39415781@N06/4484079702">The Old Rodney, The Wharfage, Ironbridge - red door and faded old pub signs</a>&quot; by <a href="https://www.flickr.com/photos/39415781@N06">ell brown</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a></p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/introduction/">introduction</a>,
+                  <a href="/advent/blog/tag/slicing/">slicing</a>,
+                  <a href="/advent/blog/tag/bad-values/">bad values</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd Duffee has been hanging around the <a href="https://metacpan.org/author/DUFFEE">edges</a> of the Perl ecosystem for many moons, picking up new bits of shiny to make SysAdmining more interesting.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/blog">Blog.</a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

@@ -110,7 +110,7 @@ site:
                 name: Ed J
                 image: 'https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg'
                 text: |-
-                  Ed J (aka "mohawk" on IRC) has been using Perl for a long time. He is currently porting the reference [GraphQL](http://graphql.org/) implementation from the [JavaScript version](http://graphql.org/graphql-js/) to [Perl](https://metacpan.org/pod/GraphQL). Find out more by [joining the `#graphql-perl` channel on irc.perl.org](https://chat.mibbit.com/?channel=%23graphql-perl&server=irc.perl.org)!
+                  Ed J (aka "mohawk" on IRC) has been using Perl for a long time. He ported the reference [GraphQL](http://graphql.org/) implementation from the [JavaScript version](http://graphql.org/graphql-js/) to [Perl](https://metacpan.org/pod/GraphQL). He is currently release manager for PDL.
             duffee :
                 name: 'Boyd Duffee'
                 image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'

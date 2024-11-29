@@ -1,0 +1,14 @@
+<div id="page-title">
+
+  <div class="row">
+
+      <div class="ten columns centered text-center">
+        %= include 'site/title.html.ep', title => $title
+        <p><%== $subtitle %></p>
+      </div>
+
+  </div>
+
+</div>
+
+

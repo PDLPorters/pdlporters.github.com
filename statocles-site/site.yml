@@ -30,7 +30,7 @@ site:
     $class: 'Statocles::Site'
 
     # title: This is the title of the site, shown in the <title> tag
-    title: 'My Statocles Site'
+    title: 'PDL Advent calendar 2024'
 
     # base_url: This is the base URL the site will be deployed to. It
     # should be a full URL, and may contain a path, like:
@@ -39,7 +39,7 @@ site:
     #
     # If the base_url contains a path, all internal links will be
     # rewritten appropriately.
-    base_url: 'http://www.example.com'
+    base_url: 'https://pdl.perl.org'
 
     # apps: These are the applications in this site. The name of the app,
     # "blog", "page", or "static", is used to refer to it in commands.
@@ -58,6 +58,10 @@ site:
     plugins:
         link_check:
             $class: 'Statocles::Plugin::LinkCheck'
+        highlight:
+            $class: Statocles::Plugin::Highlight
+            $args:
+                style: sunburst
 
     # theme: The theme builds and manages the templates. Use themes to
     # change how your site looks.
@@ -86,6 +90,33 @@ site:
     deploy:
         $ref: 'deploy'
 
+    data:
+        highlight:
+            style: 'sunburst'
+            languages:
+                - perl
+                - bash
+                - yaml
+                - xml
+        bios:
+            jberger:
+                name: 'Joel Berger'
+                twitter: '@joelaberger'
+                image: 'https://secure.gravatar.com/avatar/cc767569f5863a7c261991ee5b23f147'
+                text: |-
+                  Joel has Ph.D. in Physics from the University of Illinois at Chicago.
+                  He an avid Perl user and [author](https://metacpan.org/author/JBERGER) and is a member of the Mojolicious Core Team.
+            mohawk:
+                name: Ed J
+                image: 'https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg'
+                text: |-
+                  Ed J (aka "mohawk" on IRC) has been using Perl for a long time. He is currently porting the reference [GraphQL](http://graphql.org/) implementation from the [JavaScript version](http://graphql.org/graphql-js/) to [Perl](https://metacpan.org/pod/GraphQL). Find out more by [joining the `#graphql-perl` channel on irc.perl.org](https://chat.mibbit.com/?channel=%23graphql-perl&server=irc.perl.org)!
+            duffee :
+                name: 'Boyd Duffee'
+                image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'
+                text: |-
+                  Boyd Duffee has been hanging around the [edges](https://metacpan.org/author/DUFFEE) of the Perl ecosystem for many moons, picking up new bits of shiny to make SysAdmining more interesting.  He's interested in Data Science, Complex Networks and walks in the woods.
+
 # theme: These are the settings for the theme.  See Statocles::Help::Theme for
 # more information, and Statocles::Theme for a full list of attributes and what
 # they do
@@ -102,7 +133,6 @@ theme:
 # deploy: These are the settings for the site's deploy. See Statocles::Deploy::File
 # for a full list of attributes and what they do.
 deploy:
-    $class: 'Statocles::Deploy::File'
     $class: 'Statocles::Deploy::File'
     path: '.'
 

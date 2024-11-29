@@ -1,95 +1,138 @@
-<header>
-    <h1><%== $self->title %></h1>
+%= include 'blog/title.html.ep'
 
-    <aside>
-        <time datetime="<%= $self->date->strftime('%Y-%m-%d') %>">
-            Posted on <%= $self->date->strftime('%Y-%m-%d') %>
-        </time>
-        % if ( $self->author ) {
-            <span class="author">
-                by <%= $self->author %>
-            </span>
-        % }
-    </aside>
+<div class="content-outer">
 
-    <p class="tags">Tags:
-    % for my $tag ( $self->tags ) {
-        <a href="<%= $tag->href %>" rel="tag"><%== $tag->text %></a>
-    % }
-    </p>
+  <div id="page-content" class="row">
 
-    % if ( $self->links( 'crosspost' ) ) {
-    <p>Originally posted as:
-        % for my $link ( $self->links( 'crosspost' ) ) {
-            <a href="<%= $link->href %>">
-                <em><%= $self->title %></em> on <%= $link->title %>.
-            </a>
-        % }
-    </p>
-    % }
+      <div id="primary" class="eight columns">
 
-</header>
-% my @sections = $self->sections;
-% for my $i ( 0..$#sections ) {
-<section id="section-<%= $i+1 %>">
-    <%= $sections[$i] %>
-</section>
-% }
+        <article class="post">
 
-<ul class="pager">
-    <li class="prev">
-        % if ( $self->next ) {
-            <a class="button button-primary" rel="prev"
-                href="<%= $self->next %>"
-            >
-                &larr; Older
-            </a>
-        % }
-        % else {
-            <button disabled>
-                &larr; Older
-            </button>
-        % }
-    </li>
-    <li class="next">
-        % if ( $self->prev ) {
-            <a class="button button-primary" rel="next"
-                href="<%= $self->prev %>"
-            >
-                Newer &rarr;
-            </a>
-        % }
-        % else {
-            <button disabled>
-                Newer &rarr;
-            </button>
-        % }
-    </li>
-</ul>
+            <div class="entry-header cf">
 
-% if ( $site->data->{disqus}{shortname} ) {
-<h1>Comments</h1>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = '<%= $site->data->{disqus}{shortname} %>';
-    var disqus_identifier = '<%= $self->document->path %>';
-    var disqus_url = '<%= $site->url( $self->path ) %>';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-% }
+              <h1><%== $self->title %></h1>
 
-% content tags => begin
-    <nav id="tags">
-        <h1>Tags</h1>
-        <ul class="list-inline">
-        % for my $tag ( $app->tags ) {
-            <li><a href="<%= $tag->href %>"><%== $tag->text %></a></li>
+              <p class="post-meta">
+
+                  <time class="date" datetime="<%= $self->date->strftime('%Y-%m-%d') %>"><%= $self->date->strftime('%b %e, %Y') %></time>
+                  <%# #categories
+                  /
+                  <span class="categories">
+                  <a href="#">Design</a> /
+                  <a href="#">User Inferface</a> /
+                  <a href="#">Web Design</a>
+                  </span>
+                  %>
+
+              </p>
+
+            </div>
+
+            % my $banner = $self->images('banner');
+            % if ($banner) {
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img src="<%== $banner->src %>" alt="<%== $banner->alt %>">
+              </div>
+            % }
+
+            <div class="post-content">
+              %# note that p.lead gets a slight emphasis
+
+              % my @sections = $self->sections;
+              % for my $i ( 0..$#sections ) {
+              <section id="section-<%= $i+1 %>">
+                  <%= $sections[$i] %>
+              </section>
+              % }
+              % if ($banner && (my $attribution = $banner->data->{attribution})) {
+              <small><%= markdown $attribution %></small>
+              % }
+
+              % my @tags = $self->tags;
+              % if (@tags) {
+              <p class="tags">
+                <span>Tagged in </span>:
+                % for my $tag ( @tags ) {
+                  <a href="<%= $tag->href %>"><%== $tag->text %></a><% unless ($tag == $tags[-1]) { %>,<% } %>
+                % }
+              </p>
+              % }
+
+              % if (my $bios = $self->data->{bio}) {
+                % if (ref $bios ne 'ARRAY') { $bios = [$bios] }
+                % for my $bio (@$bios) {
+
+                  % if (! ref $bio) { $bio = $site->data->{bios}{$bio} || die "Unknown bio '$bio'" }
+                  <div class="bio cf">
+
+                      % if (my $image = $bio->{image}) {
+                      <div class="gravatar">
+                        <img src="<%== $image %>" alt="author image">
+                      </div>
+                      % }
+                      <div class="about">
+                        % if (my $homepage = $bio->{homepage}) {
+                        <h5><a title="Posts by <%== $bio->{name} %>" href="<%== $homepage %>" rel="author"><%== $bio->{name} %></a></h5>
+                        % } else {
+                        <h5><%== $bio->{name} %></h5>
+                        % }
+                        <%= markdown $bio->{text} %>
+                      </div>
+
+                  </div>
+                % }
+              % }
+
+              <ul class="post-nav cf">
+                %# back compatibility for before page had access to the full page objects that surround it
+                % if ($self->can('next_page')) {
+                  % if (my $next = $self->next_page) {
+                  <li class="prev"><a rel="prev" href="<%= $next->path %>"><strong>Previous Article</strong> <%== $next->title %></a></li>
+                  % }
+                  % if (my $prev = $self->prev_page) {
+                  <li class="next"><a rel="next" href="<%= $prev->path %>"><strong>Next Article</strong> <%== $prev->title %> </a></li>
+                  % }
+                % } else {
+                  % if (my $next = $self->next) {
+                  <li class="prev"><a rel="prev" href="<%= $next %>"><strong>Previous Article</strong></a></li>
+                  % }
+                  % if (my $prev = $self->prev) {
+                  <li class="next"><a rel="next" href="<%= $prev %>"><strong>Next Article</strong></a></li>
+                  % }
+                % }
+              </ul>
+
+            </div>
+
+        </article>
+
+        % if ( $site->data->{disqus}{shortname} ) {
+        <div id="comments">
+          <h3>Comments</h3>
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = '<%= $site->data->{disqus}{shortname} %>';
+              var disqus_identifier = '<%= $self->document->path %>';
+              var disqus_url = '<%= $site->url( $self->path ) %>';
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
         % }
-        </ul>
-    </nav>
-% end
+
+      </div>
+
+      <div id="secondary" class="four columns end">
+        <aside id="sidebar">
+          %= include 'site/sidebar.html.ep'
+        </aside>
+      </div>
+
+   </div>
+
+</div>

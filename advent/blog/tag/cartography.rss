@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>PDL Advent calendar 2024</title>
-        <link>https://pdl.perl.org/advent/blog/</link>
-        <atom:link href="https://pdl.perl.org/advent/blog/index.rss" rel="self" type="application/rss+xml" />
+        <link>https://pdl.perl.org/advent/blog/tag/cartography/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/cartography.rss" rel="self" type="application/rss+xml" />
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
@@ -23,26 +23,6 @@
             ]]></description>
             <pubDate>
                 Mon, 02 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 1: What is Perl Data Language?</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/01/introduction/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/01/introduction/</guid>
-            <description><![CDATA[
-                <p>If you have a bunch of numerical data that you need crunched fast, you need <a href="https://pdl.perl.org/">PDL</a> !</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/01/introduction/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/introduction/">introduction</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/slicing/">slicing</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/bad-values/">bad values</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Sun, 01 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

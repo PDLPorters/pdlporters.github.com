@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/cartography/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-02T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/cartography.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/cartography/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/02/cartography/</id>
+        <title>Day 2: Maps with Perl Data Language</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/02/cartography/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you want to visualise or transform cartographic data, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/02/cartography/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/cartography/">cartography</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/transform/">transform</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-02T00:00:00Z</updated>
+        <category term="cartography" />
+        <category term="transform" />
+    </entry>
+</feed>
+

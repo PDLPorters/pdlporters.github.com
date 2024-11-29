@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/02/cartography/" property="og:url">
+  <meta content="Day 2: Maps with Perl Data Language" property="og:title">
+    <meta content="Maps with PDL (Perl Data Language)" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 2: Maps with Perl Data Language - PDL Advent calendar 2024</title>
+  <meta content="Ed J" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/blog">Blog</a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 2: Maps with Perl Data Language</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-02">Dec  2, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Old world map" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>If you want to visualise or transform cartographic data, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>Santa&#39;s chief planner knew she had to have good visuals that even the
+reindeer could understand. Maybe this time they wouldn&#39;t get lost
+again! She read the introduction to PDL article - maybe that could help?</p>
+
+<p><a href="https://metacpan.org/pod/PDL::Transform::Cartography">PDL::Transform::Cartography</a>
+includes a global earth vector coastline map and night and day world
+image maps, as well as the infrastructure for transforming them to
+different coordinate systems.
+<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>
+lets you see the results easily.</p>
+
+<p>Load the necessary modules:</p>
+
+<pre><code>use PDL::Graphics::Simple;
+use PDL::Transform::Cartography;
+</code></pre>
+
+<p>Get the vector coastline map (and a lon/lat grid), and load the Earth
+RGB daytime image -- both of these are built-in to the module. The
+coastline map is a set of (X,Y,Pen) vectors:</p>
+
+<pre><code>$coast = earth_coast()-&gt;glue( 1, scalar graticule(15,1) );
+print &quot;Coastline data are a collection of vectors:  &quot;,
+         join(&quot;x&quot;,$coast-&gt;dims),&quot;\n&quot;;
+$map = earth_image(&#39;day&#39;);
+print &quot;Map data are RGB:   &quot;,join(&quot;x&quot;,$map-&gt;dims),&quot;\n\n&quot;;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Coastline data are a collection of vectors:  3x27065
+Map data are RGB:   2048x1024x3
+</code></pre>
+
+<p>Map data are stored natively in Plate Carree format.
+The image contains a FITS header that contains coordinate system info.</p>
+
+<pre><code>print &quot;FITS HEADER INFORMATION:\n&quot;;
+for $_(sort keys %{$map-&gt;hdr}){
+  next if(m/SIMPLE/ || m/HISTORY/ || m/COMMENT/);
+  printf (&quot;  %8s: %10s%s&quot;, $_, $map-&gt;hdr-&gt;{$_}, (++$i%3) ? &quot;  &quot; : &quot;\n&quot;); 
+}
+print &quot;\n&quot;;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>FITS HEADER INFORMATION:
+  CDELT1: 0.17578125      CDELT2: 0.17578125      CDELT3: 0.666666666666667
+  CRPIX1:     1024.5      CRPIX2:      512.5      CRPIX3:          1
+  CRVAL1:          0      CRVAL2:          0      CRVAL3:          0
+  CTYPE1:  Longitude      CTYPE2:   Latitude      CTYPE3:        RGB
+  CUNIT1:    degrees      CUNIT2:    degrees      CUNIT3:      index
+   NAXIS:          3      NAXIS1:       2048      NAXIS2:       1024
+  NAXIS3:          3  
+</code></pre>
+
+<p>Show the results:</p>
+
+<pre><code>$w = pgswin();
+$w-&gt;plot(with=&gt;&#39;fits&#39;, $map, {Title=&gt;&quot;NASA/MODIS Earth Map (Plate Carree)&quot;,J=&gt;0});
+</code></pre>
+
+<p><img src="/advent/../images/demos/cartography/output-1.png"></p>
+
+<p>The map data are co-aligned with the vector data, which can be drawn
+on top of the window with the <code>with polylines</code> plot type.  The
+<code>clean_lines</code> method breaks lines that pass over the map&#39;s singularity
+at the 180th parallel.</p>
+
+<pre><code>$w-&gt;hold;
+$w-&gt;plot(with=&gt;&#39;polylines&#39;, $coast-&gt;clean_lines);
+$w-&gt;release;
+</code></pre>
+
+<p><img src="/advent/../images/demos/cartography/output-2.png"></p>
+
+<p></p><hr>
+The <code>or</code> curve option specifies the output range of the mapping.
+There are a large number of map projections -- to list them all,
+say &quot;??cartography&quot; in the <code>perldl</code> shell.
+Here are four of them:
+
+<pre><code>undef $w; # Close old window
+$w = pgswin( size=&gt;[8,6], multi=&gt;[2,2] ) ;
+sub draw {
+ ($tx, $t, $px, @opt ) = @_;
+ $w-&gt;plot(with=&gt;&#39;fits&#39;, $map-&gt;map( $tx, $px, @opt ),
+   with=&gt;&#39;polylines&#39;, $coast-&gt;apply( $tx )-&gt;clean_lines(@opt),
+   {Title=&gt;$t, J=&gt;1});
+}
+draw( t_mercator,  &quot;Mercator Projection&quot;,    [400,300] );
+draw( t_aitoff,    &quot;Aitoff / Hammer&quot;,        [400,300] );
+draw( t_gnomonic,  &quot;Gnomonic&quot;,               [400,300],{or=&gt;[[-3,3],[-2,2]]} );
+draw( t_lambert,   &quot;Lambert Conformal Conic&quot;,[400,300],{or=&gt;[[-3,3],[-2,2]]} );
+</code></pre>
+
+<p><img src="/advent/../images/demos/cartography/output-3.png"></p>
+
+<p>You can create oblique projections by feeding in a different origin.
+Here, the origin is centered over North America.</p>
+
+<pre><code>draw( t_mercator(  o=&gt;[-90,40] ), &quot;Mercator Projection&quot;,    [400,300] );
+draw( t_aitoff (   o=&gt;[-90,40] ), &quot;Aitoff / Hammer&quot;,        [400,300] );
+draw( t_gnomonic(  o=&gt;[-90,40] ), &quot;Gnomonic&quot;,[400,300],{or=&gt;[[-3,3],[-2,2]]} );
+draw( t_lambert(   o=&gt;[-90,40] ), &quot;Lambert &quot;,[400,300],{or=&gt;[[-3,3],[-2,2]]} );
+</code></pre>
+
+<p><img src="/advent/../images/demos/cartography/output-4.png"></p>
+
+<p>There are three main perspective projections (in addition to special
+cases like stereographic and gnomonic projection): orthographic,
+vertical, and true perspective.  The true perspective has options for
+both downward-looking and aerial-view coordinate systems.</p>
+
+<pre><code>draw( t_orthographic( o=&gt;[-90,40] ), 
+      &quot;Orthographic&quot;,  [400,300]);
+draw( t_vertical( r0=&gt; (2 + 1), o=&gt;[-90,40] ), 
+      &quot;Vertical (Altitude = 2 r_e)&quot;, [400,300]);
+draw( t_perspective( r0=&gt; (2 + 1), o=&gt;[-90,40] ),
+      &quot;True Perspective (Altitude= 2 r_e)&quot;, [400,300]);
+</code></pre>
+
+<p>Observer is 0.1 earth-radii above surface, lon 117W, lat 31N (over Tijuana).
+view is 45 degrees below horizontal, azimuth -22 (338) degrees:</p>
+
+<pre><code>draw( t_perspective( r0=&gt; 1.1, o=&gt;[-117,31], cam=&gt;[-22,-45,0] ),
+      &quot;Aerial view of West Coast of USA&quot;, [400,300],
+      {or=&gt;[[-60,60],[-45,45]], method=&gt;&#39;linear&#39;});
+</code></pre>
+
+<p><img src="/advent/../images/demos/cartography/output-5.png"></p>
+
+<p>This is all very well, she thought. But what about the van der Grinten
+projection? What about the Gauss-Schreiber Transverse Mercator??
+But it was OK!
+<a href="https://metacpan.org/pod/PDL::Transform::Proj4">PDL::Transform::Proj4</a>
+has your back.</p>
+
+<pre><code>use PDL::Transform::Proj4;
+sub draw2 {
+ ($tx, $t, $px, @opt ) = @_;
+ $tx = t_scale(1/6378135, iunit=&gt;&#39;metres&#39;, ounit=&gt;&#39;radii&#39;) x $tx;
+ $w-&gt;plot(with=&gt;&#39;fits&#39;, $earth-&gt;map( $tx, $px, @opt ),
+   with=&gt;&#39;polylines&#39;, clean_lines($coast-&gt;apply($tx), $pen, @opt),
+   {Title=&gt;$t});
+}
+draw2( t_proj_murd3(lat_1=&gt;30, lat_2=&gt;50), &quot;Murdoch III&quot;, [400,300]);
+draw2( t_proj_vandg, &quot;van der Grinten (I)&quot;, [400,300]);
+draw2( t_proj_gstmerc, &quot;Gauss-Schreiber Transverse Mercator&quot;, [400,300]);
+draw2( t_proj_som(inc_angle=&gt;98, ps_rev=&gt;0.06, asc_lon=&gt;64),
+  &quot;Space Oblique Mercator&quot;, [400,300]);
+</code></pre>
+
+<p><img src="/advent/../images/demos/proj/output-4.png"></p>
+
+<p>Well, she thought. That should show them where to go. But how does this
+&quot;transform&quot; thing actually work? <em>Stay tuned</em> to find out in future
+installments!</p>
+
+<h2>Further resources</h2>
+
+<p>Take a look at
+<a href="https://proj.org/en/stable/operations/projections/index.html">https://proj.org/en/stable/operations/projections/index.html</a>
+for more from PROJ!</p>
+
+              </section>
+              <small><p><a href="https://en.wikipedia.org/wiki/File:Old-world-map.jpg">Map of the world from 1565</a> in the public domain</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/cartography/">cartography</a>,
+                  <a href="/advent/blog/tag/transform/">transform</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
+                      </div>
+                      <div class="about">
+                        <h5>Ed J</h5>
+                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/01/introduction/index.html" rel="prev"><strong>Previous Article</strong> Day 1: What is Perl Data Language?</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/blog">Blog.</a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

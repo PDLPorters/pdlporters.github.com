@@ -116,6 +116,11 @@ site:
                 image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'
                 text: |-
                   Boyd Duffee has been hanging around the [edges](https://metacpan.org/author/DUFFEE) of the Perl ecosystem for many moons, picking up new bits of shiny to make SysAdmining more interesting.  He's interested in Data Science, Complex Networks and walks in the woods.
+            vikasnkumar:
+                name: 'Vikas N Kumar'
+                image: 'https://avatars.githubusercontent.com/u/12120?v=4'
+                text: |-
+                  Vikas N Kumar (aka "vicash" on IRC) has been using Perl for about 18 years. He builds a lot of web-based software in Perl, and works in the finance industry doing a mix of C, C++ and Perl in his day job trying to succeed building trading strategies and trading systems. He has a background in Aerospace engineering but spends most of his time doing Computer Science related projects.
 
 # theme: These are the settings for the theme.  See Statocles::Help::Theme for
 # more information, and Statocles::Theme for a full list of attributes and what

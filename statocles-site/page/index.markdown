@@ -28,6 +28,9 @@ data:
       image: '/blog/2024/12/04/interpol/banner.jpg'
     - date: 2018-12-05
     - date: 2018-12-06
+      title: PDL::Finance::TA
+      href: '/blog/2024/12/06/finance/'
+      image: '/blog/2024/12/06/finance/banner.jpg'
     - date: 2018-12-07
     - date: 2018-12-08
     - date: 2018-12-09

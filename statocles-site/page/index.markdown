@@ -19,6 +19,9 @@ data:
       href: '/blog/2024/12/02/cartography/'
       image: '/blog/2024/12/02/cartography/banner.jpg'
     - date: 2018-12-03
+      title: Installing on MacOS
+      href: '/blog/2024/12/03/installing-on-macos/'
+      image: '/blog/2024/12/03/installing-on-macos/banner.jpg'
     - date: 2018-12-04
       title: Interpolation
       href: '/blog/2024/12/04/interpol/'

@@ -542,7 +542,7 @@
 <pre><code>  pdl&gt; p 10**36/sum($gal)
   5.58159992096455e+28</code></pre>
 
-<p>This is also about 200 solar luminosities, (Note we have switched to using <code>p</code> as a shorthand for <code>print</code> - which only works in the <code>pdl</code> and <code>pdl2</code> shells) which gives 4 billion solar luminosities for the whole galaxy.</p>
+<p>This is also about 200 solar luminosities, (Note we have switched to using <code>p</code> as a shorthand for <code>print</code> - which only works in the <code>pdl</code> shell) which gives 4 billion solar luminosities for the whole galaxy.</p>
 
 <p>OK we do not need PDL for this simple arithmetic, let&#39;s get back to computations that involve the whole image. How can we get the sum of a piece of an image, e.g. near the centre? Well in PDL there is more than one way to do it (Perl aficionados call this phenomenon TIMTOWTDI). In this case, because we really want the brightness in a circular aperture, we&#39;ll use the <code>rvals</code> function:</p>
 
@@ -637,7 +637,7 @@
   ndtri           The value for which the area under the Gaussian probability density function (integrated from minus
                                 infinity) is equal to the argument (cf erfi). Works inplace.</code></pre>
 
-<p>This tells us a whole lot about various functions and modules to do with Gaussians. Note that we can abbreviate <code>help</code> and <code>apropos</code> with &#39;<code>?</code>&#39; and &#39;<code>??</code>&#39; when using the <code>pdl</code> or <code>pdl2</code> shells.</p>
+<p>This tells us a whole lot about various functions and modules to do with Gaussians. Note that we can abbreviate <code>help</code> and <code>apropos</code> with &#39;<code>?</code>&#39; and &#39;<code>??</code>&#39; when using the <code>pdl</code> shell.</p>
 
 <p>Let&#39;s fit a Gaussian:</p>
 

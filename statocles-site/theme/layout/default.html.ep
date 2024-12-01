@@ -116,7 +116,7 @@
                    <li><a href="<%= $link->href %>"><%= $link->text %></a></li>
                    % }
                  % }
-
+                 <li><a href="/index.rss"><i class="fa fa-rss"></i></a></li>
                </ul>
 
             </nav>
@@ -160,6 +160,7 @@
                % if (my $github = $site->data->{github}) {
                 <li><a href="<%= $github %>">Contribute to this site on Github</a></li>
                % }
+               <li><a href="/index.rss"><i class="fa fa-rss"></i></a></li>
                <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
                <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
                <li>Powered by <a href="http://www.perl.org">Perl</a></li>

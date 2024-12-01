@@ -426,7 +426,7 @@ Below is the code for this.
 Below is a screenshot of the full script that you would see in the browser,
 along with the Bollinger Bands and the buy and sell signals.
 
-![pdl_js_highcharts_plot.png](banner.jpg)
+![Plotting HighCharts with PDL - Screenshot](banner.jpg)
 
 
 ## The Full Script

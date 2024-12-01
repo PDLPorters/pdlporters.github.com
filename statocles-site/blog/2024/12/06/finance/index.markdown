@@ -60,7 +60,7 @@ you find an issue on other types of Linux or on Windows, please inform me.
     ## sometimes this module does not pass the tests
     $ cpanm -f Finance::QuoteHist
     ## check if PDL got installed
-    $ which pdl2
+    $ which perldl
 
 ## Get Pricing Data from Yahoo Finance
 

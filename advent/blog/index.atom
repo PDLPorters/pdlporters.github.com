@@ -26,6 +26,31 @@
         <category term="interpolation" />
     </entry>
     <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/</id>
+        <title>Day 3: Perl Data Language on the Mac</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
+Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
+It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
+the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/macos/">MacOS</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/installation/">installation</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/scipdl/">SciPDL</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-03T00:00:00Z</updated>
+        <category term="MacOS" />
+        <category term="installation" />
+        <category term="SciPDL" />
+    </entry>
+    <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/02/cartography/</id>
         <title>Day 2: Maps with Perl Data Language</title>
         <author><name>Ed J</name></author>

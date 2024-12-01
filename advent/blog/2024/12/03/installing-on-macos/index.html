@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/" property="og:url">
+  <meta content="Day 3: Perl Data Language on the Mac" property="og:title">
+    <meta content="Installing PDL on MacOS" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 3: Perl Data Language on the Mac - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/blog">Blog</a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 3: Perl Data Language on the Mac</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-03">Dec  3, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Apple logo" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
+Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
+It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
+the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>I&#39;m a <a href="https://brew.sh/">Homebrew</a> fan because it simplifies my life when installing third party software on the Mac.
+Part of me wants to see what the minimum requirements are to get PDL up and running, but Life&#39;s Too Short.</p>
+
+<p>Homebrew has formulae for <a href="https://metacpan.org/pod/PDL::Graphics::PLplot">PLPlot</a>,
+<a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">Gnuplot</a>, GD for graphics,
+the <a href="https://metacpan.org/pod/PDL::IO::HDF">HDF</a> library and <a href="https://metacpan.org/pod/PDL::GSL::CDF">Gnu Scientific Library</a>
+as well as the X11 server needed for the <a href="https://pdl.perl.org/?page=demos/plot2D">PGPLOT demos</a>.
+There&#39;s a bit of discussion about how <a href="https://www.xquartz.org/">XQuartz</a> is to be replaced by Apple&#39;s Metal,
+but for now it looks best to stick with XQuartz.
+Go for Maximum Install!</p>
+
+<pre><code>brew install plplot gnuplot gd hdf5 gsl
+brew install --cask xquartz
+</code></pre>
+
+<p>Now, does your MacBook have the Intel chip or the newer M1 chip found in post-2020 machines?
+Figure that out and go to the <a href="https://github.com/PDLPorters/SciPDL/blob/main/README.md">Instructions</a>,
+which consist of downloading the correct release,
+open the <code>.dmg</code> file, drag and drop the image onto the Applications folder icon that&#39;s just popped up.
+Done.</p>
+
+<p>(yes, it is that easy)</p>
+
+<p>If you rush to click on the <code>pdl&gt;</code> icon and get surprised by this error popup,
+it means that you haven&#39;t read further down the <code>README</code> where it informs you not to panic,
+<strong>Edit</strong> and <strong>Save</strong> the file (you won&#39;t see a Save button, but you just <strong>⌘ S</strong> or <strong>File &gt; Save</strong>)</p>
+
+<p><img alt="Not authorised message" src="apple_not_authorised.png" title="Error message"></p>
+
+<p>For running the PGPLOT demo, you&#39;ll need to start the Xserver and if it says it can&#39;t connect,
+try rebooting, starting the Xserver and entering the pdl shell.
+If that still doesn&#39;t work,
+open a terminal and follow the Running SciPDL instructions to set the environment and type <code>pdl</code> or <code>pdl2</code> at the prompt.</p>
+
+<p>Parabolas are boring. Here&#39;s a cubic instead.</p>
+
+<pre><code>pdl&gt; use PGPLOT                                                                 
+pdl&gt; use PDL::Graphics::PGPLOT                                                  
+
+pdl&gt; $ENV{PGPLOT_XW_WIDTH} = 0.3                                                  
+pdl&gt; dev(&#39;/XSERVE&#39;)                                                             
+
+pdl&gt; $x = sequence(10)                                                                                                                          
+pdl&gt; $y = $x**3 - 8 * $x**2 + 20                                                
+
+pdl&gt; points $x, $y
+</code></pre>
+
+<p><img alt="Plotting a cubic with PGPLOT" src="cubic_pgplot.png" title="points along a cubic curve"></p>
+
+<p>You&#39;ll have an excellent imagination to see the outline of Santa&#39;s pipe in the above plot,
+no doubt inspired by a mince pie or two!</p>
+
+              </section>
+              <small><p><a href="https://www.flickr.com/photos/91645335@N00/2214058583">apple logo</a> by <a href="https://www.flickr.com/photos/91645335@N00">zolierdos</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0</a></p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/macos/">MacOS</a>,
+                  <a href="/advent/blog/tag/installation/">installation</a>,
+                  <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd Duffee has been hanging around the <a href="https://metacpan.org/author/DUFFEE">edges</a> of the Perl ecosystem for many moons, picking up new bits of shiny to make SysAdmining more interesting.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/02/cartography/index.html" rel="prev"><strong>Previous Article</strong> Day 2: Maps with Perl Data Language</a></li>
+                  <li class="next"><a href="/advent/blog/2024/12/04/interpol/index.html" rel="next"><strong>Next Article</strong> Day 4: Interpolation with Perl Data Language </a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/blog">Blog.</a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

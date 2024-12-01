@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/macos/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/macos.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 3: Perl Data Language on the Mac</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/</guid>
+            <description><![CDATA[
+                <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
+Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
+It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
+the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/macos/">MacOS</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/installation/">installation</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/scipdl/">SciPDL</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Tue, 03 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

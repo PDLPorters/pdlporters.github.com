@@ -22,20 +22,20 @@
             % }
         </aside>
 
-        <p class="tags">Tags:
+        <aside class="tags">Tags:
         % for my $tag ( $page->tags ) {
             <a href="<%= $tag->href %>" rel="tag"><%== $tag->text %></a>
         % }
-        </p>
+        </aside>
 
         % if ( $page->links( 'crosspost' ) ) {
-        <p>Originally posted as:
+        <aside>Originally posted as:
             % for my $link ( $page->links( 'crosspost' ) ) {
                 <a href="<%= $link->href %>">
                     <em><%= $page->title %></em> on <%= $link->title %>.
                 </a>
             % }
-        </p>
+        </aside>
         % }
     </header>
 

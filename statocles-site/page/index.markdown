@@ -20,6 +20,9 @@ data:
       image: '/blog/2024/12/02/cartography/banner.jpg'
     - date: 2018-12-03
     - date: 2018-12-04
+      title: Interpolation
+      href: '/blog/2024/12/04/interpol/'
+      image: '/blog/2024/12/04/interpol/banner.jpg'
     - date: 2018-12-05
     - date: 2018-12-06
     - date: 2018-12-07

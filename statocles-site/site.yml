@@ -90,6 +90,9 @@ site:
     deploy:
         $ref: 'deploy'
 
+    images:
+        icon: '/../images/favicon.ico'
+
     data:
         highlight:
             style: 'sunburst'

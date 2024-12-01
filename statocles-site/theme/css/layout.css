@@ -187,6 +187,13 @@ img { border-radius: 3px; }
 /* b. Header Styles
 /* ------------------------------------------------------------------ */
 
+/* for use in blog/index.html */
+article header {
+   height: 126px; /* PDL adds 30 since we have a "tags" */
+   width: 100%;
+   background: #383232 url(../images/header-bg.jpg);
+}
+
 header {
    height: 96px;
    width: 100%;

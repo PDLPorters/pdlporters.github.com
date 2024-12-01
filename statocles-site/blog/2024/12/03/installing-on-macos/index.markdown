@@ -55,7 +55,7 @@ it means that you haven't read further down the `README` where it informs you no
 For running the PGPLOT demo, you'll need to start the Xserver and if it says it can't connect,
 try rebooting, starting the Xserver and entering the pdl shell.
 If that still doesn't work,
-open a terminal and follow the Running SciPDL instructions to set the environment and type `pdl` or `pdl2` at the prompt.
+open a terminal and follow the Running SciPDL instructions to set the environment and type `pdl` at the prompt.
 
 Parabolas are boring. Here's a cubic instead.
 

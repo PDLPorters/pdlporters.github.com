@@ -36,7 +36,7 @@ If you're starting from scratch, the first thing to do is to [install PDL](https
 (and if you're going for the latest version, my personal preference is the
 [cpanminus](https://metacpan.org/pod/App::cpanminus) tool to install it with using `cpanm` in place of `cpan`).
 
-Once installed, run either the `perldl` or the `pdl2` command to get the PDL shell so we can start playing
+Once installed, run the `perldl` command to get the PDL shell so we can start playing
 
     pdl> $x = ones(5)               # a 1D array of 5 ones
     pdl> p $x
@@ -125,7 +125,7 @@ I will go further into this topic in a later post.
 ### REPL included
 As seen above,
 PDL comes with a built-in [Read-Eval-Print Loop](https://metacpan.org/pod/perldl)
-(the `perldl` or `pdl2` shells) for you to explore the language as well as your data.
+(the `perldl` shell) for you to explore the language as well as your data.
 Every statement is evaluated as soon has you hit Enter and the shell has a few shortcuts,
 such as **`p`** to pretty print a data structure soon to be joined by **`x`** which will **Data::Dumper** your data.
 

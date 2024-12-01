@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/interpolation/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-04T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/interpolation.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/interpolation/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/04/interpol/</id>
+        <title>Day 4: Interpolation with Perl Data Language</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/interpolation/">interpolation</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-04T00:00:00Z</updated>
+        <category term="interpolation" />
+    </entry>
+</feed>
+

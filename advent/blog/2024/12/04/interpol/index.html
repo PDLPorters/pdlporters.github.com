@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" property="og:url">
+  <meta content="Day 4: Interpolation with Perl Data Language" property="og:title">
+    <meta content="Interpolation with PDL (Perl Data Language)" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 4: Interpolation with Perl Data Language - PDL Advent calendar 2024</title>
+  <meta content="Ed J" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/blog">Blog</a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 4: Interpolation with Perl Data Language</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-04">Dec  4, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Santa flying in his sleigh" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>The big night was approaching. Santa needed a refuelling stop over
+Australia. But when would he get there? And why hadn&#39;t they tracked his
+usual timings in more detail till now?? His chief planner only had a
+few location/time fixes from previous Christmas eves.  Could PDL help
+again by predicting when he&#39;d get there?</p>
+
+<p><a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> has nice
+wrappers for interpolation functions; with a few data
+points, it can generate a description of the path, to
+trace the points in between.  We&#39;ll visualise it again with
+<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>.</p>
+
+<p>We can model Santa&#39;s flight just with the time (as input), and his forward
+distance as output. We <em>could</em> model multiple coordinates, each with
+time as an input, but we&#39;re not going to do that here as it&#39;s not needed.</p>
+
+<p>Let&#39;s warm up by making a couple of simple graphs of different modes of
+interpolation, &quot;PCHIP&quot; (Piecewise Cubic Hermite Interpolation - well,
+you did ask), and B-Spline. Load the necessary modules:</p>
+
+<pre><code>use PDL::Graphics::Simple;
+use PDL::Func qw(pchip spline); # load, import convenience functions
+$w = pgswin();
+</code></pre>
+
+<p>Set up a step function, similar to
+<a href="https://uk.mathworks.com/help/matlab/ref/pchip.html">https://uk.mathworks.com/help/matlab/ref/pchip.html</a>:</p>
+
+<pre><code>$x = sequence(7) - 3;
+$y = pdl q[-1 -1 -1 0 1 1 1];
+</code></pre>
+
+<p>The convenience function &quot;pchip&quot; uses the <a href="https://metacpan.org/pod/PDL::Slatec">PDL binding for
+SLATEC</a>&#39;s PCHIP with all the
+default settings</p>
+
+<pre><code>$xi = zeroes(100)-&gt;xlinvals(-3,3);
+$yi = pchip($x, $y, $xi);
+$yi_s = spline($x, $y, $xi);
+$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $xi, $yi_s,
+  with =&gt; &#39;line&#39;, key =&gt; &#39;pchip&#39;, $xi, $yi,
+  with =&gt; &#39;points&#39;, $x, $y,
+  {legend=&gt;&#39;tl&#39;});
+</code></pre>
+
+<p><img src="/advent/../images/demos/func/output-1.png"></p>
+
+<p>Now a more undulating function, where PCHIP is less effective</p>
+
+<pre><code>$x2 = sequence(16);
+$y2 = bessj1($x2);
+$xi2 = zeroes(100)-&gt;xlinvals(0,15);
+$yi2 = pchip($x2, $y2, $xi2);
+$yi2_s = spline($x2, $y2, $xi2);
+$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $xi2, $yi2_s,
+  with =&gt; &#39;line&#39;, key =&gt; &#39;pchip&#39;, $xi2, $yi2,
+  with =&gt; &#39;points&#39;, $x2, $y2,
+  {legend=&gt;&#39;tr&#39;});
+</code></pre>
+
+<p><img src="/advent/../images/demos/func/output-2.png"></p>
+
+<p>Our planner looks at the curves, and her gut tells her Santa&#39;s flight
+will have behaved more like the <code>spline</code> function than the <code>pchip</code> one -
+he&#39;s a supernatural elf, not a UFO! She carefully plots the known times
+and distances from distance 0 - Australia is at distance 20,000km:</p>
+
+<pre><code>$santacoords = pdl &#39;[0 0; 3 8000; 7 10000; 8 11000; 11 15000;
+  13 21000; 18 30000; 22 35000]&#39;;
+($t, $dist) = $santacoords-&gt;using(0,1);
+$ti = zeroes(100)-&gt;xlinvals(0,22);
+$disti = spline($t, $dist, $ti);
+$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $ti, $disti,
+  with =&gt; &#39;points&#39;, $t, $dist,
+  {legend=&gt;&#39;tr&#39;, xlabel=&gt;&quot;Time (hours)&quot;, ylabel=&gt;&quot;Distance (km)&quot;});
+</code></pre>
+
+<p><img src="santa-1.png"></p>
+
+<p>OK, that looks good. Now to calculate then plot the closest time to 20,000km:</p>
+
+<pre><code>$disti_20k = abs($disti-20_000);
+$closest_ind = $disti_20k-&gt;minimum_ind;
+print &quot;Time: &quot;, $closest_time = $ti-&gt;index($closest_ind), &quot;\n&quot;;
+print &quot;Dist: &quot;, $closest_dist = $disti-&gt;index($closest_ind), &quot;\n&quot;;
+$w-&gt;oplot(with =&gt; &#39;line&#39;, style=&gt;4,
+  $closest_time-&gt;dummy(0,2), pdl(0,$closest_dist));
+# Time: 12.6666666666667
+# Dist: 19980.2751270675
+</code></pre>
+
+<p><img src="santa-2.png"></p>
+
+<p>12 hours and 40 minutes after take-off it is!</p>
+
+<h2>Further resources</h2>
+
+<p>Be sure to check the documentation for
+<a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a>, to see further
+possibilities: PDL::Func objects encapsulate data to interpolate,
+integrate, and get gradients of (differentiate).</p>
+
+              </section>
+              <small><p><a href="https://www.cbsnews.com/boston/news/norad-santa-tracker-website-christmas-eve-2020/">Santa Claus with coronavirus mask on NORAD&#39;s 2020 tracker.</a> Image Credit: NORAD, so public domain</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/interpolation/">interpolation</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
+                      </div>
+                      <div class="about">
+                        <h5>Ed J</h5>
+                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/02/cartography/index.html" rel="prev"><strong>Previous Article</strong> Day 2: Maps with Perl Data Language</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/blog">Blog.</a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

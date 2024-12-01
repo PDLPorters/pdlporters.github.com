@@ -53,6 +53,9 @@
                             <a href="<%= $nav->href %>"><%= $nav->text %></a>
                         </li>
                         % }
+                        <li>
+                            <a href="/index.rss"><i class="fa fa-rss"></i></a>
+                        </li>
                     </ul>
                     % }
                     %= include 'site/navbar_extra.html.ep'
@@ -72,6 +75,7 @@
         <footer>
             %= include 'site/footer.html.ep'
             <div class="container tagline">
+                <a href="/index.rss"><i class="fa fa-rss"></i></a><br/>
                 <a href="http://preaction.me/statocles">Made with Statocles</a><br/>
                 <a href="http://www.perl.org">Powered by Perl</a>
             </div>

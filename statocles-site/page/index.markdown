@@ -30,6 +30,9 @@ data:
     - date: 2018-12-06
     - date: 2018-12-07
     - date: 2018-12-08
+      title: Simplex optimisation
+      href: '/blog/2024/12/08/simplex/'
+      image: '/blog/2024/12/08/simplex/banner.jpg'
     - date: 2018-12-09
     - date: 2018-12-10
     - date: 2018-12-11

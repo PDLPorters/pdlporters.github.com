@@ -29,6 +29,9 @@ data:
     - date: 2018-12-05
     - date: 2018-12-06
     - date: 2018-12-07
+      title: Plotting PDL data in the browser
+      href: '/blog/2024/12/09/finance2/'
+      image: '/blog/2024/12/09/finance2/banner.jpg'
     - date: 2018-12-08
     - date: 2018-12-09
     - date: 2018-12-10

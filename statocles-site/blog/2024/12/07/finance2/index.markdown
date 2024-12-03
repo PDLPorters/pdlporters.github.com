@@ -97,7 +97,7 @@ here.
 It is actually really easy to convert PDL to JSON for HighCharts.
 
 We create a PDL object with the timestamp, open price, high price, low price and
-close price in that order. We then `tranpose` the PDL since the PDL is stored
+close price in that order. We then `transpose` the PDL since the PDL is stored
 column-wise and we need to convert it to row-wise. Then we call the magical
 `unpdl` function which converts the PDL object into a Perl array of arrays, and
 then we invoke `encode_json` from the `JSON::XS` module to convert it to JSON.

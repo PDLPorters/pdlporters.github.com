@@ -1,5 +1,5 @@
 ---
-title: Day 9: Plotting PDL data in the browser using Javascript
+title: Day 7: Plotting PDL data in the browser using Javascript
 tags:
     - finance
     - plotting

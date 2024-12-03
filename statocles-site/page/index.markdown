@@ -27,14 +27,17 @@ data:
       href: '/blog/2024/12/04/interpol/'
       image: '/blog/2024/12/04/interpol/banner.jpg'
     - date: 2018-12-05
+      title: K-means clustering
+      href: '/blog/2024/12/05/k-means/'
+      image: '/blog/2024/12/05/k-means/banner.png'
     - date: 2018-12-06
       title: PDL::Finance::TA
       href: '/blog/2024/12/06/finance/'
       image: '/blog/2024/12/06/finance/banner.jpg'
     - date: 2018-12-07
       title: Plotting PDL data in the browser
-      href: '/blog/2024/12/09/finance2/'
-      image: '/blog/2024/12/09/finance2/banner.jpg'
+      href: '/blog/2024/12/07/finance2/'
+      image: '/blog/2024/12/07/finance2/banner.jpg'
     - date: 2018-12-08
       title: Simplex optimisation
       href: '/blog/2024/12/08/simplex/'

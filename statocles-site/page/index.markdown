@@ -36,6 +36,9 @@ data:
       href: '/blog/2024/12/09/finance2/'
       image: '/blog/2024/12/09/finance2/banner.jpg'
     - date: 2018-12-08
+      title: Simplex optimisation
+      href: '/blog/2024/12/08/simplex/'
+      image: '/blog/2024/12/08/simplex/banner.jpg'
     - date: 2018-12-09
     - date: 2018-12-10
     - date: 2018-12-11

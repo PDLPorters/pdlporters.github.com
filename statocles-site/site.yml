@@ -83,8 +83,12 @@ site:
     # "text", the text of the link, and "href", the URL to link to.
     nav:
         main:
+            - text: 'PDL Website'
+              href: '/../'
             - text: 'Blog'
               href: '/blog'
+            - text: '<i class="fa fa-rss"></i>'
+              href: '/blog/index.rss'
 
     # deploy: This is the deploy object, used to deploy this site.
     deploy:

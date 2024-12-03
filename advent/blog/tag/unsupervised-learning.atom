@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/unsupervised-learning/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-05T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</id>
+        <title>Day 5: Using k-means clustering as a ... crayon?</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>The
+<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
+is 50 years old.
+This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
+The results are <strong>shocking!</strong></p>
+
+<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/data-analysis/">data analysis</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/clustering/">clustering</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/csv/">CSV</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-05T00:00:00Z</updated>
+        <category term="data analysis" />
+        <category term="clustering" />
+        <category term="unsupervised learning" />
+        <category term="TriD" />
+        <category term="CSV" />
+        <category term="visualization" />
+    </entry>
+</feed>
+

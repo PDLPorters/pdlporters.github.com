@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/05/k-means/" property="og:url">
+  <meta content="Day 5: Using k-means clustering as a ... crayon?" property="og:title">
+    <meta content="k-means clustering on attributes of electric vehicles" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 5: Using k-means clustering as a ... crayon? - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 5: Using k-means clustering as a ... crayon?</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-05">Dec  5, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="objects clustered into 3 partitions" src="./banner.png">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>The
+<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
+is 50 years old.
+This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
+The results are <strong>shocking!</strong></p>
+
+<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
+
+              </section>
+              <section id="section-2">
+                  <p>I collected the data on over 300 EVs from 
+the <a href="https://ev-database.org/uk/cheatsheet/price-electric-car">Electric Vehicle Database</a>
+and created a combined CSV file for you to
+<a href="ev_cars.csv">download.</a></p>
+
+<p>The headings in the file are: model,
+acceleration (seconds), battery usable (kWh), energy consumption (Wh/mile),
+price (UK pounds), price per range (UK pounds/mile), range (miles)
+top speed (mph), towing weight (kg).
+I won&#39;t vouch for its accuracy, but it&#39;s good enough to stick under your Christmas tree.</p>
+
+<h2>k-means</h2>
+
+<p>The <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means algorithm</a>
+is a basic clustering algorithm that seems to be
+everyone&#39;s first stop when trying to find groupings within their data.
+It kind of depends on knowing apriori how many clusters you have
+and its distance from a centroid metric for membership pushes
+clusters into N-spheres whether they like it or not.
+There are better algorithms for unsupervised learning,
+but here I&#39;m going to use it as a vehicle 
+to demonstrate how to get data in from a CSV file and plot it in 3D.</p>
+
+<h2>Importing CSV files</h2>
+
+<p>A lot of well-meaning people think that data lives in Excel files.
+Some might even know without asking that you&#39;d prefer it in a CSV file.
+Assuming the headers are stored in the first row, you can import the data like this
+using the perldl shell</p>
+
+<pre><code>pdl&gt; use PDL::IO::CSV &#39;:all&#39;
+pdl&gt; $cars = rcsv2D(&#39;ev_cars.csv&#39;, [1 .. 4, 6, 7], {text2bad =&gt; 1, header =&gt; 1, debug =&gt; 1})
+pdl&gt; ($names) = rcols &#39;ev_cars.csv&#39;, {COLSEP =&gt; &#39;,&#39;, LINES =&gt; &#39;1:&#39;, PERLCOLS =&gt; [ 0 ]}
+</code></pre>
+
+<p>First, import the <strong>PDL::IO::CSV</strong> module to load the functions that read csv files.
+The function <a href="https://metacpan.org/pod/PDL::IO::CSV#rcsv2D">rcsv2D</a>
+reads several columns and creates a 2 dimensional array.
+The arguments are the filename, the set of columns you want to read into
+the data structure and the options.
+The columns start counting from 0, so we are skipping the first and sixth columns.
+We get the first column as an array in <code>$names</code> in the following line
+with <a href="https://metacpan.org/pod/PDL::IO::Misc#rcols">rcols</a>.
+The sixth column is price per range which I&#39;ll skip because it&#39;s derived from
+2 of the other columns.
+Since the first row of the file contains the headers, we add the <code>header =&gt; 1</code> option
+to keep it out of the data array.
+It&#39;s accessible from the hashref in <code>$cars-&gt;hdr</code> if you need it.</p>
+
+<p>Before we start to cluster, we&#39;ll normalize the data so that price doesn&#39;t swamp
+the distance metric. To do that we&#39;ll need to determine the range from
+the minimum and maximum values in the data.</p>
+
+<pre><code>pdl&gt; use PDL::Stats
+pdl&gt; ($min, $max, $min_ind, $max_ind) = minmaximum $cars
+pdl&gt; $range = $max - $min
+pdl&gt; $norm = ( $cars - $min-&gt;dummy(0) ) / $range-&gt;dummy(0)
+</code></pre>
+
+<p>And now apply the k-means algorithm to find the clusters</p>
+
+<pre><code>pdl&gt; %k = $norm-&gt;kmeans
+CNTRD   =&gt; Null
+FULL    =&gt; 0
+NCLUS   =&gt; 3
+NSEED   =&gt; 308
+NTRY    =&gt; 5
+V   =&gt; 1
+overall ss: 52.0994759549272
+iter 0 R2 [0.55 0.49 0.52 0.53 0.56]
+iter 1 R2 [0.62 0.59 0.54 0.55 0.61]
+...
+iter 9 R2 [0.63 0.63 0.63 0.63 0.63]
+
+
+pdl&gt; $colours = $k{cluster}-&gt;transpose
+</code></pre>
+
+<p><em>Wait - what&#39;s going on with <code>$colours</code> on the last line?</em></p>
+
+<p>The default number of clusters <code>NCLUS</code> for the k-means function is 3 which is ok.
+You also get the <em>overall Sum Squared Error</em> which gives you
+a means to compare this clustering with other runs on your data.
+The clusters are returned as 3 arrays of cluster membership, binary values
+representing whether the model is in that particular cluster.
+Turns out that if you turn that NDArray on its side with
+<a href="https://metacpan.org/pod/PDL::Basic#transpose">transpose</a>,
+you get 308 three-element arrays that work exceedingly well as RGB colours.</p>
+
+<p>Let&#39;s see what that looks like.</p>
+
+<pre><code>pdl&gt; points3d( $cars-&gt;slice(&#39;:,0:2&#39;)-&gt;transpose, $colours, {PointSize =&gt; 3} )
+</code></pre>
+
+<p><video controls><source src="ev_cars_rgb.webm" type="video/webm"></video>
+<strong>Acceleration-Battery-Energy Consumption plot</strong>: A 3D plot of acceleration x-axis, battery usable y-axis, energy consumption z-axis</p>
+
+<p>That blue is hard to see against the black background.
+Luckily, changing blue to white is as easy as turning <code>[0,0,1]</code> into <code>[1,1,1]</code>
+using <a href="https://metacpan.org/pod/PDL::Primitive#where">where</a>,
+(one index at a time).
+We will make a copy so that the changes we make to <code>$colours</code> don&#39;t flow back
+to <code>$k{cluster}</code> and change the cluster membership.</p>
+
+<pre><code>pdl&gt; $lights = $colours-&gt;copy
+pdl&gt; $lights(0,:)-&gt;where( $lights(2,:) &gt; 0 ) .= 1
+pdl&gt; $lights(1,:)-&gt;where( $lights(2,:) &gt; 0 ) .= 1
+pdl&gt; points3d( $cars-&gt;slice(&#39;:,3:5&#39;)-&gt;transpose, $lights, {PointSize =&gt; 3} )
+</code></pre>
+
+<p><video controls><source src="ev_cars_rg_white.webm" type="video/webm"></video>
+<strong>Price-Range-Top Speed plot</strong>: A 3D plot of price x-axis, range y-axis, top speed z-axis</p>
+
+<h2>TriD plotting Unwrapped</h2>
+
+<p>It&#39;s a good thing that k-means in PDL is easy because, as you see in the plot,
+there are no clear clusters in the data at all. This goes to show that while
+the algorithm will give you solid answers, you still need to sanity check the results.
+The default size of the points is a little small for me, so I upped it with <code>{PointSize =&gt; 3}</code>.
+The <a href="https://metacpan.org/pod/PDL::Graphics::TriD#spheres3d">spheres3d</a> function
+is visually more appealing than squares, but it doesn&#39;t do colour (yet).
+<img alt="rather dull baubles" src="spheres.png" title="A 3D plot of data using spheres"></p>
+
+<p>What I did see is that in the 4 plots I checked (columns 0-2, 1-3, 2-4 and 3-5),
+is a curved surface.
+A flattish face showing in the first image while the edge is pronounced in the second image.
+This suggests that the attributes are not independent, especially when price is involved.
+Given 2 attributes, a third attribute is mostly determined.
+Perhaps what I really should do is calculate the
+<a href="https://metacpan.org/pod/PDL::Stats::Basic#corr_table">Correlation table</a>
+for the data to be more selective about which attributes to analyse.</p>
+
+<p>What really surprised me is that I now have a super-fast, no-fuss, easy colouring method
+to give depth to my 3D scatter plots.
+The three cluster memberships map neatly to a 3 colour value (RGB).
+It&#39;s like it was designed to do this.</p>
+
+<p>I just need to put those red, green and white lights up on a tree now.</p>
+
+<p>Merry K-ristmas!</p>
+
+              </section>
+              <small><p><a href="https://commons.wikimedia.org/w/index.php?curid=36621380">K-means steg 4</a>&quot; by <a href="https://commons.wikimedia.org/wiki/User:Larsac07">Larsac07</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/?ref=openverse">CC BY-SA 3.0</a></p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/data-analysis/">data analysis</a>,
+                  <a href="/advent/blog/tag/clustering/">clustering</a>,
+                  <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>,
+                  <a href="/advent/blog/tag/trid/">TriD</a>,
+                  <a href="/advent/blog/tag/csv/">CSV</a>,
+                  <a href="/advent/blog/tag/visualization/">visualization</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/04/interpol/index.html" rel="prev"><strong>Previous Article</strong> Day 4: Interpolation with Perl Data Language</a></li>
+                  <li class="next"><a href="/advent/blog/2024/12/06/finance/index.html" rel="next"><strong>Next Article</strong> Day 6: How to use PDL::Finance::TA to develop a trading strategy </a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

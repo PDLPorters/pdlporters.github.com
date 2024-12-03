@@ -16,9 +16,9 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" property="og:url">
-  <meta content="Day 4: Interpolation with Perl Data Language" property="og:title">
-    <meta content="Interpolation with PDL (Perl Data Language)" property="og:description">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" property="og:url">
+  <meta content="Day 8: Simplex optimisation with Perl Data Language" property="og:title">
+    <meta content="Simplex optimisation with PDL (Perl Data Language)" property="og:description">
     <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
@@ -26,7 +26,7 @@
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 4: Interpolation with Perl Data Language - PDL Advent calendar 2024</title>
+  <title>Day 8: Simplex optimisation with Perl Data Language - PDL Advent calendar 2024</title>
   <meta content="Ed J" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 4: Interpolation with Perl Data Language</h1>
+              <h1>Day 8: Simplex optimisation with Perl Data Language</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-04">Dec  4, 2024</time>
+                  <time class="date" datetime="2024-12-08">Dec  8, 2024</time>
                   
 
               </p>
@@ -89,125 +89,133 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Santa flying in his sleigh" src="./banner.jpg">
+                <img alt="Simplex optimisation" src="./banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+                  <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
 
               </section>
               <section id="section-2">
-                  <p>The big night was approaching. Santa needed a refuelling stop over
-Australia. But when would he get there? And why hadn&#39;t they tracked his
-usual timings in more detail till now?? His chief planner only had a
-few location/time fixes from previous Christmas eves.  Could PDL help
-again by predicting when he&#39;d get there?</p>
+                  <p>This article discusses
+<a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a>, and uses
+<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>
+to display output.</p>
 
-<p><a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a> has nice
-wrappers for interpolation functions; with a few data
-points, it can generate a description of the path, to
-trace the points in between.  We&#39;ll visualise it again with
-<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>.</p>
+<p>The simplex algorithm finds the optimum &quot;point&quot; (coordinates) in a space
+you define, which can have any number (called <code>n</code> here) of dimensions.</p>
 
-<p>We can model Santa&#39;s flight just with the time (as input), and his forward
-distance as output. We <em>could</em> model multiple coordinates, each with
-time as an input, but we&#39;re not going to do that here as it&#39;s not needed.</p>
+<p>The algorithm takes either a fully-formed cloud of n+1 points, or a
+single starting point, in which case it constructs the cloud for you
+using the &quot;initsize&quot; parameter. It also takes a function that will take a
+series of points in your space, and returns the &quot;value&quot; at each of those
+points. From that, it works out which point of the simplex to move to be
+closer to the optimum point, which has the lowest value of your function.</p>
 
-<p>Let&#39;s warm up by making a couple of simple graphs of different modes of
-interpolation, &quot;PCHIP&quot; (Piecewise Cubic Hermite Interpolation - well,
-you did ask), and B-Spline. Load the necessary modules:</p>
+<p>It also takes other, less important parameters, which you&#39;ll see,
+including a &quot;logging&quot; function which you can use to report progress,
+or plot data.</p>
+
+<p>Load the necessary modules, set up a plotting window:</p>
 
 <pre><code>use PDL::Graphics::Simple;
-use PDL::Func qw(pchip spline); # load, import convenience functions
+use PDL::Opt::Simplex;
 $w = pgswin();
 </code></pre>
 
-<p>Set up a step function, similar to
-<a href="https://uk.mathworks.com/help/matlab/ref/pchip.html">https://uk.mathworks.com/help/matlab/ref/pchip.html</a>:</p>
+<p>Try a simple ellipsoid; the multiplier makes the algorithm prioritise
+the first (X) dimension, as you&#39;ll see on the plot.</p>
 
-<pre><code>$x = sequence(7) - 3;
-$y = pdl q[-1 -1 -1 0 1 1 1];
+<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-15,5],yrange=&gt;[-15,5]});
+my $mult = pdl 4,1;
+sub func { (($mult * $_[0]) ** 2)-&gt;sumover }
+sub logs {
+  $w-&gt;oplot(with=&gt;&#39;lines&#39;, $_[0]-&gt;glue(1,$_[0]-&gt;slice(&quot;,0&quot;))-&gt;using(0,1));
+}
+simplex(pdl(-10,-10), 0.5, 0.01, 30,
+  \&amp;func,
+  \&amp;logs
+);
 </code></pre>
 
-<p>The convenience function &quot;pchip&quot; uses the <a href="https://metacpan.org/pod/PDL::Slatec">PDL binding for
-SLATEC</a>&#39;s PCHIP with all the
-default settings</p>
+<p><img src="/advent/../images/demos/simplex/vid-1.gif"></p>
 
-<pre><code>$xi = zeroes(100)-&gt;xlinvals(-3,3);
-$yi = pchip($x, $y, $xi);
-$yi_s = spline($x, $y, $xi);
-$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $xi, $yi_s,
-  with =&gt; &#39;line&#39;, key =&gt; &#39;pchip&#39;, $xi, $yi,
-  with =&gt; &#39;points&#39;, $x, $y,
-  {legend=&gt;&#39;tl&#39;});
+<p>Now the first of two examples contributed by Alison Offer.
+These values are for both:</p>
+
+<pre><code>$minsize = 1.e-6; # convergence: if simplex points are this far apart, stop
+$maxiter = 100; # max number of iterations: if done these many, stop
 </code></pre>
 
-<p><img src="/advent/../images/demos/func/output-1.png"></p>
+<p>Now we minimise polynomial: (x-3)^2 + 2*(x-3)*(y-2.5) + 3*(y-2.5)^2</p>
 
-<p>Now a more undulating function, where PCHIP is less effective</p>
-
-<pre><code>$x2 = sequence(16);
-$y2 = bessj1($x2);
-$xi2 = zeroes(100)-&gt;xlinvals(0,15);
-$yi2 = pchip($x2, $y2, $xi2);
-$yi2_s = spline($x2, $y2, $xi2);
-$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $xi2, $yi2_s,
-  with =&gt; &#39;line&#39;, key =&gt; &#39;pchip&#39;, $xi2, $yi2,
-  with =&gt; &#39;points&#39;, $x2, $y2,
-  {legend=&gt;&#39;tr&#39;});
+<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-1,5],yrange=&gt;[-1,4]}); # reset
+$init = pdl [ 0 , 1 ];
+$initsize = 2;
+($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
+  sub {
+    my ($x, $y) = $_[0]-&gt;using(0,1);
+    ($x-3)**2 + 2*($x-3)*($y-2.5) + 3*($y-2.5)**2;
+  },
+  \&amp;logs
+);
 </code></pre>
 
-<p><img src="/advent/../images/demos/func/output-2.png"></p>
+<p><img src="/advent/../images/demos/simplex/vid-2.gif"></p>
 
-<p>Our planner looks at the curves, and her gut tells her Santa&#39;s flight
-will have behaved more like the <code>spline</code> function than the <code>pchip</code> one -
-he&#39;s a supernatural elf, not a UFO! She carefully plots the known times
-and distances from distance 0 - Australia is at distance 20,000km:</p>
+<p>Now to minimise least squares Gaussian fit to data + noise:
+32 *exp (-((x-10)/6)^2) + noise</p>
 
-<pre><code>$santacoords = pdl &#39;[0 0; 3 8000; 7 10000; 8 11000; 11 15000;
-  13 21000; 18 30000; 22 35000]&#39;;
-($t, $dist) = $santacoords-&gt;using(0,1);
-$ti = zeroes(100)-&gt;xlinvals(0,22);
-$disti = spline($t, $dist, $ti);
-$w-&gt;plot(with =&gt; &#39;line&#39;, key =&gt; &#39;spline&#39;, $ti, $disti,
-  with =&gt; &#39;points&#39;, $t, $dist,
-  {legend=&gt;&#39;tr&#39;, xlabel=&gt;&quot;Time (hours)&quot;, ylabel=&gt;&quot;Distance (km)&quot;});
+<pre><code>$factor = 3; # noise factor
 </code></pre>
 
-<p><img src="santa-1.png"></p>
+<p>data : gaussian + noise</p>
 
-<p>OK, that looks good. Now to calculate then plot the closest time to 20,000km:</p>
-
-<pre><code>$disti_20k = abs($disti-20_000);
-$closest_ind = $disti_20k-&gt;minimum_ind;
-print &quot;Time: &quot;, $closest_time = $ti-&gt;index($closest_ind), &quot;\n&quot;;
-print &quot;Dist: &quot;, $closest_dist = $disti-&gt;index($closest_ind), &quot;\n&quot;;
-$w-&gt;oplot(with =&gt; &#39;line&#39;, style=&gt;4,
-  $closest_time-&gt;dummy(0,2), pdl(0,$closest_dist));
-# Time: 12.6666666666667
-# Dist: 19980.2751270675
+<pre><code>$j = sequence(20); srandom(5);
+$data = 32*exp(-(($j-10)/6)**2) + $factor * (random(20) - 0.5);
+$init = pdl [ 33, 9, 12 ];
+$initsize = 2;
 </code></pre>
 
-<p><img src="santa-2.png"></p>
+<p>The plotting will flatten, i.e. ignore, the third dimension in the vectors.</p>
 
-<p>12 hours and 40 minutes after take-off it is!</p>
+<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[30,36],yrange=&gt;[7,12]}); # reset
+($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
+  sub {
+    my ($x, $y, $z) = map $_[0]-&gt;slice($_), 0..2;
+    (($data - $x*exp(-(($j-$y)/$z)**2))**2)-&gt;sumover;
+  },
+  \&amp;logs
+);
+</code></pre>
+
+<p><img src="/advent/../images/demos/simplex/vid-3.gif"></p>
 
 <h2>Further resources</h2>
 
-<p>Be sure to check the documentation for
-<a href="https://metacpan.org/pod/PDL::Func">PDL::Func</a>, to see further
-possibilities: PDL::Func objects encapsulate data to interpolate,
-integrate, and get gradients of (differentiate).</p>
+<p>There are other optimisation modules for PDL, including:</p>
+
+<ul>
+<li><a href="https://metacpan.org/pod/PDL::Opt::GLPK">PDL::Opt::GLPK</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Opt::NonLinear">PDL::Opt::NonLinear</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Opt::QP">PDL::Opt::QP</a></li>
+<li><a href="https://metacpan.org/pod/PDL::Opt::ParticleSwarm">PDL::Opt::ParticleSwarm</a></li>
+</ul>
+
+<p>Take a look at
+<a href="https://en.wikipedia.org/wiki/Simplex_algorithm">the Wikipedia page for the simplex algorithm</a>
+for more on the subject.</p>
 
               </section>
-              <small><p><a href="https://www.cbsnews.com/boston/news/norad-santa-tracker-website-christmas-eve-2020/">Santa Claus with coronavirus mask on NORAD&#39;s 2020 tracker.</a> Image Credit: NORAD, so public domain</p>
+              <small><p><a href="https://commons.wikimedia.org/wiki/File:Simplex-description-en.svg">Graphical description of how the simplex method can solve linear programming problems</a> under Creative Commons Attribution-Share Alike 3.0 Unported</p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/interpolation/">interpolation</a>
+                  <a href="/advent/blog/tag/optimisation/">optimisation</a>,
+                  <a href="/advent/blog/tag/simplex/">simplex</a>
               </p>
 
 
@@ -225,8 +233,7 @@ integrate, and get gradients of (differentiate).</p>
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/03/installing-on-macos/index.html" rel="prev"><strong>Previous Article</strong> Day 3: Perl Data Language on the Mac</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/05/k-means/index.html" rel="next"><strong>Next Article</strong> Day 5: Using k-means clustering as a ... crayon? </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/07/finance2/index.html" rel="prev"><strong>Previous Article</strong> Day 7: Plotting PDL data in the browser using Javascript</a></li>
               </ul>
 
             </div>

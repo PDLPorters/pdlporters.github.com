@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/unsupervised-learning/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 5: Using k-means clustering as a ... crayon?</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</guid>
+            <description><![CDATA[
+                <p>The
+<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
+is 50 years old.
+This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
+The results are <strong>shocking!</strong></p>
+
+<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/data-analysis/">data analysis</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/clustering/">clustering</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/csv/">CSV</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Thu, 05 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

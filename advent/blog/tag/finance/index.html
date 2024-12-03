@@ -1,41 +1,93 @@
-<?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/</id>
-    <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-08T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
-    <generator version="0.098">Statocles</generator>
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
 
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</id>
-        <title>Day 8: Simplex optimisation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+  <meta charset="utf-8">
+  <meta content="" name="description">
 
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/#section-2">Continue reading...</a></p>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/optimisation/">optimisation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/simplex/">simplex</a>
-                </p>
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
 
-        ]]></content>
-        <updated>2024-12-08T00:00:00Z</updated>
-        <category term="optimisation" />
-        <category term="simplex" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</id>
-        <title>Day 7: Plotting PDL data in the browser using Javascript</title>
-        <author><name>Vikas N Kumar</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <h2>Introduction</h2>
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/tag/finance/" property="og:url">
+  <meta content="PDL Advent calendar 2024" property="og:title">
+    <meta content="summary" name="twitter:card">
 
-<p>In a <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> we
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>PDL Advent calendar 2024</title>
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/blog/tag/finance.atom" rel="alternate" type="application/atom+xml">
+  <link href="/advent/blog/tag/finance.rss" rel="alternate" type="application/rss+xml">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<article>
+    <header>
+        <h1><a href="/advent/blog/2024/12/07/finance2/">Day 7: Plotting PDL data in the browser using Javascript</a></h1>
+
+        <aside>
+            <time datetime="2024-12-07">
+                Posted on 2024-12-07
+            </time>
+                <span class="author">
+                    by Vikas N Kumar
+                </span>
+        </aside>
+
+        <aside class="tags">Tags:
+            <a href="/advent/blog/tag/finance/" rel="tag">finance</a>
+            <a href="/advent/blog/tag/plotting/" rel="tag">plotting</a>
+        </aside>
+
+    </header>
+
+    <h2>Introduction</h2>
+
+<p>In a <a href="/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> we
 saw how to create a trading strategy using
 <a href="https://metacpan.org/pod/PDL::Finance::TA">PDL::Finance::TA</a> and
 <a href="https://metacpan.org/pod/PDL">PDL</a> with Perl.</p>
@@ -51,7 +103,7 @@ want to use your favorite Javascript plotting library to do the plots.  Maybe
 you want to do some live plotting based on some user interactions.</p>
 
 <p>If this is your use case, this blog post will describe how to accomplish that.
-We continue to use the same example as in the <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous blog
+We continue to use the same example as in the <a href="/advent/blog/2024/12/07/finance2/../../06/finance/">previous blog
 post</a>
 related to creating buy and sell trading signals for a trading strategy. But I
 will show you how to modify the plotting code to generate custom Javascript.</p>
@@ -109,7 +161,7 @@ processed with the template.</p>
 <p>HighCharts plots financial time series data, where the timestamp is in
 milliseconds.</p>
 
-<p>We will be referencing the code from the <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a>
+<p>We will be referencing the code from the <a href="/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a>
 here.</p>
 
 <h3>Create the Open-High-Low-Close chart object</h3>
@@ -400,7 +452,7 @@ the HighCharts chart data. The <code>$ttconf</code> variable is a HASH object th
 the variables that the template needs.</p>
 
 <p>We have <code>$symbol</code> which is the symbol of the prices we have downloaded as per
-the <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a>.
+the <a href="/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a>.
 In our case it is the string <code>DOGEUSD</code>.</p>
 
 <p>We then load the <code>__DATA__</code> contents into <code>$ttcontent</code>. We also save that to a
@@ -451,11 +503,11 @@ if ($ret) {
 <p>Below is a screenshot of the full script that you would see in the browser,
 along with the Bollinger Bands and the buy and sell signals.</p>
 
-<p><img alt="Plotting HighCharts with PDL - Screenshot" src="https://pdl.perl.org/advent/blog/2024/12/07/finance2/banner.jpg"></p>
+<p><img alt="Plotting HighCharts with PDL - Screenshot" src="/advent/blog/2024/12/07/finance2/banner.jpg"></p>
 
 <h2>The Full Script</h2>
 
-<p>We now reference most of the script from the <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> here, until the plotting section.</p>
+<p>We now reference most of the script from the <a href="/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> here, until the plotting section.</p>
 
 <p><strong>NOTE</strong>: We have removed the dependency of this script on <code>PDL::Finance::Gnuplot</code> and instead added <code>Template</code> and <code>Browser::Open</code> as imported modules.</p>
 
@@ -752,23 +804,28 @@ __DATA__
 </code></pre>
 
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/plotting/">plotting</a>
-                </p>
 
-        ]]></content>
-        <updated>2024-12-07T00:00:00Z</updated>
-        <category term="finance" />
-        <category term="plotting" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/06/finance/</id>
-        <title>Day 6: How to use PDL::Finance::TA to develop a trading strategy</title>
-        <author><name>Vikas N Kumar</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/06/finance/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <h2>Introduction</h2>
+</article>
+<article>
+    <header>
+        <h1><a href="/advent/blog/2024/12/06/finance/">Day 6: How to use PDL::Finance::TA to develop a trading strategy</a></h1>
+
+        <aside>
+            <time datetime="2024-12-06">
+                Posted on 2024-12-06
+            </time>
+                <span class="author">
+                    by Vikas N Kumar
+                </span>
+        </aside>
+
+        <aside class="tags">Tags:
+            <a href="/advent/blog/tag/finance/" rel="tag">finance</a>
+        </aside>
+
+    </header>
+
+    <h2>Introduction</h2>
 
 <p>So you are a Perl developer and you see a lot of people make money on the stock
 market and think you could do that too. You could use third party tools provided
@@ -1346,68 +1403,75 @@ $pwin-&gt;end_multi;
 $pwin-&gt;pause_until_close;
 </code></pre>
 
-<p><img alt="Image of the final chart" src="https://pdl.perl.org/advent/blog/2024/12/06/finance/banner.jpg"></p>
+<p><img alt="Image of the final chart" src="/advent/blog/2024/12/06/finance/banner.jpg"></p>
 
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                </p>
 
-        ]]></content>
-        <updated>2024-12-06T00:00:00Z</updated>
-        <category term="finance" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</id>
-        <title>Day 5: Using k-means clustering as a ... crayon?</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>The
-<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
-is 50 years old.
-This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
-The results are <strong>shocking!</strong></p>
+</article>
 
-<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
+<ul class="pager">
+    <li class="prev">
+            <button disabled>
+                ← Older
+            </button>
+    </li>
+    <li class="next">
+            <button disabled>
+                Newer →
+            </button>
+    </li>
+</ul>
 
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/#section-2">Continue reading...</a></p>
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/data-analysis/">data analysis</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/clustering/">clustering</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/csv/">CSV</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                </p>
 
-        ]]></content>
-        <updated>2024-12-05T00:00:00Z</updated>
-        <category term="data analysis" />
-        <category term="clustering" />
-        <category term="unsupervised learning" />
-        <category term="TriD" />
-        <category term="CSV" />
-        <category term="visualization" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/04/interpol/</id>
-        <title>Day 4: Interpolation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
 
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/#section-2">Continue reading...</a></p>
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/interpolation/">interpolation</a>
-                </p>
+   <footer>
 
-        ]]></content>
-        <updated>2024-12-04T00:00:00Z</updated>
-        <category term="interpolation" />
-    </entry>
-</feed>
+      <div class="row">
 
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

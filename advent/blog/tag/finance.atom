@@ -1,32 +1,12 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/</id>
+    <id>https://pdl.perl.org/advent/blog/tag/finance/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-08T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
+    <updated>2024-12-07T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/finance.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/finance/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</id>
-        <title>Day 8: Simplex optimisation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/optimisation/">optimisation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/simplex/">simplex</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-08T00:00:00Z</updated>
-        <category term="optimisation" />
-        <category term="simplex" />
-    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</id>
         <title>Day 7: Plotting PDL data in the browser using Javascript</title>
@@ -1356,58 +1336,6 @@ $pwin-&gt;pause_until_close;
         ]]></content>
         <updated>2024-12-06T00:00:00Z</updated>
         <category term="finance" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</id>
-        <title>Day 5: Using k-means clustering as a ... crayon?</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>The
-<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
-is 50 years old.
-This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
-The results are <strong>shocking!</strong></p>
-
-<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/data-analysis/">data analysis</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/clustering/">clustering</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/csv/">CSV</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-05T00:00:00Z</updated>
-        <category term="data analysis" />
-        <category term="clustering" />
-        <category term="unsupervised learning" />
-        <category term="TriD" />
-        <category term="CSV" />
-        <category term="visualization" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/04/interpol/</id>
-        <title>Day 4: Interpolation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/interpolation/">interpolation</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-04T00:00:00Z</updated>
-        <category term="interpolation" />
     </entry>
 </feed>
 

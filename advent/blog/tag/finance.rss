@@ -1,39 +1,17 @@
 <?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/</id>
-    <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-08T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
-    <generator version="0.098">Statocles</generator>
-
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</id>
-        <title>Day 8: Simplex optimisation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/optimisation/">optimisation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/simplex/">simplex</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-08T00:00:00Z</updated>
-        <category term="optimisation" />
-        <category term="simplex" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</id>
-        <title>Day 7: Plotting PDL data in the browser using Javascript</title>
-        <author><name>Vikas N Kumar</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <h2>Introduction</h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/finance/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/finance.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 7: Plotting PDL data in the browser using Javascript</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</guid>
+            <description><![CDATA[
+                <h2>Introduction</h2>
 
 <p>In a <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> we
 saw how to create a trading strategy using
@@ -752,23 +730,22 @@ __DATA__
 </code></pre>
 
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/plotting/">plotting</a>
-                </p>
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/plotting/">plotting</a>
+                    </p>
 
-        ]]></content>
-        <updated>2024-12-07T00:00:00Z</updated>
-        <category term="finance" />
-        <category term="plotting" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/06/finance/</id>
-        <title>Day 6: How to use PDL::Finance::TA to develop a trading strategy</title>
-        <author><name>Vikas N Kumar</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/06/finance/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <h2>Introduction</h2>
+            ]]></description>
+            <pubDate>
+                Sat, 07 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>Day 6: How to use PDL::Finance::TA to develop a trading strategy</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/06/finance/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/06/finance/</guid>
+            <description><![CDATA[
+                <h2>Introduction</h2>
 
 <p>So you are a Perl developer and you see a lot of people make money on the stock
 market and think you could do that too. You could use third party tools provided
@@ -1349,65 +1326,15 @@ $pwin-&gt;pause_until_close;
 <p><img alt="Image of the final chart" src="https://pdl.perl.org/advent/blog/2024/12/06/finance/banner.jpg"></p>
 
 
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                </p>
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
+                    </p>
 
-        ]]></content>
-        <updated>2024-12-06T00:00:00Z</updated>
-        <category term="finance" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</id>
-        <title>Day 5: Using k-means clustering as a ... crayon?</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>The
-<a href="https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html">mtcars dataset</a>
-is 50 years old.
-This is the 21st Century, so let&#39;s look at Electric Vehicles with k-means clustering.
-The results are <strong>shocking!</strong></p>
-
-<p><em>Punning without a license? Guilty as <strong>charged</strong>!</em></p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/05/k-means/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/data-analysis/">data analysis</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/clustering/">clustering</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/csv/">CSV</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-05T00:00:00Z</updated>
-        <category term="data analysis" />
-        <category term="clustering" />
-        <category term="unsupervised learning" />
-        <category term="TriD" />
-        <category term="CSV" />
-        <category term="visualization" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/04/interpol/</id>
-        <title>Day 4: Interpolation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/interpolation/">interpolation</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-04T00:00:00Z</updated>
-        <category term="interpolation" />
-    </entry>
-</feed>
+            ]]></description>
+            <pubDate>
+                Fri, 06 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
 

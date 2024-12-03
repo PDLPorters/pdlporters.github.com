@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/optimisation/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/optimisation.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 8: Simplex optimisation with Perl Data Language</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</guid>
+            <description><![CDATA[
+                <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/optimisation/">optimisation</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/simplex/">simplex</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Sun, 08 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

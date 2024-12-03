@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/06/finance/" property="og:url">
+  <meta content="Day 6: How to use PDL::Finance::TA to develop a trading strategy" property="og:title">
+    <meta content="Using PDL::Finance::TA to develop a trading strategy" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 6: How to use PDL::Finance::TA to develop a trading strategy - PDL Advent calendar 2024</title>
+  <meta content="Vikas N Kumar" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 6: How to use PDL::Finance::TA to develop a trading strategy</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-06">Dec  6, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Finance Chart showing Trading Strategy with DOGEUSD" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <h2>Introduction</h2>
+
+<p>So you are a Perl developer and you see a lot of people make money on the stock
+market and think you could do that too. You could use third party tools provided
+by the trading platforms, you could use Python with its various related tools,
+you could use R with its RQuantLib, you could do C++ with <em>quantlib</em> and other
+similar methods. Maybe you want to use machine learning on the stock price data,
+or want to just gamble by guessing or following the herd. <em>TIMTOWTDI</em> applies
+here.</p>
+
+<p>But you decided you want to use Perl, so for that scenario you
+can use <a href="https://metacpan.org/pod/PDL">PDL</a> and the financial technical analysis library <a href="https://metacpan.org/pod/PDL::Finance::TA">PDL::Finance::TA</a>, which
+wraps the TA-lib C++ library. Technical Analysis, also known sometimes by
+detractors as <em>astrology for traders</em>, can be a useful way to generate buy and
+sell trading signals for a stock that you may be interested in trading. It
+consists of invoking a set of functions, that maybe statistical or numerical in
+nature, to create <em>indicators</em> that generate such trading signals or provide a
+hint for the trader to make a trade. However, these indicators are always
+lagging indicators because they cannot predict the future, they can only be
+based on the past data, similar to what a machine learning model does.</p>
+
+<p>That&#39;s why you see disclaimers like <em>past performance is not indicative of
+future results</em> in your broker&#39;s statements or in advertisements.</p>
+
+<p>In this post, I show you how to start using <code>PDL::Finance::TA</code> to test out some
+theories that you can experiment with. A module named <a href="https://metacpan.org/pod/App::financeta">App::financeta</a> exists that
+is a desktop GUI product that allows you to do this in an easier fashion without writing
+any code, but for this post we describe how to develop simple functions to do
+this from scratch. Maybe you want to embed this kind of functionality into a website you
+already have developed.</p>
+
+<h2>Pre-requisites</h2>
+
+<p>Let&#39;s first install all the prerequisites using <code>App::cpanminus</code>, which is what
+I use on Linux. This code has been tested on Ubuntu 22.04 LTS and Debian 11. If
+you find an issue on other types of Linux or on Windows, please inform me.</p>
+
+<pre><code>## you need Perl installed and Gnuplot installed.
+$ sudo apt -y install gnuplot perl perl-modules cpanminus liblocal-lib-perl
+## set your local Perl install to $HOME/perl5
+$ mkdir -p ~/perl5/lib/perl5
+### add this oneliner to the ~/.bashrc or ~/.profile for your terminal
+$ eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
+$ cpanm PDL PDL::Graphics::Gnuplot PDL::Finance::TA JSON::XS         LWP::UserAgent DateTime Path::Tiny
+## sometimes this module does not pass the tests
+$ cpanm -f Finance::QuoteHist
+## check if PDL got installed
+$ which perldl
+</code></pre>
+
+<h2>Get Pricing Data from Yahoo Finance</h2>
+
+<p>Before we start we need to download some pricing data. You can either use Yahoo
+Finance and download a CSV, or we can use a web request with
+<code>Finance::QuoteHist</code>.</p>
+
+<p>Below we show code to download a stock like NVDA from Yahoo Finance and convert to PDL object.</p>
+
+<pre><code>use DateTime;
+use Finance::QuoteHist;
+use PDL;
+use PDL::NiceSlice;
+my $finq = Finance::QuoteHist-&gt;new(
+        symbols =&gt; [&#39;NVDA&#39;],
+        start_date =&gt; &#39;1 year ago&#39;,
+        end_date =&gt; &#39;today&#39;,
+        auto_proxy =&gt; 1,
+        );
+my @quotes = ();
+foreach my $row ($finq-&gt;quotes) {
+    my ($sym, $date, $o, $h, $l, $c, $vol) = @$row;
+    ## date is in YYYY/MM/DD format
+    my ($yy, $mm, $dd) = split /\//, $date;
+    ## the data is NASDAQ/NYSE specific
+    my $epoch = DateTime-&gt;new(
+        year =&gt; $yy, month =&gt; $mm, day =&gt; $dd,
+        hour =&gt; 16, minute =&gt; 0, second =&gt; 0,
+        time_zone =&gt; &#39;America/New_York&#39;)-&gt;epoch;
+    push @quotes, pdl($epoch, $o, $h, $l, $c, $vol);
+}
+$finq-&gt;clear_cache;
+## convert the array of PDLs to a single 6-D PDL
+my $qdata = pdl(@quotes)-&gt;transpose;
+## now we operate on the $qdata PDL object
+</code></pre>
+
+<p>In simple terms, the above code downloads 1 year of open, high, low, close and
+volume data for the <em>NVDA</em> (NVIDIA) stock symbol from Yahoo Finance and is
+converted to a 6-dimension PDL to be used for the next steps.</p>
+
+<h2>Get Pricing Data from Gemini Exchange</h2>
+
+<p>If you want to trade cryptocurrencies, the Gemini Exchange provides a free
+public REST API that we can use to get data from using <code>LWP::UserAgent</code>.</p>
+
+<p>Here is a <a href="https://docs.gemini.com/rest-api/?shell#candles">link</a> to the
+<em>candles</em> REST API for Gemini which we will be using to get the open, high, low,
+close and volume data for a cryptocurrency such as DOGEUSD (Dogecoin).</p>
+
+<pre><code>use LWP::UserAgent
+use PDL;
+use PDL::NiceSlice;
+use JSON::XS qw(decode_json);
+
+my $url = sprintf(&quot;https://api.gemini.com/v2/candles/%s/%s&quot;, &#39;dogeusd&#39;, &#39;1day&#39;);
+my $lwp = LWP::UserAgent-&gt;new(timeout =&gt; 60);
+$lwp-&gt;env_proxy;
+my $resp = $lwp-&gt;get($url);
+my $qdata;
+if ($resp-&gt;is_success) {
+    my $content = $resp-&gt;decoded_content;
+    if (defined $content and length($content)) {
+        my $jquotes = decode_json $content;
+        if (ref $jquotes eq &#39;ARRAY&#39; and scalar(@$jquotes)) {
+            ## sort quotes by timestamp
+            my @sorted = sort { $a-&gt;[0] &lt;=&gt; $b-&gt;[0] } @$jquotes;
+            foreach my $q (@sorted) {
+                ## timestamp is the first column in milliseconds
+                $q-&gt;[0] /= 1000;
+            }
+            ## convert the quotes to a PDL
+            $qdata = pdl(@sorted)-&gt;transpose;
+        } else {
+            warn &quot;No quotes returned by $url&quot;;
+            $qdata = undef;
+        }
+    } else {
+        warn &quot;No content received from $url&quot;;
+        $qdata = undef;
+    }
+} else {
+    warn &quot;Error from request to $url: &quot; . $resp-&gt;status_line;
+    $qdata = undef;
+}
+##
+die &quot;Unable to get data for dogeusd&quot; unless ref $qdata eq &#39;PDL&#39;;
+## now we operate on the $qdata PDL object
+</code></pre>
+
+<h2>Plot the Quotes using PDL::Graphics::Gnuplot</h2>
+
+<p>In this section we will use the <code>$qdata</code> variable and <a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">PDL::Graphics::Gnuplot</a>
+to plot the prices on a chart to view them.</p>
+
+<pre><code>use PDL;
+use PDL::NiceSlice;
+use PDL::Graphics::Gnuplot;
+## let&#39;s assume all the data has been loaded into $qdata variable as in the
+## above sections.
+
+## create a default Gnuplot window
+my $pwin = gpwin(size =&gt; [ 1024, 768, &#39;px&#39; ]);
+## now that the window is created, reset it anyway
+$pwin-&gt;reset();
+$pwin-&gt;multiplot();
+$pwin-&gt;plot({
+        object =&gt; &#39;1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb &quot;black&quot; behind&#39;,
+        title =&gt; [&quot;DOGEUSD Open-High-Low-Close&quot;, textcolor =&gt; &#39;rgb &quot;white&quot;&#39;],
+        key =&gt; [&#39;on&#39;, &#39;outside&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        border =&gt; &#39;linecolor rgbcolor &quot;white&quot;&#39;,
+        xlabel =&gt; [&#39;Date&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        ylabel =&gt; [&#39;Price&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        xdata =&gt; &#39;time&#39;,
+        xtics =&gt; {format =&gt; &#39;%Y-%m-%d&#39;, rotate =&gt; -90, textcolor =&gt; &#39;orange&#39;, },
+        ytics =&gt; {textcolor =&gt; &#39;orange&#39;},
+        label =&gt; [1, &#39;DOGEUSD&#39;, textcolor =&gt; &#39;rgb &quot;cyan&quot;&#39;, at =&gt; &quot;graph 0.90,0.03&quot;],
+    },
+    {
+        with =&gt; &#39;financebars&#39;,
+        linecolor =&gt; &#39;white&#39;,
+        legend =&gt; &#39;Price&#39;,
+    },
+    $qdata(,(0)), #timestamp
+    $qdata(,(1)), #open
+    $qdata(,(2)), #high
+    $qdata(,(3)), #low
+    $qdata(,(4)), #close
+    );
+$pwin-&gt;end_multi;
+$pwin-&gt;pause_until_close;
+</code></pre>
+
+<h2>Run Indicators</h2>
+
+<p>Now that we have pricing data stored in the <code>$qdata</code> variable we will show how
+to use <code>PDL::Finance::TA</code> and <code>PDL::Graphics::Gnuplot</code> to generate some trading
+signals and indicators.</p>
+
+<p>The PDL that we have has 6 dimensions: timestamp, open price, high price, low
+price, close price and trading volume. Different data providers have different
+meanings for volume, but we will assume you can refer to their documentation for
+more details.</p>
+
+<p>First we try simple indicators like <a href="https://en.wikipedia.org/wiki/Bollinger_Bands">Bollinger
+Bands</a> which does a moving
+average around the variable and noisy price distribution with a standard
+deviation that can be configured. We will use 2 standard deviations in our code
+below.</p>
+
+<p>The <code>PDL::Finance::TA</code> function that implements Bolling Bands is called
+<code>ta_bbands</code>. Here&#39;s how the code would look if we were to invoke this indicator
+with some default values on the <code>$qdata</code> variable.</p>
+
+<pre><code>use PDL;
+use PDL::NiceSlice;
+use PDL::Finance::TA;
+
+## load data as PDL into $qdata as described above
+
+## use the close price
+my $timestamp = $qdata(, (0));
+my $open_px = $qdata(, (1));
+my $high_px = $qdata(, (2));
+my $low_px = $qdata(, (3));
+my $close_px = $qdata(, (4));
+## use the default values
+my ($bb_upper, $bb_middle, $bb_lower) = PDL::ta_bbands($close_px, 5, 2, 2, 0);
+
+## plot the data
+my $pwin = gpwin(size =&gt; [1024, 768, &#39;px&#39;]);
+$pwin-&gt;reset;
+$pwin-&gt;multiplot;
+$pwin-&gt;plot({
+        object =&gt; &#39;1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb &quot;black&quot; behind&#39;,
+        title =&gt; [&quot;$symbol Open-High-Low-Close&quot;, textcolor =&gt; &#39;rgb &quot;white&quot;&#39;],
+        key =&gt; [&#39;on&#39;, &#39;outside&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        border =&gt; &#39;linecolor rgbcolor &quot;white&quot;&#39;,
+        xlabel =&gt; [&#39;Date&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        ylabel =&gt; [&#39;Price&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        xdata =&gt; &#39;time&#39;,
+        xtics =&gt; {format =&gt; &#39;%Y-%m-%d&#39;, rotate =&gt; -90, textcolor =&gt; &#39;orange&#39;, },
+        ytics =&gt; {textcolor =&gt; &#39;orange&#39;},
+        label =&gt; [1, $symbol, textcolor =&gt; &#39;rgb &quot;cyan&quot;&#39;, at =&gt; &quot;graph 0.90,0.03&quot;],
+    },
+    {
+        with =&gt; &#39;financebars&#39;,
+        linecolor =&gt; &#39;white&#39;,
+        legend =&gt; &#39;Price&#39;,
+    },
+    $timestamp, $open_px, $high_px, $low_px, $close_px,
+    ### Bollinger Bands plot
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-green&#39;,
+        legend =&gt; &#39;Bollinger Band - Upper&#39;
+    },
+    $timestamp, $bb_upper, #upper band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-magenta&#39;,
+        legend =&gt; &#39;Bollinger Band - Lower&#39;
+    },
+    $timestamp, $bb_lower, #lower band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;orange&#39;,
+        legend =&gt; &#39;Bollinger Band - Middle&#39;
+    },
+    $timestamp, $bb_middle, #middle band
+);
+$pwin-&gt;end_multi;
+$pwin-&gt;pause_until_close;
+</code></pre>
+
+<p>Similarly, you can read the documentation of <code>PDL::Finance::TA</code> and pick
+whatever indicators you would like to plot.</p>
+
+<h2>Generate Buy or Sell Signals</h2>
+
+<p>Now let&#39;s take the case where we want to buy the security (whether a stock or a
+cryptocurrency), when the low price crosses the lower Bollinger band and sell when
+the high price crosses the upper Bollinger band.</p>
+
+<p>To do that we will write the below <code>PDL</code> code.</p>
+
+<pre><code>use PDL;
+use PDL::NiceSlice;
+use PDL::Finance::TA;
+
+## load data as PDL into $qdata as described above
+
+## use the close price
+my $timestamp = $qdata(, (0));
+my $open_px = $qdata(, (1));
+my $high_px = $qdata(, (2));
+my $low_px = $qdata(, (3));
+my $close_px = $qdata(, (4));
+## use the default values
+my ($bb_upper, $bb_middle, $bb_lower) = PDL::ta_bbands($close_px, 5, 2, 2, 0);
+
+## generate buy and sell signals
+## we want to sell at the CLOSE price when the HIGH price cuts the Upper Bollinger Band
+## we want to buy at the OPEN price when the LOW price cuts the Lower Bollinger Band
+my $buys            = zeroes( $close_px-&gt;dims );
+my $sells           = zeroes( $close_px-&gt;dims );
+## use a 1 tick lookback
+my $lookback        = 1;
+## calculate the indexes of the lookback PDL based on LOW price
+my $idx_0           = xvals( $low_px-&gt;dims ) - $lookback;
+## if the lookback index is negative set it to 0
+$idx_0 = $idx_0-&gt;setbadif( $idx_0 &lt; 0 )-&gt;setbadtoval(0);
+## get the indexes of when the LOW Price &lt; Lower Bollinger Band based on the lookback
+my $idx_1 = which(
+        ($low_px-&gt;index($idx_0) &gt; $bb_lower-&gt;index($idx_0)) &amp;
+        ($low_px &lt; $bb_lower)
+);
+## set the buys to be on the OPEN price for those indexes
+$buys-&gt;index($idx_1) .= $open_px-&gt;index($idx_1);
+## set all 0 values to BAD to avoid plotting zeroes
+$buys-&gt;inplace-&gt;setvaltobad(0);
+
+## calculate the indexes of the lookback PDL based on HIGH price
+my $idx_2 = xvals( $high_px-&gt;dims ) - $lookback;
+## if the lookback index is negative set it to 0
+$idx_2 = $idx_2-&gt;setbadif( $idx_2 &lt; 0 )-&gt;setbadtoval(0);
+## get the indexes of when the HIGH Price &gt; Upper Bollinger Band based on the lookback
+my $idx_3 = which(
+    ($high_px-&gt;index($idx_2) &lt; $bb_upper-&gt;index($idx_2)) &amp;
+    ($high_px &gt; $bb_upper )
+);
+## set the sells to be on the CLOSE price for those indexes
+$sells-&gt;index($idx_3) .= $close_px-&gt;index($idx_3);
+## set all 0 values to BAD to avoid plotting zeroes
+$sells-&gt;inplace-&gt;setvaltobad(0);
+
+## plot the data
+my $pwin = gpwin(size =&gt; [1024, 768, &#39;px&#39;]);
+$pwin-&gt;reset;
+$pwin-&gt;multiplot;
+$pwin-&gt;plot({
+        object =&gt; &#39;1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb &quot;black&quot; behind&#39;,
+        title =&gt; [&quot;$symbol Open-High-Low-Close&quot;, textcolor =&gt; &#39;rgb &quot;white&quot;&#39;],
+        key =&gt; [&#39;on&#39;, &#39;outside&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        border =&gt; &#39;linecolor rgbcolor &quot;white&quot;&#39;,
+        xlabel =&gt; [&#39;Date&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        ylabel =&gt; [&#39;Price&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        xdata =&gt; &#39;time&#39;,
+        xtics =&gt; {format =&gt; &#39;%Y-%m-%d&#39;, rotate =&gt; -90, textcolor =&gt; &#39;orange&#39;, },
+        ytics =&gt; {textcolor =&gt; &#39;orange&#39;},
+        label =&gt; [1, $symbol, textcolor =&gt; &#39;rgb &quot;cyan&quot;&#39;, at =&gt; &quot;graph 0.90,0.03&quot;],
+    },
+    {
+        with =&gt; &#39;financebars&#39;,
+        linecolor =&gt; &#39;white&#39;,
+        legend =&gt; &#39;Price&#39;,
+    },
+    $timestamp,
+    $open_px,
+    $high_px,
+    $low_px,
+    $close_px,
+    ### Bollinger Bands plot
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-green&#39;,
+        legend =&gt; &#39;Bollinger Band - Upper&#39;
+    },
+    $timestamp,
+    $bb_upper, #upper band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-magenta&#39;,
+        legend =&gt; &#39;Bollinger Band - Lower&#39;
+    },
+    $timestamp,
+    $bb_lower, #lower band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;orange&#39;,
+        legend =&gt; &#39;Bollinger Band - Middle&#39;
+    },
+    $timestamp,
+    $bb_middle, #middle band
+    {
+        with =&gt; &#39;points&#39;,
+        pointtype =&gt; 5, #triangle
+        linecolor =&gt; &#39;green&#39;,
+        legend =&gt; &#39;Buys&#39;,
+    },
+    $timestamp,
+    $buys,
+    {
+        with =&gt; &#39;points&#39;,
+        pointtype =&gt; 7, #inverted triangle
+        linecolor =&gt; &#39;red&#39;,
+        legend =&gt; &#39;Sells&#39;,
+    },
+    $timestamp,
+    $sells,
+);
+$pwin-&gt;end_multi;
+$pwin-&gt;pause_until_close;
+</code></pre>
+
+<h2>Final Script</h2>
+
+<p>So let&#39;s aggregate all the code into one script and it looks like below. We have moved the data retrieval into a simple
+function <code>get_data()</code> that does not make web requests unnecessarily. You can copy this code and run it as is in the
+shell and it will plot a Gnuplot window as seen in the screenshot image linked below.</p>
+
+<pre><code>#!/usr/bin/env perl
+use strict;
+use warnings;
+use PDL;
+use PDL::NiceSlice;
+use PDL::Finance::TA;
+use PDL::Graphics::Gnuplot;
+use JSON::XS qw(decode_json);
+use LWP::UserAgent;
+use DateTime;
+use Try::Tiny;
+use Path::Tiny;
+
+sub get_data($) {
+    my $symbol = shift;
+    my $filename = lc &quot;$symbol.json&quot;;
+    my $content;
+    my $qdata;
+    my $url = sprintf(&quot;https://api.gemini.com/v2/candles/%s/%s&quot;, lc $symbol, &#39;1day&#39;);
+    if (-e $filename) {
+        print &quot;Found $filename, loading data from that\n&quot;;
+        $content = path($filename)-&gt;slurp;
+    } else {
+        my $lwp = LWP::UserAgent-&gt;new(timeout =&gt; 60);
+        $lwp-&gt;env_proxy;
+        my $resp = $lwp-&gt;get($url);
+        if ($resp-&gt;is_success) {
+            $content = $resp-&gt;decoded_content;
+            path($filename)-&gt;spew($content);
+        } else {
+            warn &quot;Error from request to $url: &quot; . $resp-&gt;status_line;
+            return undef;
+        }
+    }
+    if (defined $content and length($content)) {
+        my $jquotes = decode_json $content;
+        if (ref $jquotes eq &#39;ARRAY&#39; and scalar(@$jquotes)) {
+            ## sort quotes by timestamp
+            my @sorted = sort { $a-&gt;[0] &lt;=&gt; $b-&gt;[0] } @$jquotes;
+            foreach my $q (@sorted) {
+                ## timestamp is the first column in milliseconds
+                $q-&gt;[0] /= 1000;
+            }
+            ## convert the quotes to a PDL
+            $qdata = pdl(@sorted)-&gt;transpose;
+        } else {
+            warn &quot;No quotes returned by $url or $filename&quot;;
+            $qdata = undef;
+        }
+    } else {
+        warn &quot;No content received from $url or $filename&quot;;
+        $qdata = undef;
+    }
+    ## now we operate on the $qdata PDL object
+    return $qdata;
+}
+
+my $symbol = $ARGV[0] // &#39;DOGEUSD&#39;;
+my $qdata = get_data($symbol);
+die &quot;Unable to get data for $symbol&quot; unless ref $qdata eq &#39;PDL&#39;;
+print $qdata;
+my $timestamp = $qdata(, (0));
+my $open_px = $qdata(, (1));
+my $high_px = $qdata(, (2));
+my $low_px = $qdata(, (3));
+my $close_px = $qdata(, (4));
+## use the default values
+## each of these are 1-D PDLs
+my ($bb_upper, $bb_middle, $bb_lower) = PDL::ta_bbands($close_px, 5, 2, 2, 0);
+my $buys            = zeroes( $close_px-&gt;dims );
+my $sells           = zeroes( $close_px-&gt;dims );
+## use a 1 tick lookback
+my $lookback        = 1;
+## calculate the indexes of the lookback PDL based on LOW price
+my $idx_0           = xvals( $low_px-&gt;dims ) - $lookback;
+## if the lookback index is negative set it to 0
+$idx_0 = $idx_0-&gt;setbadif( $idx_0 &lt; 0 )-&gt;setbadtoval(0);
+## get the indexes of when the LOW Price &lt; Lower Bollinger Band based on the lookback
+my $idx_1 = which(
+        ($low_px-&gt;index($idx_0) &gt; $bb_lower-&gt;index($idx_0)) &amp;
+        ($low_px &lt; $bb_lower)
+);
+## set the buys to be on the OPEN price for those indexes
+$buys-&gt;index($idx_1) .= $open_px-&gt;index($idx_1);
+## set all 0 values to BAD to avoid plotting zeroes
+$buys-&gt;inplace-&gt;setvaltobad(0);
+
+## calculate the indexes of the lookback PDL based on HIGH price
+my $idx_2 = xvals( $high_px-&gt;dims ) - $lookback;
+## if the lookback index is negative set it to 0
+$idx_2 = $idx_2-&gt;setbadif( $idx_2 &lt; 0 )-&gt;setbadtoval(0);
+## get the indexes of when the HIGH Price &gt; Upper Bollinger Band based on the lookback
+my $idx_3 = which(
+    ($high_px-&gt;index($idx_2) &lt; $bb_upper-&gt;index($idx_2)) &amp;
+    ($high_px &gt; $bb_upper )
+);
+## set the sells to be on the CLOSE price for those indexes
+$sells-&gt;index($idx_3) .= $close_px-&gt;index($idx_3);
+## set all 0 values to BAD to avoid plotting zeroes
+$sells-&gt;inplace-&gt;setvaltobad(0);
+## plot the data
+my $pwin = gpwin(size =&gt; [1024, 768, &#39;px&#39;]);
+$pwin-&gt;reset;
+$pwin-&gt;multiplot;
+$pwin-&gt;plot({
+        object =&gt; &#39;1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb &quot;black&quot; behind&#39;,
+        title =&gt; [&quot;$symbol Open-High-Low-Close&quot;, textcolor =&gt; &#39;rgb &quot;white&quot;&#39;],
+        key =&gt; [&#39;on&#39;, &#39;outside&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        border =&gt; &#39;linecolor rgbcolor &quot;white&quot;&#39;,
+        xlabel =&gt; [&#39;Date&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        ylabel =&gt; [&#39;Price&#39;, textcolor =&gt; &#39;rgb &quot;yellow&quot;&#39;],
+        xdata =&gt; &#39;time&#39;,
+        xtics =&gt; {format =&gt; &#39;%Y-%m-%d&#39;, rotate =&gt; -90, textcolor =&gt; &#39;orange&#39;, },
+        ytics =&gt; {textcolor =&gt; &#39;orange&#39;},
+        label =&gt; [1, $symbol, textcolor =&gt; &#39;rgb &quot;cyan&quot;&#39;, at =&gt; &quot;graph 0.90,0.03&quot;],
+    },
+    {
+        with =&gt; &#39;financebars&#39;,
+        linecolor =&gt; &#39;white&#39;,
+        legend =&gt; &#39;Price&#39;,
+    },
+    $timestamp,
+    $open_px,
+    $high_px,
+    $low_px,
+    $close_px,
+    ### Bollinger Bands plot
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-green&#39;,
+        legend =&gt; &#39;Bollinger Band - Upper&#39;
+    },
+    $timestamp,
+    $bb_upper, #upper band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;dark-magenta&#39;,
+        legend =&gt; &#39;Bollinger Band - Lower&#39;
+    },
+    $timestamp,
+    $bb_lower, #lower band
+    {
+        with =&gt; &#39;lines&#39;,
+        axes =&gt; &#39;x1y1&#39;,
+        linecolor =&gt; &#39;orange&#39;,
+        legend =&gt; &#39;Bollinger Band - Middle&#39;
+    },
+    $timestamp,
+    $bb_middle, #middle band
+    {
+        with =&gt; &#39;points&#39;,
+        pointtype =&gt; 5, #triangle
+        linecolor =&gt; &#39;green&#39;,
+        legend =&gt; &#39;Buys&#39;,
+    },
+    $timestamp,
+    $buys,
+    {
+        with =&gt; &#39;points&#39;,
+        pointtype =&gt; 7, #inverted triangle
+        linecolor =&gt; &#39;red&#39;,
+        legend =&gt; &#39;Sells&#39;,
+    },
+    $timestamp,
+    $sells,
+);
+$pwin-&gt;end_multi;
+$pwin-&gt;pause_until_close;
+</code></pre>
+
+<p><img alt="Image of the final chart" src="banner.jpg"></p>
+
+              </section>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/finance/">finance</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://avatars.githubusercontent.com/u/12120?v=4">
+                      </div>
+                      <div class="about">
+                        <h5>Vikas N Kumar</h5>
+                        <p>Vikas N Kumar (aka &quot;vicash&quot; on IRC) has been using Perl for about 18 years. He builds a lot of web-based software in Perl, and works in the finance industry doing a mix of C, C++ and Perl in his day job trying to succeed building trading strategies and trading systems. He has a background in Aerospace engineering but spends most of his time doing Computer Science related projects.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/05/k-means/index.html" rel="prev"><strong>Previous Article</strong> Day 5: Using k-means clustering as a ... crayon?</a></li>
+                  <li class="next"><a href="/advent/blog/2024/12/07/finance2/index.html" rel="next"><strong>Next Article</strong> Day 7: Plotting PDL data in the browser using Javascript </a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

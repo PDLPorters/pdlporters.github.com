@@ -18,11 +18,11 @@ images:
         <a href="https://commons.wikimedia.org/w/index.php?curid=36621380">K-means steg 4</a>" by <a href="https://commons.wikimedia.org/wiki/User:Larsac07">Larsac07</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/?ref=openverse">CC BY-SA 3.0</a>
 data:
   bio: duffee
-  description: 'k-means clustering on attributes of electric vehicles
+  description: k-means clustering on attributes of electric vehicles
 ---
 
 The
-[mtcars dataset](https://cran.r-project.org/web//packages//explore/vignettes/explore-mtcars.html)
+[mtcars dataset](https://cran.r-project.org/web/packages/explore/vignettes/explore-mtcars.html)
 is 50 years old.
 This is the 21st Century, so let's look at Electric Vehicles with k-means clustering.
 The results are **shocking!**
@@ -120,7 +120,8 @@ Let's see what that looks like.
 
     pdl> points3d( $cars->slice(':,0:2')->transpose, $colours, {PointSize => 3} )
 
-![Acceleration-Battery-Energy Consumption plot](ev_cars_rgb.webm 'A 3D plot of acceleration x-axis, battery usable y-axis, energy consumption z-axis')
+<video controls><source src="ev_cars_rgb.webm" type="video/webm" /></video>
+**Acceleration-Battery-Energy Consumption plot**: A 3D plot of acceleration x-axis, battery usable y-axis, energy consumption z-axis
 
 That blue is hard to see against the black background.
 Luckily, changing blue to white is as easy as turning `[0,0,1]` into `[1,1,1]`
@@ -134,7 +135,8 @@ to `$k{cluster}` and change the cluster membership.
     pdl> $lights(1,:)->where( $lights(2,:) > 0 ) .= 1
     pdl> points3d( $cars->slice(':,3:5')->transpose, $lights, {PointSize => 3} )
 
-![Price-Range-Top Speed plot](ev_cars_rg_white.webm 'A 3D plot of price x-axis, range y-axis, top speed z-axis')
+<video controls><source src="ev_cars_rg_white.webm" type="video/webm" /></video>
+**Price-Range-Top Speed plot**: A 3D plot of price x-axis, range y-axis, top speed z-axis
 
 ## TriD plotting Unwrapped
 
@@ -148,8 +150,8 @@ is visually more appealing than squares, but it doesn't do colour (yet).
 
 What I did see is that in the 4 plots I checked (columns 0-2, 1-3, 2-4 and 3-5),
 is a curved surface.
-A flatish face showing in the first image while the edge is pronounced in the second image.
-This suggests that the attributes are not independant, especially when price is involved.
+A flattish face showing in the first image while the edge is pronounced in the second image.
+This suggests that the attributes are not independent, especially when price is involved.
 Given 2 attributes, a third attribute is mostly determined.
 Perhaps what I really should do is calculate the
 [Correlation table](https://metacpan.org/pod/PDL::Stats::Basic#corr_table)

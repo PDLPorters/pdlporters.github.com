@@ -109,6 +109,8 @@ to any other in the network.
 It makes me smile as they go flying off the screen,
 like baubles do when you bump into the Christmas tree.
 
+Have fun!
+
 (with more time, I'd have liked to make the nodes random colours, too)
 
 ## All the code

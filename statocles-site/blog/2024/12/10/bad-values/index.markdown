@@ -20,7 +20,7 @@ data:
 
 Santa has discovered quality control issues in some of the scientific equipment that was delivered to children last Christmas.
 The results from the Early Elf Joint Internship Training program were more No-No-No than Ho-Ho-Ho!
-However the EEJIT's were consistent and testing revealed that the first 3 values in every 10 measurments were faulty. 
+However the EEJIT's were consistent and testing revealed that the first 3 values in every 10 measurements were faulty.
 An update was sent to all affected children so they could recalculate their results, knowing which readings to ignore.
 
 **Problem:** How should they treat the suspect values?

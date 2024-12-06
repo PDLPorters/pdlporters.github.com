@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/09/d3/" property="og:url">
+  <meta content="Day 9: Exploring Data with D3.js and Mojolicious" property="og:title">
+    <meta content="Using JavaScript to display data generated from PDL" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 9: Exploring Data with D3.js and Mojolicious - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 9: Exploring Data with D3.js and Mojolicious</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-09">Dec  9, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Mojolicious and D3.js logos" src="./banner.png">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>Sometimes PDL doesn&#39;t scratch the particular itch you have.
+PDL isn&#39;t like Vegas. It doesn&#39;t have to stay there.
+After crunching your data, you can get it out to Perl and beyond.</p>
+
+              </section>
+              <section id="section-2">
+                  <p>As any Yule fule know, PDL has
+<a href="https://metacpan.org/pod/PDL::Graphics">plenty of graphing options</a>
+so I&#39;ll need something unusual to make it worth the time.
+I was impressed by <a href="https://d3js.org/what-is-d3">D3.js</a>,
+a JavaScript library for visualising data, especially its force layout for networks.</p>
+
+<h2>Making a Random Graph</h2>
+
+<p>People have been studying
+<a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">Random Graphs</a>
+for over 60 years and they are a starting point for research into
+<a href="https://en.wikipedia.org/wiki/Complex_network">Complex Networks</a>
+such as social networks.
+I&#39;m not too fussed about the actual network produced here,
+so for now let&#39;s just create a matrix filled with random values
+and create links for everything above a chosen cutoff value.
+Keen Graph-heads might want to look at the
+<a href="https://metacpan.org/pod/Graph::Maker::Random">Graph::Maker::Random</a>
+module for a more rigorous approach to creating Random Graphs.</p>
+
+<p>A network can be represented by a square matrix
+where a link between nodes <strong>i</strong> and <strong>j</strong> is represented
+by a <code>1</code> in element <code>ij</code> and <code>0</code> elsewhere.
+To do that we create a
+<a href="https://metacpan.org/pod/PDL::Primitive#random">random</a>
+matrix with <code>$matrix = random($size, $size)</code>
+and zero everything below the cutoff
+with <code>$matrix-&gt;where( $matrix &lt; $cutoff ) .= 0</code>
+(lines 12 and 13)
+using the <a href="https://metacpan.org/pod/PDL::Primitive#where">where</a> function.
+Having created our network, let&#39;s export it to Perl with
+<a href="https://pdl.perl.org/?docs=PDL::Core#unpdl">unpdl</a>.
+That gives us an arrayref of arrayrefs which we use to decide
+when to push a hashref onto <code>@links</code> (line 21 and 22).
+<code>@nodes</code> and <code>@links</code> are then
+<a href="https://docs.mojolicious.org/Mojo/File#spew">spewed</a>
+into a <a href="https://docs.mojolicious.org/Mojo/JSON">JSON file</a>
+which D3 will display for us.</p>
+
+<h2>Serving web pages with Mojolicious</h2>
+
+<p>A neat little trick with Mojolicious is using the
+<a href="https://docs.mojolicious.org/Mojolicious/Lite">Mojolicious::Lite</a> application
+to get a one-file webapp up and running with the
+<a href="https://mojolicious.io/blog/2017/12/01/day-1-getting-started/">minimum of fuss.</a>
+Because it&#39;s all just Perl, I can create the network and export the JSON
+all in the same webapp that serves the page.
+Using the <a href="https://docs.mojolicious.org/morbo">morbo</a> development server
+means your saved changes are immediate reflected in the pages served.</p>
+
+<p>Save the code here as <strong>display_network.pl</strong>,
+create a directory named <strong>public</strong> to hold the JSON file and any CSS files used
+and run it with <code>morbo display_network.pl</code></p>
+
+<p>Every time you browse to <a href="http://localhost:3000/">localhost:3000</a>,
+the <a href="https://docs.mojolicious.org/Mojolicious/Lite#get">get</a> sub will
+create a new network and then render the <strong>index</strong> template
+to display the JSON file using the D3.js
+<a href="https://www.d3indepth.com/force-layout/">force layout.</a></p>
+
+<p>Mojo fans will immediately see how to modify the route
+so you can play with different values for size and cutoff
+without editing the file each time.
+The original example that impressed me so much is from
+<a href="https://www.safaribooksonline.com/library/view/title/9781449328788//">a decade old book</a>
+when D3 was in version 3.0 (it&#39;s now version 7.0).
+because you could play around with the network using your mouse
+to tease out the structure.
+It&#39;s been difficult to find a current force layout example I like
+which I could just drop into place, so I just grabbed
+<a href="http://bl.ocks.org/mbostock/ad70335eeef6d167bc36fd3c04378048">this one</a>
+and keen D3.js users can fix the interactive bits that I&#39;ve missed.</p>
+
+<h2>Christmas morning</h2>
+
+<p>I had only a vague idea of what a random graph looked like when I started.
+I was thinking that I&#39;d need a cutoff value of 0.3 or 0.5 to get a loosely connected network.
+After I got this tangled ball of Christmas lights,
+I kept raising and raising the cutoff until 0.9 (or only 10% chance of 2 nodes being linked)
+started giving me the result that I had in my head.
+You&#39;ll notice that my simple generator creates nodes that are not connected
+to any other in the network.
+It makes me smile as they go flying off the screen,
+like baubles do when you bump into the Christmas tree.</p>
+
+<p>Have fun!</p>
+
+<p>(with more time, I&#39;d have liked to make the nodes random colours, too)</p>
+
+<h2>All the code</h2>
+
+<p>Save this as <a href="display_network.pl">display_network.pl</a></p>
+
+<pre><code>#!/usr/bin/env perl
+use Mojolicious::Lite -signatures;
+
+use Mojo::File;
+use Mojo::JSON qw(to_json);
+use PDL;
+
+sub create_network ($size = 50, $cutoff = 0.925) { # signatures available on Perl 5.20+
+    #my ($size, $cutoff) = @_;                     # otherwise uncomment these 2 lines
+    #$size ||= 50; $cutoff ||= 0.925;
+
+    my $matrix = random($size, $size);
+    $matrix-&gt;where( $matrix &lt; $cutoff ) .= 0;
+
+    my $network = unpdl( $matrix );
+    my @nodes   = map { { id =&gt; $_ } } 0 .. ($size - 1);
+
+    my @links;
+    for (my $i = 0; $i &lt; $size; $i++) {
+        for (my $j = $i; $j &lt; $size; $j++) {
+            push @links, { source =&gt; $i, target =&gt; $j }
+                if $network-&gt;[$i][$j] &gt; 0;
+        }
+    }
+
+    my $json = to_json { nodes =&gt; \@nodes, links =&gt; \@links };
+    Mojo::File-&gt;new(&#39;public/random_network.json&#39;)-&gt;spew($json);
+}
+
+get &#39;/&#39; =&gt; sub ($c) {
+  create_network();
+  $c-&gt;render(template =&gt; &#39;index&#39;);
+};
+
+app-&gt;start;
+__DATA__
+
+@@ index.html.ep
+% layout &#39;default&#39;;
+% title &#39;Network example&#39;;
+&lt;h1&gt;Random Network displayed with D3.js force layout&lt;/h1&gt;
+&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;
+
+@@ layouts/default.html.ep
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;
+  %= stylesheet &#39;/network.css&#39;
+  %# stylesheets and js file names are relative to the public folder
+    &lt;meta name=&quot;description&quot; content=&quot;force directed graph example&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+      circle {
+        stroke: #fff;
+        stroke-width: 1;
+      }
+
+      .link {
+        stroke: #999;
+        stroke-opacity: 0.6;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;%= content %&gt;
+    &lt;script&gt;
+      // Original demo from Mike Bostock: http://bl.ocks.org/mbostock/ad70335eeef6d167bc36fd3c04378048
+
+      const margin = {
+        top: 40,
+        bottom: 10,
+        left: 20,
+        right: 20,
+      };
+      const width = 800 - margin.left - margin.right;
+      const height = 600 - margin.top - margin.bottom;
+
+      // Creates sources &lt;svg&gt; element and inner g (for margins)
+      const svg = d3
+        .select(&quot;#content&quot;)
+        .append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, width + margin.left + margin.right)
+        .attr(&quot;height&quot;, height + margin.top + margin.bottom)
+        .append(&quot;g&quot;)
+        .attr(&quot;transform&quot;, `translate(${margin.left}, ${margin.top})`);
+
+      /////////////////////////
+
+      const simulation = d3
+        .forceSimulation()
+        .force(
+          &quot;link&quot;,
+          d3.forceLink().id((d) =&gt; d.id)
+        )
+        .force(&quot;charge&quot;, d3.forceManyBody())
+        .force(&quot;center&quot;, d3.forceCenter(width / 2, height / 2));
+
+      const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+      d3.json(&quot;random_network.json&quot;).then((data) =&gt; {
+        // Links data join
+        const link = svg
+          .selectAll(&quot;.link&quot;)
+          .data(data.links)
+          .join((enter) =&gt; enter.append(&quot;line&quot;).attr(&quot;class&quot;, &quot;link&quot;));
+
+        // Nodes data join
+        const node = svg
+          .selectAll(&quot;.node&quot;)
+          .data(data.nodes)
+          .join((enter) =&gt; {
+            const node_enter = enter.append(&quot;circle&quot;).attr(&quot;class&quot;, &quot;node&quot;).attr(&quot;r&quot;, 10);
+            node_enter.append(&quot;title&quot;).text((d) =&gt; d.id);
+            return node_enter;
+          });
+
+        node.style(&quot;fill&quot;, (d) =&gt; color(d.group));
+
+        simulation.nodes(data.nodes).force(&quot;link&quot;).links(data.links);
+
+        simulation.on(&quot;tick&quot;, (e) =&gt; {
+          link
+            .attr(&quot;x1&quot;, (d) =&gt; d.source.x)
+            .attr(&quot;y1&quot;, (d) =&gt; d.source.y)
+            .attr(&quot;x2&quot;, (d) =&gt; d.target.x)
+            .attr(&quot;y2&quot;, (d) =&gt; d.target.y);
+
+          node.attr(&quot;cx&quot;, (d) =&gt; d.x).attr(&quot;cy&quot;, (d) =&gt; d.y);
+        });
+      });
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>and save this as <a href="network.css">public/network.css</a></p>
+
+<pre><code>body {
+  max-width: 800px;
+  margin: 25px auto;
+  font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;
+}
+
+circle {
+  stroke:black;
+  stroke-width:1px;
+  fill:MediumSeaGreen;
+  opacity:0.5;
+}
+</code></pre>
+
+              </section>
+              <small><p><a href="https://www.flickr.com/photos/64500102@N05/5972411305">Crew Player Combinations: Defenders</a>&quot; by <a href="https://www.flickr.com/photos/64500102@N05">Bernhardt Soccer</a> and Boyd Duffee is licensed under <a href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0</a></p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/visualization/">visualization</a>,
+                  <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>,
+                  <a href="/advent/blog/tag/d3-js/">D3.js</a>,
+                  <a href="/advent/blog/tag/random-graph/">random graph</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/08/simplex/index.html" rel="prev"><strong>Previous Article</strong> Day 8: Simplex optimisation with Perl Data Language</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">bad values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

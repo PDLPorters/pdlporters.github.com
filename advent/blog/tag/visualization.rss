@@ -7,6 +7,29 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 9: Exploring Data with D3.js and Mojolicious</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/09/d3/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/09/d3/</guid>
+            <description><![CDATA[
+                <p>Sometimes PDL doesn&#39;t scratch the particular itch you have.
+PDL isn&#39;t like Vegas. It doesn&#39;t have to stay there.
+After crunching your data, you can get it out to Perl and beyond.</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/09/d3/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/mojolicious/">Mojolicious</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/d3-js/">D3.js</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/random-graph/">random graph</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Mon, 09 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 5: Using k-means clustering as a ... crayon?</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/05/k-means/</guid>

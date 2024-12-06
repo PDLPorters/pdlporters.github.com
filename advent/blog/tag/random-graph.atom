@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/random-graph/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-09T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/random-graph.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/random-graph/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/09/d3/</id>
+        <title>Day 9: Exploring Data with D3.js and Mojolicious</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/09/d3/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>Sometimes PDL doesn&#39;t scratch the particular itch you have.
+PDL isn&#39;t like Vegas. It doesn&#39;t have to stay there.
+After crunching your data, you can get it out to Perl and beyond.</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/09/d3/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/mojolicious/">Mojolicious</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/d3-js/">D3.js</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/random-graph/">random graph</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-09T00:00:00Z</updated>
+        <category term="visualization" />
+        <category term="Mojolicious" />
+        <category term="D3.js" />
+        <category term="random graph" />
+    </entry>
+</feed>
+

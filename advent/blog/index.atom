@@ -2,11 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-08T00:00:00Z</updated>
+    <updated>2024-12-09T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/09/d3/</id>
+        <title>Day 9: Exploring Data with D3.js and Mojolicious</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/09/d3/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>Sometimes PDL doesn&#39;t scratch the particular itch you have.
+PDL isn&#39;t like Vegas. It doesn&#39;t have to stay there.
+After crunching your data, you can get it out to Perl and beyond.</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/09/d3/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/mojolicious/">Mojolicious</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/d3-js/">D3.js</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/random-graph/">random graph</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-09T00:00:00Z</updated>
+        <category term="visualization" />
+        <category term="Mojolicious" />
+        <category term="D3.js" />
+        <category term="random graph" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</id>
         <title>Day 8: Simplex optimisation with Perl Data Language</title>
@@ -1390,24 +1416,6 @@ The results are <strong>shocking!</strong></p>
         <category term="TriD" />
         <category term="CSV" />
         <category term="visualization" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/04/interpol/</id>
-        <title>Day 4: Interpolation with Perl Data Language</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you want to interpolate data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/04/interpol/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/interpolation/">interpolation</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-04T00:00:00Z</updated>
-        <category term="interpolation" />
     </entry>
 </feed>
 

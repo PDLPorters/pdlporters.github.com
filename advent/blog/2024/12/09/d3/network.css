@@ -1,0 +1,12 @@
+body {
+  max-width: 800px;
+  margin: 25px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+circle {
+  stroke:black;
+  stroke-width:1px;
+  fill:MediumSeaGreen;
+  opacity:0.5;
+}

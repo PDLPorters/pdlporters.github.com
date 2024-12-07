@@ -43,6 +43,9 @@ data:
       href: '/blog/2024/12/08/simplex/'
       image: '/blog/2024/12/08/simplex/banner.jpg'
     - date: 2018-12-09
+      title: Data with D3.js and Mojolicious
+      href: '/blog/2024/12/09/d3/'
+      image: '/blog/2024/12/09/d3/banner.png'
     - date: 2018-12-10
     - date: 2018-12-11
     - date: 2018-12-12

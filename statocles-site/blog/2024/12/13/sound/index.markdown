@@ -10,11 +10,8 @@ images:
     alt: 'Score sheet for "In dulci jubilo"'
     data:
       attribution: |-
-        From <a href="https://www.cpdl.org/wiki/">ChoralWiki</a>, available under the
-		<a href="https://www.cpdl.org/wiki/index.php/ChoralWiki:CPDL">Choral Public Domain License</a>.
-		Copyright © 2016 by CPDL.
+        Banner image From <a href="https://www.cpdl.org/wiki/">ChoralWiki</a>, available under the <a href="https://www.cpdl.org/wiki/index.php/ChoralWiki:CPDL">Choral Public Domain License</a>.  Copyright © 2016 by CPDL.
 data:
-  bio: haj
   description: 'Creating Sound with PDL (Perl Data Language)'
 ---
 
@@ -45,11 +42,11 @@ the result in a one-dimensional PDL ndarray.  Like audio CDs, we use
 
     # This subroutine is where the fun will happen.
     # Return N_SAMPLES for a wave with FREQUENCY
-	sub samples ($n_samples, $frequency) {
-	    my $phase   = sequence($n_samples) * 2 * PI * $frequency / RATE;
-	    my $samples = sin($phase);
-	    return $samples;
-	}
+    sub samples ($n_samples, $frequency) {
+        my $phase   = sequence($n_samples) * 2 * PI * $frequency / RATE;
+        my $samples = sin($phase);
+        return $samples;
+    }
 
 The `sequence` constructor of PDL builds regular intervals which we
 adjust for the rate and the desired frequency.  Also, PDL brings its
@@ -64,12 +61,12 @@ constructor, and we make sure that they use the full value range for
 Perl scalar which holds the _binary_ array which we can directly print
 to a WAV file:
 
-	sub prepare ($samples) {
-		my $amplitude = 2**15-1;
-	    my $max = max(abs $samples);
-	    my $sound16 = short($samples / $max * $amplitude);
-		return $sound16->get_dataref;
-	}
+    sub prepare ($samples) {
+        my $amplitude = 2**15-1;
+        my $max = max(abs $samples);
+        my $sound16 = short($samples / $max * $amplitude);
+        return $sound16->get_dataref;
+    }
 
 The actual WAV formatting needs some bookkeeping but isn't all that
 interesting:
@@ -183,8 +180,8 @@ samples:
         $samples    -= short $samples; # drop the integer part
         $samples    *= 2;
         $samples    -= 1;
-		return $samples;
-	}
+        return $samples;
+    }
 
 <audio controls>
   <source src="sawtooth.wav" type="audio/wav">
@@ -300,18 +297,18 @@ with an approporate ndarray of the same length.  Here are two examples:
     samples, there's no need to know its frequency nor any other
     property.
 
-	    my $samples = sine_wave(RATE,440)
+        my $samples = sine_wave(RATE,440)
             * (1+sin(20*sequence(RATE)/RATE))/2;
 
-	<audio controls>
-		<source src="volume_mod.wav" type="audio/wav">
+    <audio controls>
+        <source src="volume_mod.wav" type="audio/wav">
     </audio>
 
     ![Spectrum of a volume modulation](volume_mod.png)
 
-	The spectrum, zoomed around the frequency of this note,
-	demonstrates the second method to get the same effect: Just add
-	vibrations with frequencies close to each other!
+    The spectrum, zoomed around the frequency of this note,
+    demonstrates the second method to get the same effect: Just add
+    vibrations with frequencies close to each other!
 
 ### Effects: Frequency Modulation
 

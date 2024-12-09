@@ -16,9 +16,9 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" property="og:url">
-  <meta content="Day 8: Simplex optimisation with Perl Data Language" property="og:title">
-    <meta content="Simplex optimisation with PDL (Perl Data Language)" property="og:description">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/10/bad-values/" property="og:url">
+  <meta content="Day 10: Playing Nice with Bad Values" property="og:title">
+    <meta content="handling bad values in data" property="og:description">
     <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
@@ -26,8 +26,8 @@
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 8: Simplex optimisation with Perl Data Language - PDL Advent calendar 2024</title>
-  <meta content="Ed J" name="author">
+  <title>Day 10: Playing Nice with Bad Values - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
   
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 8: Simplex optimisation with Perl Data Language</h1>
+              <h1>Day 10: Playing Nice with Bad Values</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-08">Dec  8, 2024</time>
+                  <time class="date" datetime="2024-12-10">Dec 10, 2024</time>
                   
 
               </p>
@@ -89,152 +89,108 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Simplex optimisation" src="./banner.jpg">
+                <img alt="The Grinch" src="./banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+                  <p>Santa has discovered quality control issues in some of the scientific equipment that was delivered to children last Christmas.
+The results from the Early Elf Joint Internship Training program were more No-No-No than Ho-Ho-Ho!
+However the EEJIT&#39;s were consistent and testing revealed that the first 3 values in every 10 measurements were faulty.
+An update was sent to all affected children so they could recalculate their results, knowing which readings to ignore.</p>
+
+<p><strong>Problem:</strong> How should they treat the suspect values?</p>
 
               </section>
               <section id="section-2">
-                  <p>This article discusses
-<a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a>, and uses
-<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>
-to display output.</p>
+                  <p>You could choose to set those values to some out of range number to flag them, could be 0 or -999 for temperatures - anything obviously unreal.
+Children familiar with the POSIX standard might thing that the NaN (for Not a Number) is a better flag,
+but the nicest children with the best behaviour (using PDL, of course) can set the <code>BAD</code> flag.</p>
 
-<p>The simplex algorithm finds the optimum &quot;point&quot; (coordinates) in a space
-you define, which can have any number (called <code>n</code> here) of dimensions.</p>
+<p>What will happen to each group?</p>
 
-<p>The algorithm takes either a fully-formed cloud of n+1 points, or a
-single starting point, in which case it constructs the cloud for you
-using the &quot;initsize&quot; parameter. It also takes a function that will take a
-series of points in your space, and returns the &quot;value&quot; at each of those
-points. From that, it works out which point of the simplex to move to be
-closer to the optimum point, which has the lowest value of your function.</p>
+<pre><code>$x    = sequence(10);
+$zero = sequence(10);
+$nan  = sequence(10);
+$bad  = sequence(10);
 
-<p>It also takes other, less important parameters, which you&#39;ll see,
-including a &quot;logging&quot; function which you can use to report progress,
-or plot data.</p>
+$zero-&gt;slice(&#39;0:2&#39;) .= 0;     # [0 0 0 3 4 5 6 7 8 9]
+$nan-&gt;slice(&#39;0:2&#39;)  .= nan;   # [NaN NaN NaN 3 4 5 6 7 8 9]
+$bad = $bad-&gt;setbadif($x &lt; 3);# [BAD BAD BAD 3 4 5 6 7 8 9]
 
-<p>Load the necessary modules, set up a plotting window:</p>
-
-<pre><code>use PDL::Graphics::Simple;
-use PDL::Opt::Simplex;
-$w = pgswin();
+pdl&gt; p $x-&gt;avg, $x-&gt;median
+4.5     4.5
+pdl&gt; p $zero-&gt;avg, $zero-&gt;median
+4.2     4.5
+pdl&gt; p $nan-&gt;avg, $nan-&gt;median
+NaN     6.5
+pdl&gt; p $bad-&gt;avg, $bad-&gt;median
+6       6
 </code></pre>
 
-<p>Try a simple ellipsoid; the multiplier makes the algorithm prioritise
-the first (X) dimension, as you&#39;ll see on the plot.</p>
+<p>So, we&#39;ve created 4 ndarrays and replaced the first three elements with either zeroes, NaN or BAD
+to compare what happens when we compute some basic statistics, the mean and the median, for each.</p>
 
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-15,5],yrange=&gt;[-15,5]});
-my $mult = pdl 4,1;
-sub func { (($mult * $_[0]) ** 2)-&gt;sumover }
-sub logs {
-  $w-&gt;oplot(with=&gt;&#39;lines&#39;, $_[0]-&gt;glue(1,$_[0]-&gt;slice(&quot;,0&quot;))-&gt;using(0,1));
-}
-simplex(pdl(-10,-10), 0.5, 0.01, 30,
-  \&amp;func,
-  \&amp;logs
-);
+<p>The mean and median of the sequence 0 .. 9 are both <strong>4.5</strong>. <br>
+The mean and median of the sequence 3 .. 9 are now both <strong>6</strong>.</p>
+
+<p>We see that just changing values messes with the mean, but hasn&#39;t changed the median in this specific case because the order happens to remain the same.
+It looks like <strong>NaN</strong> is treated as an infinity, because <strong>Infinity</strong> divided by 10 is still <strong>Infinity</strong>.
+The median with NaN is interesting because using a <code>sort</code> to find the middle value would have shifted those values to one end or the other making the median 7.5 if there were three Infinities.
+A median of 6.5 could be that the 3 flagged values are folded into one or NaN breaks <code>sort</code> in an interesting way.
+So we see that routines that are aware of Bad values will give us the correct answers.</p>
+
+<p>Now how do those values propagate through your calculations?
+Operating on anything BAD makes the result BAD too, meaning coal in your stocking on Christmas morning.</p>
+
+<pre><code>pdl&gt; p $x + $bad
+[BAD BAD BAD 6 8 10 12 14 16 18]
+
+pdl&gt; p $x / $x
+[NaN 1 1 1 1 1 1 1 1 1]
+
+pdl&gt; p $x / $bad
+[BAD BAD BAD 1 1 1 1 1 1 1]
 </code></pre>
 
-<p><img src="/advent/../images/demos/simplex/vid-1.gif"></p>
+<p>From the first example, adding two ndarrays together carries the BAD values through to the result.
+The second example shows an ndarray divided by itself, resulting in ones except where 0 divides 0, giving NaN.
+The third example shows that dividing by BAD is still BAD.</p>
 
-<p>Now the first of two examples contributed by Alison Offer.
-These values are for both:</p>
+<p>If you know the bad values are on the same elements, you can create a mask and apply it to every data array you need.
+<a href="https://metacpan.org/pod/PDL::Bad">PDL::Bad</a> also lets you swap NaN or a set value for Bad and back again.
+You can read more about the reasoning behind it in <a href="https://metacpan.org/dist/PDL/view/Basic/Pod/BadValues.pod">PDL::BadValues</a>.</p>
 
-<pre><code>$minsize = 1.e-6; # convergence: if simplex points are this far apart, stop
-$maxiter = 100; # max number of iterations: if done these many, stop
-</code></pre>
-
-<p>Now we minimise polynomial: (x-3)^2 + 2*(x-3)*(y-2.5) + 3*(y-2.5)^2</p>
-
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-1,5],yrange=&gt;[-1,4]}); # reset
-$init = pdl [ 0 , 1 ];
-$initsize = 2;
-($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
-  sub {
-    my ($x, $y) = $_[0]-&gt;using(0,1);
-    ($x-3)**2 + 2*($x-3)*($y-2.5) + 3*($y-2.5)**2;
-  },
-  \&amp;logs
-);
-</code></pre>
-
-<p><img src="/advent/../images/demos/simplex/vid-2.gif"></p>
-
-<p>Now to minimise least squares Gaussian fit to data + noise:
-32 *exp (-((x-10)/6)^2) + noise</p>
-
-<pre><code>$factor = 3; # noise factor
-</code></pre>
-
-<p>data : gaussian + noise</p>
-
-<pre><code>$j = sequence(20); srandom(5);
-$data = 32*exp(-(($j-10)/6)**2) + $factor * (random(20) - 0.5);
-$init = pdl [ 33, 9, 12 ];
-$initsize = 2;
-</code></pre>
-
-<p>The plotting will flatten, i.e. ignore, the third dimension in the vectors.</p>
-
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[30,36],yrange=&gt;[7,12]}); # reset
-($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
-  sub {
-    my ($x, $y, $z) = map $_[0]-&gt;slice($_), 0..2;
-    (($data - $x*exp(-(($j-$y)/$z)**2))**2)-&gt;sumover;
-  },
-  \&amp;logs
-);
-</code></pre>
-
-<p><img src="/advent/../images/demos/simplex/vid-3.gif"></p>
-
-<h2>Further resources</h2>
-
-<p>There are other optimisation modules for PDL, including:</p>
-
-<ul>
-<li><a href="https://metacpan.org/pod/PDL::Opt::GLPK">PDL::Opt::GLPK</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::NonLinear">PDL::Opt::NonLinear</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::QP">PDL::Opt::QP</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::ParticleSwarm">PDL::Opt::ParticleSwarm</a></li>
-</ul>
-
-<p>Take a look at
-<a href="https://en.wikipedia.org/wiki/Simplex_algorithm">the Wikipedia page for the simplex algorithm</a>
-for more on the subject.</p>
+<p>Remember: Be GOOD because Santa knows who&#39;s <a href="https://metacpan.org/pod/PDL::Bad#isbad">naughty</a> or <a href="https://metacpan.org/pod/PDL::Bad#isgood">nice</a>!</p>
 
               </section>
-              <small><p><a href="https://commons.wikimedia.org/wiki/File:Simplex-description-en.svg">Graphical description of how the simplex method can solve linear programming problems</a> under Creative Commons Attribution-Share Alike 3.0 Unported</p>
+              <small><p><a href="https://www.flickr.com/photos/86665756@N00/8139519263">The Grinch&#39;s Holiday Workshop</a>&quot; by <a href="https://www.flickr.com/photos/86665756@N00">Studio Sarah Lou</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a></p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/optimisation/">optimisation</a>,
-                  <a href="/advent/blog/tag/simplex/">simplex</a>
+                  <a href="/advent/blog/tag/bad-values/">Bad Values</a>,
+                  <a href="/advent/blog/tag/statistics/">statistics</a>,
+                  <a href="/advent/blog/tag/nan/">NaN</a>
               </p>
 
 
                   <div class="bio cf">
 
                       <div class="gravatar">
-                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
                       </div>
                       <div class="about">
-                        <h5>Ed J</h5>
-                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
 
                       </div>
 
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/07/finance2/index.html" rel="prev"><strong>Previous Article</strong> Day 7: Plotting PDL data in the browser using Javascript</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/09/d3/index.html" rel="next"><strong>Next Article</strong> Day 9: Exploring Data with D3.js and Mojolicious </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/09/d3/index.html" rel="prev"><strong>Previous Article</strong> Day 9: Exploring Data with D3.js and Mojolicious</a></li>
               </ul>
 
             </div>

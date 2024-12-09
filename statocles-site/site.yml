@@ -128,6 +128,11 @@ site:
                 image: 'https://avatars.githubusercontent.com/u/12120?v=4'
                 text: |-
                   Vikas N Kumar (aka "vicash" on IRC) has been using Perl for about 18 years. He builds a lot of web-based software in Perl, and works in the finance industry doing a mix of C, C++ and Perl in his day job trying to succeed building trading strategies and trading systems. He has a background in Aerospace engineering but spends most of his time doing Computer Science related projects.
+            shugo :
+                name: 'Shugo Suwazono MD, PhD.'
+                image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'
+                text: |-
+                  Shugo Suwazono started writing Perl modules for matrix operations in 1999 and has reached version 1.9.23. A [2020 Pubmed article](https://pubmed.ncbi.nlm.nih.gov/33294707/) describing EEG processing with Perl was realized with **eeg.pm** version 2.2.4.85 consisting of 13353 loc.
 
 # theme: These are the settings for the theme.  See Statocles::Help::Theme for
 # more information, and Statocles::Theme for a full list of attributes and what

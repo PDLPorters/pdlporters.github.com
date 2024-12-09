@@ -47,6 +47,9 @@ data:
       href: '/blog/2024/12/09/d3/'
       image: '/blog/2024/12/09/d3/banner.png'
     - date: 2018-12-10
+      title: Playing Nice with Bad Values
+      href: '/blog/2024/12/10/bad-values/'
+      image: '/blog/2024/12/10/bad-values/banner.jpg'
     - date: 2018-12-11
     - date: 2018-12-12
     - date: 2018-12-13

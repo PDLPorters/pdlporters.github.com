@@ -21,6 +21,7 @@ you could use R with its RQuantLib, you could do C++ with _quantlib_ and other
 similar methods. Maybe you want to use machine learning on the stock price data,
 or want to just gamble by guessing or following the herd. *TIMTOWTDI* applies
 here.
+---
 
 But you decided you want to use Perl, so for that scenario you
 can use [PDL](https://metacpan.org/pod/PDL) and the financial technical analysis library [PDL::Finance::TA](https://metacpan.org/pod/PDL::Finance::TA), which

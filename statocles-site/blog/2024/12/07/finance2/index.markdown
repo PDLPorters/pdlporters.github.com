@@ -24,6 +24,7 @@ You may have noticed that I used
 [PDL::Graphics::Gnuplot](https://metacpan.org/pod/PDL::Graphics::Gnuplot) to do
 the plotting there.  This module requires the user to install Gnuplot on their
 desktop or server, which may be a limitation in some use cases.
+---
 
 Let us assume you were creating a webservice where you were running some back-end
 PDL code, you may want to use a Javascript based plotting function.  Maybe you

@@ -133,6 +133,14 @@ site:
                 image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'
                 text: |-
                   Shugo Suwazono started writing Perl modules for matrix operations in 1999 and has reached version 1.9.23. A [2020 Pubmed article](https://pubmed.ncbi.nlm.nih.gov/33294707/) describing EEG processing with Perl was realized with **eeg.pm** version 2.2.4.85 consisting of 13353 loc.
+            haj:
+                name: 'Harald Jörg'
+                image: 'https://avatars.githubusercontent.com/u/32883055'
+                text: |-
+                  Harald Jörg never got paid to write Perl software.
+                  He wrote software in several programming languages,
+                  and occasionally he did get paid to solve problems quickly.
+                  Perl is his language of choice for these things.
 
 # theme: These are the settings for the theme.  See Statocles::Help::Theme for
 # more information, and Statocles::Theme for a full list of attributes and what

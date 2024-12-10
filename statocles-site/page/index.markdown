@@ -59,6 +59,9 @@ data:
       href: '/blog/2024/12/12/eeg/'
       image: '/blog/2024/12/12/eeg/banner.jpg'
     - date: 2018-12-13
+      title: Music
+      href: '/blog/2024/12/13/music/'
+      image: '/blog/2024/12/13/music/banner.jpg'
     - date: 2018-12-14
     - date: 2018-12-15
     - date: 2018-12-16

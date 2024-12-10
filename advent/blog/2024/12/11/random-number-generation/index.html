@@ -16,17 +16,17 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/08/simplex/" property="og:url">
-  <meta content="Day 8: Simplex optimisation with Perl Data Language" property="og:title">
-    <meta content="Simplex optimisation with PDL (Perl Data Language)" property="og:description">
-    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/" property="og:url">
+  <meta content="Day 11: Random Number Generation with Perl Data Language" property="og:title">
+    <meta content="Random Number Generation with PDL (Perl Data Language)" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.png" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
   <script src="/advent/theme/js/modernizr.js"></script>
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 8: Simplex optimisation with Perl Data Language - PDL Advent calendar 2024</title>
+  <title>Day 11: Random Number Generation with Perl Data Language - PDL Advent calendar 2024</title>
   <meta content="Ed J" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 8: Simplex optimisation with Perl Data Language</h1>
+              <h1>Day 11: Random Number Generation with Perl Data Language</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-08">Dec  8, 2024</time>
+                  <time class="date" datetime="2024-12-11">Dec 11, 2024</time>
                   
 
               </p>
@@ -89,133 +89,109 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Simplex optimisation" src="./banner.jpg">
+                <img alt="Rolling the dice" src="./banner.png">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
+                  <p>If you want to generate random numbers data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>! (With a little help from the GNU Scientific Library)</p>
+
+<p>&quot;What&#39;s a PPR?&quot;, asked Santa&#39;s chief planner? Santa mumbled, &quot;a premature package release.&quot;</p>
+
+<p>&quot;You dropped some packages? How widespread? Where did they go?&quot;</p>
 
               </section>
               <section id="section-2">
-                  <p>This article discusses
-<a href="https://metacpan.org/pod/PDL::Opt::Simplex">PDL::Opt::Simplex</a>, and uses
-<a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a>
-to display output.</p>
-
-<p>The simplex algorithm finds the optimum &quot;point&quot; (coordinates) in a space
-you define, which can have any number (called <code>n</code> here) of dimensions.</p>
-
-<p>The algorithm takes either a fully-formed cloud of n+1 points, or a
-single starting point, in which case it constructs the cloud for you
-using the &quot;initsize&quot; parameter. It also takes a function that will take a
-series of points in your space, and returns the &quot;value&quot; at each of those
-points. From that, it works out which point of the simplex to move to be
-closer to the optimum point, which has the lowest value of your function.</p>
-
-<p>It also takes other, less important parameters, which you&#39;ll see,
-including a &quot;logging&quot; function which you can use to report progress,
-or plot data.</p>
-
-<p>Load the necessary modules, set up a plotting window:</p>
+                  <p>To model this, the planner turned to the
+<a href="https://metacpan.org/pod/PDL::GSL::RNG">PDL::GSL::RNG</a> module.
+This shows the power of PDL with a concise way to generate graphs of
+different random number distributions.</p>
 
 <pre><code>use PDL::Graphics::Simple;
-use PDL::Opt::Simplex;
+use PDL::GSL::RNG;
+$x = zeroes(100)-&gt;xlinvals(-5,5);
 $w = pgswin();
 </code></pre>
 
-<p>Try a simple ellipsoid; the multiplier makes the algorithm prioritise
-the first (X) dimension, as you&#39;ll see on the plot.</p>
+<p>The exponential power distribution is a generalisation of the &quot;normal&quot;
+(Gaussian) distribution. With β = 1, it&#39;s &quot;normal&quot;, but there are other
+values. For example, to model how far away each package might have fallen
+from the sleigh:</p>
 
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-15,5],yrange=&gt;[-15,5]});
-my $mult = pdl 4,1;
-sub func { (($mult * $_[0]) ** 2)-&gt;sumover }
-sub logs {
-  $w-&gt;oplot(with=&gt;&#39;lines&#39;, $_[0]-&gt;glue(1,$_[0]-&gt;slice(&quot;,0&quot;))-&gt;using(0,1));
+<pre><code>$w-&gt;plot(
+  with=&gt;&#39;lines&#39;, key=&gt;&#39;a=1 b=2.5&#39;, $x, ran_exppow_pdf($x, 1, 2.5),
+  with=&gt;&#39;lines&#39;, key=&gt;&#39;a=1 b=0.5&#39;, $x, ran_exppow_pdf($x, 1, 0.5),
+  {le=&gt;&#39;tr&#39;, yrange=&gt;[0,0.8], title=&gt;&#39;Exponential Power Distribution&#39;,
+    xlabel=&gt;&#39;x&#39;, ylabel=&gt;&#39;p(x)&#39;}
+);
+</code></pre>
+
+<p><img src="/advent/../images/demos/gsl_rng/output-1.png"></p>
+
+<p>But to model how many packages would have spread out at different heights,
+we&#39;d use a bivariate Gaussian distribution:</p>
+
+<pre><code>$points = pdl &#39;[219 88 2.7; 38 95 1.7; 45 268 0.8]&#39;;
+($XSIZE, $YSIZE) = (300, 300);
+($xcoord, $ycoord, $weight) = $points       # xyw nweights
+  -&gt;slice(&quot;,*$XSIZE,*$YSIZE,&quot;)              # xyw nx ny nweights
+  -&gt;using(0..2);                            # nx ny nweights
+$xbase = xvals($XSIZE)-&gt;slice(&quot;,*$YSIZE&quot;);  # nx ny
+$ybase = xvals($YSIZE)-&gt;slice(&quot;*$XSIZE,&quot;);  # nx ny
+for (1..90) {
+  $h = (
+    $weight * ran_bivariate_gaussian_pdf(
+      $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
+    )                                           # nx ny nweights
+  )-&gt;mv(-1,0)-&gt;sumover;                         # nx ny
+  $w-&gt;plot(with=&gt;&#39;image&#39;, $h, {title=&gt;&#39;Bivariate Gaussian Distribution&#39;,j=&gt;1});
 }
-simplex(pdl(-10,-10), 0.5, 0.01, 30,
-  \&amp;func,
-  \&amp;logs
-);
 </code></pre>
 
-<p><img src="/advent/../images/demos/simplex/vid-1.gif"></p>
+<p><img src="/advent/../images/demos/gsl_rng/vid-1.gif"></p>
 
-<p>Now the first of two examples contributed by Alison Offer.
-These values are for both:</p>
+<p>Or, if we have the right libraries, the same but with a colourful heatmap:</p>
 
-<pre><code>$minsize = 1.e-6; # convergence: if simplex points are this far apart, stop
-$maxiter = 100; # max number of iterations: if done these many, stop
+<pre><code>sub as_heatmap {
+  my ($d) = @_;
+  my $max = $d-&gt;max;
+  die &quot;as_heatmap: can&#39;t work if max == 0&quot; if $max == 0;
+  $d /= $max; # negative OK
+  my $hue   = (1 - $d)*240;
+  $d = cat($hue, pdl(1), pdl(1));
+  (hsv_to_rgb($d-&gt;mv(-1,0)) * 255)-&gt;byte-&gt;mv(0,-1);
+}
+if (eval &#39;use PDL::Graphics::ColorSpace; 1&#39;) {
+  for (1..90) {
+    $h = (
+      $weight * ran_bivariate_gaussian_pdf(
+        $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
+      )                                           # nx ny nweights
+    )-&gt;mv(-1,0)-&gt;sumover;                         # nx ny
+    $w-&gt;plot(
+      with=&gt;&#39;image&#39;, as_heatmap($h),
+      {title=&gt;&#39;Bivariate Gaussian Distribution (heatmap)&#39;,j=&gt;1}
+    );
+  }
+}
 </code></pre>
 
-<p>Now we minimise polynomial: (x-3)^2 + 2*(x-3)*(y-2.5) + 3*(y-2.5)^2</p>
-
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[-1,5],yrange=&gt;[-1,4]}); # reset
-$init = pdl [ 0 , 1 ];
-$initsize = 2;
-($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
-  sub {
-    my ($x, $y) = $_[0]-&gt;using(0,1);
-    ($x-3)**2 + 2*($x-3)*($y-2.5) + 3*($y-2.5)**2;
-  },
-  \&amp;logs
-);
-</code></pre>
-
-<p><img src="/advent/../images/demos/simplex/vid-2.gif"></p>
-
-<p>Now to minimise least squares Gaussian fit to data + noise:
-32 *exp (-((x-10)/6)^2) + noise</p>
-
-<pre><code>$factor = 3; # noise factor
-</code></pre>
-
-<p>data : gaussian + noise</p>
-
-<pre><code>$j = sequence(20); srandom(5);
-$data = 32*exp(-(($j-10)/6)**2) + $factor * (random(20) - 0.5);
-$init = pdl [ 33, 9, 12 ];
-$initsize = 2;
-</code></pre>
-
-<p>The plotting will flatten, i.e. ignore, the third dimension in the vectors.</p>
-
-<pre><code>$w-&gt;plot(with=&gt;&#39;lines&#39;, [0], [1], {xrange=&gt;[30,36],yrange=&gt;[7,12]}); # reset
-($optimum,$ssize,$optval) = simplex($init,$initsize,$minsize,$maxiter,
-  sub {
-    my ($x, $y, $z) = map $_[0]-&gt;slice($_), 0..2;
-    (($data - $x*exp(-(($j-$y)/$z)**2))**2)-&gt;sumover;
-  },
-  \&amp;logs
-);
-</code></pre>
-
-<p><img src="/advent/../images/demos/simplex/vid-3.gif"></p>
+<p><img src="/advent/../images/demos/gsl_rng/vid-2.gif"></p>
 
 <h2>Further resources</h2>
 
-<p>There are other optimisation modules for PDL, including:</p>
-
-<ul>
-<li><a href="https://metacpan.org/pod/PDL::Opt::GLPK">PDL::Opt::GLPK</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::NonLinear">PDL::Opt::NonLinear</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::QP">PDL::Opt::QP</a></li>
-<li><a href="https://metacpan.org/pod/PDL::Opt::ParticleSwarm">PDL::Opt::ParticleSwarm</a></li>
-</ul>
-
-<p>Take a look at
-<a href="https://en.wikipedia.org/wiki/Simplex_algorithm">the Wikipedia page for the simplex algorithm</a>
-for more on the subject.</p>
+<p>See
+<a href="https://www.gnu.org/software/gsl/doc/html/randist.html">https://www.gnu.org/software/gsl/doc/html/randist.html</a>
+for more about GSL&#39;s random-number distribution capability.</p>
 
               </section>
-              <small><p><a href="https://commons.wikimedia.org/wiki/File:Simplex-description-en.svg">Graphical description of how the simplex method can solve linear programming problems</a> under Creative Commons Attribution-Share Alike 3.0 Unported</p>
+              <small><p><a href="http://www.openclipart.org/clipart/recreation/games/two_red_dice_01.svg">Two red dice</a> Image Credit: Stephen Silver, in the Open Clip Art Library - public domain</p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/optimisation/">optimisation</a>,
-                  <a href="/advent/blog/tag/simplex/">simplex</a>
+                  <a href="/advent/blog/tag/random-numbers/">random numbers</a>
               </p>
 
 
@@ -233,8 +209,7 @@ for more on the subject.</p>
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/07/finance2/index.html" rel="prev"><strong>Previous Article</strong> Day 7: Plotting PDL data in the browser using Javascript</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/09/d3/index.html" rel="next"><strong>Next Article</strong> Day 9: Exploring Data with D3.js and Mojolicious </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/10/bad-values/index.html" rel="prev"><strong>Previous Article</strong> Day 10: Playing Nice with Bad Values</a></li>
               </ul>
 
             </div>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/random-numbers/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/random-numbers.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 11: Random Number Generation with Perl Data Language</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</guid>
+            <description><![CDATA[
+                <p>If you want to generate random numbers data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>! (With a little help from the GNU Scientific Library)</p>
+
+<p>&quot;What&#39;s a PPR?&quot;, asked Santa&#39;s chief planner? Santa mumbled, &quot;a premature package release.&quot;</p>
+
+<p>&quot;You dropped some packages? How widespread? Where did they go?&quot;</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/random-numbers/">random numbers</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Wed, 11 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

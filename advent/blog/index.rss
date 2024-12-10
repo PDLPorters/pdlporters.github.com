@@ -7,6 +7,28 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 11: Random Number Generation with Perl Data Language</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</guid>
+            <description><![CDATA[
+                <p>If you want to generate random numbers data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>! (With a little help from the GNU Scientific Library)</p>
+
+<p>&quot;What&#39;s a PPR?&quot;, asked Santa&#39;s chief planner? Santa mumbled, &quot;a premature package release.&quot;</p>
+
+<p>&quot;You dropped some packages? How widespread? Where did they go?&quot;</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/random-numbers/">random numbers</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Wed, 11 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 10: Playing Nice with Bad Values</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/10/bad-values/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/10/bad-values/</guid>
@@ -100,32 +122,6 @@ desktop or server, which may be a limitation in some use cases.</p>
             ]]></description>
             <pubDate>
                 Sat, 07 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 6: How to use PDL::Finance::TA to develop a trading strategy</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/06/finance/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/06/finance/</guid>
-            <description><![CDATA[
-                <h2>Introduction</h2>
-
-<p>So you are a Perl developer and you see a lot of people make money on the stock
-market and think you could do that too. You could use third party tools provided
-by the trading platforms, you could use Python with its various related tools,
-you could use R with its RQuantLib, you could do C++ with <em>quantlib</em> and other
-similar methods. Maybe you want to use machine learning on the stock price data,
-or want to just gamble by guessing or following the herd. <em>TIMTOWTDI</em> applies
-here.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/06/finance/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Fri, 06 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

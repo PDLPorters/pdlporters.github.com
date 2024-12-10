@@ -55,6 +55,9 @@ data:
       href: '/blog/2024/12/11/random-number-generation/'
       image: '/blog/2024/12/11/random-number-generation/banner.png'
     - date: 2018-12-12
+      title: 3D visualization of scalp electrode sites
+      href: '/blog/2024/12/12/eeg/'
+      image: '/blog/2024/12/12/eeg/banner.jpg'
     - date: 2018-12-13
     - date: 2018-12-14
     - date: 2018-12-15

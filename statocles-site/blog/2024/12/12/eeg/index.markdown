@@ -2,11 +2,9 @@
 title: Day 12: 3D visualization of scalp electrode sites can be done with Perl
 disable_content_template: 1
 tags:
-    - visualization
+    - visualisation
     - MacOS
     - TriD
-    - 'basic matrix operation'
-    - 'ndarray operation'
 author: Shugo SUWAZONO
 images:
   banner:
@@ -14,7 +12,7 @@ images:
     alt: 'EEG Recording Cap'
     data:
       attribution: |-
-        <a href="https://commons.wikimedia.org/w/index.php?curid=24805878">EEG Recording Cap</a>" by Chris Hope is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a> and did not originate from the author's research.
+        <a href="https://commons.wikimedia.org/w/index.php?curid=24805878">EEG Recording Cap</a> by Chris Hope is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a> and did not originate from the author's research.
 data:
   bio: shugo
   description: 3D visualization of scalp electrode sites for EEG
@@ -35,15 +33,15 @@ The third is the actual visualization, using the [PDL::Graphics::TriD](https://m
 
 ## Step 0 - Preparation
 These are the needed modules to be installed:
+
 - PDL
-- PDL::NiceSlice
 - PDL::Graphics::TriD
 
 My environment FYI: MacOS Ventura 13.4, Xcode 14.3.1, MacPorts 2.10.5
 
 ## Step 1 - Parsing
 The first step is parsing the file to make a 2D array using the subroutine `parse_ASCII`.
-I wrote that subroutine written myself. Yes, this is kind of “re-inventing the wheel”. There are so many shorter and smarter modules you can find on CPAN! Anyway in many cases, I would re-use values returned by my subroutine, later in my script.
+I wrote that subroutine myself. Yes, this is kind of “re-inventing the wheel”. There are so many shorter and smarter modules you can find on CPAN! Anyway in many cases, I would re-use values returned by my subroutine, later in my script.
 
 ## Step 2 - Make a table
 Next, construct an accessible table using the subroutine `parse_ELEC_POS3D_ASA_4AdventCalendar`.

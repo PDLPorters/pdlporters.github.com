@@ -291,7 +291,7 @@ with an approporate ndarray of the same length.  Here are two examples:
       <source src="plucked.wav" type="audio/wav">
     </audio>
 
-  * A slow, perodic change of the amplitude (tremolo) can be achieved
+  * A slow, periodic change of the amplitude (tremolo) can be achieved
     in two different ways.  First, let's apply a sine function to the
     amplitude of the samples.  This method works for any batch of
     samples, there's no need to know its frequency nor any other

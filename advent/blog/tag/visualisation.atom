@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/tag/macos/</id>
+    <id>https://pdl.perl.org/advent/blog/tag/visualisation/</id>
     <title>PDL Advent calendar 2024</title>
     <updated>2024-12-12T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/tag/macos.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/tag/macos/" rel="alternate" />
+    <link href="https://pdl.perl.org/advent/blog/tag/visualisation.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/visualisation/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
     <entry>
@@ -33,31 +33,6 @@ Here I need to better visualize 3D locations of electrode positions.</p>
         <category term="visualisation" />
         <category term="MacOS" />
         <category term="TriD" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/</id>
-        <title>Day 3: Perl Data Language on the Mac</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
-Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
-It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
-the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/macos/">MacOS</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/installation/">installation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/scipdl/">SciPDL</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-03T00:00:00Z</updated>
-        <category term="MacOS" />
-        <category term="installation" />
-        <category term="SciPDL" />
     </entry>
 </feed>
 

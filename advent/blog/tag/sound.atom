@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/sound/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-13T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/sound.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/sound/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/13/music/</id>
+        <title>Day 13: The Sound of Perl</title>
+        <author><name>Harald Jörg</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/13/music/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you can not sing nor play an instrument but want to make a contribution, let <a href="https://pdl.perl.org/">PDL</a> help you out!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/13/music/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/sound/">sound</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-13T00:00:00Z</updated>
+        <category term="sound" />
+    </entry>
+</feed>
+

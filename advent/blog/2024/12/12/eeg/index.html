@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/12/eeg/" property="og:url">
+  <meta content="Day 12: 3D visualization of scalp electrode sites can be done with Perl" property="og:title">
+    <meta content="3D visualization of scalp electrode sites for EEG" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 12: 3D visualization of scalp electrode sites can be done with Perl - PDL Advent calendar 2024</title>
+  <meta content="Shugo SUWAZONO" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 12: 3D visualization of scalp electrode sites can be done with Perl</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-12">Dec 12, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="EEG Recording Cap" src="banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>Seeing is believing. A better presentation can more easily persuade people with your story.
+I, working as an EEG (<a href="https://en.wikipedia.org/wiki/Electroencephalography">electroencephalography</a>) researcher, sometimes need to consider the location of its origin, referring to the electrode positions used while recording the data.
+This is because the scalp distribution of the recorded EEG potential (amplitude) can be affected by how the electrodes align with each other.
+Here I need to better visualize 3D locations of electrode positions.</p>
+
+<p>Let’s try visualization of those electrode positions using Perl, in 3D manner, where you can change the camera position to watch them from your favorite angle/direction!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>I took three steps to realize such a visualization.
+The first one is to parse the electrode position file, the second to construct its contents in the way I
+want to call/name, connecting its contents to the way I would prefer to reuse/call.
+The third is the actual visualization, using the <a href="https://metacpan.org/pod/PDL::Graphics::TriD">PDL::Graphics::TriD</a> module.</p>
+
+<h2>Step 0 - Preparation</h2>
+
+<p>These are the needed modules to be installed:</p>
+
+<ul>
+<li>PDL</li>
+<li>PDL::Graphics::TriD</li>
+</ul>
+
+<p>My environment FYI: MacOS Ventura 13.4, Xcode 14.3.1, MacPorts 2.10.5</p>
+
+<h2>Step 1 - Parsing</h2>
+
+<p>The first step is parsing the file to make a 2D array using the subroutine <code>parse_ASCII</code>.
+I wrote that subroutine myself. Yes, this is kind of “re-inventing the wheel”. There are so many shorter and smarter modules you can find on CPAN! Anyway in many cases, I would re-use values returned by my subroutine, later in my script.</p>
+
+<pre><code>use strict;
+use warnings;
+use PDL;
+use PDL::NiceSlice;
+use PDL::Graphics::TriD;
+use PDL::Graphics::TriD::Labels;
+
+our $verbose = 1;
+sub parse_ASCII {
+    my ($filein) = @_;
+    if (!-s $filein) { die(&quot;$filein is empty, quits  \n&quot;); }
+    open my $fh, &quot;&lt;&quot;, $filein or die &quot;Cannot open: $filein for input at parse_ASCII$!&quot;;
+    print &quot;reading ASCII input:$filein...\t&quot; if $verbose;
+    my ($nl, $lgth, @out2D) = (0,0);
+    while (&lt;$fh&gt;) {
+        my @tmp = split(/\s+/);
+        $nl++;
+        $lgth = @tmp if @tmp &gt; $lgth;
+        push @out2D, \@tmp;
+    }
+    print &quot;Done!\n&quot; if $verbose;
+    ($lgth, $nl, \@out2D);
+}
+</code></pre>
+
+<h2>Step 2 - Make a table</h2>
+
+<p>Next, construct an accessible table using the subroutine <code>parse_ELEC_POS3D_ASA_4AdventCalendar</code>.
+The input file has <strong>xyz</strong> coordinates of each electrode in the upper half of the file, and labels (electrode names) in the lower part of the file.
+So I need to connect/associate the labels to the corresponding coordinates. This kind of job is one of the Perl’s strongest suits (^^).
+And we can build very flexible data structure in one construct, like a combination of dictionaries (a <em>hash</em> in Perl terminology) and numerical arrays.</p>
+
+<pre><code>my ($r_h, $r_pos, $labels, $x, $y, $z) = parse_ELEC_POS3D_ASA_4AdventCalendar($ARGV[0]);
+print &quot; ... processed $r_h-&gt;{FileComment} \n&quot; if $verbose;
+
+sub parse_ELEC_POS3D_ASA_4AdventCalendar
+{ # ASA electrode file provided by mne_python e.g., https://github.com/mne-tools/mne-python/blob/main/mne/channels/data/montages/standard_1020.elc
+    my ($r_start) = @_;
+    my ($lgth, $nl, $r) = parse_ASCII($r_start);
+    my @in = @$r;
+    my (@epos, @labels, %h);
+    $h{total_nl}        = $nl;
+    $h{filename}        = $r_start;
+    $h{N_header}        = 4;
+    $h{N_Coords}        = ($nl - $h{N_header} - 2) / 2;
+    $h{FileComment}     = join(&quot; &quot;, @{ $in[0] });
+    $h{ReferenceLabel}  = $in[1][1];
+    $h{UnitPosition}    = $in[2][1];
+    $h{NumberPositions} = $in[3][1];
+    print &quot;Parsing $nl lines with $h{NumberPositions} locations ... &quot; if $verbose;
+    for my $i (0..$nl) { $h{Labels_loc} = $i if ($in[$i][0]//&#39;&#39;) eq &quot;Labels&quot;; }
+    $h{start_label} = $h{Labels_loc} + 1;
+    $h{start_cord}  = $h{N_header} + 1;
+    for my $i ($h{start_label}..$nl-1) {
+        $epos[$i - $h{start_label}]{name} = $in[$i][0];
+    }
+    for my $i ($h{start_cord}..$h{Labels_loc}-1) {
+        @{$epos[$i - $h{start_cord}]}{qw(x y z)} = @{$in[$i]};
+    }
+    for my $i (0..$h{NumberPositions}-1) {
+        $h{ $epos[$i]{name} }{DeviceCh} = $i;
+        @{ $h{ $epos[$i]{name} } }{qw(x y z)} = @{ $epos[$i] }{qw(x y z)};
+    }
+    warn &quot;\n Oops, make sure $h{NumberPositions} ne $h{N_Coords} ... \n&quot;
+        if $h{NumberPositions} ne $h{N_Coords};
+    my $coords = zeroes(float, 3, $h{NumberPositions});
+    for my $i (0..$h{NumberPositions}-1) {
+        $coords(,$i) .= pdl(map $_ || 0, @{$epos[$i]}{qw(x y z)});
+        $labels[$i] = &quot;  &quot; . &quot;$epos[$i]{name}&quot;;
+    }
+    print &quot;Done!\n&quot; if $verbose;
+    return (\%h, \@epos, \@labels, $coords-&gt;using(0,1,2));
+}
+</code></pre>
+
+<h2>Step 3 - Add color</h2>
+
+<p>Finally in the subroutine <code>disp_3d</code>, define the colors and draw the positions in 3D!
+Now the time to define colors of each electrode. In this report, the color is defined by its coordinates, and of course you can use EEG voltage if you want. Then call the actual visualization of the 3D window.
+There should appear one window <a href="SC4PerlAdventCalendar01.png">with small square tiles</a>, corresponding to each electrode position. You can drag and change the rotation of the “helmet” like point-clouds!
+If you click on the window and press <strong>q</strong> on your keyboard, the second figure will appear <a href="SC4PerlAdventCalendar2.png">with electrode name labels</a>.
+These labels also move around with each corresponding tile (electrode) while you drag the “helmet”!</p>
+
+<pre><code>disp_3d($labels, $x, $y, $z);
+sub disp_3d {
+    my ($labels, $x, $y, $z) = @_;
+    points3d([ $x, $y, $z ], [ $y + 50, $x, $z ], { PointSize =&gt; 8 });
+    hold3d();
+    PDL::Graphics::TriD::graph_object(my $lab
+            = PDL::Graphics::TriD::Labels-&gt;new([ $x, $y, $z ], { Strings =&gt; $labels }));
+}
+</code></pre>
+
+<p><img alt="SC4PerlAdventCalendar01" src="SC4PerlAdventCalendar01.png"></p>
+
+<h2>Putting it all together</h2>
+
+<p>How to execute the above 3 steps?</p>
+
+<p>Place the electrode position file <a href="classic10_20.elc">classic10_20.elc</a> and the Perl script file
+<a href="PerlAdventCalendar2024Dec.Shugo.pl">PerlAdventCalendar2024Dec.Shugo.pl</a> in the same directory on your machine.
+You need to open up a terminal.app, and move to that directory where the above two files are located.
+Then type</p>
+
+<pre><code>$ perl PerlAdventCalendar2024Dec.Shugo.pl classic10_20.elc
+</code></pre>
+
+<p>Now you will see a X window with 3D locations you decoded. Have fun with dragging the “helmet”!</p>
+
+<p><img alt="SC4PerlAdventCalendar2" src="SC4PerlAdventCalendar2.png"></p>
+
+<h3>Next step(s)</h3>
+
+<p>It will be possible to make voltage mapping figures projected on the scalp hopefully!</p>
+
+<h2>References</h2>
+
+<ul>
+<li>Shugo Suwazono, Hiroshi Arao.
+<a href="https://pubmed.ncbi.nlm.nih.gov/33294707/">A newly developed free software tool set for averaging electroencephalogram implemented in the Perl programming language.
+</a> Heliyon. 2020;6(11):e05580.
+doi: 10.1016/j.heliyon.2020.e05580. PMID: 33294707 PMCID: PMC7701343</li>
+</ul>
+
+              </section>
+              <small><p><a href="https://commons.wikimedia.org/w/index.php?curid=24805878">EEG Recording Cap</a> by Chris Hope is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a> and did not originate from the author&#39;s research.</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/visualisation/">visualisation</a>,
+                  <a href="/advent/blog/tag/macos/">MacOS</a>,
+                  <a href="/advent/blog/tag/trid/">TriD</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Shugo Suwazono MD, PhD.</h5>
+                        <p>Shugo Suwazono started writing Perl modules for matrix operations in 1999 and has reached version 1.9.23. A <a href="https://pubmed.ncbi.nlm.nih.gov/33294707/">2020 Pubmed article</a> describing EEG processing with Perl was realized with <strong>eeg.pm</strong> version 2.2.4.85 consisting of 13353 loc.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/11/random-number-generation/index.html" rel="prev"><strong>Previous Article</strong> Day 11: Random Number Generation with Perl Data Language</a></li>
+                  <li class="next"><a href="/advent/blog/2024/12/13/music/index.html" rel="next"><strong>Next Article</strong> Day 13: The Sound of Perl </a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

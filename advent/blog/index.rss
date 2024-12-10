@@ -7,6 +7,49 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 13: The Sound of Perl</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/13/music/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/13/music/</guid>
+            <description><![CDATA[
+                <p>If you can not sing nor play an instrument but want to make a contribution, let <a href="https://pdl.perl.org/">PDL</a> help you out!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/13/music/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/sound/">sound</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Fri, 13 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>Day 12: 3D visualization of scalp electrode sites can be done with Perl</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/12/eeg/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/12/eeg/</guid>
+            <description><![CDATA[
+                <p>Seeing is believing. A better presentation can more easily persuade people with your story.
+I, working as an EEG (<a href="https://en.wikipedia.org/wiki/Electroencephalography">electroencephalography</a>) researcher, sometimes need to consider the location of its origin, referring to the electrode positions used while recording the data.
+This is because the scalp distribution of the recorded EEG potential (amplitude) can be affected by how the electrodes align with each other.
+Here I need to better visualize 3D locations of electrode positions.</p>
+
+<p>Let’s try visualization of those electrode positions using Perl, in 3D manner, where you can change the camera position to watch them from your favorite angle/direction!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/12/eeg/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/visualisation/">visualisation</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/macos/">MacOS</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Thu, 12 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 11: Random Number Generation with Perl Data Language</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</guid>
@@ -74,54 +117,6 @@ After crunching your data, you can get it out to Perl and beyond.</p>
             ]]></description>
             <pubDate>
                 Mon, 09 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 8: Simplex optimisation with Perl Data Language</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/08/simplex/</guid>
-            <description><![CDATA[
-                <p>If you want to solve linear programming problems, you need <a href="https://pdl.perl.org/">PDL</a>!</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/08/simplex/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/optimisation/">optimisation</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/simplex/">simplex</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Sun, 08 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 7: Plotting PDL data in the browser using Javascript</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/07/finance2/</guid>
-            <description><![CDATA[
-                <h2>Introduction</h2>
-
-<p>In a <a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/../../06/finance/">previous post</a> we
-saw how to create a trading strategy using
-<a href="https://metacpan.org/pod/PDL::Finance::TA">PDL::Finance::TA</a> and
-<a href="https://metacpan.org/pod/PDL">PDL</a> with Perl.</p>
-
-<p>You may have noticed that I used
-<a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">PDL::Graphics::Gnuplot</a> to do
-the plotting there.  This module requires the user to install Gnuplot on their
-desktop or server, which may be a limitation in some use cases.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/07/finance2/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/finance/">finance</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/plotting/">plotting</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Sat, 07 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

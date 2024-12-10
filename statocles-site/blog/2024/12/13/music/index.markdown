@@ -12,6 +12,7 @@ images:
       attribution: |-
         Banner image From <a href="https://www.cpdl.org/wiki/">ChoralWiki</a>, available under the <a href="https://www.cpdl.org/wiki/index.php/ChoralWiki:CPDL">Choral Public Domain License</a>.  Copyright © 2016 by CPDL.
 data:
+  bio: haj
   description: 'Creating Sound with PDL (Perl Data Language)'
 ---
 

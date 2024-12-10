@@ -51,6 +51,9 @@ data:
       href: '/blog/2024/12/10/bad-values/'
       image: '/blog/2024/12/10/bad-values/banner.jpg'
     - date: 2018-12-11
+      title: Random Number Generation
+      href: '/blog/2024/12/11/random-number-generation/'
+      image: '/blog/2024/12/11/random-number-generation/banner.png'
     - date: 2018-12-12
     - date: 2018-12-13
     - date: 2018-12-14

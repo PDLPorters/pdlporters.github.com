@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>PDL Advent calendar 2024</title>
-        <link>https://pdl.perl.org/advent/blog/tag/statistics/</link>
-        <atom:link href="https://pdl.perl.org/advent/blog/tag/statistics.rss" rel="self" type="application/rss+xml" />
+        <link>https://pdl.perl.org/advent/blog/tag/significance/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/significance.rss" rel="self" type="application/rss+xml" />
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
@@ -31,31 +31,6 @@ or are naughty children using rude words, taking up smoking and creating merge c
             ]]></description>
             <pubDate>
                 Sat, 14 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 10: Playing Nice with Bad Values</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/10/bad-values/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/10/bad-values/</guid>
-            <description><![CDATA[
-                <p>Santa has discovered quality control issues in some of the scientific equipment that was delivered to children last Christmas.
-The results from the Early Elf Joint Internship Training program were more No-No-No than Ho-Ho-Ho!
-However the EEJIT&#39;s were consistent and testing revealed that the first 3 values in every 10 measurements were faulty.
-An update was sent to all affected children so they could recalculate their results, knowing which readings to ignore.</p>
-
-<p><strong>Problem:</strong> How should they treat the suspect values?</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/10/bad-values/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/bad-values/">Bad Values</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/statistics/">statistics</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/nan/">NaN</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Tue, 10 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

@@ -2,11 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-13T00:00:00Z</updated>
+    <updated>2024-12-14T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/14/stats/</id>
+        <title>Day 14: Getting started with Statistics</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/14/stats/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you&#39;re doing statistics on vast swathes of data, you could use <a href="https://metacpan.org/pod/PDL::Stats">PDL</a>!</p>
+
+<p>Santa&#39;s Naughty and Nice list has over a billion names and the Elf Data Analytics section of the workshop produces
+a display of trends for the January retrospective.
+If there is an increase in naughtiness, is it because nice children are starting to forget their manners
+or are naughty children using rude words, taking up smoking and creating merge conflicts?</p>
+
+<p>You would think this discussion goes on using the social media tailor-made for cold weather climates ... <a href="https://mathstodon.xyz/about">Mastodon</a>!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/14/stats/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/statistics/">statistics</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/correlation/">correlation</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/significance/">significance</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-14T00:00:00Z</updated>
+        <category term="statistics" />
+        <category term="correlation" />
+        <category term="significance" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/13/music/</id>
         <title>Day 13: The Sound of Perl</title>
@@ -100,32 +129,6 @@ An update was sent to all affected children so they could recalculate their resu
         <category term="Bad Values" />
         <category term="statistics" />
         <category term="NaN" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/09/d3/</id>
-        <title>Day 9: Exploring Data with D3.js and Mojolicious</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/09/d3/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>Sometimes PDL doesn&#39;t scratch the particular itch you have.
-PDL isn&#39;t like Vegas. It doesn&#39;t have to stay there.
-After crunching your data, you can get it out to Perl and beyond.</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/09/d3/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/mojolicious/">Mojolicious</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/d3-js/">D3.js</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/random-graph/">random graph</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-09T00:00:00Z</updated>
-        <category term="visualization" />
-        <category term="Mojolicious" />
-        <category term="D3.js" />
-        <category term="random graph" />
     </entry>
 </feed>
 

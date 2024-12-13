@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/tag/statistics/</id>
+    <id>https://pdl.perl.org/advent/blog/tag/correlation/</id>
     <title>PDL Advent calendar 2024</title>
     <updated>2024-12-14T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/tag/statistics.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/tag/statistics/" rel="alternate" />
+    <link href="https://pdl.perl.org/advent/blog/tag/correlation.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/correlation/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
     <entry>
@@ -35,33 +35,6 @@ or are naughty children using rude words, taking up smoking and creating merge c
         <category term="statistics" />
         <category term="correlation" />
         <category term="significance" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/10/bad-values/</id>
-        <title>Day 10: Playing Nice with Bad Values</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/10/bad-values/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>Santa has discovered quality control issues in some of the scientific equipment that was delivered to children last Christmas.
-The results from the Early Elf Joint Internship Training program were more No-No-No than Ho-Ho-Ho!
-However the EEJIT&#39;s were consistent and testing revealed that the first 3 values in every 10 measurements were faulty.
-An update was sent to all affected children so they could recalculate their results, knowing which readings to ignore.</p>
-
-<p><strong>Problem:</strong> How should they treat the suspect values?</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/10/bad-values/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/bad-values/">Bad Values</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/statistics/">statistics</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/nan/">NaN</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-10T00:00:00Z</updated>
-        <category term="Bad Values" />
-        <category term="statistics" />
-        <category term="NaN" />
     </entry>
 </feed>
 

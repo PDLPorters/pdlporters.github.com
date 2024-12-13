@@ -113,6 +113,11 @@ site:
                 text: |-
                   Joel has Ph.D. in Physics from the University of Illinois at Chicago.
                   He an avid Perl user and [author](https://metacpan.org/author/JBERGER) and is a member of the Mojolicious Core Team.
+            jjatria:
+                name: 'José Joaquín Atria'
+                image: 'https://secure.gravatar.com/avatar/5c8db490df81736445eee4097def2bc9'
+                text: |-
+                  José Joaquín had a previous life as a Speech Scientist before he decided to move full time towards software development. He has released a number of [Perl](https://metacpan.org/author/JJATRIA) and [Raku](https://raku.land/zef:jjatria) distributions, and likes to give conference talks about them when he can.
             mohawk:
                 name: Ed J
                 image: 'https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg'

@@ -67,6 +67,9 @@ data:
       href: '/blog/2024/12/14/stats/'
       image: '/blog/2024/12/14/stats/banner.svg'
     - date: 2018-12-15
+      title: Pitch detection
+      href: '/blog/2024/12/15/pitch-detection/'
+      image: '/blog/2024/12/15/pitch-detection/banner.jpg'
     - date: 2018-12-16
     - date: 2018-12-17
     - date: 2018-12-18

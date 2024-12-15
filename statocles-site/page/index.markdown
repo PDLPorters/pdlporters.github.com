@@ -71,6 +71,9 @@ data:
       href: '/blog/2024/12/15/pitch-detection/'
       image: '/blog/2024/12/15/pitch-detection/banner.jpg'
     - date: 2018-12-16
+      title: Test::PDL and matrix multiplication
+      href: '/blog/2024/12/16/matrix-mult/'
+      image: '/blog/2024/12/16/matrix-mult/banner.jpg'
     - date: 2018-12-17
     - date: 2018-12-18
     - date: 2018-12-19

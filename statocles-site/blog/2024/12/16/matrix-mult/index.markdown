@@ -26,9 +26,12 @@ so we're going to square things away by multiplying orthogonal matrices and chec
 ---
 
 Like a shiny package under this year's tree,
-[Test::PDL](https://metacpan.org/pod/Test::PDL) only arrived in v2.094 which is newer than most Linux package managers provide.
+[Test::PDL](https://metacpan.org/pod/Test::PDL) arrived in PDL v2.094 which is newer than most Linux package managers provide.
 You'll either need to wait for an update or to [install the latest version from CPAN](https://pdl.perl.org/?page=install).
 (I found installing the new version fairly easy. Just a bit of a wait.)
+But you can install Test::PDL from CPAN for use with an older PDL:
+
+    cpanm Test::PDL@0.21
 
 Find yourself an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix) like this one  
 <img src="https://latex.codecogs.com/svg.latex?\left[\begin{array}{cc} \cos\theta &\sin\theta \\ -\sin\theta &\cos\theta \end{array}\right]" title="rotation matrix" />  
@@ -45,14 +48,13 @@ Use the [is_pdl](https://metacpan.org/pod/Test::PDL#is_pdl) function to show thi
      [0.866   0.5]
      [ -0.5 0.866]
     ]
-    $id = zeroes(2,2)    # Identity matrix
-    $id->diagonal(0,1)++
+    $id = identity(2)    # Identity matrix
     [
      [1 0]
      [0 1]
     ]
 
-    is_pdl($m * $m->transpose, $id, 'Orthogonal matrix times its transpose is the Identity matrix')
+    is_pdl($m * $m->t, $id, 'Orthogonal matrix times its transpose is the Identity matrix')
     not ok 1
     #     4/4 values do not match
     #          got: Double   D [2,2]      (P    )
@@ -87,7 +89,7 @@ Those digits are messing with my brain. Let's get some easier numbers to work wi
      [1 2]
      [3 4]
     ]
-    p $n->transpose
+    p $n->t
     [
      [1 3]
      [2 4]
@@ -107,7 +109,7 @@ not the dot product of the **i**th row with the **j**th column.
 
 I need the [x](https://metacpan.org/pod/PDL::Primitive#x) operator to do matrix multiplication like in my linear algebra textbook.
 
-    is_pdl($m x $m->transpose, $id, 'Orthogonal matrix times its transpose is the Identity matrix')
+    is_pdl($m x $m->t, $id, 'Orthogonal matrix times its transpose is the Identity matrix')
     not ok 2
     #     2/4 values do not match
     #          got: Double   D [2,2]      (P    )
@@ -135,7 +137,7 @@ Notice that the test failure tells you which elements it failed at (0,0 and 1,1)
 To make it pass, I could add more sig figs to the matrix ... _oooorrr_ I could just tweak the test
 with the `atol` or **absolute tolerance** option.
 
-    is_pdl($m x $m->transpose, $id, {test_name => 'Orthogonal matrix times its transpose is the Identity matrix', atol => 1E-4})
+    is_pdl($m x $m->t, $id, {test_name => 'Orthogonal matrix times its transpose is the Identity matrix', atol => 1E-4})
     ok 3 - Orthogonal matrix times its transpose is the Identity matrix
 
 See? Passes!
@@ -161,14 +163,13 @@ Here's a good one. Careful now, it really is complex!
      [ 0      i   1.414]
      [ 0 -1.414       i]
     ]
-    $i3x3 = zeroes(cdouble,3,3)
-    $i3x3->diagonal(0,1)++
+    $i3x3 = cdouble identity(3)
     [
      [1 0 0]
      [0 1 0]
      [0 0 1]
     ]
-    is_pdl($q x $q->transpose, $i3x3, 'Orthogonal 3x3 complex matrix')
+    is_pdl($q x $q->t, $i3x3, 'Orthogonal 3x3 complex matrix')
     ok 6 - Orthogonal 3x3 complex matrix
 
 The default type of `zeroes()` is **double**, so without the `cdouble` to make it complex, the `is_pdl` test will fail on type.

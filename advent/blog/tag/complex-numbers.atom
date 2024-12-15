@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/complex-numbers/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-16T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/complex-numbers.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/complex-numbers/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</id>
+        <title>Day 16: These are Testing Times, Indeed!</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
+
+<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
+so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
+<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-16T00:00:00Z</updated>
+        <category term="Test" />
+        <category term="matrix operations" />
+        <category term="complex numbers" />
+    </entry>
+</feed>
+

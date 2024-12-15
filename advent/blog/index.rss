@@ -7,6 +7,30 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 16: These are Testing Times, Indeed!</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</guid>
+            <description><![CDATA[
+                <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
+
+<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
+so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
+<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Mon, 16 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 15: Pitch detection</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/15/pitch-detection/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/15/pitch-detection/</guid>
@@ -102,28 +126,6 @@ Here I need to better visualize 3D locations of electrode positions.</p>
             ]]></description>
             <pubDate>
                 Thu, 12 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 11: Random Number Generation with Perl Data Language</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/</guid>
-            <description><![CDATA[
-                <p>If you want to generate random numbers data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>! (With a little help from the GNU Scientific Library)</p>
-
-<p>&quot;What&#39;s a PPR?&quot;, asked Santa&#39;s chief planner? Santa mumbled, &quot;a premature package release.&quot;</p>
-
-<p>&quot;You dropped some packages? How widespread? Where did they go?&quot;</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/random-numbers/">random numbers</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Wed, 11 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

@@ -16,17 +16,17 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/" property="og:url">
-  <meta content="Day 3: Perl Data Language on the Mac" property="og:title">
-    <meta content="Installing PDL on MacOS" property="og:description">
-    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/" property="og:url">
+  <meta content="Day 16: These are Testing Times, Indeed!" property="og:title">
+    <meta content="Using Test::PDL to explore matrix multiplication" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
   <script src="/advent/theme/js/modernizr.js"></script>
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 3: Perl Data Language on the Mac - PDL Advent calendar 2024</title>
+  <title>Day 16: These are Testing Times, Indeed! - PDL Advent calendar 2024</title>
   <meta content="Boyd Duffee" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 3: Perl Data Language on the Mac</h1>
+              <h1>Day 16: These are Testing Times, Indeed!</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-03">Dec  3, 2024</time>
+                  <time class="date" datetime="2024-12-16">Dec 16, 2024</time>
                   
 
               </p>
@@ -89,81 +89,189 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Apple logo" src="./banner.jpg">
+                <img alt="Matrix multiplication in symbols" src="banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
-Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
-It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
-the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
+                  <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
+
+<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
+so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
+<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
 
               </section>
               <section id="section-2">
-                  <p>I&#39;m a <a href="https://brew.sh/">Homebrew</a> fan because it simplifies my life when installing third party software on the Mac.
-Part of me wants to see what the minimum requirements are to get PDL up and running, but Life&#39;s Too Short.</p>
+                  <p>Like a shiny package under this year&#39;s tree,
+<a href="https://metacpan.org/pod/Test::PDL">Test::PDL</a> arrived in PDL v2.094 which is newer than most Linux package managers provide.
+You&#39;ll either need to wait for an update or to <a href="https://pdl.perl.org/?page=install">install the latest version from CPAN</a>.
+(I found installing the new version fairly easy. Just a bit of a wait.)
+But you can install Test::PDL from CPAN for use with an older PDL:</p>
 
-<p>Homebrew has formulae for <a href="https://metacpan.org/pod/PDL::Graphics::PLplot">PLPlot</a>,
-<a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">Gnuplot</a>, GD for graphics,
-the <a href="https://metacpan.org/pod/PDL::IO::HDF">HDF</a> library and <a href="https://metacpan.org/pod/PDL::GSL::CDF">Gnu Scientific Library</a>
-as well as the X11 server needed for the <a href="https://pdl.perl.org/?page=demos/plot2D">PGPLOT demos</a>.
-There&#39;s a bit of discussion about how <a href="https://www.xquartz.org/">XQuartz</a> is to be replaced by Apple&#39;s Metal,
-but for now it looks best to stick with XQuartz.
-Go for Maximum Install!</p>
-
-<pre><code>brew install plplot gnuplot gd hdf5 gsl
-brew install --cask xquartz
+<pre><code>cpanm Test::PDL@0.21
 </code></pre>
 
-<p>Now, does your MacBook have the Intel chip or the newer M1 chip found in post-2020 machines?
-Figure that out and go to the <a href="https://github.com/PDLPorters/SciPDL/blob/main/README.md">Instructions</a>,
-which consist of downloading the correct release,
-open the <code>.dmg</code> file, drag and drop the image onto the Applications folder icon that&#39;s just popped up.
-Done.</p>
+<p>Find yourself an <a href="https://en.wikipedia.org/wiki/Orthogonal_matrix">orthogonal matrix</a> like this one <br>
+<img src="https://latex.codecogs.com/svg.latex?\left[\begin{array}{cc} \cos\theta &amp;\sin\theta \\ -\sin\theta &amp;\cos\theta \end{array}\right]" title="rotation matrix"> <br>
+and choose an angle, say 30° which makes cos 30° = 0.866 and sin 30° = 1/2.
+Then construct the Identity matrix, with 1&#39;s on the diagonal and zeroes everywhere else.</p>
 
-<p>(yes, it is that easy)</p>
+<p>By definition, an orthogonal matrix multiplied by its
+<a href="https://metacpan.org/pod/PDL::Basic#transpose">transpose</a> is the identity matrix.
+Use the <a href="https://metacpan.org/pod/Test::PDL#is_pdl">is_pdl</a> function to show this is true.</p>
 
-<p>If you rush to click on the <code>pdl&gt;</code> icon and get surprised by this error popup,
-it means that you haven&#39;t read further down the <code>README</code> where it informs you not to panic,
-<strong>Edit</strong> and <strong>Save</strong> the file (you won&#39;t see a Save button, but you just <strong>⌘ S</strong> or <strong>File &gt; Save</strong>)</p>
+<pre><code>use Test::PDL
+$m = pdl([0.866, 0.5],[-0.5, 0.866])
+[
+ [0.866   0.5]
+ [ -0.5 0.866]
+]
+$id = identity(2)    # Identity matrix
+[
+ [1 0]
+ [0 1]
+]
 
-<p><img alt="Not authorised message" src="apple_not_authorised.png" title="Error message"></p>
-
-<p>For running the PGPLOT demo, you&#39;ll need to start the Xserver and if it says it can&#39;t connect,
-try rebooting, starting the Xserver and entering the pdl shell.
-If that still doesn&#39;t work,
-open a terminal and follow the Running SciPDL instructions to set the environment and type <code>pdl</code> at the prompt.</p>
-
-<p>Parabolas are boring. Here&#39;s a cubic instead.</p>
-
-<pre><code>pdl&gt; use PGPLOT                                                                 
-pdl&gt; use PDL::Graphics::PGPLOT                                                  
-
-pdl&gt; $ENV{PGPLOT_XW_WIDTH} = 0.3                                                  
-pdl&gt; dev(&#39;/XSERVE&#39;)                                                             
-
-pdl&gt; $x = sequence(10)                                                                                                                          
-pdl&gt; $y = $x**3 - 8 * $x**2 + 20                                                
-
-pdl&gt; points $x, $y
+is_pdl($m * $m-&gt;t, $id, &#39;Orthogonal matrix times its transpose is the Identity matrix&#39;)
+not ok 1
+#     4/4 values do not match
+#          got: Double   D [2,2]      (P    )
+# [
+#  [  0.749956      -0.25]
+#  [     -0.25   0.749956]
+# ]
+#
+#     expected: Double   D [2,2]      (P    )
+# [
+#  [1 0]
+#  [0 1]
+# ]
+#
+# First &lt;=5 values differ at:
+# [
+#  [0 0]
+#  [1 0]
+#  [0 1]
+#  [1 1]
+# ]
+# Those &#39;got&#39; values: [0.749956 -0.25 -0.25 0.749956]
+# Those &#39;expected&#39; values: [1 0 0 1]
 </code></pre>
 
-<p><img alt="Plotting a cubic with PGPLOT" src="cubic_pgplot.png" title="points along a cubic curve"></p>
+<p>Wait, <strong>what?</strong></p>
 
-<p>You&#39;ll have an excellent imagination to see the outline of Santa&#39;s pipe in the above plot,
-no doubt inspired by a mince pie or two!</p>
+<p>That should be <code>ok</code>. Let&#39;s do some sanity checking with <code>transpose</code> and the <code>*</code> operator.
+Those digits are messing with my brain. Let&#39;s get some easier numbers to work with.</p>
+
+<pre><code>$n = sequence(2,2) + 1
+[
+ [1 2]
+ [3 4]
+]
+p $n-&gt;t
+[
+ [1 3]
+ [2 4]
+]
+p $n * $n
+[
+ [ 1  4]
+ [ 9 16]
+]
+</code></pre>
+
+<p>Now I see what&#39;s going on.
+The off-diagonal elements are swapped, so the transpose is correct. 
+The last example is the square of each <em>index value</em>.
+This means that the <code>*</code> operator gives us
+<strong>C<span style="vertical-align:sub">ij</span> = A<span style="vertical-align:sub">ij</span> * B<span style="vertical-align:sub">ij</span></strong>,
+not the dot product of the <strong>i</strong>th row with the <strong>j</strong>th column.</p>
+
+<p>I need the <a href="https://metacpan.org/pod/PDL::Primitive#x">x</a> operator to do matrix multiplication like in my linear algebra textbook.</p>
+
+<pre><code>is_pdl($m x $m-&gt;t, $id, &#39;Orthogonal matrix times its transpose is the Identity matrix&#39;)
+not ok 2
+#     2/4 values do not match
+#          got: Double   D [2,2]      (P    )
+# [
+#  [  0.999956          0]
+#  [         0   0.999956]
+# ]
+#
+#     expected: Double   D [2,2]      (P    )
+# [
+#  [1 0]
+#  [0 1]
+# ]
+#
+# First &lt;=5 values differ at:
+# [
+#  [0 0]
+#  [1 1]
+# ]
+# Those &#39;got&#39; values: [0.999956 0.999956]
+# Those &#39;expected&#39; values: [1 1]
+</code></pre>
+
+<p>Oh, c&#39;mon! That&#39;s close enough, right?
+Notice that the test failure tells you which elements it failed at (0,0 and 1,1) and what values it got and expected.
+To make it pass, I could add more sig figs to the matrix ... <em>oooorrr</em> I could just tweak the test
+with the <code>atol</code> or <strong>absolute tolerance</strong> option.</p>
+
+<pre><code>is_pdl($m x $m-&gt;t, $id, {test_name =&gt; &#39;Orthogonal matrix times its transpose is the Identity matrix&#39;, atol =&gt; 1E-4})
+ok 3 - Orthogonal matrix times its transpose is the Identity matrix
+</code></pre>
+
+<p>See? Passes!</p>
+
+<p>Test::PDL also checks for type, so ndarrays with the same values but different types will fail</p>
+
+<pre><code>is_pdl double(1..5), short(1..5)
+not ok 4 - ndarrays are equal
+#     types do not match (&#39;require_equal_types&#39; is true)
+#          got: Double   D [5]        (P    ) [1 2 3 4 5]
+#     expected: Short    D [5]        (P    ) [1 2 3 4 5]
+
+is_pdl double(1..5), short(1..5), {require_equal_types =&gt; 0}
+ok 5 - ndarrays are equal
+</code></pre>
+
+<p>unless you pass the <code>require_equal_types =&gt; 0</code> option to the test.</p>
+
+<p>Here&#39;s a good one. Careful now, it really is complex!</p>
+
+<pre><code>$q = pdl([1, 0, 0],[0, i, sqrt(2)],[0, -sqrt(2), i])
+[
+ [ 1      0       0]
+ [ 0      i   1.414]
+ [ 0 -1.414       i]
+]
+$i3x3 = cdouble identity(3)
+[
+ [1 0 0]
+ [0 1 0]
+ [0 0 1]
+]
+is_pdl($q x $q-&gt;t, $i3x3, &#39;Orthogonal 3x3 complex matrix&#39;)
+ok 6 - Orthogonal 3x3 complex matrix
+</code></pre>
+
+<p>The default type of <code>zeroes()</code> is <strong>double</strong>, so without the <code>cdouble</code> to make it complex, the <code>is_pdl</code> test will fail on type.
+Or you could create an <a href="https://metacpan.org/pod/PDL::Core#i">imaginary matrix</a> and zero it, with <code>$i = i(3,3) * 0</code></p>
+
+<p>And remember kids, at Christmas Santa is multiplied by his <a href="https://metacpan.org/pod/PDL::Ops#conj">complex conjugate</a>,
+because that&#39;s when <a href="https://xkcd.com/849/">Santa is Real</a>!</p>
 
               </section>
-              <small><p><a href="https://www.flickr.com/photos/91645335@N00/2214058583">apple logo</a> by <a href="https://www.flickr.com/photos/91645335@N00">zolierdos</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0</a></p>
+              <small><p><a href="https://commons.wikimedia.org/w/index.php?curid=113553734">Matrix multiplication</a>&quot; by <a href="https://commons.wikimedia.org/w/index.php?title=User:Brigban&amp;action=edit&amp;redlink=1">Brigban</a> is marked with <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en/?ref=openverse">CC0 1.0 </a></p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/macos/">MacOS</a>,
-                  <a href="/advent/blog/tag/installation/">installation</a>,
-                  <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+                  <a href="/advent/blog/tag/test/">Test</a>,
+                  <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>,
+                  <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
               </p>
 
 
@@ -181,8 +289,7 @@ no doubt inspired by a mince pie or two!</p>
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/02/cartography/index.html" rel="prev"><strong>Previous Article</strong> Day 2: Maps with Perl Data Language</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/04/interpol/index.html" rel="next"><strong>Next Article</strong> Day 4: Interpolation with Perl Data Language </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/15/pitch-detection/index.html" rel="prev"><strong>Previous Article</strong> Day 15: Pitch detection</a></li>
               </ul>
 
             </div>

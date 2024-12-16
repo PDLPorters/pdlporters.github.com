@@ -7,17 +7,17 @@ tags:
 author: Ed J
 images:
   banner:
-    src: './banner.jpg'
+    src: './banner.png'
     alt: 'Simplex optimisation'
     data:
       attribution: |-
-        <a href="https://commons.wikimedia.org/wiki/File:Simplex-description-en.svg">Graphical description of how the simplex method can solve linear programming problems</a> under Creative Commons Attribution-Share Alike 3.0 Unported
+        <a href="https://commons.wikimedia.org/wiki/File:An-iteration-of-the-Nelder-Mead-method-over-two-dimensional-space-showing-point-p-min.png">An iteration of the Nelder-Mead method over two-dimensional space</a>
 data:
   bio: mohawk
   description: 'Simplex optimisation with PDL (Perl Data Language)'
 ---
 
-If you want to solve linear programming problems, you need [PDL](https://pdl.perl.org/)!
+If you want to solve nonlinear optimisation problems, you need [PDL](https://pdl.perl.org/)!
 ---
 
 This article discusses
@@ -117,5 +117,5 @@ There are other optimisation modules for PDL, including:
 - [PDL::Opt::ParticleSwarm](https://metacpan.org/pod/PDL::Opt::ParticleSwarm)
 
 Take a look at
-[the Wikipedia page for the simplex algorithm](https://en.wikipedia.org/wiki/Simplex_algorithm)
+[the Wikipedia page for the simplex algorithm](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method)
 for more on the subject.

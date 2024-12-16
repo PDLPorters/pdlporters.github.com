@@ -41,7 +41,7 @@ data:
     - date: 2018-12-08
       title: Simplex optimisation
       href: '/blog/2024/12/08/simplex/'
-      image: '/blog/2024/12/08/simplex/banner.jpg'
+      image: '/blog/2024/12/08/simplex/banner.png'
     - date: 2018-12-09
       title: Data with D3.js and Mojolicious
       href: '/blog/2024/12/09/d3/'

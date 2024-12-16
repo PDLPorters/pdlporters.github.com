@@ -2,11 +2,35 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-16T00:00:00Z</updated>
+    <updated>2024-12-17T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/</id>
+        <title>Day 17: New operations for Perl Data Language</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you want to create new <a href="https://pdl.perl.org/">PDL</a> operations, it&#39;s easy! You can make an ad-hoc one with
+<a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>, and expand it (or
+just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a>.</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/pptemplate/">pptemplate</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/create-operation/">create operation</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-17T00:00:00Z</updated>
+        <category term="inline-pdlpp" />
+        <category term="pptemplate" />
+        <category term="create operation" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</id>
         <title>Day 16: These are Testing Times, Indeed!</title>
@@ -109,33 +133,6 @@ or are naughty children using rude words, taking up smoking and creating merge c
         ]]></content>
         <updated>2024-12-13T00:00:00Z</updated>
         <category term="sound" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/12/eeg/</id>
-        <title>Day 12: 3D visualization of scalp electrode sites can be done with Perl</title>
-        <author><name>Shugo SUWAZONO</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/12/eeg/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>Seeing is believing. A better presentation can more easily persuade people with your story.
-I, working as an EEG (<a href="https://en.wikipedia.org/wiki/Electroencephalography">electroencephalography</a>) researcher, sometimes need to consider the location of its origin, referring to the electrode positions used while recording the data.
-This is because the scalp distribution of the recorded EEG potential (amplitude) can be affected by how the electrodes align with each other.
-Here I need to better visualize 3D locations of electrode positions.</p>
-
-<p>Let’s try visualization of those electrode positions using Perl, in 3D manner, where you can change the camera position to watch them from your favorite angle/direction!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/12/eeg/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/visualisation/">visualisation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/macos/">MacOS</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/trid/">TriD</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-12T00:00:00Z</updated>
-        <category term="visualisation" />
-        <category term="MacOS" />
-        <category term="TriD" />
     </entry>
 </feed>
 

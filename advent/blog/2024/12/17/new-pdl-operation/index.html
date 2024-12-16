@@ -16,9 +16,9 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/03/installing-on-macos/" property="og:url">
-  <meta content="Day 3: Perl Data Language on the Mac" property="og:title">
-    <meta content="Installing PDL on MacOS" property="og:description">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/" property="og:url">
+  <meta content="Day 17: New operations for Perl Data Language" property="og:title">
+    <meta content="New operations for PDL (Perl Data Language)" property="og:description">
     <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
@@ -26,8 +26,8 @@
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 3: Perl Data Language on the Mac - PDL Advent calendar 2024</title>
-  <meta content="Boyd Duffee" name="author">
+  <title>Day 17: New operations for Perl Data Language - PDL Advent calendar 2024</title>
+  <meta content="Ed J" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
   
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 3: Perl Data Language on the Mac</h1>
+              <h1>Day 17: New operations for Perl Data Language</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-03">Dec  3, 2024</time>
+                  <time class="date" datetime="2024-12-17">Dec 17, 2024</time>
                   
 
               </p>
@@ -89,100 +89,148 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Apple logo" src="./banner.jpg">
+                <img alt="Prometheus bringing fire to mankind" src="./banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>So, you&#39;ve got yourself a shiny new MacBook and you want to give PDL a spin.
-Lucky you, because the OG author of PDL just got one recently and made an installer to save you a bunch of work.
-It works pretty much for Monterey through to Sonoma, buuuuut ... of course my machine happens to be running <strong><em>Sequoia 15.1</em></strong>,
-the latest release, which is not yet listed as having been tested but I believe in Santa and Santa believes in me!</p>
+                  <p>If you want to create new <a href="https://pdl.perl.org/">PDL</a> operations, it&#39;s easy! You can make an ad-hoc one with
+<a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>, and expand it (or
+just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a>.</p>
 
               </section>
               <section id="section-2">
-                  <p>I&#39;m a <a href="https://brew.sh/">Homebrew</a> fan because it simplifies my life when installing third party software on the Mac.
-Part of me wants to see what the minimum requirements are to get PDL up and running, but Life&#39;s Too Short.</p>
+                  <p>&quot;Genetic engineering?&quot; Santa&#39;s chief planner wasn&#39;t
+<a href="https://www.youtube.com/watch?v=AeKizzQpPpY&amp;t=199s">fully losing her mind</a>,
+but it was visibly an effort.</p>
 
-<p>Homebrew has formulae for <a href="https://metacpan.org/pod/PDL::Graphics::PLplot">PLPlot</a>,
-<a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">Gnuplot</a>, GD for graphics,
-the <a href="https://metacpan.org/pod/PDL::IO::HDF">HDF</a> library and <a href="https://metacpan.org/pod/PDL::GSL::CDF">Gnu Scientific Library</a>
-as well as the X11 server needed for the <a href="https://pdl.perl.org/?page=demos/plot2D">PGPLOT demos</a>.
-There&#39;s a bit of discussion about how <a href="https://www.xquartz.org/">XQuartz</a> is to be replaced by Apple&#39;s Metal,
-but for now it looks best to stick with XQuartz.
-Go for Maximum Install!</p>
+<p>&quot;The presents stuff doesn&#39;t take up the whole year!&quot; Santa said,
+defensively. If they were going to analyse genetic data, they might as
+well do it efficiently. Perhaps PDL could help?</p>
 
-<pre><code>brew install plplot gnuplot gd hdf5 gsl
-brew install --cask xquartz
+<p>As <a href="https://www.perlmonks.org/?node_id=11162765">discussed recently on
+PerlMonks</a>, processing
+data in a highly efficient way is already possible using existing
+PDL operations, and it&#39;s easy to engage the <a href="https://metacpan.org/pod/PDL::ParallelCPU">automatic POSIX
+threading</a> too.</p>
+
+<p>Those existing operations are made with
+<a href="https://metacpan.org/pod/PDL::PP">PDL::PP</a>, which allows making
+type-generic, n-dimensional operations for PDL. But taking the first
+step can feel a bit intimidating. Inline::Pdlpp allows you to make a
+script with a PP operation in minutes.</p>
+
+<p><a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>&#39;s SYNOPSIS has a
+working example of making a new PDL operation for processing genetic data:</p>
+
+<pre><code>use strict; use warnings;
+use PDL;
+use Inline Pdlpp =&gt; &#39;DATA&#39;;
+# make data with: echo -n &#39;ATCGZATCG&#39; &gt;input.data
+# use it with aa_to_int.pl input.data
+my $file; ($file = shift, -f $file) || die &quot;Usage: $0 filename&quot;;
+my $size = -s $file;
+my $pdl = zeroes(byte, $size);
+${$pdl-&gt;get_dataref} = do { open my $fh, $file or die &quot;$file: $!&quot;; local $/; &lt;$fh&gt; };
+$pdl-&gt;upd_data;
+$pdl-&gt;inplace-&gt;aa_to_int;
+print $pdl, &quot;\n&quot;;
+__DATA__
+__Pdlpp__
+pp_def(&#39;aa_to_int&#39;,
+ Pars =&gt; &#39;i();[o] o()&#39;,
+ GenericTypes =&gt; [&#39;B&#39;],
+ Inplace =&gt; 1,
+ Code =&gt; &lt;&lt;&#39;EOF&#39;,
+switch($i()) {
+ case &#39;A&#39;: $o() = 0; break;
+ case &#39;T&#39;: $o() = 1; break;
+ case &#39;C&#39;: $o() = 2; break;
+ case &#39;G&#39;: $o() = 3; break;
+ default: $o() = 255; break;
+}
+EOF
+ Doc =&gt; &quot;=for ref\n\nConvert amino acid names to integers.\n&quot;,
+);
 </code></pre>
 
-<p>Now, does your MacBook have the Intel chip or the newer M1 chip found in post-2020 machines?
-Figure that out and go to the <a href="https://github.com/PDLPorters/SciPDL/blob/main/README.md">Instructions</a>,
-which consist of downloading the correct release,
-open the <code>.dmg</code> file, drag and drop the image onto the Applications folder icon that&#39;s just popped up.
-Done.</p>
+<p>A further improvement to that script might be to mark those unknown
+letters as <a href="../../10/bad-values/">bad values</a>:</p>
 
-<p>(yes, it is that easy)</p>
-
-<p>If you rush to click on the <code>pdl&gt;</code> icon and get surprised by this error popup,
-it means that you haven&#39;t read further down the <code>README</code> where it informs you not to panic,
-<strong>Edit</strong> and <strong>Save</strong> the file (you won&#39;t see a Save button, but you just <strong>⌘ S</strong> or <strong>File &gt; Save</strong>)</p>
-
-<p><img alt="Not authorised message" src="apple_not_authorised.png" title="Error message"></p>
-
-<p>For running the PGPLOT demo, you&#39;ll need to start the Xserver and if it says it can&#39;t connect,
-try rebooting, starting the Xserver and entering the pdl shell.
-If that still doesn&#39;t work,
-open a terminal and follow the Running SciPDL instructions to set the environment and type <code>pdl</code> at the prompt.</p>
-
-<p>Parabolas are boring. Here&#39;s a cubic instead.</p>
-
-<pre><code>pdl&gt; use PGPLOT                                                                 
-pdl&gt; use PDL::Graphics::PGPLOT                                                  
-
-pdl&gt; $ENV{PGPLOT_XW_WIDTH} = 0.3                                                  
-pdl&gt; dev(&#39;/XSERVE&#39;)                                                             
-
-pdl&gt; $x = sequence(10)                                                                                                                          
-pdl&gt; $y = $x**3 - 8 * $x**2 + 20                                                
-
-pdl&gt; points $x, $y
+<pre><code>$pdl-&gt;inplace-&gt;setvaltobad(255);
 </code></pre>
 
-<p><img alt="Plotting a cubic with PGPLOT" src="cubic_pgplot.png" title="points along a cubic curve"></p>
+<p>Or, the operation itself could set the values bad:</p>
 
-<p>You&#39;ll have an excellent imagination to see the outline of Santa&#39;s pipe in the above plot,
-no doubt inspired by a mince pie or two!</p>
+<pre><code>$pdl-&gt;badflag(1);
+$pdl-&gt;inplace-&gt;aa_to_int;
+# ...
+pp_def(&#39;aa_to_int&#39;,
+ Pars =&gt; &#39;i();[o] o()&#39;,
+ GenericTypes =&gt; [&#39;B&#39;],
+ Inplace =&gt; 1,
+ HandleBad =&gt; 1,
+ Code =&gt; &lt;&lt;&#39;EOF&#39;,
+switch($i()) {
+ case &#39;A&#39;: $o() = 0; break;
+ case &#39;T&#39;: $o() = 1; break;
+ case &#39;C&#39;: $o() = 2; break;
+ case &#39;G&#39;: $o() = 3; break;
+ default: PDL_IF_BAD($SETBAD(o()),$o() = 255); break;
+}
+EOF
+ Doc =&gt; &quot;=for ref\n\nConvert amino acid names to integers.\n&quot;,
+);
+</code></pre>
+
+<p>To turn this into a fully-fledged PDL module, use
+<a href="https://metacpan.org/pod/pptemplate">pptemplate</a>:</p>
+
+<pre><code>$ pptemplate PDL::MyModule
+</code></pre>
+
+<p>Put your <code>pp_def</code> code into <code>mymodule.pd</code> (or, in the new scheme as of
+PDL 2.096, <code>lib/PDL/MyModule.pd</code>), make some tests, write documentation,
+and publish to the world on CPAN!</p>
+
+<h2>Further resources</h2>
+
+<p>Be sure to check the documentation for
+<a href="https://metacpan.org/pod/PDL::PP">PDL::PP</a>, to see further
+possibilities. You can supply additional keys to the <code>pp_def</code>
+call to control whether to disable POSIX threading (which is
+on by default, but some C libraries can&#39;t handle that). Or you
+can automatically add lvalue processing, as with <a href="https://metacpan.org/pod/PDL::Slices#slice">the slice
+operation</a>.</p>
 
               </section>
-              <small><p><a href="https://www.flickr.com/photos/91645335@N00/2214058583">apple logo</a> by <a href="https://www.flickr.com/photos/91645335@N00">zolierdos</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0</a></p>
+              <small><p><a href="https://commons.wikimedia.org/wiki/File:Heinrich_fueger_1817_prometheus_brings_fire_to_mankind.jpg">Prometheus Brings Fire to Mankind</a> by Heinrich Füger, circa 1790</p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/macos/">MacOS</a>,
-                  <a href="/advent/blog/tag/installation/">installation</a>,
-                  <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+                  <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>,
+                  <a href="/advent/blog/tag/pptemplate/">pptemplate</a>,
+                  <a href="/advent/blog/tag/create-operation/">create operation</a>
               </p>
 
 
                   <div class="bio cf">
 
                       <div class="gravatar">
-                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
                       </div>
                       <div class="about">
-                        <h5>Boyd Duffee</h5>
-                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+                        <h5>Ed J</h5>
+                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
 
                       </div>
 
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/02/cartography/index.html" rel="prev"><strong>Previous Article</strong> Day 2: Maps with Perl Data Language</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/04/interpol/index.html" rel="next"><strong>Next Article</strong> Day 4: Interpolation with Perl Data Language </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/16/matrix-mult/index.html" rel="prev"><strong>Previous Article</strong> Day 16: These are Testing Times, Indeed!</a></li>
               </ul>
 
             </div>

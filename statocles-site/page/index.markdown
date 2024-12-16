@@ -75,6 +75,9 @@ data:
       href: '/blog/2024/12/16/matrix-mult/'
       image: '/blog/2024/12/16/matrix-mult/banner.jpg'
     - date: 2018-12-17
+      title: New operations for PDL
+      href: '/blog/2024/12/17/new-pdl-operation/'
+      image: '/blog/2024/12/17/new-pdl-operation/banner.jpg'
     - date: 2018-12-18
     - date: 2018-12-19
     - date: 2018-12-20

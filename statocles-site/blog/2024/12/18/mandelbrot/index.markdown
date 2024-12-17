@@ -6,7 +6,7 @@ tags:
 author: Vikas N Kumar
 images:
     banner:
-        src: './banner.jpg'
+        src: './banner.png'
         alt: 'Visualization of a Mandelbrot Set'
 data:
     bio: vikasnkumar
@@ -51,7 +51,7 @@ plotting 2-D and 3-D charts using OpenGL.
     $ mkdir -p ~/perl5/lib/perl5
     ### add this oneliner to the ~/.bashrc or ~/.profile for your terminal
     $ eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
-    $ cpanm OpenGL::GLUT PDL PDL::Graphics::TriD
+    $ cpanm OpenGL::GLUT PDL PDL::Graphics::TriD PDL::Graphics::ColorSpace
     ## check if PDL got installed
     $ which perldl
 
@@ -96,7 +96,7 @@ values for the Mandelbrot set. For this instance we use 50 iterations.
     my $z = czip($real_xy, $imaginary_xy);
     ## make a copy of the initial value of z
     my $c = $z->copy;
-    foreach (0 .. 50) {
+    foreach (1 .. 50) {
         ## update $z in each iteration
         $z = $z**2 + $c;
     }
@@ -108,23 +108,22 @@ function which can only be used on real data types, so we do it on both the real
 and imaginary part of the `$z` PDL and then recreate the final `$z` again using
 `czip`.
 
-
     my $xy = zeroes(100, 100);
     my $real_xy = $xy->xlinvals($xy, -2, 2);
     my $imaginary_xy = $xy->ylinvals($xy, -2, 2);
     my $z = czip($real_xy, $imaginary_xy);
     ## make a copy of the initial value of z
     my $c = $z->copy;
-    foreach (0 .. 50) {
+    foreach (1 .. 50) {
         ## update $z in each iteration
         $z = $z**2 + $c;
         ## check for escape value
-        my ($r, $i) = map { $_->clip(-5, 5) } ($z->re, $z->im);
+        my ($r, $i) = map $z->$_->clip(-5, 5), qw(re im);
         $z = czip($r, $i);
     }
 
 **Step 4**: Now we have to color the pixels, and we do that by adding the square
-of the two points, `$r` and `$i`. We store this in the `$rgb` variable.
+of the two points, `$r` and `$i`, using the `abs2` operation. We store this in the `$escaped` variable.
 
     my $xy = zeroes(100, 100);
     my $real_xy = $xy->xlinvals($xy, -2, 2);
@@ -132,18 +131,18 @@ of the two points, `$r` and `$i`. We store this in the `$rgb` variable.
     my $z = czip($real_xy, $imaginary_xy);
     ## make a copy of the initial value of z
     my $c = $z->copy;
-    my $rgb;
-    foreach (0 .. 50) {
+    my $escaped;
+    foreach (1 .. 50) {
         ## update $z in each iteration
         $z = $z**2 + $c;
         ## check for escape value
-        my ($r, $i) = map { $_->clip(-5, 5) } ($z->re, $z->im);
-        $rgb = ($r**2 + $i**2) > 5;
+        my ($r, $i) = map $z->$_->clip(-5, 5), qw(re im);
         $z = czip($r, $i);
+        $escaped = $z->abs2 > 5;
     }
 
 **Step 5**: Lastly we plot the 2-D array using `imagrgb` from
-`PDL::Graphics::TriD` which takes the `$rgb` PDL as an input. This produces a
+`PDL::Graphics::TriD` which takes the `$escaped` PDL as an input. This produces a
 black-and-white image. The user will need to press `q` on the display window to
 close it.
 
@@ -153,21 +152,20 @@ close it.
     my $z = czip($real_xy, $imaginary_xy);
     ## make a copy of the initial value of z
     my $c = $z->copy;
-    my $rgb;
-    foreach (0 .. 50) {
+    my $escaped;
+    foreach (1 .. 50) {
         ## update $z in each iteration
         $z = $z**2 + $c;
         ## check for escape value
-        my ($r, $i) = map { $_->clip(-5, 5) } ($z->re, $z->im);
-        $rgb = ($r**2 + $i**2) > 5;
+        my ($r, $i) = map $z->$_->clip(-5, 5), qw(re im);
         $z = czip($r, $i);
+        $escaped = $z->abs2 > 5;
     }
-    imagrgb[$rgb];
+    imagrgb[$escaped];
 
 **Step 6**: If you want to see an animation of each iteration you can disable
 the `q` pressing using the `nokeeptwiddling3d()` function and invoke the
 `imagrgb` call in each iteration instead.
-
 
     my $xy = zeroes(100, 100);
     my $real_xy = $xy->xlinvals($xy, -2, 2);
@@ -175,22 +173,32 @@ the `q` pressing using the `nokeeptwiddling3d()` function and invoke the
     my $z = czip($real_xy, $imaginary_xy);
     nokeeptwiddling3d();
     my $c = $z->copy;
-    foreach (0 .. 50) {
+    foreach (1 .. 50) {
         $z = $z ** $power + $c;
-        my ($r, $i) = map { $_->clip(-5, 5) }  ($z->re, $z->im);
+        my ($r, $i) = map $z->$_->clip(-5, 5), qw(re im);
         $z = czip($r, $i);
-        $rgb = ($z->re ** 2 + $z->im ** 2) > 5;
-        imagrgb[$rgb];
+        $escaped = $z->abs2 > 5;
+        imagrgb[$escaped];
     }
     keeptwiddling3d();
     twiddle3d();
 
 **Step 7**: We can then save the final image using the `wpic` function and call
-it on the `$rgb` PDL like below.
+it on the `$escaped` PDL like below.
 
+    $escaped->wpic("final.png");
 
-    $rgb->wpic("final.png");
+**Step 8**: Let's count how many iterations before it escapes its bounds:
 
+    my $xy = zeroes(100, 100);
+    # ...
+    my $iterations = $xy->copy;
+    foreach (1 .. 50) {
+        # ...
+        $escaped = $z->abs2 > 5;
+        $iterations->where($escaped & !$iterations) .= $_;
+        imagrgb[$iterations / $_];
+    }
 
 ## The Full Implementation
 
@@ -203,41 +211,55 @@ You can run it on the commandline line `perl ./mandelbrot.pl 500 100 5 2` to get
 
 To get a **multibrot** set you can run it as `perl ./mandelbrot.pl 500 100 5 4` and see the visuals attached.
 
-    #!/usr/bin/env perl
     use strict;
     use warnings;
     use Scalar::Util qw(looks_like_number);
     use PDL;
-    use PDL::NiceSlice;
     use PDL::Graphics::TriD;
+    use PDL::Graphics::ColorSpace;
+
+    sub as_heatmap {
+      my ($d) = @_;
+      my $max = $d->max;
+      die "as_heatmap: can't work if max == 0" if $max == 0;
+      $d = $d / $max; # negative OK
+      my $hue   = (1 - $d)*240;
+      $d = cat($hue, pdl(1), pdl(1));
+      hsv_to_rgb($d->mv(-1,0));
+    }
 
     ## escape time algorithm
     my $maxsz = looks_like_number($ARGV[0] // '') ? int($ARGV[0]) : 100;
     my $max_iter = looks_like_number($ARGV[1] // '') ? int($ARGV[1]) : 50;
     my $bound = looks_like_number($ARGV[2] // '') ? $ARGV[2] : 5;
     my $power = looks_like_number($ARGV[3] // '') ? int($ARGV[3]) : 2;
-    my $xy = zeroes($maxsz, $maxsz);
+    my $xy = zeroes($maxsz, $maxsz); 
     my $real_xy = xlinvals($xy, -2, 2);
     my $imaginary_xy = ylinvals($xy, -2, 2);
-    my $rgb;
+    my $escaped;
     nokeeptwiddling3d();
     my $z = czip($real_xy, $imaginary_xy);
     my $c = $z->copy;
-    foreach (0 .. $max_iter) {
+    my $iterations = $xy->copy;
+    foreach (1 .. $max_iter) {
         $z = $z ** $power + $c;
-        my ($r, $i) = map { $_->clip(-$bound, $bound) }  ($z->re, $z->im);
-        $rgb = ($r ** 2 + $i ** 2) > $bound;
-        imagrgb[$rgb];
+        my ($r, $i) = map $z->$_->clip(-$bound, $bound), qw(re im);
         $z = czip($r, $i);
+        $escaped = $z->abs2 > $bound;
+        $iterations->where($escaped & !$iterations) .= $_;
+        imagrgb[as_heatmap($iterations)->using(0..2)];
     }
     print "Press q in the window to exit\n";
     keeptwiddling3d();
     twiddle3d();
-    $rgb->wpic(sprintf "final_%d_%d_%d_%d.png", $maxsz, $max_iter, $bound, $power);
-
+    as_heatmap($iterations)->wpic(sprintf "final_%d_%d_%d_%d.png", $maxsz, $max_iter, $bound, $power);
 
 ## Final Visualization
 
-![Mandelbrot set](mandelbrot_1.png)
+![Mandelbrot set](banner.png)
 
 ![Multibrot set](multibrot_1.png)
+
+And with power 4, zoomed in on x=[-0.2,0.2] y=[0.7,1.1]:
+
+![Multibrot set](multibrot_zoom.png)

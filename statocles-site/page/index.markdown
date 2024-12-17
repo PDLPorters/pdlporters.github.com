@@ -81,7 +81,7 @@ data:
     - date: 2018-12-18
       title: Drawing a Mandelbrot set with PDL
       href: '/blog/2024/12/18/mandelbrot/'
-      image: '/blog/2024/12/18/mandelbrot/banner.jpg'
+      image: '/blog/2024/12/18/mandelbrot/banner.png'
     - date: 2018-12-19
     - date: 2018-12-20
     - date: 2018-12-21

@@ -32,6 +32,7 @@ Mathematica.
 
 In this post, I demonstrate how to go about implementing a Mandelbrot
 visualization, including _multibrot_ ones.
+---
 
 ## Pre-requisites
 

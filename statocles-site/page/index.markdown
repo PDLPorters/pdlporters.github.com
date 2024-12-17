@@ -79,6 +79,9 @@ data:
       href: '/blog/2024/12/17/new-pdl-operation/'
       image: '/blog/2024/12/17/new-pdl-operation/banner.jpg'
     - date: 2018-12-18
+      title: Drawing a Mandelbrot set with PDL
+      href: '/blog/2024/12/18/mandelbrot/'
+      image: '/blog/2024/12/18/mandelbrot/banner.png'
     - date: 2018-12-19
     - date: 2018-12-20
     - date: 2018-12-21

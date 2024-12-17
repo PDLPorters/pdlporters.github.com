@@ -83,6 +83,9 @@ data:
       href: '/blog/2024/12/18/mandelbrot/'
       image: '/blog/2024/12/18/mandelbrot/banner.png'
     - date: 2018-12-19
+      title: Ray tracing with matrix multiplication
+      href: '/blog/2024/12/19/optics/'
+      image: '/blog/2024/12/19/optics/banner.jpg'
     - date: 2018-12-20
     - date: 2018-12-21
     - date: 2018-12-22

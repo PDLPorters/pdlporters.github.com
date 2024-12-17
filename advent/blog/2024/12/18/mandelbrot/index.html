@@ -1,17 +1,101 @@
-<?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>PDL Advent calendar 2024</title>
-        <link>https://pdl.perl.org/advent/blog/</link>
-        <atom:link href="https://pdl.perl.org/advent/blog/index.rss" rel="self" type="application/rss+xml" />
-        <description>Blog feed of PDL Advent calendar 2024</description>
-        <generator>Statocles 0.098</generator>
-        <item>
-            <title>Day 18: How to use PDL to draw a Mandelbrot Set</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/</guid>
-            <description><![CDATA[
-                <h1>How to use PDL to draw a Mandelbrot Set</h1>
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/" property="og:url">
+  <meta content="Day 18: How to use PDL to draw a Mandelbrot Set" property="og:title">
+    <meta content="How to use PDL to draw a Mandelbrot Set" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 18: How to use PDL to draw a Mandelbrot Set - PDL Advent calendar 2024</title>
+  <meta content="Vikas N Kumar" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 18: How to use PDL to draw a Mandelbrot Set</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-18">Dec 18, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Visualization of a Mandelbrot Set" src="./banner.png">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <h1>How to use PDL to draw a Mandelbrot Set</h1>
 
 <h2>Introduction</h2>
 
@@ -264,126 +348,158 @@ as_heatmap($iterations)-&gt;wpic(sprintf &quot;final_%d_%d_%d_%d.png&quot;, $max
 
 <h2>Final Visualization</h2>
 
-<p><img alt="Mandelbrot set" src="https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/banner.png"></p>
+<p><img alt="Mandelbrot set" src="banner.png"></p>
 
-<p><img alt="Multibrot set" src="https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/multibrot_1.png"></p>
+<p><img alt="Multibrot set" src="multibrot_1.png"></p>
 
 <p>And with power 4, zoomed in on x=[-0.2,0.2] y=[0.7,1.1]:</p>
 
-<p><img alt="Multibrot set" src="https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/multibrot_zoom.png"></p>
+<p><img alt="Multibrot set" src="multibrot_zoom.png"></p>
+
+              </section>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>,
+                  <a href="/advent/blog/tag/visualization/">visualization</a>
+              </p>
 
 
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/mandelbrot/">mandelbrot</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                    </p>
+                  <div class="bio cf">
 
-            ]]></description>
-            <pubDate>
-                Wed, 18 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 17: New operations for Perl Data Language</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/</guid>
-            <description><![CDATA[
-                <p>If you want to create new <a href="https://pdl.perl.org/">PDL</a> operations, it&#39;s easy! You can make an ad-hoc one with
-<a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>, and expand it (or
-just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a>.</p>
+                      <div class="gravatar">
+                        <img alt="author image" src="https://avatars.githubusercontent.com/u/12120?v=4">
+                      </div>
+                      <div class="about">
+                        <h5>Vikas N Kumar</h5>
+                        <p>Vikas N Kumar (aka &quot;vicash&quot; on IRC) has been using Perl for about 18 years. He builds a lot of web-based software in Perl, and works in the finance industry doing a mix of C, C++ and Perl in his day job trying to succeed building trading strategies and trading systems. He has a background in Aerospace engineering but spends most of his time doing Computer Science related projects.</p>
 
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/#section-2">Continue reading...</a></p>
+                      </div>
 
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/pptemplate/">pptemplate</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/create-operation/">create operation</a>
-                    </p>
+                  </div>
 
-            ]]></description>
-            <pubDate>
-                Tue, 17 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 16: These are Testing Times, Indeed!</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</guid>
-            <description><![CDATA[
-                <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/17/new-pdl-operation/index.html" rel="prev"><strong>Previous Article</strong> Day 17: New operations for Perl Data Language</a></li>
+              </ul>
 
-<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
-so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
-<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
+            </div>
 
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
+        </article>
 
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
-                    </p>
 
-            ]]></description>
-            <pubDate>
-                Mon, 16 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 15: Pitch detection</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/15/pitch-detection/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/15/pitch-detection/</guid>
-            <description><![CDATA[
-                <p>In a previous life I spent most of my time (free and otherwise) thinking about
-phonetics and the analysis of speech sounds. Like most scientific research, it
-was slow and tedious and oddly rewarding.</p>
+      </div>
 
-<p>Back then I was already in a steady drift towards spending more time playing
-with computers than with my research, so a lot of my efforts went into
-studying <a href="https://www.fon.hum.uva.nl/praat">Praat</a>, a piece of software you&#39;ve
-almost certainly never heard of, but that has probably been used in most of
-the phonetics research you&#39;ve also never heard of.</p>
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
 
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/15/pitch-detection/#section-2">Continue reading...</a></p>
 
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/signal-processing/">signal processing</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/phonetics/">phonetics</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/speech/">speech</a>
-                    </p>
 
-            ]]></description>
-            <pubDate>
-                Sun, 15 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 14: Getting started with Statistics</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/14/stats/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/14/stats/</guid>
-            <description><![CDATA[
-                <p>If you&#39;re doing statistics on vast swathes of data, you could use <a href="https://metacpan.org/pod/PDL::Stats">PDL</a>!</p>
 
-<p>Santa&#39;s Naughty and Nice list has over a billion names and the Elf Data Analytics section of the workshop produces
-a display of trends for the January retrospective.
-If there is an increase in naughtiness, is it because nice children are starting to forget their manners
-or are naughty children using rude words, taking up smoking and creating merge conflicts?</p>
 
-<p>You would think this discussion goes on using the social media tailor-made for cold weather climates ... <a href="https://mathstodon.xyz/about">Mastodon</a>!</p>
 
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/14/stats/#section-2">Continue reading...</a></p>
 
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/statistics/">statistics</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/correlation/">correlation</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/significance/">significance</a>
-                    </p>
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
 
-            ]]></description>
-            <pubDate>
-                Sat, 14 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-    </channel>
-</rss>
 
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

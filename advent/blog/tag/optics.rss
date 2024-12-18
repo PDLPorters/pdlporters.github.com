@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>PDL Advent calendar 2024</title>
-        <link>https://pdl.perl.org/advent/blog/tag/matrix-operations/</link>
-        <atom:link href="https://pdl.perl.org/advent/blog/tag/matrix-operations.rss" rel="self" type="application/rss+xml" />
+        <link>https://pdl.perl.org/advent/blog/tag/optics/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/optics.rss" rel="self" type="application/rss+xml" />
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
@@ -32,30 +32,6 @@ can be done by working through a series of equations <em>or</em> by
             ]]></description>
             <pubDate>
                 Thu, 19 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 16: These are Testing Times, Indeed!</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</guid>
-            <description><![CDATA[
-                <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
-
-<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
-so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
-<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Mon, 16 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

@@ -16,18 +16,18 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/11/random-number-generation/" property="og:url">
-  <meta content="Day 11: Random Number Generation with Perl Data Language" property="og:title">
-    <meta content="Random Number Generation with PDL (Perl Data Language)" property="og:description">
-    <meta content="https://pdl.perl.org/advent/./banner.png" property="og:image">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/19/optics/" property="og:url">
+  <meta content="Day 19: Twinkle, Twinkle Little Star" property="og:title">
+    <meta content="Doing ray tracing with matrix multiplication" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
   <script src="/advent/theme/js/modernizr.js"></script>
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 11: Random Number Generation with Perl Data Language - PDL Advent calendar 2024</title>
-  <meta content="Ed J" name="author">
+  <title>Day 19: Twinkle, Twinkle Little Star - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
   
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 11: Random Number Generation with Perl Data Language</h1>
+              <h1>Day 19: Twinkle, Twinkle Little Star</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-11">Dec 11, 2024</time>
+                  <time class="date" datetime="2024-12-19">Dec 19, 2024</time>
                   
 
               </p>
@@ -89,128 +89,124 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Rolling the dice" src="./banner.png">
+                <img alt="Green laser reflection and refraction" src="banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>If you want to generate random numbers data easily and fast, you need <a href="https://pdl.perl.org/">PDL</a>! (With a little help from the GNU Scientific Library)</p>
+                  <p>If you&#39;re tracing rays or transforming coordinates, you could be using PDL!</p>
 
-<p>&quot;What&#39;s a PPR?&quot;, asked Santa&#39;s chief planner? Santa mumbled, &quot;a premature package release.&quot;</p>
-
-<p>&quot;You dropped some packages? How widespread? Where did they go?&quot;</p>
+<p>A little knowledge is a dangerous thing.
+Having seen how to do matrix multiplication <a href="/advent/advent/blog/2024/12/16/matrix-mult/">on 16 December</a>,
+the Elf R&amp;D department, headed by Rudolf and <a href="https://www.dancer.pm/">Dancer</a>,
+decided to calculate the sparkle from their baubles.
+In optics, tracing light rays through bits of glass that act as mirrors and lenses
+can be done by working through a series of equations <em>or</em> by
+<a href="https://en.wikipedia.org/wiki/Ray_transfer_matrix_analysis">multiplying matrices and vectors</a>!</p>
 
               </section>
               <section id="section-2">
-                  <p>To model this, the planner turned to the
-<a href="https://metacpan.org/pod/PDL::GSL::RNG">PDL::GSL::RNG</a> module.
-This shows the power of PDL with a concise way to generate graphs of
-different random number distributions.</p>
+                  <p>If a ray at height <em>y</em> and angle <em>θ</em>, travels a distance <em>d</em>, where does it end up?
+Using vector multiplication with this matrix,</p>
 
-<pre><code>use PDL::Graphics::Simple;
-use PDL::GSL::RNG;
-$x = zeroes(100)-&gt;xlinvals(-5,5);
-$w = pgswin();
+<p><img alt="Transfer matrix for free space" src="transfer_matrix.png">
+gives you a resultant vector like this</p>
+
+<p><img alt="vector transformed by the  matrix" src="vector_transform.png"></p>
+
+<p>What happens when the ray hits a thin lens, focal length <strong><em>f</em></strong>?</p>
+
+<p><img alt="Transfer matrix for thin lens" src="lens_matrix.png"></p>
+
+<p>Nice, but what&#39;s the big deal?</p>
+
+<p>Well, these things stack. The end of one light ray path is the beginning of the next.
+You follow the path from element to element until you get to the end of your optical system.
+Even better, the calculation in PDL is in the same order as the written mathematics;
+start with the vector on the right and work through the elements in the path from right to left in the code.</p>
+
+<p><img alt="System of 4 lenses" src="https://www.mdpi.com/applsci/applsci-10-08278/article_deploy/html/images/applsci-10-08278-g003.png">
+<em>figure from <a href="https://www.mdpi.com/2076-3417/10/22/8278">Fujiwara and Cordeiro</a></em></p>
+
+<p>What&#39;s that, Blitzen? How does that look in PDL?</p>
+
+<p>Well, given values for the distances <code>$d0 .. $d4</code>, and focal lengths <code>$f1 .. $f4</code></p>
+
+<pre><code>$ab = [1,0]    # shortcuts for defining elements
+$cd = [0,1]
+
+$T0 = pdl([1, $d0], $cd)
+$L1 = pdl($ab,      [-1/$f1, 1])
+$T1 = pdl([1, $d1], $cd)
+$L2 = pdl($ab,      [-1/$f2, 1])
+$T2 = pdl([1, $d2], $cd)
+$L3 = pdl($ab,      [-1/$f3, 1])
+$T3 = pdl([1, $d3], $cd)
+$L4 = pdl($ab,      [-1/$f4, 1])
+$T4 = pdl([1, $d4], $cd)
+
+$y_theta0 = pdl($y0, $th0)
+$y_theta9 = $T4 x $L4 x $T3 x $L3 x $T2 x $L2 x $T1 x $L1 x $T0 x $y_theta0
 </code></pre>
 
-<p>The exponential power distribution is a generalisation of the &quot;normal&quot;
-(Gaussian) distribution. With β = 1, it&#39;s &quot;normal&quot;, but there are other
-values. For example, to model how far away each package might have fallen
-from the sleigh:</p>
+<p>The only calculation is that one last line. The rest are all defining the system.</p>
 
-<pre><code>$w-&gt;plot(
-  with=&gt;&#39;lines&#39;, key=&gt;&#39;a=1 b=2.5&#39;, $x, ran_exppow_pdf($x, 1, 2.5),
-  with=&gt;&#39;lines&#39;, key=&gt;&#39;a=1 b=0.5&#39;, $x, ran_exppow_pdf($x, 1, 0.5),
-  {le=&gt;&#39;tr&#39;, yrange=&gt;[0,0.8], title=&gt;&#39;Exponential Power Distribution&#39;,
-    xlabel=&gt;&#39;x&#39;, ylabel=&gt;&#39;p(x)&#39;}
-);
-</code></pre>
+<p>This makes it easy to add elements and even compute a single Ray Transfer Matrix for the whole system.
+It will be faster than Perl when it comes to iterating over a million vectors.
+Being PDL, there&#39;s nothing stopping you from constructing a <code>$y_theta0</code> ndarray with <em>all</em> your vectors
+and computing the set of transformed vectors in a single line of code. (I haven&#39;t tested that yet)</p>
 
-<p><img src="/advent/../images/demos/gsl_rng/output-1.png"></p>
+<p>This, of course, is the <em>Ideal Situation</em>. Back in Reality, the elves will need to check that
+light rays don&#39;t go outside the diameter of the lenses in the middle of the system.
+Santa is very rooted in the Real World and takes a dim view of <em>unphysical results</em>.</p>
 
-<p>But to model how many packages would have spread out at different heights,
-we&#39;d use a bivariate Gaussian distribution:</p>
+<p>We&#39;re not limited to these two basic matrices.
+Here are four more formulae for optical elements which show mirrors as well as a lens with a changing index of refraction.</p>
 
-<pre><code>$points = pdl &#39;[219 88 2.7; 38 95 1.7; 45 268 0.8]&#39;;
-($XSIZE, $YSIZE) = (300, 300);
-($xcoord, $ycoord, $weight) = $points       # xyw nweights
-  -&gt;slice(&quot;,*$XSIZE,*$YSIZE,&quot;)              # xyw nx ny nweights
-  -&gt;using(0..2);                            # nx ny nweights
-$xbase = xvals($XSIZE)-&gt;slice(&quot;,*$YSIZE&quot;);  # nx ny
-$ybase = xvals($YSIZE)-&gt;slice(&quot;*$XSIZE,&quot;);  # nx ny
-for (1..90) {
-  $h = (
-    $weight * ran_bivariate_gaussian_pdf(
-      $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
-    )                                           # nx ny nweights
-  )-&gt;mv(-1,0)-&gt;sumover;                         # nx ny
-  $w-&gt;plot(with=&gt;&#39;image&#39;, $h, {title=&gt;&#39;Bivariate Gaussian Distribution&#39;,j=&gt;1});
-}
-</code></pre>
+<p><a href="https://www.researchgate.net/figure/ABCD-matrices-of-some-optical-elements-18_tbl1_365741941">
+<img alt="ABCD matrices of some optical elements [18]." src="https://www.researchgate.net/publication/365741941/figure/tbl1/AS:11431281108346700@1671470398979/ABCD-matrices-of-some-optical-elements-18.png">
+</a></p>
 
-<p><img src="/advent/../images/demos/gsl_rng/vid-1.gif"></p>
+<p>And Wikipedia also
+<a href="https://en.wikipedia.org/wiki/Ray_transfer_matrix_analysis#Matrices_for_simple_optical_components">has prisms</a>.</p>
 
-<p>Or, if we have the right libraries, the same but with a colourful heatmap:</p>
+<p>There already is a Perl module that adds optical elements for you called
+<a href="https://metacpan.org/pod/Physics::RayTransfer">Physics::RayTransfer</a> (Hi, Joel! <em>also author of <a href="https://metacpan.org/pod/PDL::Util">PDL::Util</a></em> ).
+It has a nice Object Oriented interface, but it doesn&#39;t use PDL,
+so if you&#39;ve got a script that runs for a long time maybe adding PDL ndarrays to the attributes
+will give you that speed up you&#39;re looking for.</p>
 
-<pre><code>sub as_heatmap {
-  my ($d) = @_;
-  my $max = $d-&gt;max;
-  die &quot;as_heatmap: can&#39;t work if max == 0&quot; if $max == 0;
-  $d /= $max; # negative OK
-  my $hue   = (1 - $d)*240;
-  $d = cat($hue, pdl(1), pdl(1));
-  (hsv_to_rgb($d-&gt;mv(-1,0)) * 255)-&gt;byte-&gt;mv(0,-1);
-}
-if (eval &#39;use PDL::Graphics::ColorSpace; 1&#39;) {
-  for (1..90) {
-    $h = (
-      $weight * ran_bivariate_gaussian_pdf(
-        $xcoord-$xbase, $ycoord-$ybase, $_, $_, 0
-      )                                           # nx ny nweights
-    )-&gt;mv(-1,0)-&gt;sumover;                         # nx ny
-    $w-&gt;plot(
-      with=&gt;&#39;image&#39;, as_heatmap($h),
-      {title=&gt;&#39;Bivariate Gaussian Distribution (heatmap)&#39;,j=&gt;1}
-    );
-  }
-}
-</code></pre>
-
-<p><img src="/advent/../images/demos/gsl_rng/vid-2.gif"></p>
-
-<h2>Further resources</h2>
-
-<p>See
-<a href="https://www.gnu.org/software/gsl/doc/html/randist.html">https://www.gnu.org/software/gsl/doc/html/randist.html</a>
-for more about GSL&#39;s random-number distribution capability.</p>
+<p>Wow, Rudolph!
+Calculating refractions hasn&#39;t been this much fun <a href="https://en.wikipedia.org/wiki/Book_of_Optics">since 1021 CE</a>!</p>
 
               </section>
-              <small><p><a href="http://www.openclipart.org/clipart/recreation/games/two_red_dice_01.svg">Two red dice</a> Image Credit: Stephen Silver, in the Open Clip Art Library - public domain</p>
+              <small><p><a href="https://www.flickr.com/photos/34431996@N06/8468330190">Green laser reflection and refraction 2</a> by <a href="https://www.flickr.com/photos/34431996@N06">astroshots42</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a></p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+                  <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>,
+                  <a href="/advent/blog/tag/optics/">optics</a>,
+                  <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
               </p>
 
 
                   <div class="bio cf">
 
                       <div class="gravatar">
-                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
                       </div>
                       <div class="about">
-                        <h5>Ed J</h5>
-                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
 
                       </div>
 
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/10/bad-values/index.html" rel="prev"><strong>Previous Article</strong> Day 10: Playing Nice with Bad Values</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/12/eeg/index.html" rel="next"><strong>Next Article</strong> Day 12: 3D visualization of scalp electrode sites can be done with Perl </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/18/mandelbrot/index.html" rel="prev"><strong>Previous Article</strong> Day 18: How to use PDL to draw a Mandelbrot Set</a></li>
               </ul>
 
             </div>

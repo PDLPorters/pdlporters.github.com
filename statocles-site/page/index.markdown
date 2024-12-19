@@ -87,6 +87,9 @@ data:
       href: '/blog/2024/12/19/optics/'
       image: '/blog/2024/12/19/optics/banner.jpg'
     - date: 2018-12-20
+      title: PDL internals
+      href: '/blog/2024/12/20/pdl-internals/'
+      image: '/blog/2024/12/20/pdl-internals/banner.jpg'
     - date: 2018-12-21
     - date: 2018-12-22
     - date: 2018-12-23

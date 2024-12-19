@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/dataflow/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-20T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/dataflow.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/dataflow/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/</id>
+        <title>Day 20: Perl Data Language internals</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p><a href="https://pdl.perl.org/">PDL</a> is powerful and has many features. But as
+with any complex software system, bugs can happen. Let&#39;s learn about two!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/internals/">internals</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/implementation/">implementation</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/dataflow/">dataflow</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-20T00:00:00Z</updated>
+        <category term="internals" />
+        <category term="implementation" />
+        <category term="dataflow" />
+    </entry>
+</feed>
+

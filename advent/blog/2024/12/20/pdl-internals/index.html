@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/" property="og:url">
+  <meta content="Day 20: Perl Data Language internals" property="og:title">
+    <meta content="PDL (Perl Data Language) internals" property="og:description">
+    <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 20: Perl Data Language internals - PDL Advent calendar 2024</title>
+  <meta content="Ed J" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 20: Perl Data Language internals</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-20">Dec 20, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Four stroke gasoline engine diagram" src="./banner.jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p><a href="https://pdl.perl.org/">PDL</a> is powerful and has many features. But as
+with any complex software system, bugs can happen. Let&#39;s learn about two!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>&quot;Those who love sausages and PDL should watch neither being made,&quot;
+said Santa, dreamily.</p>
+
+<p>Santa&#39;s chief planner frowned. &quot;Why are all your metaphors food-based?&quot;</p>
+
+<p>2024 is ending as it started: with very subtle PDL dataflow bugs being
+discovered, and fixed.</p>
+
+<h2>Winter turning into spring, and a dataflow bug surfaces</h2>
+
+<p>The first one came to light in January, when Karl
+Glazebrook, the inventor of PDL, <a href="https://sourceforge.net/p/pdl/mailman/message/58720790/">emailed to the pdl-general
+list</a> that
+he&#39;d discovered a problem with <code>clump</code>. Some clever-ish <a href="https://sourceforge.net/p/pdl/mailman/message/58723923/">finagling with
+<code>git bisect</code></a>
+discovered when the problem had occurred. That finagling in full, to
+help others another time:</p>
+
+<pre><code>git bisect start
+git bisect bad # current “master” is bad
+git bisect good 2.025 # tell it it was working as of 2.025
+perl Makefile.PL &amp;&amp; time make core &amp;&amp; perl -Mblib repro-script; echo $? # kept running this, then:
+git bisect bad # if failing
+git bisect good # if working correctly
+git bisect reset # when finished, to close down the bisect
+# Note the use of “make core” which takes about 2 mins from scratch
+# on my system, vs about 6 to “make” everything, saving lots of time.
+</code></pre>
+
+<p>Some <a href="https://sourceforge.net/p/pdl/mailman/message/58730063/">further detective
+work</a> lead
+to adding what is now the <code>gv</code> function in <code>perldl</code>, to generate this
+diagram showing visually what was going on (the dotted lines show where a
+&quot;vaffine&quot; ndarray&#39;s data pointer actually points):</p>
+
+<p><a href="https://sourceforge.net/p/pdl/mailman/attachment/AS8P194MB1382D0AF017328EF94B519D0827F2%40AS8P194MB1382.EURP194.PROD.OUTLOOK.COM/1/"><img alt="Steps through a bugged use of &lt;code&gt;clump&lt;/code&gt;" src="https://sourceforge.net/p/pdl/mailman/attachment/AS8P194MB1382D0AF017328EF94B519D0827F2%40AS8P194MB1382.EURP194.PROD.OUTLOOK.COM/1/"></a></p>
+
+<p>A couple of weeks of deep investigation lead to a fix, as captured on
+<a href="https://github.com/PDLPorters/pdl/issues/461">a GitHub issue</a>: this
+problem, which had been created in April 2022, then got reported by
+two independent sources within a month of each other, nearly two years
+later! (Plus <a href="https://www.perlmonks.org/?node_id=11153348">an additional time</a>,
+some months earlier in 2023) So what was the problem? PDL&#39;s dataflow
+happens two ways:</p>
+
+<ul>
+<li>a &quot;vaffine&quot; ndarray has a pointer directly into
+a different ndarray&#39;s data, typically with a &quot;<a href="https://en.wikipedia.org/wiki/Dope_vector">dope
+vector</a>&quot; to interpret that
+correctly for its purposes; this is barely &quot;flow&quot;, because it&#39;s just a
+(possibly different) view of the same bytes in memory</li>
+<li>&quot;real&quot; dataflow, when two ndarrays have a &quot;flowing&quot; relationship via
+a flowing transformation (a.k.a. PDL operation or function); when one
+gets changed, the PDL core propagates that change by walking the data
+structure to propagate that change <em>by marking them as changed</em> but not
+changing them yet; that real update will only happen when the &quot;changed&quot;
+ndarray gets read from - it&#39;s lazy evaluation</li>
+</ul>
+
+<p>The problem here was that the propagation of a <code>DATACHANGED</code> message got
+incorrectly interrupted by flowing transformations that erroneously set
+that they were <code>DATACHANGED</code>. The hard bit was identifying that was the
+situation. The fix was to make that erroneous setting not happen. The
+rest was easy!</p>
+
+<h2>Autumn turning into winter, and another dataflow bug appears</h2>
+
+<p>Now it&#39;s December, and another bug in dataflow has come to
+light. PDL::Complex was officially deprecated in favour of &quot;native
+complex&quot; data with PDL 2.055, in 2021. When it was identified that needed
+to be released as an independent CPAN module and removed from the upcoming
+slimmed-down PDL 2.096, that meant all the modules that use (or rather,
+still support) it needed updating. This was easy for
+<a href="https://metacpan.org/pod/PDL::LinearAlgebra">PDL::LinearAlgebra</a>, but
+<a href="https://metacpan.org/pod/PDL::FFTW3">PDL::FFTW3</a> was another matter.</p>
+
+<p>It turned out that my implementation of native complex support worked
+fine for complex double-precision (<code>cdouble</code>), but not single-precision
+(<code>cfloat</code>), which just produced zeroes, but <em>only</em> when turning real
+input into complex output. Believe it or not, this was partly due to
+dataflow behaviour.</p>
+
+<p>When the PDL core starts up a transformation, it checks the datatypes
+of all its inputs and outputs (collectively, &quot;parameters&quot;), and from
+those plus the specification for the transformation&#39;s parameters,
+determines the datatype for the transformation itself. After that,
+it then sees which of its parameters need type-converting to match.</p>
+
+<ul>
+<li>For inputs, that&#39;s straightforward; the input gets converted by making it
+an input for a type-converting transformation, and using the output of
+that as the actual input.</li>
+<li>For outputs, it&#39;s complicated: currently (as of 2.095, and at the time
+of writing on <code>git master</code>) it does exactly the same as the above,
+meaning that that output of the transformation is the output of both
+the main transformation, <em>and</em> of the type-conversion - but it &quot;knows&quot;
+of only one parent, which is the type-conversion.</li>
+</ul>
+
+<p>For non-flowing transformations, this actually works in all
+circumstances. The transformation is created, then immediately destroyed
+which makes all of its updates happen. The output gets written into the
+conversion&#39;s output, and the propagation of that gets passed backwards
+to that conversion&#39;s parent, the original passed output.</p>
+
+<p>PDL::FFTW3, because it needs to guarantee which data address it&#39;s making
+an <a href="https://www.fftw.org/doc/Using-Plans.html">FFTW &quot;plan&quot;</a> for,
+constructs its output, generates/looks up the plan (including for which
+precision), and passes them into the transformation, triggering the
+above type behaviour. It turns out that the type-establishing behaviour
+has a bug when a parameter is marked as the &quot;complex&quot; version of the
+transformation&#39;s datatype, and a complex ndarray is provided for
+that. That bug means the transformation&#39;s datatype is established wrongly,
+which means type-conversion is needed for all the parameters. Because
+the type-conversion stuff works fine for non-flowing transformations
+(and PDL::FFTW3&#39;s operations are non-flowing), this almost works. But
+not quite:</p>
+
+<ul>
+<li>for single-precision, the plan is generated for that, and it&#39;s used
+in the transformation&#39;s implementing code with no regard for that
+transformation&#39;s datatype</li>
+<li>the input data is converted into double-precision, but FFTW3 interprets
+those bytes as single-precision, producing extremely small (actually
+subnormal, order of <code>1e-315</code>) values, which the type-conversion turns
+back into single-precision - but single-precision can&#39;t go smaller than
+<code>1e-38</code>, so it&#39;s precisely zero</li>
+</ul>
+
+<p>The latest version of PDL::FFTW3 has a workaround for this, by
+substituting its own modification for the type-establishing code that
+avoids the bug. When PDL 2.096 is released, this substitution can
+be removed. But how is this a dataflow bug?</p>
+
+<p>When capturing this as behaviour in main PDL, the best way to test for
+this is to examine the passed-in output ndarray, to check it <em>doesn&#39;t</em>
+have a type-conversion on it. But because non-flowing transformations
+get immediately executed and destroyed (at least until
+<a href="https://github.com/PDLPorters/pdl/issues/349">loop fusion</a> comes in),
+I needed to make a flowing version using the recently-added <code>flowing</code>
+method. This also showed zeroes in the output, despite FFTW3 not being
+involved!</p>
+
+<p>It&#39;s turned out this is because of the double-parent problem mentioned
+in the type-conversion process above:</p>
+
+<ul>
+<li>the operation&#39;s flowing input gets mutated</li>
+<li>this propagates a <code>DATACHANGED</code> to the outputs, but nothing else
+happens due to lazy evaluation</li>
+<li>the transformation&#39;s output is here the output of the conversion</li>
+<li>when the supplied output is read, it&#39;s not marked as changed, and
+even if it were, there&#39;s no route for it to &quot;pull&quot; from the original
+transformation, since that one&#39;s output doesn&#39;t know about it as a parent</li>
+</ul>
+
+<p>Currently, it looks like the way forward will be to change outputs&#39;
+type conversion so that the conversion&#39;s inputs and outputs (and the
+&quot;from&quot; and &quot;to&quot; datatypes) get switched, then the input of that gets
+put as the output of the flowing transformation. This means PDL needs
+to now prevent supplied outputs that need converting, but already have a
+&quot;parent&quot; input.
+<a href="https://github.com/PDLPorters/pdl/issues/511">This is causing some complications</a>!</p>
+
+<p>Specifically, this won&#39;t work:</p>
+
+<pre><code>float(&#39;1 2 3&#39;)-&gt;slice(&#39;1&#39;) .= double(5); # left-hand side gets converted
+</code></pre>
+
+<p>But a bit more surprisingly, nor will this, because <code>float</code> is a
+higher-numbered type than <code>indx</code>, so in the current algorithm it would
+&quot;win&quot;, forcing a conversion on the output:</p>
+
+<pre><code>indx(&#39;1 2 3&#39;)-&gt;slice(&#39;1&#39;) .= 5.5; # right-hand gets made into `float`
+</code></pre>
+
+<p>One possibility is to make PDL operations not immediately and blindly
+turn their inputs into an ndarray of the lowest-numbered type that can
+contain them, but to ask the transformation what types it wants its Perl
+scalar arguments to be. This would open the possibility of allowing all-Perl
+values to get processed directly by an added version of the compiled code,
+without needing to make any ndarrays at all.</p>
+
+<p>Another possibility is to be more careful in the type-detecting, and
+prioritise outputs; after all, it is they that get the final result;
+why not convert the inputs instead?</p>
+
+<p>Another glorious day with PDL!</p>
+
+              </section>
+              <small><p><a href="https://commons.wikimedia.org/wiki/File:Four_stroke_engine_diagram.jpg">Four stroke gasoline engine diagram</a> by Wapcaplet</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/internals/">internals</a>,
+                  <a href="/advent/blog/tag/implementation/">implementation</a>,
+                  <a href="/advent/blog/tag/dataflow/">dataflow</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg">
+                      </div>
+                      <div class="about">
+                        <h5>Ed J</h5>
+                        <p>Ed J (aka &quot;mohawk&quot; on IRC) has been using Perl for a long time. He ported the reference <a href="http://graphql.org/">GraphQL</a> implementation from the <a href="http://graphql.org/graphql-js/">JavaScript version</a> to <a href="https://metacpan.org/pod/GraphQL">Perl</a>. He is currently release manager for PDL.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/19/optics/index.html" rel="prev"><strong>Previous Article</strong> Day 19: Twinkle, Twinkle Little Star</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/dataflow/">dataflow</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/implementation/">implementation</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/internals/">internals</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optics/">optics</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

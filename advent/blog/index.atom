@@ -2,11 +2,33 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-20T00:00:00Z</updated>
+    <updated>2024-12-21T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</id>
+        <title>Day 21: Fun and Games with Images</title>
+        <author><name>Boyd Duffee</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p>If you are manipulating images, you need PDL!</p>
+
+<p>For years, I&#39;ve had this urge to use PDL to take a bitmap image and trace the outlines to make an SVG file that I could scale up to A0 poster size without the resulting pixelation. Yes, there are already <a href="https://github.com/autotrace/autotrace">tools that do that</a>, but where&#39;s the fun in that? It&#39;s Christmas, the time for Fun and Games!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/image-manipulation/">image manipulation</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-21T00:00:00Z</updated>
+        <category term="image manipulation" />
+        <category term="broadcasting" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/</id>
         <title>Day 20: Perl Data Language internals</title>
@@ -121,32 +143,6 @@ just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a
         <category term="inline-pdlpp" />
         <category term="pptemplate" />
         <category term="create operation" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</id>
-        <title>Day 16: These are Testing Times, Indeed!</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
-
-<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
-so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
-<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-16T00:00:00Z</updated>
-        <category term="Test" />
-        <category term="matrix operations" />
-        <category term="complex numbers" />
     </entry>
 </feed>
 

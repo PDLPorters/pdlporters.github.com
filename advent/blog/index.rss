@@ -7,6 +7,27 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 21: Fun and Games with Images</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</guid>
+            <description><![CDATA[
+                <p>If you are manipulating images, you need PDL!</p>
+
+<p>For years, I&#39;ve had this urge to use PDL to take a bitmap image and trace the outlines to make an SVG file that I could scale up to A0 poster size without the resulting pixelation. Yes, there are already <a href="https://github.com/autotrace/autotrace">tools that do that</a>, but where&#39;s the fun in that? It&#39;s Christmas, the time for Fun and Games!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/image-manipulation/">image manipulation</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Sat, 21 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 20: Perl Data Language internals</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/</guid>
@@ -112,30 +133,6 @@ just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a
             ]]></description>
             <pubDate>
                 Tue, 17 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 16: These are Testing Times, Indeed!</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/</guid>
-            <description><![CDATA[
-                <p>If you&#39;re multiplying lots of matrices together, you need <a href="https://metacpan.org/pod/PDL">PDL</a>!</p>
-
-<p>There are bales of decorative paper <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> that have gotten tangled,
-so we&#39;re going to square things away by multiplying orthogonal matrices and checking the results with
-<a href="https://en.wikipedia.org/wiki/Test-driven_development">Tests</a>.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/16/matrix-mult/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/test/">Test</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/complex-numbers/">complex numbers</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Mon, 16 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/" property="og:url">
+  <meta content="Day 21: Fun and Games with Images" property="og:title">
+    <meta content="Image manipulation" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 21: Fun and Games with Images - PDL Advent calendar 2024</title>
+  <meta content="Boyd Duffee" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 21: Fun and Games with Images</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-21">Dec 21, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Don Quixote by Picasso" src="banner.png">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>If you are manipulating images, you need PDL!</p>
+
+<p>For years, I&#39;ve had this urge to use PDL to take a bitmap image and trace the outlines to make an SVG file that I could scale up to A0 poster size without the resulting pixelation. Yes, there are already <a href="https://github.com/autotrace/autotrace">tools that do that</a>, but where&#39;s the fun in that? It&#39;s Christmas, the time for Fun and Games!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>First, let&#39;s grab <a href="https://xkcd.com/643/">my favourite image</a> and save it locally.
+<img alt="Ohm" src="https://imgs.xkcd.com/comics/ohm.png"></p>
+
+<pre><code>use PDL::Graphics::Simple
+$o = rim(&#39;ohm.png&#39;)
+imag $o
+</code></pre>
+
+<p>A good sanity check. The first time, I used a deprecated library and got this -  oops:</p>
+
+<p><img alt="flipped" src="flipped.png"></p>
+
+<p>I just want the drawing, so use <a href="https://metacpan.org/pod/PDL::Slices#range">range</a> and fiddle around a bit until I get the values correct.
+This should do.</p>
+
+<p><img alt="clipped" src="clipped.png"></p>
+
+<p>My brilliant plan is to move a window over the image and use the <a href="https://metacpan.org/pod/PDL::Image2D#centroid2d">centroid2d</a> function to map out the the darkest parts.
+Except that the value of black is <code>0</code> and white is <code>255</code> and for this trick to work, I need to reverse them.
+So, create a new image with <code>$x = 255 - $o-&gt;range([50,50],[150,140])</code> that looks like</p>
+
+<p><img alt="reversed" src="reversed.png"></p>
+
+<p>After playing around with some code, I settled on this.</p>
+
+<pre><code>use PDL;
+use PDL::Graphics::TriD; # points3d
+use PDL::Image2D;          # centroid3d
+
+my (@points, );
+
+my $o = rim(&#39;ohm.png&#39;);
+my $x = 255 - $o-&gt;range([50,50],[150,140]);
+
+my ($cutoff, $imax, $jmax) = (150, $x-&gt;dims);
+
+for (my $i = 10; $i &lt; $imax - 10; $i += 2) {
+    for (my $j = 10; $j &lt; $jmax - 10; $j += 2) {
+        next unless sum( $x-&gt;range([$i-5,$j-5],[10,10]) ) &gt; 510;
+        next unless $x-&gt;at($i-5, $j) &lt; $cutoff
+            &amp;&amp; $x-&gt;at($i+5, $j) &lt; $cutoff
+            &amp;&amp; $x-&gt;at($i, $j-5) &lt; $cutoff
+            &amp;&amp; $x-&gt;at($i, $j+5) &lt; $cutoff;
+        push @points, [$x-&gt;centroid2d($i, $j, 10), 0];
+}}
+
+my $s = pdl( @points);
+my $t = $s-&gt;rotate(1);
+
+points3d($t, {PointSize =&gt; 2});
+</code></pre>
+
+<p>I get this which I&#39;m pretty happy with for a first go:</p>
+
+<p><img alt="points" src="points.png">  </p>
+
+<h2>So how does that work?</h2>
+
+<p>After reading in the image, cropping it and reversing the values, I get to the nested loops.
+I&#39;m going to loop through all the <strong>x</strong>,<strong>y</strong> values leaving a border of 10 pixels where I just won&#39;t bother.
+Using <code>range</code>, I select a 10x10 window around <code>$i, $j</code> and calculate the <a href="https://metacpan.org/pod/PDL::Ufunc#sum">sum</a> to make sure that there are at least 2 maximum (255) values inside the window.
+Using <a href="https://metacpan.org/pod/PDL::Core#at">at</a>, which returns the value <strong>at</strong> an index,
+I make sure that the cardinal points on the window are below a <code>$cutoff</code> value so that a centroid is more likely to be inside the window instead of on the boundary. These are just quick and dirty assumptions to get us closer to the desired result.
+Then I push an arrayref of 3 values onto <code>@points</code> (the z value is 0 because we were going 3D).
+Finally, I create an ndarray from the points, swap the dimensions with <a href="https://metacpan.org/pod/PDL::Slices#rotate">rotate</a> because I prefer to see my image standing up (<strong>x-&gt;y</strong>, <strong>y-&gt;z</strong>)
+and plot with <code>points3d</code>.</p>
+
+<p>I must apologise. I switched to TriD&#39;s
+<a href="https://metacpan.org/pod/PDL::Graphics::TriD#points3d">points3d</a> because
+I was using that module earlier this year and when you have a hammer
+everything looks like a 3D plot. I had hoped to use the not-brilliant
+<code>spheres3d</code> function to give it a bit of volume, but the result looked
+a little like the youngest elves&#39; craft projects:</p>
+
+<p><img alt="spheres" src="spheres.png"></p>
+
+<h2>A Christmas miracle</h2>
+
+<p>Well, let me tell you that Christmas miracles <em>do</em> happen.
+I wrote to Santa,
+(who here is played by <a href="https://www.boulder.swri.edu/~deforest/">Craig DeForest</a>, original author of <a href="https://metacpan.org/pod/PDL::Transform::Color">PDL::Transform::Color</a> and <a href="https://metacpan.org/pod/PDL::Graphics::Gnuplot">PDL::Graphics::Gnuplot</a> ),
+and even though it is a very busy time of year for both Santa and Craig, I got a brilliant answer,
+a beautiful gift for the <a href="https://en.wikipedia.org/wiki/Alban_Arthan">Solstice</a> that delves into the dark mysteries of <a href="https://metacpan.org/dist/PDL/view/Basic/Pod/Broadcasting.pod">broadcasting</a>.</p>
+
+<p>He said, <em>The for loops and $s assignment could be replaced with:</em></p>
+
+<pre><code>$mc = pdl( [0,5], [10,5], [5,0], [5,10] );               # 2 x 4
+$r = $x-&gt;range( ndcoords(11,11) - 5, [$o-&gt;dims], ‘e’ );  # 11 x 11 x w x h
+$s = whichND(
+        ( $r-&gt;clump(2)-&gt;sumover &gt; 510 ) *                # 11 x 11 x w x h --&gt; w x h
+        ( all ( $r-&gt;range( $mc,[0,0] ) &lt; $cutoff ) )     # 4 x w x h --&gt; w x h
+    ); # 2 x n
+</code></pre>
+
+<p>and like any gift <em>that</em> needs a lot of unwrapping.</p>
+
+<h3>The Unwrappening</h3>
+
+<ul>
+<li>The <code>$mc</code> is a 2x4 array that stores the corners of a diamond. <em>Why?</em></li>
+<li><a href="https://metacpan.org/pod/PDL::Basic#ndcoords">ndcoords</a> gives you a 11x11 box centred on 0.</li>
+<li>I used <a href="https://metacpan.org/pod/PDL::Core#dims">dims</a> earlier without explaining that it gets the dimensions of the ndarray as a list.</li>
+</ul>
+
+<p>We&#39;ve seen this before, but <a href="https://metacpan.org/pod/PDL::Slices#2-(synonyms:-&#39;e&#39;,&#39;x&#39;,&#39;extend&#39;)">range with the <code>e</code> option</a> uses the boundary value for any values that would lie <em>outside</em> of the ndarray.
+This gives us <code>$r</code> which has four dimensions, <strong>11 x 11 x width x height</strong> of the original image.
+You&#39;re essentially creating an attached subsection to the image to use as a temporary work space, making the 2D image 4 dimensional.
+<em>Takes a bit of getting your head around how this works</em></p>
+
+<p>I will leave <a href="https://metacpan.org/pod/PDL::Primitive#whichND">whichND</a> and
+<a href="https://metacpan.org/pod/PDL::Core#clump">clump</a> for another time.</p>
+
+<p><a href="https://metacpan.org/pod/PDL::Ufunc#sumover">sumover</a> takes the sum along the first dimension. It produces an ndarray with the same dimensions as <code>$o</code>, the original image.</p>
+
+<p>In conditional expressions, <a href="https://metacpan.org/pod/PDL::Ufunc#all">all</a> returns <code>true</code> if all elements in the ndarray are less than <code>$cutoff</code> <em>Hmmm. Is this where I&#39;m going wrong?</em> The <code>[0,0]</code> is the boundary option to range which <em>forbids</em> the range crossing the boundary.
+It&#39;d be nice to see a list of cases where you would want to use each of those boundary options so I&#39;d have a better idea of which one I need each time.</p>
+
+<h2>Wrapping up</h2>
+
+<p>Unfortunately, this is not a drop-in solution here because no elements satisfy the conditions and I don&#39;t know why ... yet!
+I am a Bear of Very Little Brain.
+Working that out will take about <a href="https://en.wikipedia.org/wiki/Twelfth_Night_(holiday)">12 days</a> for me to <a href="https://en.wikipedia.org/wiki/Epiphany_(holiday)">understand</a>, especially the bit where we go into the 4th dimension!</p>
+
+<p>Craig&#39;s original suggestion for an advent post was about manipulating images based on a moving window, which sounds a lot like how you might do <a href="https://metacpan.org/pod/PDL::Image2D#conv2d">convolution</a> by hand.
+More presents under the tree, but that will have to do for today. I&#39;m bushed and will now say <em>auf wiedersehen, adieu</em>.</p>
+
+<h2>Just time for a Public Service Announcement:</h2>
+
+<p>As everyone knows, Santa lives in Canada, so please remember to use the correct Postal Code, <a href="https://en.wikipedia.org/wiki/Postal_codes_in_Canada#Santa_Claus">H0H 0H0</a>.</p>
+
+<p>Joyeux Noël</p>
+
+              </section>
+              <small><p><a href="https://xkcd.com/556">Alternative Energy Revolution</a> by <a href="https://xkcd.com/about/">Randall Monroe</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/image-manipulation/">image manipulation</a>,
+                  <a href="/advent/blog/tag/broadcasting/">broadcasting</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Boyd Duffee</h5>
+                        <p>Boyd has wanted to learn PDL for many years and realizing that dream is <a href="https://perldatascience.wordpress.com/">bringing him joy</a>.  He has done mad things to Complex Networks with NLP and is moving on to DSP and Time Series Analysis.  He&#39;s interested in Data Science, Complex Networks and walks in the woods.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/20/pdl-internals/index.html" rel="prev"><strong>Previous Article</strong> Day 20: Perl Data Language internals</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/broadcasting/">broadcasting</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/dataflow/">dataflow</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/image-manipulation/">image manipulation</a>
+    <a href="/advent/blog/tag/implementation/">implementation</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/internals/">internals</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optics/">optics</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

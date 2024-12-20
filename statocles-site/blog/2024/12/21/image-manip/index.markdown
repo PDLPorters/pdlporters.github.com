@@ -11,7 +11,7 @@ images:
     alt: 'Don Quixote by Picasso'
     data:
       attribution: |-
-        <a href="https://xkcd.com/556"><Alternative Energy Revolution/a> by <a href="https://xkcd.com/about/">Randall Monroe</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.
+        <a href="https://xkcd.com/556">Alternative Energy Revolution</a> by <a href="https://xkcd.com/about/">Randall Monroe</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.
 data:
   bio: duffee
   description: Image manipulation
@@ -29,16 +29,19 @@ First, let's grab [my favourite image](https://xkcd.com/643/) and save it locall
     $o = rim('ohm.png')
     imag $o
 
-A good sanity check. The first time, I used a deprecated library and got this
-![flipped](flipped.png) Oops.
+A good sanity check. The first time, I used a deprecated library and got this -  oops:
+
+![flipped](flipped.png)
 
 I just want the drawing, so use [range](https://metacpan.org/pod/PDL::Slices#range) and fiddle around a bit until I get the values correct.
 This should do.
+
 ![clipped](clipped.png)
 
 My brilliant plan is to move a window over the image and use the [centroid2d](https://metacpan.org/pod/PDL::Image2D#centroid2d) function to map out the the darkest parts.
 Except that the value of black is `0` and white is `255` and for this trick to work, I need to reverse them.
 So, create a new image with `$x = 255 - $o->range([50,50],[150,140])` that looks like
+
 ![reversed](reversed.png)
 
 After playing around with some code, I settled on this.
@@ -69,9 +72,9 @@ After playing around with some code, I settled on this.
 
     points3d($t, {PointSize => 2});
 
-I get this 
+I get this which I'm pretty happy with for a first go:
+
 ![points](points.png)  
-which I'm pretty happy with for a first go.
 
 ## So how does that work?
 
@@ -84,14 +87,20 @@ Then I push an arrayref of 3 values onto `@points` (the z value is 0 because we 
 Finally, I create an ndarray from the points, swap the dimensions with [rotate](https://metacpan.org/pod/PDL::Slices#rotate) because I prefer to see my image standing up (**x->y**, **y->z**)
 and plot with `points3d`.
 
-I must apologise. I switched to TriD's [points3d](https://metacpan.org/pod/PDL::Graphics::TriD#points3d) because I was using that module earlier this year and when you have a hammer everything looks like a 3D plot. I had hoped to use the not-brilliant `spheres3d` function to give it a bit of volume, but the result looked a little like the youngest elves' craft projects
+I must apologise. I switched to TriD's
+[points3d](https://metacpan.org/pod/PDL::Graphics::TriD#points3d) because
+I was using that module earlier this year and when you have a hammer
+everything looks like a 3D plot. I had hoped to use the not-brilliant
+`spheres3d` function to give it a bit of volume, but the result looked
+a little like the youngest elves' craft projects:
+
 ![spheres](spheres.png)
 
 ## A Christmas miracle
 
 Well, let me tell you that Christmas miracles _do_ happen.
 I wrote to Santa,
-(who here is played by [Craig DeForest](https://www.boulder.swri.edu/~deforest/) original author of [PDL::Transform::Color](https://metacpan.org/pod/PDL::Transform::Color) and [PDL::Graphics::Gnuplot](https://metacpan.org/pod/PDL::Graphics::Gnuplot) ),
+(who here is played by [Craig DeForest](https://www.boulder.swri.edu/~deforest/), original author of [PDL::Transform::Color](https://metacpan.org/pod/PDL::Transform::Color) and [PDL::Graphics::Gnuplot](https://metacpan.org/pod/PDL::Graphics::Gnuplot) ),
 and even though it is a very busy time of year for both Santa and Craig, I got a brilliant answer,
 a beautiful gift for the [Solstice](https://en.wikipedia.org/wiki/Alban_Arthan) that delves into the dark mysteries of [broadcasting](https://metacpan.org/dist/PDL/view/Basic/Pod/Broadcasting.pod).
 

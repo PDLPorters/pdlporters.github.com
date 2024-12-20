@@ -91,6 +91,9 @@ data:
       href: '/blog/2024/12/20/pdl-internals/'
       image: '/blog/2024/12/20/pdl-internals/banner.jpg'
     - date: 2018-12-21
+      title: Image manipulation
+      href: '/blog/2024/12/21/image-manip/'
+      image: '/blog/2024/12/21/image-manip/banner.png'
     - date: 2018-12-22
     - date: 2018-12-23
     - date: 2018-12-24

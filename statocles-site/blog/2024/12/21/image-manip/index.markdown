@@ -23,6 +23,7 @@ For years, I've had this urge to use PDL to take a bitmap image and trace the ou
 ---
 
 First, let's grab [my favourite image](https://xkcd.com/643/) and save it locally.
+
 ![Ohm](https://imgs.xkcd.com/comics/ohm.png)
 
     use PDL::Graphics::Simple

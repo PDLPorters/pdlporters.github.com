@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+      <meta content="@zmughal" name="twitter:creator">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/" property="og:url">
+  <meta content="Day 22: Clearing the Runway" property="og:title">
+    <meta content="Hough transform for line extraction" property="og:description">
+    <meta content="https://pdl.perl.org/advent/Runway_34,_Nagoya_Airfield_(3937428018).jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 22: Clearing the Runway - PDL Advent calendar 2024</title>
+  <meta content="Zaki Mughal" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 22: Clearing the Runway</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-22">Dec 22, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Runway 34, Nagoya Airfield" src="Runway_34,_Nagoya_Airfield_(3937428018).jpg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>The North Pole Workshop’s logistics department has been busy this year
+with upgrading the sleigh’s dash-cam with a new more powerful computer.
+They’ve asked the research and development department if there is
+anything that can be done with the extra cycles to make the journey
+safer. After bouncing around a couple ideas, they came up with a plan
+for an autoland system…but since Santa and the reindeer do not operate
+in typical environments (such as roofs), this would not be a typical
+autoland system (which use microwave/radio guidance) so they couldn’t
+select anything off-the-shelf (and they do know their shelves).</p>
+
+              </section>
+              <section id="section-2">
+                  <p>To help iterate over the requirements for this new system, the elves
+knew that PDL could help them process images and try different
+approaches quickly. This iterative process will start with simpler
+scenarios in order to ensure the algorithms are on the right track.
+We’ll start with an airport runway as a test image.</p>
+
+<h1>Setup</h1>
+
+<p>First we need to setup the environment to do everything we need: read
+images, processing them with some filters, and then plot the results.
+Since image processing requires frequent visualisation, this work is
+being done in Jupyter Notebook via
+<a href="https://p3rl.org/Devel::IPerl"><code>Devel::IPerl</code></a>, but the setup below
+allows for display of plots both in a notebook, but also as a regular
+Perl script. You can <a href="20241222-hough-lines.ipynb">download the notebook
+here</a>.</p>
+
+<pre><code>use v5.36;
+use utf8;
+use feature qw(signatures postderef);
+
+use constant IN_IPERL =&gt; !! $ENV{PERL_IPERL_RUNNING};
+no if   IN_IPERL, warnings =&gt; &#39;redefine&#39;; # fewer messages when re-running cells
+no if ! IN_IPERL, warnings =&gt; &#39;void&#39;;     # fewer messages for variable at end of cell outside of IPerl
+
+use PDL 2.095;
+use PDL::Constants qw(PI);
+use PDL::IO::Pic;
+use PDL::Image2D;
+use PDL::ImageRGB;
+
+use SVG;
+use MooX::Struct ();
+use Path::Tiny qw(path);
+use List::Util ();
+use Encode qw(encode_utf8);
+
+use Data::Printer;
+use Data::Printer::Filter::PDL ();
+
+use PDL::Graphics::Gnuplot qw(gpwin);
+
+# Make PDL::Graphics::Gnuplot compatible with IPerl
+use if IN_IPERL, &#39;Devel::IPerl::Plugin::PDLGraphicsGnuplot&#39;;
+if( IN_IPERL ) {
+    IPerl-&gt;load_plugin(&#39;PDLGraphicsGnuplot&#39;);
+}
+
+sub PDL::Graphics::Gnuplot::fancy_display {
+    if(IN_IPERL){
+        IPerl-&gt;display($_[0]);
+    } else {
+        #sleep 1; $_[0]-&gt;close;
+        $_[0]-&gt;pause_until_close;
+    }
+}
+
+my $gp = gpwin();
+</code></pre>
+
+<h1>Image processing for feature extraction</h1>
+
+<p>The elves know that runways are characterized by strong straight lines:
+the edges of the runway, centerline markings, and threshold stripes. If
+they can reliably detect these lines in images from the sleigh’s camera,
+they’ll have a key piece of their autoland system.</p>
+
+<p>But how do you find straight lines in an image? Let’s break this down
+into steps:</p>
+
+<ol>
+<li><p>First, we need to find places in the image where there are sharp
+changes in brightness — these are edges that might be part of the
+lines we’re looking for:</p>
+
+<p><img alt="" src="media/729f1ef3611653f9a18e3df1dd90b43b25bef322.svg"></p></li>
+<li><p>But just having edge points isn’t enough - we need to figure out
+which ones form straight lines. This is tricky because:</p>
+
+<ul>
+<li>edges might be broken (gaps in runway lines);</li>
+<li>there’s usually noise (not all edges are runway lines); and</li>
+<li>lines might be partial (only part of the runway visible).</li>
+</ul></li>
+<li><p>This is where the Hough transform comes in. Instead of trying to
+connect edge points directly, it:</p>
+
+<ol>
+<li>Takes each edge point.</li>
+<li>Finds all possible lines through that point.</li>
+<li>Lets the points “vote” on which lines they might be part of.</li>
+<li>Finds the lines that got the most votes.</li>
+</ol></li>
+</ol>
+
+<p>The rest of this notebook shows how we implement this pipeline using
+PDL, step by step.</p>
+
+<h1>Prepare image</h1>
+
+<p>After selecting a test image
+(<a href="https://commons.wikimedia.org/wiki/File:Runway_34,_Nagoya_Airfield_(3937428018).jpg">Runway
+34, Nagoya Airfield</a>, by Kentaro Iemoto from Tokyo, Japan,
+<a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA
+2.0</a>, via Wikimedia Commons), we need to read it in using <code>rpic()</code>
+and take a look at the dimensions.</p>
+
+<pre><code># https://commons.wikimedia.org/wiki/File:Runway_34,_Nagoya_Airfield_(3937428018).jpg
+my $runway = rpic(&#39;Runway_34,_Nagoya_Airfield_(3937428018).jpg&#39;);
+
+say np $runway;
+
+PDL {
+    Data     : too long to print
+    Type     : unsigned char
+    Shape    : [3 1024 683]
+    Nelem    : 2098176
+    Min      : 0
+    Max      : 255
+    Badflag  : No
+    Has Bads : No
+}
+</code></pre>
+
+<p>and then view the image in Gnuplot:</p>
+
+<pre><code>$gp-&gt;image( $runway );
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/01e39f9194e3ca816a8f270e0455dcf92fed7356.svg"></p>
+
+<p>Note the dimensions are <code>[3 W H]</code> where 3 is the number of channels, <code>W</code>
+is the width (x-extent), and <code>H</code> is the height (y-extent).</p>
+
+<p>We can’t process the color channels in the image directly, so we need to
+convert it to a single greyscale (luminance) channel. We can use
+<code>rgbtogr</code> which uses a standard formula.</p>
+
+<pre><code>my $grey = rgbtogr($runway)-&gt;double / 255;
+$gp-&gt;image($grey,
+    { title =&gt; &#39;Greyscale image&#39;,
+      clut  =&gt; &#39;grey&#39; });
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/a80fe788ac3cf4f8013ee3a3026e6739485f93aa.svg"></p>
+
+<h1>Gaussian blur</h1>
+
+<p>We need to find edges in the image, but all real-world images have some
+amount of noise (e.g., from random variation in brightness from pixel to
+pixel). This noise can interfere with further processing such as edge
+detection such that the noise may be picked up as spurious edges.</p>
+
+<p>To smooth out this noise, we apply a 2D Gaussian filter to the image.
+The filter:</p>
+
+<ol>
+<li>Looks at each pixel and its neighbors.</li>
+<li>Creates a weighted average where:
+<ul>
+<li>The center pixel counts most;</li>
+<li>Nearby pixels count less;</li>
+<li>Far pixels barely count at all;</li>
+<li>The weights follow a bell curve (Gaussian) shape.</li>
+</ul></li>
+</ol>
+
+<p>The parameter σ (sigma) controls how much smoothing we do:</p>
+
+<ul>
+<li>Small σ: less smoothing, keeps more detail.</li>
+<li>Large σ: more smoothing, might blur real edges.</li>
+</ul>
+
+<p>The way we can perform this weighted average is by performing
+convolution with the <code>conv2d()</code> function.</p>
+
+<p><b>Implementation note:</b> The 2D isotropic Gaussian is a separable
+filter, which means that</p>
+
+<p><img alt="G(x,y) = e^{-\frac{x^2 + y^2}{2\sigma^2}}" src="media/e8f5cf07646cbfe0238a5e5f1031265deed702f3.svg" style="vertical-align:-0pt"></p>
+
+<p>can be written as the product of two 1D Gaussians:</p>
+
+<p><img alt="G(x,y) = e^{-\frac{x^2}{2\sigma^2}} \cdot e^{-\frac{y^2}{2\sigma^2}}" src="media/80aa545bbdb35936553e7f268167b7b3ef257dc7.svg" style="vertical-align:-0pt"></p>
+
+<p>This lets us compute 1D Gaussian values and use this to create the 2D
+Gaussian values for the kernel, which is much more efficient than
+computing the full 2D function directly (though the kernel is typically
+small). It is also possible to use two consecutive <code>conv1d()</code> calls
+here, but we’ll skip that for now.</p>
+
+<p>Note that the above formulae are written without the normalisation
+factor. Here we approximate the normalisation factor by dividing by the
+sum.</p>
+
+<p>See more at:</p>
+
+<ul>
+<li>R. Fisher, S. Perkins, A. Walker, and E. Wolfart, <a href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm">Spatial Filters -
+Gaussian
+Smoothing</a>.
+“Hypermedia Image Processing Reference (HIPR)”, 2003.</li>
+<li><a href="https://en.wikipedia.org/wiki/Gaussian_function#Two-dimensional_Gaussian_function">Gaussian function -
+Wikipedia</a>.</li>
+</ul>
+
+<!-- -->
+
+<pre><code>sub gaussian_kernel( $sigma = 1.0 ) {
+    die &#39;sigma must be positive&#39; unless $sigma &gt; 0;
+
+    my $GAUSSIAN_CUTOFF = 3; # Standard deviations from center (±3σ)
+
+    # Kernel size: Ensure it&#39;s odd for symmetry around the center pixel
+    # Total width = 2 * 3σ + 1.
+    my $size = pdl(2 * ceil($GAUSSIAN_CUTOFF * $sigma) + 1)-&gt;sclr;
+
+    # Create 1D Gaussian values centered at 0
+    # using symmetric x-coordinates.
+    my $x = xvals($size) - ($size-1)/2;
+    my $gauss_1d = exp(-($x**2)/(2 * $sigma**2));
+
+    # Create 2D kernel using outer product
+    my $kernel = $gauss_1d-&gt;outer($gauss_1d);
+    $kernel /= $kernel-&gt;sum; # normalise
+
+    return $kernel;
+}
+
+sub gaussian_blur($img, $sigma = 1) {
+    return conv2d($img, gaussian_kernel($sigma));
+}
+</code></pre>
+
+<h2>Test Gaussian blur on a point source</h2>
+
+<p>We can see how this works by testing on a simple “point source” image —
+a single bright pixel surrounded by darkness:</p>
+
+<pre><code># Create a point source.
+my $point = zeroes(21,21);
+$point-&gt;set(10,10, 1);
+
+my $point_blurred = gaussian_blur($point, 1);
+$gp-&gt;image($point_blurred,
+    { title =&gt; encode_utf8(&#39;Gaussian Blur of Point Source (σ=1)&#39;),
+      clut  =&gt; &#39;grey&#39;, },
+);
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/2efeab23ae033005613d9e48964a0b9c1605f358.svg"></p>
+
+<p>We can see this took the single point and “spread out” its intensity in
+a radial manner. Furthermore, <code>$point_blurred</code> continues to sum up to 1
+which means that brightness is preserved due to the normalisation
+factor.</p>
+
+<pre><code>say &quot;Σ p = &quot;, $point_blurred-&gt;sum-&gt;sclr;
+
+Σ p = 1
+</code></pre>
+
+<h2>Use Gaussian blur on image</h2>
+
+<p>We can now apply the Gaussian blur filter to the runway image.</p>
+
+<pre><code>my $blurred = gaussian_blur($grey, 2);
+$gp-&gt;image($blurred,
+    { title =&gt; encode_utf8(&#39;Gaussian Blur (σ=2)&#39;),
+      clut  =&gt; &#39;grey&#39;, },
+);
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/90bea7770407200fc87072428748045c5b9d0f9e.svg"></p>
+
+<h1>Sobel edge detection</h1>
+
+<p>Now that we’ve smoothed out the noise, we can look for edges. But what
+exactly is an edge in an image? An edge occurs where there’s a sharp
+change in brightness — like the transition from the dark runway surface
+to the bright markings.</p>
+
+<p>Mathematically, these changes in brightness are derivatives: how quickly
+is the brightness changing as we move across the image? The Sobel
+operator helps us find these changes by looking at how brightness
+differs between neighboring pixels in both horizontal (x) and vertical
+(y) directions.</p>
+
+<p><b>Implementation note:</b> The Sobel operator uses two 3×3 kernels:</p>
+
+<p>For horizontal changes (x-direction):</p>
+
+<p><img alt="K_x = \frac{1}{8}\begin{bmatrix}
+-1 &amp; 0 &amp; +1 \\
+-2 &amp; 0 &amp; +2 \\
+-1 &amp; 0 &amp; +1
+\end{bmatrix}" src="media/c43e8b146044cac23335e931d53268ab88b22405.svg" style="vertical-align:-0pt"></p>
+
+<p>For vertical changes (y-direction):</p>
+
+<p><img alt="K_y = \frac{1}{8}\begin{bmatrix}
+-1 &amp; -2 &amp; -1 \\
+ 0 &amp;  0 &amp;  0 \\
++1 &amp; +2 &amp; +1
+\end{bmatrix}" src="media/ef6a9a4cbb3cde073c6431e35ca5ba2ad478c33a.svg" style="vertical-align:-0pt"></p>
+
+<p>We calculate both directions and combine them to get the total edge
+strength:
+<!-- $$\text{strength}^2 = (\text{horizontal change})^2 + (\text{vertical change})^2$$ --></p>
+
+<p>strength² = (horizontal change)² + (vertical change)²</p>
+
+<p>The factor of ⅛ <!-- $\frac{1}{8}$ --> normalizes the kernels so the
+maximum response to a perfect edge is 1.</p>
+
+<p>Note: We store strength² directly rather than taking its square root
+since:</p>
+
+<ol>
+<li>We only care about relative strengths.</li>
+<li>Avoiding the square root is more efficient.</li>
+<li>The threshold comparison will still work the same.</li>
+</ol>
+
+<p>See more at:</p>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel operator -
+Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Edge_detection">Edge detection -
+Wikipedia</a></li>
+</ul>
+
+<p>We can threshold this strength to get a <strong>binary edge image</strong>: pixels
+where the strength is above some threshold become 1 (edge), and others
+become 0 (non-edge). The threshold is chosen relative to the average
+edge strength in the image — this helps it adapt to different images
+automatically.</p>
+
+<p><b>Note:</b> Often further post-processing of the edge detection result
+is done such as thinning which can help create more clear edges without
+spurious points, but we won’t do that here.</p>
+
+<pre><code>sub sobel_operator($img) {
+    # Define Sobel kernel and normalise it
+    my $kx = pdl([
+        [-1,  0,  1],
+        [-2,  0,  2],
+        [-1,  0,  1],
+    ]);
+    $kx /= $kx-&gt;abs-&gt;sum;
+
+    # Stack x and y kernels
+    my $k = cat($kx, $kx-&gt;transpose);
+
+    # Add dummy dimension to image for conv2d
+    my $img_3d = $img-&gt;dummy(-1);
+
+    # Single convolution and magnitude calculation.
+    # Returns strength² (no sqrt).
+    return conv2d($img_3d, $k)-&gt;mv(-1,0)-&gt;pow(2)-&gt;sumover;
+}
+
+sub default_edge_threshold($strength2) {
+    my $mean_strength2 = $strength2-&gt;avg;
+    my $thresh2 = 4 * $mean_strength2;
+    return $strength2 &gt; $thresh2;
+}
+
+sub sobel_edges($img) {
+    return default_edge_threshold(sobel_operator($img));
+}
+</code></pre>
+
+<h2>Test Sobel edge detection on point source</h2>
+
+<p>First, let’s see how edge detection works on our point source test
+image. This is useful because:</p>
+
+<ol>
+<li>We know exactly what the input looks like (single bright pixel)</li>
+<li>The edges should appear where brightness changes most rapidly</li>
+<li>With a single point, we expect to see edges form a simple pattern</li>
+</ol>
+
+<!-- -->
+
+<pre><code># Test sobel_edges on point source
+my $point_edges = sobel_edges($point);
+$gp-&gt;image($point_edges,
+    { title =&gt; &#39;Sobel Edges of Point Source&#39;,
+      clut  =&gt; &#39;grey&#39;, },
+);
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/41199a2141a5924872245743139d93b9557f0897.svg"></p>
+
+<p>The result shows edges right next to the original point — this makes
+sense because that’s where the brightness changes most sharply.</p>
+
+<h2>Use Sobel edge detection on image</h2>
+
+<p>Now let’s apply edge detection directly to our blurred runway image:</p>
+
+<pre><code>my $binary_edges = sobel_edges($blurred);
+$gp-&gt;image($binary_edges,
+    { title =&gt; &#39;Sobel Edges Binarised&#39;,
+      clut  =&gt; &#39;grey&#39;, },
+);
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/8b7d39fe9b0f051062887ea40f4f024947f0b93d.svg"></p>
+
+<p>Looking at the result:</p>
+
+<ul>
+<li>Strong edges appear along the runway boundaries.</li>
+<li>The runway markings create clear edges.</li>
+</ul>
+
+<p>These edge points are what we’ll use for line detection, but we still
+have a challenge: how do we figure out which edge points belong to the
+same straight line? We could try to trace along contiguous pixels, but
+this can not deal with the less well-defined edges (e.g., broken
+disconnected edges due to shadows).</p>
+
+<p>That’s where the Hough transform comes in.</p>
+
+<h1>Hough transform</h1>
+
+<p>As mentioned earlier, the Hough transform works by using points in the
+image to “vote” for which line they are in. Well, technically, the Hough
+transform is more general in that it can be used for any model to match
+against as long as you have a valid parameterisation of the model in the
+image space.</p>
+
+<p>There are widely used parameterisations for lines and circles. We’ll be
+using the line parameterisation because we are looking for lines.</p>
+
+<h2>Define line parameterisation</h2>
+
+<p>What do we mean by parameterisation? It’s just a fancy way of saying
+what variables do you need to define a shape. For example, a 2D line
+segment needs four parameters
+<img alt="(x_0, y_0), (x_1, y_1)" src="media/dfb9e511bfc7775a56e94a8c727980b0fb400db7.svg" style="vertical-align:-3pt">. Similarly,
+a 2D line can be parameterised using a <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form">slope-intercept
+form</a>
+<img alt="y = mx + y_0" src="media/79e4fb1536389e14cb6a7cb16fd60291ff2f598c.svg" style="vertical-align:-2.333324pt"> with the two
+parameters <img alt="m" src="media/15bf98615897bcbfddfd1f77b35a82af078fcae1.svg" style="vertical-align:-0pt"> and
+<img alt="y_0" src="media/33fb5e2c8e83ceb1cc6b724bff1b7a997e736dd3.svg" style="vertical-align:-2.333324pt">.</p>
+
+<p>We’re looking for lines, so that could work, but it has issues when
+dealing with vertical or nearly vertical lines. Our parameter range for
+<img alt="m" src="media/15bf98615897bcbfddfd1f77b35a82af078fcae1.svg" style="vertical-align:-0pt"> would have to be very large in
+those cases. An alternative parameterisation is <a href="https://en.wikipedia.org/wiki/Hesse_normal_form">Hesse normal
+form</a> which for a 2D
+line follows the equation
+<img alt=" \rho = x \cos \theta + y \sin \theta " src="media/79e2f8eb1ff08e8372245e63a27c9f505470a86a.svg" style="vertical-align:-1.1e-05pt"> where given a target
+line, <img alt="\rho" src="media/b9ff3bf014cee77effcf8989a51bf8d3e2ce9c23.svg" style="vertical-align:-2.333324pt"> is the shortest
+distance between that line and the origin and
+<img alt="\theta" src="media/735fca1ddd1bb1d43081c025745d53345cc4bd7f.svg" style="vertical-align:-0pt"> is the angle between the
+axis and a line of length
+<img alt="\rho" src="media/b9ff3bf014cee77effcf8989a51bf8d3e2ce9c23.svg" style="vertical-align:-2.333324pt"> that intersects the
+target line. Maybe that’s easier to see with a picture:</p>
+
+<p><img alt="" src="media/545d630a470080700dfc873ae8e9cdbd7f04a97e.svg"></p>
+
+<p>This diagram uses the top-left as the origin as is common with image
+processing code. For a fixed θ, different values of ρ represent parallel
+lines (note that ρ can be negative). Values of θ can range from -π/2 to
+π/2 which allows for parametrising all possible lines including vertical
+and horizontal lines.</p>
+
+<p>We can implement an object to hold all this information in a single
+place. By default, the parameter space is discretised to ~1 pixel
+resolution in ρ and 1° resolution in θ.</p>
+
+<pre><code>use MooX::Struct -retain, HoughParameters =&gt; [
+    # Rho parameters
+    rho_range =&gt; [ required =&gt; 1 ],
+    num_rho   =&gt; [ required =&gt; 1 ],
+
+    # Theta parameters
+    theta_range =&gt; [ required =&gt; 1 ],
+    num_theta   =&gt; [ required =&gt; 1 ],
+
+    # Lazy builders for actual parameter values
+    rho_res   =&gt; [ builder =&gt; &#39;_build_rho_res&#39; ],
+    theta_res =&gt; [ builder =&gt; &#39;_build_theta_res&#39; ],
+    rhos      =&gt; [ builder =&gt; &#39;_build_rhos&#39; ],
+    thetas    =&gt; [ builder =&gt; &#39;_build_thetas&#39; ],
+    _build_rho_res =&gt; sub {
+        my $self = shift;
+        my ($min, $max) = @{$self-&gt;rho_range};
+        ($max - $min) / ($self-&gt;num_rho - 1);
+    },
+    _build_theta_res =&gt; sub {
+        my $self = shift;
+        my ($min, $max) = @{$self-&gt;theta_range};
+        ($max - $min) / ($self-&gt;num_theta - 1);
+    },
+    _build_rhos =&gt; sub {
+        my $self = shift;
+        sequence($self-&gt;num_rho)-&gt;xlinvals(@{$self-&gt;rho_range});
+    },
+    _build_thetas =&gt; sub {
+        my $self = shift;
+        sequence($self-&gt;num_theta)-&gt;xlinvals(@{$self-&gt;theta_range});
+    },
+
+    # Class method for default parameters from image
+    from_image =&gt; sub {
+        my ($class, $img, %rest) = @_;
+        my $max_rho = $img-&gt;shape-&gt;magnover;
+        return $class-&gt;new(
+            rho_range =&gt; [-$max_rho, $max_rho],
+            num_rho =&gt; int(2 * $max_rho),  # ~1 pixel resolution
+            theta_range =&gt; [-PI/2, PI/2],
+            num_theta =&gt; 180,              # ~1 degree resolution
+            %rest,
+        );
+    },
+];
+</code></pre>
+
+<h2>Build the Hough space accumulator</h2>
+
+<p>The voting procedure works by varying θ and finding the ρ for a line
+that a given edge point would be part of. These are then accumulated
+into a 2D ndarray using <code>histogram2d()</code> which places the votes in the
+appropriate bin for each parameter.</p>
+
+<p>This accumulator is also known as the Hough space.</p>
+
+<pre><code>sub line_hough($binary_edges, $params) {
+    # Create accumulator array
+    my $accumulator = zeroes($params-&gt;num_rho, $params-&gt;num_theta);
+
+    # Find edge points and convert to 2D matrix of [x y] coordinates
+    # shape [2,N].
+    my $edge_points = whichND($binary_edges);
+
+    say &#39;[INFO] &#39;, &quot;Processing &quot;, $edge_points-&gt;dim(1), &quot; edge points&quot;;
+
+    # Create transformation matrix [180,2]
+    # for [x,y] coordinate order
+    my $transform = cat(
+        cos($params-&gt;thetas),  # for x
+        sin($params-&gt;thetas),  # for y
+    );
+
+    # Calculate ρ = edge_points × transform giving [180,N]
+    my $rho = $edge_points x $transform;
+
+    # Scale rho values to accumulator indices using params values
+    my $rho_min = $params-&gt;rho_range-&gt;[0];
+    my $rho_max = $params-&gt;rho_range-&gt;[1];
+    my $rho_scale = ($params-&gt;num_rho - 1) / ($rho_max - $rho_min);
+    my $rho_idx = ($rho - $rho_min) * $rho_scale;
+
+    # Create theta indices [180,N] where each row is 0..179
+    my $theta_idx = zeros($params-&gt;num_theta, $rho_idx-&gt;dim(1));
+    $theta_idx += sequence($params-&gt;num_theta);
+
+    # Filter valid rho indices
+    my $valid = ($rho_idx &gt;= 0) &amp; ($rho_idx &lt; $params-&gt;num_rho);
+    $rho_idx = $rho_idx-&gt;where($valid);
+    $theta_idx = $theta_idx-&gt;where($valid);
+
+    # Use histogram2d to accumulate votes
+    $accumulator = histogram2d($rho_idx, $theta_idx,
+                               1, 0, $params-&gt;num_rho,
+                               1, 0, $params-&gt;num_theta);
+
+    return $accumulator;
+}
+</code></pre>
+
+<h2>Find lines (peaks) in the Hough space</h2>
+
+<p>A maximum in the Hough space represents a line where many edge points
+participate and those edge points are thus likely collinear. The
+following looks for those peaks iteratively, but suppresses neighbouring
+values (which represent nearby lines) so that they are not detected as
+peaks in later iterations. The <code>range()</code> function is the perfect tool
+for extracting out a neighbourhood and modifying it. However, be careful
+that you use <code>sever()</code> so that you don’t accidentally end up zeroing out
+the peak value!</p>
+
+<pre><code>sub find_lines($accumulator, $params, $threshold_ratio=0.3, $nhood_size=[5,5], $max_peaks=20) {
+    # Pre-allocate peaks array
+    my $peak_indices = zeroes(2, $max_peaks);  # [rho_idx, theta_idx] × max_peaks
+    my $peak_values = zeroes($max_peaks);
+    my $num_peaks = 0;
+
+    # Calculate deltas for neighbourhood
+    my $rho_theta_delta = pdl(@$nhood_size);
+
+    # Initialize working copy and get flattened view.
+    my $H = $accumulator-&gt;copy;
+    my $H_flat = $H-&gt;clump(-1);
+    my $threshold = $H_flat-&gt;index(maximum_ind($H_flat)) * $threshold_ratio;
+
+    while ($num_peaks &lt; $max_peaks) {
+        # Find peak location and value using maximum_ind
+        my $max_ind = maximum_ind($H_flat);
+        my $max_val = $H_flat-&gt;index($max_ind)-&gt;sever;
+
+        last if $max_val &lt; $threshold;
+
+        my $peak_idx = pdl(one2nd($H, $max_ind));
+
+        # Record peak
+        $peak_indices-&gt;slice(&quot;:,$num_peaks&quot;) .= $peak_idx;
+        $peak_values-&gt;index($num_peaks) .= $max_val;
+        $num_peaks++;
+
+        # Suppress neighbourhood using range.
+        # Adjust center point back by half the neighbourhood size.
+        my $corner = $peak_idx - $rho_theta_delta/2;
+        my $r = $H-&gt;range($corner, $rho_theta_delta, &#39;t&#39;);
+        $r .= 0;
+    }
+
+    # Truncate results if fewer peaks found
+    if ($num_peaks &lt; $max_peaks) {
+        $peak_indices = $peak_indices-&gt;slice(&#39;:,0:&#39; . ($num_peaks-1));
+        $peak_values = $peak_values-&gt;slice(&#39;0:&#39; . ($num_peaks-1));
+    }
+
+    # Create parameter space values directly
+    my $peak_params = cat(
+        $params-&gt;rhos-&gt;index($peak_indices-&gt;using(0)),
+        $params-&gt;thetas-&gt;index($peak_indices-&gt;using(1)),
+    );
+
+    return ($peak_params, $peak_values);
+}
+</code></pre>
+
+<h2>Extract lines from peaks</h2>
+
+<p>Then using these peaks, we transform back from the Hough space to the
+binary edge image space in order to find the edge points that
+participate in that line. These segments might be disconnected, so there
+is some tolerance for that in the <code>$fillgap</code> parameter.</p>
+
+<pre><code>sub extract_line_segments($edges, $peak_params, $fillgap=20, $minlength=40) {
+    my ($width, $height) = $edges-&gt;dims;
+
+    # Find all edge points in image as [2,N] array of [x,y] coordinates
+    my $edge_points = whichND($edges);
+
+    # Get parameters for each line from [N,2] array
+    my $rhos = $peak_params-&gt;slice(&#39;:,(0)&#39;);
+    my $thetas = $peak_params-&gt;slice(&#39;:,(1)&#39;);
+
+    my @all_segments;
+    my $delta_rho = 0.5;  # Half-pixel tolerance
+
+    for my $i (0..$rhos-&gt;nelem-1) {
+        my $rho = $rhos-&gt;at($i);
+        my $theta = $thetas-&gt;at($i);
+
+        # Project points onto normal direction (cos θ, sin θ) for [x,y] coordinates
+        my $normal_proj = pdl([cos($theta), sin($theta)]);
+        my $rho_all = inner($edge_points, $normal_proj);
+
+        # Find points belonging to this line
+        my $points_idx = which(abs($rho_all - $rho) &lt;= $delta_rho);
+        next unless $points_idx-&gt;nelem &gt;= 2;
+
+        # Get coordinates of line points, maintaining [2,N] structure
+        my $points = $edge_points-&gt;slice([],$points_idx);
+
+        # Calculate spans using minmaximum
+        my $spans = pdl((minmaximum($points-&gt;xchg(-1,0)))[0,1])-&gt;xchg(0,-1)-&gt;diff2-&gt;squeeze;
+
+        # Sort based on dominant direction
+        my $sort_idx = $spans-&gt;at(0) &gt; $spans-&gt;at(1)
+            # More horizontal - sort by x, then y
+            ? qsorti($points-&gt;slice(&#39;(0)&#39;) * $height + $points-&gt;slice(&#39;(1)&#39;))
+            # More vertical - sort by y, then x
+            : qsorti($points-&gt;slice(&#39;(1)&#39;) * $width + $points-&gt;slice(&#39;(0)&#39;));
+
+        $points = $points-&gt;slice([],$sort_idx);
+
+        # Find gaps using point-to-point distances
+        my $diffs = $points-&gt;xchg(0,1)-&gt;diff2-&gt;xchg(0,1);
+        my $gap_idx = which($diffs-&gt;magnover &gt; $fillgap);
+
+        # Create segment bounds - [2,N] array where dimension 0 is [start,end]
+        my $seg_bounds = zeroes(2, $gap_idx-&gt;nelem + 1);
+
+        # Handle segment bounds based on gaps
+        if ($gap_idx-&gt;nelem) {
+            $seg_bounds .= cat(
+                pdl(0)-&gt;append($gap_idx + 1),
+                $gap_idx-&gt;append($points-&gt;dim(1) - 1)
+            )-&gt;transpose;
+        } else {
+            $seg_bounds .= pdl([0, $points-&gt;dim(1) - 1]);
+        }
+
+        # Process each segment
+        for my $j (0..$seg_bounds-&gt;dim(1)-1) {
+            my $endpoints = $points-&gt;slice([],$seg_bounds-&gt;slice(&quot;,($j)&quot;));
+            my $length = $endpoints-&gt;xchg(0,1)-&gt;diff2-&gt;xchg(0,1)-&gt;magnover-&gt;sclr;
+
+            next unless $length &gt;= $minlength;
+
+            push @all_segments, {
+                point1 =&gt; $endpoints-&gt;slice(&#39;,(0)&#39;)-&gt;unpdl,
+                point2 =&gt; $endpoints-&gt;slice(&#39;,(1)&#39;)-&gt;unpdl,
+                rho   =&gt; $rho,
+                theta =&gt; $theta,
+                length =&gt; $length,
+                dominant_axis =&gt; $spans-&gt;at(0) &gt; $spans-&gt;at(1) ? &#39;x&#39; : &#39;y&#39;,
+            };
+        }
+    }
+
+    return \@all_segments;
+}
+</code></pre>
+
+<h1>Pipeline</h1>
+
+<p>Now let’s put this all together and take a look at what this looks like.</p>
+
+<h2>Test pattern</h2>
+
+<p>First to ensure that various parts of this algorithm are working, let’s
+go even simpler and create a synthetic test image that only contains
+various lines which are guaranteed to be edges.</p>
+
+<p>An easy way to do this is to create a vector image using SVG and then
+render it to a raster image.</p>
+
+<pre><code>sub create_test_pattern($width=400, $height=400) {
+    # Create SVG object
+    my $svg = SVG-&gt;new(
+        width  =&gt; $width,
+        height =&gt; $height,
+    );
+
+    # White background
+    $svg-&gt;rectangle(
+        x =&gt; 0,
+        y =&gt; 0,
+        width =&gt; $width,
+        height =&gt; $height,
+        fill =&gt; &#39;white&#39;
+    );
+
+    # Create group for all lines with common style
+    my $lines = $svg-&gt;group(
+        style =&gt; {
+            stroke =&gt; &#39;black&#39;,
+            &#39;stroke-width&#39; =&gt; 2
+        }
+    );
+
+    # Complete test lines
+    $lines-&gt;line(x1 =&gt; 50,  y1 =&gt; 50,  x2 =&gt; 350, y2 =&gt; 50);   # Horizontal
+    $lines-&gt;line(x1 =&gt; 350, y1 =&gt; 50,  x2 =&gt; 350, y2 =&gt; 350);  # Vertical
+    $lines-&gt;line(x1 =&gt; 50,  y1 =&gt; 50,  x2 =&gt; 350, y2 =&gt; 350);  # 45 degrees
+
+    # Standalone edges and partial segments
+    $lines-&gt;line(x1 =&gt; 50,  y1 =&gt; 150, x2 =&gt; 150, y2 =&gt; 150);  # Broken horizontal 1
+    $lines-&gt;line(x1 =&gt; 200, y1 =&gt; 150, x2 =&gt; 300, y2 =&gt; 150);  # Broken horizontal 2
+    $lines-&gt;line(x1 =&gt; 250, y1 =&gt; 200, x2 =&gt; 300, y2 =&gt; 230);  # Short diagonal
+    $lines-&gt;line(x1 =&gt; 280, y1 =&gt; 280, x2 =&gt; 320, y2 =&gt; 280);  # Isolated short
+
+    # Merge test cases
+    # Nearly parallel vertical lines
+    $lines-&gt;line(x1 =&gt; 100, y1 =&gt; 200, x2 =&gt; 100, y2 =&gt; 350);
+    $lines-&gt;line(x1 =&gt; 102, y1 =&gt; 200, x2 =&gt; 102, y2 =&gt; 350);
+
+    # Slightly diverging lines
+    $lines-&gt;line(x1 =&gt; 150, y1 =&gt; 200, x2 =&gt; 180, y2 =&gt; 350);
+    $lines-&gt;line(x1 =&gt; 155, y1 =&gt; 200, x2 =&gt; 190, y2 =&gt; 350);
+
+    # Closely spaced parallel horizontal segments
+    $lines-&gt;line(x1 =&gt; 200, y1 =&gt; 200, x2 =&gt; 300, y2 =&gt; 200);
+    $lines-&gt;line(x1 =&gt; 200, y1 =&gt; 203, x2 =&gt; 300, y2 =&gt; 203);
+
+    # Nearly coincident short segments
+    $lines-&gt;line(x1 =&gt; 250, y1 =&gt; 100, x2 =&gt; 300, y2 =&gt; 120);
+    $lines-&gt;line(x1 =&gt; 251, y1 =&gt; 101, x2 =&gt; 301, y2 =&gt; 121);
+
+    # Create temporary files using Path::Tiny
+    my $svg_file = Path::Tiny-&gt;tempfile(SUFFIX =&gt; &#39;.svg&#39;);
+    my $png_file = Path::Tiny-&gt;tempfile(SUFFIX =&gt; &#39;.png&#39;);
+
+    # Save SVG
+    $svg_file-&gt;spew_utf8($svg-&gt;xmlify);
+
+    # Convert to PNG using full path strings
+    system(&#39;convert&#39;, &#39;-density&#39;, &#39;150&#39;, $svg_file-&gt;absolute, $png_file-&gt;absolute) == 0
+        or die &quot;ImageMagick convert failed: $!&quot;;
+
+    # Read PNG into PDL
+    my $img = rpic(&quot;$png_file&quot;);
+
+    # Binary (edge = 1, background = 0)
+    my $binary = $img-&gt;double / 255 &lt; 0.5;
+
+    return $binary;
+}
+</code></pre>
+
+<p>This looks like:</p>
+
+<pre><code>my $binary_test_image = create_test_pattern();
+$gp-&gt;image($binary_test_image,
+    { title =&gt; &#39;Test pattern&#39;,
+      clut  =&gt; &#39;grey&#39;, },
+);
+$gp-&gt;fancy_display;
+</code></pre>
+
+<p><img alt="" src="media/5c39a9ca38156774538e6527e384229e44ce07c4.svg"></p>
+
+<p>Now let’s visualise the various parts of this algorithm.</p>
+
+<p>First, lets create a function that let’s us see what the Hough space
+looks like and optionally where the peaks are.</p>
+
+<pre><code>sub plot_hough_space($gp, $hough_space, $params, $peak_params=undef, $nhood_size=[15,15], $title=&#39;Hough Transform Space [ log(H + 1) ]&#39;) {
+    my $log_H = log($hough_space + 1);
+
+    # Base plot remains the same
+    my @plot_items = (
+        {
+            title  =&gt; $title,
+            ylabel =&gt; encode_utf8(&#39;ρ (pixels)&#39;),  # rho
+            xlabel =&gt; encode_utf8(&#39;θ (radians)&#39;), # theta
+            clut   =&gt; &#39;sepia&#39;,
+            xtics  =&gt; {
+                labels =&gt; [
+                    map { [ encode_utf8($_-&gt;[0]), $_-&gt;[1] ] }
+                        [&#39;-π/2&#39; ,  -PI/2],
+                        [&#39;-π/4&#39; ,  -PI/4],
+                        [ &#39;0&#39;   ,    0  ],
+                        [ &#39;π/4&#39; ,   PI/4],
+                        [ &#39;π/2&#39; ,   PI/2],
+                ],
+            },
+        },
+        with =&gt; &#39;image&#39;,
+        $params-&gt;thetas-&gt;dummy(0, $params-&gt;num_rho),
+        $params-&gt;rhos-&gt;dummy(1, $params-&gt;num_theta),
+        $log_H,
+    );
+
+    # Add rectangles around peaks if provided
+    if (defined $peak_params) {
+        my $drho   = $params-&gt;rho_res   * $nhood_size-&gt;[0]/2;
+        my $dtheta = $params-&gt;theta_res * $nhood_size-&gt;[1]/2;
+
+        for my $i (0..$peak_params-&gt;dim(0)-1) {
+            my $theta = $peak_params-&gt;slice(&quot;($i),1&quot;)-&gt;sclr;
+            my $rho   = $peak_params-&gt;slice(&quot;($i),0&quot;)-&gt;sclr;
+
+            my $rect = make_rectangle($theta, $rho, 2*$dtheta, 2*$drho);
+
+            $rect-&gt;slice(&#39;(0)&#39;)-&gt;inplace-&gt;clip($params-&gt;theta_range-&gt;@*);
+            $rect-&gt;slice(&#39;(1)&#39;)-&gt;inplace-&gt;clip($params-&gt;rho_range-&gt;@*);
+
+            push @plot_items, (
+                { with =&gt; &#39;lines&#39;,
+                  lc =&gt; &#39;rgb &quot;#FFFFFF&quot;&#39;,  # white lines
+                  dt =&gt; &#39;1&#39;,
+                },
+                $rect-&gt;using(0,1)
+            );
+        }
+    }
+
+    $gp-&gt;plot(@plot_items);
+}
+
+sub make_rectangle($x0, $y0, $width, $height) {
+    # Create rectangle coordinates (5 points to close the box)
+    return pdl([
+        [$x0-$width/2, $y0-$height/2],
+        [$x0+$width/2, $y0-$height/2],
+        [$x0+$width/2, $y0+$height/2],
+        [$x0-$width/2, $y0+$height/2],
+        [$x0-$width/2, $y0-$height/2],  # close the rectangle
+    ]);
+}
+</code></pre>
+
+<p>And we absolutely need to see the image with the detected lines
+overlaid.</p>
+
+<pre><code>sub plot_detected_lines($gp, $orig_img, $segments, $title=&#39;Line Detection Results&#39;) {
+    $gp-&gt;plot(
+        {
+            title =&gt; $title,
+            key =&gt; &#39;off&#39;,
+        },
+        { with =&gt; &#39;image&#39; }, $orig_img,
+        ( map {
+             (
+              { with =&gt; &#39;lines&#39;,
+                lc =&gt; &#39;rgb &quot;#00FF00&quot;&#39;,  # green color
+                dt =&gt; 1,                # solid
+                lw =&gt; 2, },             # thicker lines
+                pdl($_-&gt;{point1}[0], $_-&gt;{point2}[0]),  # x coordinates
+                pdl($_-&gt;{point1}[1], $_-&gt;{point2}[1]),  # y coordinates
+             )
+         } @$segments ),
+    );
+}
+</code></pre>
+
+<p>And a helper function to orchestrate the whole process of the Hough
+transform, peak finding, and line segment extraction.</p>
+
+<pre><code>sub visualise_hough_transform($gp, $orig_img, $binary_edges, $params, %opts) {
+    my $max_rho = $params-&gt;rho_range-&gt;[1];
+
+    my %defaults = (
+        threshold_ratio =&gt; 0.3,
+        nhood_size =&gt; [15,15],
+        max_peaks =&gt; 20,
+        fillgap =&gt; 50,
+        minlength =&gt; int($max_rho * 0.2),  # 20% of max possible line length
+    );
+    %opts = (%defaults, %opts);
+
+    # Run Hough transform
+    my $hough_space = line_hough($binary_edges, $params);
+
+    # Find peaks
+    my ($peak_params, $peak_values) = find_lines($hough_space,
+            $params,
+            $opts{threshold_ratio},
+            $opts{nhood_size},
+            $opts{max_peaks});
+
+    plot_hough_space($gp, $hough_space, $params, $peak_params, $opts{nhood_size});
+    $gp-&gt;fancy_display;
+
+    # Extract line segments
+    my $segments = extract_line_segments($binary_edges, $peak_params,
+        $opts{fillgap}, $opts{minlength});
+
+    # Visualize detected segments
+    plot_detected_lines($gp, $orig_img, $segments);
+    $gp-&gt;fancy_display;
+
+    return ($hough_space, $peak_params, $segments);
+}
+</code></pre>
+
+<h2>Hough line feature extraction visualised</h2>
+
+<pre><code>do {
+    # For test pattern
+    my $test_img = create_test_pattern();
+    my $test_params = HoughParameters-&gt;from_image($test_img);
+    my ($test_hough, $test_peaks, $test_segments)
+        = visualise_hough_transform($gp, $test_img, $test_img, $test_params,
+            nhood_size =&gt; [100,100],
+            fillgap =&gt; 10,
+          );
+};
+</code></pre>
+
+<p><img alt="" src="media/305355958f04280709a99deb0d97dac1c157b46c.svg"></p>
+
+<p><img alt="" src="media/ca33a36b038ca5f9e7b67fe84b93b563464f40e0.svg"></p>
+
+<pre><code>[INFO] Processing 4446 edge points
+</code></pre>
+
+<p>Here we see that some of the lines in the test image that are nearby
+each other are not considered a separate edge. This is a consequence of
+multiple parts of the algorithm resolution, delta rho tolerance, and
+neighbourhood suppression. Shorter lines are not picked up because the
+minimum length parameter.</p>
+
+<p>Vertical and horizontal line segments are found, but do not extend the
+full length of the image elements.</p>
+
+<hr>
+
+<p>And finally for the runway image:</p>
+
+<pre><code>do {
+    # For runway image
+    my $params = HoughParameters-&gt;from_image($binary_edges);
+    my ($hough, $peaks, $segments)
+        = visualise_hough_transform($gp, $runway, $binary_edges, $params,
+            threshold_ratio =&gt; 0.1,
+            nhood_size =&gt; [30,30],
+            max_peaks =&gt; 50,
+            fillgap =&gt; 20,
+            minlength =&gt; 150,
+          );
+};
+</code></pre>
+
+<p><img alt="" src="media/b1d9f78bf8205cc86d0108be25a639674f4b5ecf.svg"></p>
+
+<p><img alt="" src="media/a6a8c079bc0b677fbba965334717891a09db7e2b.svg"></p>
+
+<pre><code>[INFO] Processing 40034 edge points
+</code></pre>
+
+<p>Line segments in both a more vertical direction and a more horizontal
+direction are found. There are some curious line segments that extend
+the full length of the top and bottom of the image. These could be
+filtered out using a region of interest (ROI) filter (i.e., essentially
+a mask) as it is likely that edges near the border of the image do not
+represent objects.</p>
+
+<h1>What now?</h1>
+
+<p>With this, the elves were satisfied with their progress on the autoland
+system…for now. But there are so many more things to explore. PDL let
+them quickly process and visualise an algorithm, making it easy to
+iterate on their design. For the next iteration they could swap out one
+edge detection algorithm for another, come up with custom ways of
+processing and post-processing the image, implement more robust line
+segment extraction, or use a probabilistic approach to quickly extract
+more complex objects (<a href="https://www.youtube.com/watch?v=MgIwLeASnkw">especially those to
+avoid</a>).</p>
+
+              </section>
+              <small><p><a href="https://commons.wikimedia.org/wiki/File:Runway_34,_Nagoya_Airfield_(3937428018).jpg">Runway 34, Nagoya Airfield</a>, by Kentaro Iemoto from Tokyo, Japan, <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, via Wikimedia Commons</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/image-processing/">image processing</a>,
+                  <a href="/advent/blog/tag/computer-vision/">computer vision</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://www.gravatar.com/avatar/0f151061694e6b0eb3b67be2d155b584575cde8b7a5bffc960c5440750501356?d=identicon&amp;s=130">
+                      </div>
+                      <div class="about">
+                        <h5>Zaki Mughal</h5>
+                        <p>Zaki Mughal has been using Perl and PDL for computational science for quite a while. He got hooked on the power of PDL when implementing a geometry algorithm and finding that a single statement could do what other numerical array processing tools would take several lines to do, so quickly ended up contributing to PDL itself. He has a background in biomedical engineering and computer science specifically working in various biomedical-related domains using image analysis, machine learning, and knowledge graph techniques. You can find him blogging at <a href="https://enetdown.org/">https://enetdown.org/</a> or as &quot;sivoais&quot; on IRC.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/21/image-manip/index.html" rel="prev"><strong>Previous Article</strong> Day 21: Fun and Games with Images</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/broadcasting/">broadcasting</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/computer-vision/">computer vision</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/dataflow/">dataflow</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/image-manipulation/">image manipulation</a>
+    <a href="/advent/blog/tag/image-processing/">image processing</a>
+    <a href="/advent/blog/tag/implementation/">implementation</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/internals/">internals</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optics/">optics</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-graph/">random graph</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

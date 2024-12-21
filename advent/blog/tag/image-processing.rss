@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/image-processing/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/image-processing.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 22: Clearing the Runway</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</guid>
+            <description><![CDATA[
+                <p>The North Pole Workshop’s logistics department has been busy this year
+with upgrading the sleigh’s dash-cam with a new more powerful computer.
+They’ve asked the research and development department if there is
+anything that can be done with the extra cycles to make the journey
+safer. After bouncing around a couple ideas, they came up with a plan
+for an autoland system…but since Santa and the reindeer do not operate
+in typical environments (such as roofs), this would not be a typical
+autoland system (which use microwave/radio guidance) so they couldn’t
+select anything off-the-shelf (and they do know their shelves).</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/computer-vision/">computer vision</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Sun, 22 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

@@ -7,6 +7,33 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 22: Clearing the Runway</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</guid>
+            <description><![CDATA[
+                <p>The North Pole Workshop’s logistics department has been busy this year
+with upgrading the sleigh’s dash-cam with a new more powerful computer.
+They’ve asked the research and development department if there is
+anything that can be done with the extra cycles to make the journey
+safer. After bouncing around a couple ideas, they came up with a plan
+for an autoland system…but since Santa and the reindeer do not operate
+in typical environments (such as roofs), this would not be a typical
+autoland system (which use microwave/radio guidance) so they couldn’t
+select anything off-the-shelf (and they do know their shelves).</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/computer-vision/">computer vision</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Sun, 22 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 21: Fun and Games with Images</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</guid>
@@ -111,28 +138,6 @@ visualization, including <em>multibrot</em> ones.</p>
             ]]></description>
             <pubDate>
                 Wed, 18 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 17: New operations for Perl Data Language</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/</guid>
-            <description><![CDATA[
-                <p>If you want to create new <a href="https://pdl.perl.org/">PDL</a> operations, it&#39;s easy! You can make an ad-hoc one with
-<a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>, and expand it (or
-just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a>.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/pptemplate/">pptemplate</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/create-operation/">create operation</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Tue, 17 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

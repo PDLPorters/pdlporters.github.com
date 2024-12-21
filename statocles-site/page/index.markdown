@@ -95,6 +95,9 @@ data:
       href: '/blog/2024/12/21/image-manip/'
       image: '/blog/2024/12/21/image-manip/banner.png'
     - date: 2018-12-22
+      title: Image feature extraction
+      href: '/blog/2024/12/22/hough-lines/'
+      image: '/blog/2024/12/22/hough-lines/Runway_34,_Nagoya_Airfield_(3937428018).jpg'
     - date: 2018-12-23
     - date: 2018-12-24
     - date: 2018-12-25

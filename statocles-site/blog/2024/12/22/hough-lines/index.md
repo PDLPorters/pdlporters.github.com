@@ -26,7 +26,7 @@ in typical environments (such as roofs), this would not be a typical
 autoland system (which use microwave/radio guidance) so they couldn’t
 select anything off-the-shelf (and they do know their shelves).
 
-------------------------------------------------------------------------
+---
 
 To help iterate over the requirements for this new system, the elves
 knew that PDL could help them process images and try different

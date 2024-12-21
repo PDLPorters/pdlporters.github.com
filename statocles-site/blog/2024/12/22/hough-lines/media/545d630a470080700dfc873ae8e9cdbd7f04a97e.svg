@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<marker id="arrowhead" markerHeight="6" markerWidth="6" orient="auto" refX="10" refY="5" viewBox="0 0 10 10">
+			<path d="M 0 0 L 10 5 L 0 10 z" style="fill: #999" />
+		</marker>
+	</defs>
+	<g style="font-family: sans-serif; stroke-width: 1.5; text-anchor: middle" transform="translate(25,25) scale(1,1)">
+		<line style="marker-end: url(#arrowhead); stroke: #999; stroke-dasharray: 4,4" x1="0" x2="140" y1="0" y2="0" />
+		<line style="marker-end: url(#arrowhead); stroke: #999; stroke-dasharray: 4,4" x1="0" x2="0" y1="0" y2="140" />
+		<line style="stroke: blue" x1="0" x2="50" y1="0" y2="50" />
+		<line style="stroke: red" x1="0" x2="100" y1="100" y2="0" />
+		<rect height="8" style="fill: none; stroke: black; stroke-width: 1" transform="rotate(225, 50, 50)" width="8" x="50" y="50" />
+		<path d="M 20,0 A 20,20 0 0,1 14.14,14.14" style="fill: none; stroke: green" />
+		<g transform="scale(1,1)">
+			<text style="font-size: 16px" x="25" y="45">ρ</text>
+			<text style="font-size: 16px" x="30" y="20">θ</text>
+			<text style="font-size: 12px" x="-10" y="-5">O</text>
+			<text style="font-size: 12px" x="145" y="-5">x</text>
+			<text style="font-size: 12px" x="5" y="150">y</text>
+		</g>
+		<circle cx="0" cy="0" r="2" style="fill: black" />
+	</g>
+	<!--
+	Generated using the Perl SVG Module V2.87
+	by Ronan Oger
+
+	-->
+</svg>

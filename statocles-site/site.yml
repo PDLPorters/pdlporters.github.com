@@ -146,6 +146,22 @@ site:
                   He wrote software in several programming languages,
                   and occasionally he did get paid to solve problems quickly.
                   Perl is his language of choice for these things.
+            zmughal :
+                name: 'Zaki Mughal'
+                twitter: '@zmughal'
+                image: 'https://www.gravatar.com/avatar/0f151061694e6b0eb3b67be2d155b584575cde8b7a5bffc960c5440750501356?d=identicon&s=130'
+                text: >-
+                  Zaki Mughal has been using Perl and PDL for computational
+                  science for quite a while. He got hooked on the power of PDL
+                  when implementing a geometry algorithm and finding that a
+                  single statement could do what other numerical array
+                  processing tools would take several lines to do, so quickly
+                  ended up contributing to PDL itself. He has a background in
+                  biomedical engineering and computer science specifically
+                  working in various biomedical-related domains using image
+                  analysis, machine learning, and knowledge graph techniques.
+                  You can find him blogging at <https://enetdown.org/> or as
+                  "sivoais" on IRC.
 
 # theme: These are the settings for the theme.  See Statocles::Help::Theme for
 # more information, and Statocles::Theme for a full list of attributes and what

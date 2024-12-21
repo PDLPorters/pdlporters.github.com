@@ -40,7 +40,8 @@ Since image processing requires frequent visualisation, this work is
 being done in Jupyter Notebook via
 [`Devel::IPerl`](https://p3rl.org/Devel::IPerl), but the setup below
 allows for display of plots both in a notebook, but also as a regular
-Perl script.
+Perl script. You can [download the notebook
+here](20241222-hough-lines.ipynb).
 
     use v5.36;
     use utf8;

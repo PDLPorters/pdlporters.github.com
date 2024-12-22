@@ -23,7 +23,6 @@ After crunching your data, you can get it out to Perl and beyond.</p>
                     <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
                     <a href="https://pdl.perl.org/advent/blog/tag/mojolicious/">Mojolicious</a>
                     <a href="https://pdl.perl.org/advent/blog/tag/d3-js/">D3.js</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/random-graph/">random graph</a>
                 </p>
 
         ]]></content>
@@ -31,7 +30,6 @@ After crunching your data, you can get it out to Perl and beyond.</p>
         <category term="visualization" />
         <category term="Mojolicious" />
         <category term="D3.js" />
-        <category term="random graph" />
     </entry>
 </feed>
 

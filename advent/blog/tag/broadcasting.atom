@@ -20,13 +20,13 @@
                 <p><a href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/#section-2">Continue reading...</a></p>
 
                 <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/image-manipulation/">image manipulation</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
                     <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
                 </p>
 
         ]]></content>
         <updated>2024-12-21T00:00:00Z</updated>
-        <category term="image manipulation" />
+        <category term="image processing" />
         <category term="broadcasting" />
     </entry>
 </feed>

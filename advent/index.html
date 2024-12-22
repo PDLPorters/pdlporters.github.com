@@ -92,7 +92,7 @@
     <section>
 
       <!-- code from https://codepen.io/dudleystorey/pen/MagNaY -->
-<!-- build date: 2024-12-21T22:30:40 -->
+<!-- build date: 2024-12-22T18:14:46 -->
 
 <div class="calendar">
     <time class="blank" datetime="2024-11-25"><span class="caldate">25</span></time>
@@ -255,7 +255,13 @@
         <span class="title">Image feature extraction</span>
       </a>
     </time>
-    <time class="blank" datetime="2018-12-23"><span class="caldate">23</span></time>
+    <time class="hidden" datetime="2018-12-23">
+      <a href="/advent/blog/2024/12/23/random/">
+        <img alt="Generalised random numbers" src="/advent/blog/2024/12/23/random/banner.png">
+        <span class="caldate">23</span>
+        <span class="title">Generalised random numbers</span>
+      </a>
+    </time>
     <time class="blank" datetime="2018-12-24"><span class="caldate">24</span></time>
     <time class="blank" datetime="2018-12-25"><span class="caldate">25</span></time>
     <time class="blank" datetime="2018-12-26"><span class="caldate">26</span></time>
@@ -274,7 +280,7 @@
     var dates = document.querySelectorAll(".calendar time.hidden");
     var i = 1;
     Array.prototype.forEach.call(dates, function(caldate) {
-      setTimeout(function(){ caldate.classList.remove("hidden") }, 250*i)
+      setTimeout(function(){ caldate.classList.remove("hidden") }, 100*i)
       i++;
     });
   })();

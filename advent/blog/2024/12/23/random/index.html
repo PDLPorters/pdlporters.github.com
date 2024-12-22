@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/23/random/" property="og:url">
+  <meta content="Day 23: Generic, general random number simulation using the Inverse CDF method in PDL" property="og:title">
+    <meta content="Random numbers from scratch" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 23: Generic, general random number simulation using the Inverse CDF method in PDL - PDL Advent calendar 2024</title>
+  <meta content="Christos Argyropoulos" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 23: Generic, general random number simulation using the Inverse CDF method in PDL</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-23">Dec 23, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="Baby Grinch in pink candyland" src="banner.png">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p>If you are generating <em>truly</em> random numbers for esoteric distributions, you need PDL!</p>
+
+              </section>
+              <section id="section-2">
+                  <p>Sometimes one finds themselves in need of a truly general random number
+generator from a distribution for which no random generator is (easily)
+accessible. In other cases, one would like to generate random numbers
+from truncated versions of common distributions, e.g. those in which the
+support is a proper subset of the original distribution. To visualize an
+example, consider the Gaussian distribution, which usually &quot;runs&quot; from
+negative to positive infinity and has the probability density function:</p>
+
+<p><img alt="P.D.F." src="PDF.svg"></p>
+
+<p>if one were to restrict it to just the positive numbers, the mathematical expression for the density changes to this Grinch:</p>
+
+<p><img alt="density" src="density.png"></p>
+
+<p>Or for those who prefer visuals, here is our truncated Grinch towering over the unsuspecting normal cousin:</p>
+
+<p><img alt="image" src="visuals.png"></p>
+
+<p>While one can use custom algorithms to simulate numbers from such distributions, there is one truly <strong>general</strong> method to accomplish this task, the <em>inverse CDF method</em>.
+Given a random variable <em>X</em> with CDF <img src="https://latex.codecogs.com/svg.latex?F_X(x)">, the method is based on the principle that if <em>U</em> is a uniform random variable on <code>(0,1)</code>, then <img src="https://latex.codecogs.com/svg.latex?X = F^{-1}_X(U)"> has the same distribution as <em>X</em>. This method requires that the CDF <img src="https://latex.codecogs.com/svg.latex?F_X(x)"> is invertible, which is the case for most continuous distributions. For discrete distributions, the method can be adapted by using the inverse of the discrete CDF. Here is what is the inverse CDF algorithm looks like:</p>
+
+<ol>
+<li>Generate a uniform random number <em>u</em> in the interval <code>(0,1)</code> for the non-truncated case. To sample from the distribution of a random variable <em>X</em> that is truncated to the interval <code>[L,R]</code> one draws the uniform random value in the interval <img src="https://latex.codecogs.com/svg.latex?(F_X(L),CDF(F_XR))"> .</li>
+<li>Compute <img src="https://latex.codecogs.com/svg.latex?x = F^{-1}_X(u)">, where <img src="https://latex.codecogs.com/svg.latex?F^{-1}_X(u)"> is the inverse of the CDF function<a href="#footnote-1">[1]</a> of <em>X</em>.</li>
+<li>The number <em>x</em> is a random number distributed according to the distribution of <em>X</em>.</li>
+</ol>
+
+<p>The necessary components for the algorithm are thus: a) methods to compute <img src="https://latex.codecogs.com/svg.latex?F_X(x)"> and <img src="https://latex.codecogs.com/svg.latex?F^{-1}_X(x)"> for a specific distribution <em>X</em> and b) facilities to draw uniform random numbers.</p>
+
+<p>One reasonably clean way to pack this logic into a software component is to</p>
+
+<ul>
+<li>import all the relevant definitions from a module that provides methods for the CDF and inverse CDF methods for a <strong>very large</strong> collection of random distributions into a new module</li>
+<li>compose a role for the inverse CDF method into the module of the previous step</li>
+<li>provide the module for the simulation with a plugin for the random number simulator</li>
+</ul>
+
+<p>With this design, one examines the performance gains of different codings of the inverse CDF method, i.e. by composing modules for stochastic simulation that compose alternatives roles AND different random number simulators. The latter is particularly important as there alternatives for the underlying engine that draws the random uniform numbers; these alternatives differ in speed of generation, statistical correctness and (less relevant for our application) cryptographic security. In <code>Perl</code>, two modules <a href="https://metacpan.org/pod/PDL::GSL::CDF">PDL::GSL::CDF</a> and  <a href="https://metacpan.org/pod/Math::GSL::CDF">Math::GSL::CDF</a> provide interfaces to the CDF functions of the (very large) collection of random distributions in the GSL library. The main difference between the two packages is that the former provides access to these distributions via a <code>PDL</code>  interface, while the latter is a pure <code>Perl</code> module. <code>PDL</code> also provides alternatives to the Perl <code>rand</code> function for the uniform random number generator (RNG); one can also use the RNG from the GSL itself, or PDL&#39;s builtin replacement <code>random</code> that is based on the highly performant <a href="https://prng.di.unimi.it/">Xoshiro</a> generators.</p>
+
+<p>I recently had to create a <a href="https://metacpan.org/pod/Bio::SeqAlignment::Examples::TailingPolyester"><code>Perl</code> wrapper</a> to extend <a href="https://github.com/alyssafrazee/polyester">Polyester</a>, a bioinformatics R package, which gave me the opportunity to take the truncated Mr Grinch for a ride on Santa <code>PDL</code> sleigh. The relevant packages were created under the <a href="https://metacpan.org/pod/Bio::SeqAlignment::Examples::TailingPolyester">TailingPolyester distribution</a>. The role for simulating possibly truncated distributions using <code>PDL</code> is shown below:</p>
+
+<pre><code>use strict;
+use warnings;
+
+package Bio::SeqAlignment::Examples::TailingPolyester::SimulateTruncatedRNGPDL;
+
+use Carp;
+use PDL;
+use Role::Tiny;
+requires qw(random has_distr cdf inv_cdf);
+
+sub simulate_trunc {
+    my $self       = shift;
+    my %args       = @_;
+    my $random_dim = $args{random_dim} || [1];     ## default to 1 random number
+    my $distr      = $args{distr}      || &#39;flat&#39;;
+    my $left_trunc_lmt  = $args{left_trunc_lmt}  || &#39;missing&#39;;
+    my $right_trunc_lmt = $args{right_trunc_lmt} || &#39;missing&#39;;
+    my $params          = $args{params}          || &#39;missing&#39;;
+    my $cdf_val_at_left_trunc_lmt;
+    my $cdf_val_at_right_trunc_lmt;
+
+    ## set up sanity checks
+    croak &quot;The distribution $distr is not available&quot;
+      unless $self-&gt;has_distr($distr);             ## distr must exist
+    if ( $params eq &#39;missing&#39; &amp;&amp; $distr ne &#39;flat&#39; ) {
+        croak &quot;Must provide parameters for the distribution $distr&quot;;
+    }    ##and parameters cannot be missing unless it is a flat distribution
+
+    ## set up CDF computations at the truncation limits
+    if ( $left_trunc_lmt eq &#39;missing&#39; ) {
+        $cdf_val_at_left_trunc_lmt = pdl(0);
+    }
+    else {
+        $left_trunc_lmt = pdl($left_trunc_lmt);
+        $cdf_val_at_left_trunc_lmt =
+          $self-&gt;cdf( $distr, $left_trunc_lmt, $params );
+
+    }
+    if ( $right_trunc_lmt eq &#39;missing&#39; ) {
+        $cdf_val_at_right_trunc_lmt = pdl(1);
+    }
+    else {
+        $right_trunc_lmt = pdl($right_trunc_lmt);
+        $cdf_val_at_right_trunc_lmt =
+          $self-&gt;cdf( $distr, $right_trunc_lmt, $params );
+    }
+    my $domain_lengh_trunc_distr =
+      $cdf_val_at_right_trunc_lmt - $cdf_val_at_left_trunc_lmt;
+
+    ## now simulate the truncated distribution using vectorized instructions
+    my $simulated_values = $self-&gt;random($random_dim);
+    $simulated_values-&gt;inplace-&gt;mult($domain_lengh_trunc_distr);
+    $simulated_values-&gt;inplace-&gt;plus($cdf_val_at_left_trunc_lmt);
+    return $self-&gt;inv_cdf( $distr, $simulated_values, $params );
+}
+1;
+</code></pre>
+
+<p>While we showed the entire package, it is really the last four lines that do the heavy lifting. If one were to write the last four lines of code in base <code>Perl</code>one has an option between the cake (use map but pay the price of multiple memory allocations) or eating the cake (a for loop that transforms each of the uniform random numbers in place):</p>
+
+<pre><code>my $simulated_values = $self-&gt;random($random_dim);
+my $num_rand_values  = scalar $simulated_values-&gt;@*;
+for my $i ( 0 .. $num_rand_values - 1 ) {
+    $simulated_values-&gt;[$i] =
+      $simulated_values-&gt;[$i] * $domain_lengh_trunc_distr +
+      $cdf_val_at_left_trunc_lmt;
+    $simulated_values-&gt;[$i] =
+      $self-&gt;inv_cdf( $distr, $simulated_values-&gt;[$i], $params );
+}
+return $simulated_values;
+</code></pre>
+
+<p>Note that PDL implementation of the inverse CDF matches that in the R programming language, but the PDL offers in place calculations (these are still experimental in R) and as we will see it also delivers superior performance.</p>
+
+<pre><code>lowercdf &lt;-ifelse(is.null(lower),0,cdf(lower,...))
+uppercdf &lt;-ifelse(is.null(upper),1,cdf(upper,...))
+
+domain &lt;-uppercdf - lowercdf
+simvals&lt;-uniform(n)
+simvals&lt;-lowercdf + simvals*domain
+invcdf(simvals,...)
+</code></pre>
+
+<p>Santa Perl and PDL laboratory made for us many presents for truncated random number generation as the table below shows:</p>
+
+<table border="1" cellpadding="5" cellspacing="5">
+<thead>
+<tr><th> Uniform random number generator    </th><th> CDF Library </th></tr>
+</thead>
+<tbody>
+<tr><td> Perl&#39;s rand </td><td> Math::GSL </td></tr>
+<tr><td> Perl&#39;s rand </td><td> PDL::GSL </td></tr>
+<tr><td> PDL&#39;s random </td><td> Math::GSL </td></tr>
+<tr><td> PDL&#39;s random </td><td> PDL::GSL</td></tr>
+</tbody>
+</table>
+
+<p></p>
+
+<p>But which one is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping its builtin random number generator for the Xoshiro one)?</p>
+
+<p>The two modules, i.e. <code>SimulateMathGSL</code> and <code>SimulatePDLGSL</code> and the two uniform random generators plugins, i.e. <code>PERLRNG</code> and <code>PDLRNG</code> become available by installing <code>Bio::SeqAlignment::Examples::TailingPolyester</code> (Santa makes a mental note that these probably deserve to be given their own distribution next year).</p>
+
+<p>But which one out of these four options is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping its builtin random number generator for the Xoshiro one by installing the library <a href="https://github.com/daqana/dqrng">dqRNGkind</a>)? Furthermore, what is the price one has to pay for the object oriented paper that wraps the gifts?
+The quick elf in Santa&#39;s laboratory would point out that one could throw together at least three different  and possibly faster non object oriented solutions:</p>
+
+<ol>
+<li>create multiple implementations, e.g. <code>simulate_trunc_UniformRNG_CDFLibrary</code> that hard wire the function calls inside them</li>
+<li>use an <code>eval</code> string for the uniform RNG and CDF libraries (the elf was immediately banished from Santa&#39;s laboratory for bringing this up)</li>
+<li>provide code references to the <code>simulate_trunc</code> function for the random number generator and the CDF subroutines</li>
+</ol>
+
+<p>However, the kids that wrote to Santa asking for non-object oriented gifts, were naughty this year and Santa told them they will get such gifts in R this year. But all the gifts would be opened and benchmarked on Christmas night!</p>
+
+<p>To benchmark, I used the following code that uses the package <a href="https://metacpan.org/pod/Benchmark::CSV">Benchmark::CSV</a> to obtain raw timings for a thousand replications of the generation of 1M random variates from the log-normal distribution.</p>
+
+<pre><code>use v5.36;
+use strict;
+use warnings;
+
+use Benchmark::CSV;
+use Carp;
+use Class::Tiny;
+use Bio::SeqAlignment::Examples::TailingPolyester::PERLRNGPDL;
+use Bio::SeqAlignment::Examples::TailingPolyester::PERLRNG;
+use Bio::SeqAlignment::Examples::TailingPolyester::PDLRNG;
+use Bio::SeqAlignment::Examples::TailingPolyester::GSLRNG;
+use Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL;
+use Bio::SeqAlignment::Examples::TailingPolyester::SimulateMathGSL;
+use Cwd;
+use File::Spec;
+use PDL;
+use PDL::IO::CSV &#39;:all&#39;;
+use PDL::GSL::RNG;
+
+use Time::HiRes &#39;time&#39;;
+
+my $benchmark_reps    = 1000;
+my $distr             = &#39;lognormal&#39;;
+my $iter              = 1000000;
+my $t                 = time;
+my $params            = [ log(125), 1 ];
+my $lower_trunc_limit = 0;
+my $upper_trunc_limit = 250;
+
+set_autopthread_size(1024*256); ## ensures we will only use 1 thread
+## generate RNG objects to assess object construction overhead
+my $rng_PERLRNGPDL =
+  Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+    seed       =&gt; 3,
+    rng_plugin =&gt; &#39;Bio::SeqAlignment::Examples::TailingPolyester::PERLRNGPDL&#39;
+  );    ## perl rng with PDL
+my $rng_PERLRNG =
+  Bio::SeqAlignment::Examples::TailingPolyester::SimulateMathGSL-&gt;new(
+    seed       =&gt; 3,
+    rng_plugin =&gt; &#39;Bio::SeqAlignment::Examples::TailingPolyester::PERLRNG&#39;
+  );    ## perl rng with Math::GSL
+my $rng_RNG =
+  Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+    seed       =&gt; 3,
+    rng_plugin =&gt; &#39;Bio::SeqAlignment::Examples::TailingPolyester::PDLRNG&#39;
+  );
+my $rng_PDLGSLUNIF =
+  Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+    seed       =&gt; 3,
+    rng_plugin =&gt; &#39;Bio::SeqAlignment::Examples::TailingPolyester::GSLRNG&#39;,
+    RNG_init_parameters =&gt; [&#39;mt19937&#39;]
+  );    ## GSL uniform RNG with PDL
+
+my $cwd = getcwd();
+
+my $benchmark = Benchmark::CSV-&gt;new(
+    output      =&gt; File::Spec-&gt;catfile($cwd,&#39;testPerl.csv&#39;),
+    sample_size =&gt; 1,
+);
+
+$benchmark-&gt;add_instance(
+    PDLGSL_PERLRNGPDL_WITH_OC =&gt; sub {
+        my $rng =
+          Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+            seed       =&gt; 3,
+            rng_plugin =&gt;
+              &#39;Bio::SeqAlignment::Examples::TailingPolyester::PERLRNGPDL&#39;
+          );
+        my $pdl = $rng-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    MathMLGSL_PERLRNG_WITH_OC =&gt; sub {
+        my $rng =
+          Bio::SeqAlignment::Examples::TailingPolyester::SimulateMathGSL-&gt;new(
+            seed       =&gt; 3,
+            rng_plugin =&gt;
+              &#39;Bio::SeqAlignment::Examples::TailingPolyester::PERLRNG&#39;
+          );
+        my $pdl = $rng-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    PDLGSL_PDLUNIF_WITH_OC =&gt; sub {
+        my $rng =
+          Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+            seed       =&gt; 3,
+            rng_plugin =&gt;
+              &#39;Bio::SeqAlignment::Examples::TailingPolyester::PDLRNG&#39;
+          );
+        my $pdl = $rng-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    PDLGSL_PDLGSLUNIF_WITH_OC =&gt; sub {
+        my $rng =
+          Bio::SeqAlignment::Examples::TailingPolyester::SimulatePDLGSL-&gt;new(
+            seed       =&gt; 3,
+            rng_plugin =&gt;
+              &#39;Bio::SeqAlignment::Examples::TailingPolyester::GSLRNG&#39;,
+            RNG_init_parameters =&gt; [&#39;mt19937&#39;]
+          );
+        my $pdl = $rng-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    PDLGSL_PERLRNGPDL_WO_OC =&gt; sub {
+        my $pdl = $rng_PERLRNGPDL-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    MathMLGSL_PERLRNG_WO_OC =&gt; sub {
+        my $pdl = $rng_PERLRNG-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    PDLGSL_PDLUNIF_WO_OC =&gt; sub {
+        my $pdl = $rng_RNG-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+$benchmark-&gt;add_instance(
+    PDLGSL_PDLGSLUNIF_WO_OC =&gt; sub {
+        my $pdl = $rng_PDLGSLUNIF-&gt;simulate_trunc(
+            random_dim      =&gt; [$iter],
+            distr           =&gt; $distr,
+            params          =&gt; $params,
+            left_trunc_lmt  =&gt; $lower_trunc_limit,
+            right_trunc_lmt =&gt; $upper_trunc_limit,
+        );
+    }
+);
+
+
+$benchmark-&gt;run_iterations($benchmark_reps);
+</code></pre>
+
+<p>It is instructive to look at the R side comparators, because R will vectorize certain mathematical and statistical operations over containers out of the box. It also allows one to search functions through symbolic reference searches over the visible stashes, and other constructs familiar to the Perl programmer, e.g. the <code>eval</code> of strings (elf go back to the cold), which is why the author finds it very easy to go from Perl to R and back when the application demands it.</p>
+
+<pre><code>library(dqrng)
+library(data.table)
+library(vioplot)
+library(microbenchmark)
+rm(list=ls());gc()
+simtrunceval&lt;-function(n,distr=NULL,uniformRNG=NULL,lower=NULL,upper=NULL,...){
+  cdf&lt;-function(x,...) eval(parse(text=paste(&quot;p&quot;,distr,sep=&quot;&quot;)))(x,...)
+  invcdf&lt;-function(x,...) eval(parse(text=paste(&quot;q&quot;,distr,sep=&quot;&quot;)))(x,...)
+  uniform = function(x,...) eval(parse(text=uniformRNG))(x)
+  lowercdf &lt;-ifelse(is.null(lower),0,cdf(lower,...))
+  uppercdf &lt;-ifelse(is.null(upper),1,cdf(upper,...))
+  domain &lt;-uppercdf - lowercdf
+  simvals&lt;-uniform(n)
+  simvals&lt;-lowercdf + simvals*domain
+  invcdf(simvals,...)
+}
+
+simtruncget&lt;-function(n,distr=NULL,uniformRNG=NULL,lower=NULL,upper=NULL,...){
+  cdf&lt;-get(paste(&quot;p&quot;, distr, sep = &quot;&quot;))
+  invcdf&lt;-get(paste(&quot;q&quot;, distr, sep = &quot;&quot;))
+  uniform = get(uniformRNG)
+  lowercdf &lt;-ifelse(is.null(lower),0,cdf(lower,...))
+  uppercdf &lt;-ifelse(is.null(upper),1,cdf(upper,...))
+  domain &lt;-uppercdf - lowercdf
+  simvals&lt;-uniform(n)
+  simvals&lt;-lowercdf + simvals*domain
+  invcdf(simvals,...)
+}
+
+simtruncfixedrunif&lt;-function(n,lower=NULL,upper=NULL,...){
+  lowercdf &lt;-ifelse(is.null(lower),0,plnorm(lower,...))
+  uppercdf &lt;-ifelse(is.null(upper),1,plnorm(upper,...))
+  domain &lt;-uppercdf - lowercdf
+  simvals&lt;-runif(n)
+  simvals&lt;-lowercdf + simvals*domain
+  qlnorm(simvals,...)
+}
+
+simtruncfixedqrng&lt;-function(n,lower=NULL,upper=NULL,...){
+  lowercdf &lt;-ifelse(is.null(lower),0,plnorm(lower,...))
+  uppercdf &lt;-ifelse(is.null(upper),1,plnorm(upper,...))
+  domain &lt;-uppercdf - lowercdf
+  simvals&lt;-dqrunif(n)
+  simvals&lt;-lowercdf + simvals*domain
+  qlnorm(simvals,...)
+}
+
+simnontruncget&lt;-function(n,distr=NULL,...){
+  sim&lt;-get(paste(&quot;r&quot;, distr, sep = &quot;&quot;))
+  sim(n,...)
+}
+</code></pre>
+
+<p>Benchmarking the R code, requires more R code:</p>
+
+<pre><code>dqRNGkind(&quot;Xoshiro256+&quot;)
+iter = 1000000
+times&lt;-1000
+distr=&quot;lnorm&quot;
+leftrunc=0
+rightrunc=250
+param1=log(125)
+param2=1
+timeunif&lt;-microbenchmark(vals&lt;-simtrunceval(iter,distr,&#39;runif&#39;,leftrunc,rightrunc,param1,param2),times=times)
+timeunifget&lt;-microbenchmark(valsget&lt;-simtruncget(iter,distr,&#39;runif&#39;,leftrunc,rightrunc,param1,param2),times=times)
+timedruniffixed&lt;-microbenchmark(valsd&lt;-simtruncfixedrunif(iter,leftrunc,rightrunc,param1,param2),times=times)
+timedqrunif&lt;-microbenchmark(valsd&lt;-simtrunceval(iter,distr,&#39;dqrunif&#39;,leftrunc,rightrunc,param1,param2),times=times)
+timedqrunifget&lt;-microbenchmark(valsdget&lt;-simtruncget(iter,distr,&#39;dqrunif&#39;,leftrunc,rightrunc,param1,param2),times=times)
+timedqruniffixed&lt;-microbenchmark(valsd&lt;-simtruncfixedqrng(iter,leftrunc,rightrunc,param1,param2),times=times)
+time&lt;-microbenchmark(x&lt;-dqrunif(iter),times=times)
+</code></pre>
+
+<p>Finally, plotting the results (as a <a href="https://en.wikipedia.org/wiki/Violin_plot">violin plot</a>, that overlays smoothed density estimates of the timings, over boxplots of the data), reveals the truth, the whole truth and nothing but the truths:</p>
+
+<p><img alt="vioplot_Perl_R_lognormal" src="https://github.com/user-attachments/assets/63a20d07-f416-4a74-99b4-73b1a7bc5099"></p>
+
+<ol>
+<li>Lack of vectorization is the major impediment to high performance Perl scripts for numerical or statistical calculations for big data. This is clearly seen when comparing the performance of the 1) MathMLGSL_PERLRNG implementations that use base Perl for  both random number generation and for coding of the inverse CDF method  to that of 2) PDLGSL_PERLRNG that generate random numbers through base Perl, but use the PDL wrapper over GSL to vectorize 3) the pure PDL implementations PDLGSL_PDLUNIF that use PDL to both simulate the uniform numbers and compute the CDFs.</li>
+<li>The speed of the vectorized PDL implementation that also used the PDL RNG were competitive with the R code that used the Xoshiro implementation.</li>
+<li>The Xoshiro based implementations achieved the best performance in either language. In R the difference is largely due to the speed of the RNG relative to the one builtin the language, whereas in Perl the difference can be attributed to the non-vectorized nature of base Perl AND the RNG. The former is the biggest source of performance drop as can be seen from the comparison of the lower four violin plots , which swapped the Xoshiro for the GSL default RNG, but kept vectorization for calculations.</li>
+<li>Object construction (contrast violin plots &quot;WO_OC&quot; vs &quot;WITH_OC&quot;) had negligible effect on the relative performance of all Perl implementations.</li>
+<li>Despite appeals to avoid &quot;eval&quot; strings in R (yes elf, you cannot use <code>eval</code> in either R or Perl), the choice of method to access dependencies (e.g. the inverse CDF method, or the RNG) had minimal effect on performance.</li>
+<li>The performance of all R implementations was much more variable (largest spread on the x-axis) with many more outliers than any of the Perl implementations. The reason for the rather variable performance of the R code is not clear to us, but could be related to the lazy evaluation properties of R code.</li>
+</ol>
+
+<p>In summary, these observations should direct us to utilize the combination of Perl and PDL more frequently in data analytics. Stated in other terms,  PDL  offers a bewildering array of performant modules for numerical and statistical calculations and if you are not comfortable (or unwilling) to deploy multi-language applications, learning and using PDL, will be the best gift you can ask Santa to bring you. Even if that gift is to be given to a truncated distribution Grinch.</p>
+
+              </section>
+              <section id="section-3">
+                  <p id="footnote-1">[1] The inverse CDF function is also known as the quantile or the percentile function of the distribution</p>
+
+              </section>
+              <small><p>AI generated image at <a href="https://cdn.pixabay.com/photo/2024/04/04/11/04/ai-generated-8674863_640.jpg">pixabay.com</a></p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/inverse-cdf/">Inverse CDF</a>,
+                  <a href="/advent/blog/tag/random-numbers/">random numbers</a>,
+                  <a href="/advent/blog/tag/performance/">performance</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://avatars.githubusercontent.com/u/14349799?v=4">
+                      </div>
+                      <div class="about">
+                        <h5>Christos Argyropoulos</h5>
+                        <p>Christos Argyropoulos, MD, PhD, FASN, is the Division Chief of Nephrology at the Clinical and Translational Science Center in the University of New Mexico School of Medicine. He can be found on <a href="https://github.com/chrisarg">GitHub</a> and at @christosargyrop.bsky.social</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/22/hough-lines/index.html" rel="prev"><strong>Previous Article</strong> Day 22: Clearing the Runway</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/broadcasting/">broadcasting</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/computer-vision/">computer vision</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/dataflow/">dataflow</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/image-processing/">image processing</a>
+    <a href="/advent/blog/tag/implementation/">implementation</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/internals/">internals</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/inverse-cdf/">Inverse CDF</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optics/">optics</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/performance/">performance</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

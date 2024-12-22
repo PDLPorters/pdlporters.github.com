@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PDL Advent calendar 2024</title>
+        <link>https://pdl.perl.org/advent/blog/tag/inverse-cdf/</link>
+        <atom:link href="https://pdl.perl.org/advent/blog/tag/inverse-cdf.rss" rel="self" type="application/rss+xml" />
+        <description>Blog feed of PDL Advent calendar 2024</description>
+        <generator>Statocles 0.098</generator>
+        <item>
+            <title>Day 23: Generic, general random number simulation using the Inverse CDF method in PDL</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/23/random/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/23/random/</guid>
+            <description><![CDATA[
+                <p>If you are generating <em>truly</em> random numbers for esoteric distributions, you need PDL!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/23/random/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/inverse-cdf/">Inverse CDF</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/random-numbers/">random numbers</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/performance/">performance</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Mon, 23 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>
+

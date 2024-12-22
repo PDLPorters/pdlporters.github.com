@@ -7,6 +7,26 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 23: Generic, general random number simulation using the Inverse CDF method in PDL</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/23/random/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/23/random/</guid>
+            <description><![CDATA[
+                <p>If you are generating <em>truly</em> random numbers for esoteric distributions, you need PDL!</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/23/random/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/inverse-cdf/">Inverse CDF</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/random-numbers/">random numbers</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/performance/">performance</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Mon, 23 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 22: Clearing the Runway</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</guid>
@@ -45,7 +65,7 @@ select anything off-the-shelf (and they do know their shelves).</p>
                     <p><a href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/#section-2">Continue reading...</a></p>
 
                     <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/image-manipulation/">image manipulation</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
                         <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
                     </p>
 
@@ -101,43 +121,6 @@ can be done by working through a series of equations <em>or</em> by
             ]]></description>
             <pubDate>
                 Thu, 19 Dec 2024 00:00:00 +0000
-            </pubDate>
-        </item>
-        <item>
-            <title>Day 18: How to use PDL to draw a Mandelbrot Set</title>
-            <link>https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/</link>
-            <guid>https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/</guid>
-            <description><![CDATA[
-                <h1>How to use PDL to draw a Mandelbrot Set</h1>
-
-<h2>Introduction</h2>
-
-<p>The <a href="https://en.wikipedia.org/wiki/Mandelbrot_set#Python_code">Mandelbrot set</a>
-is a popular fractal plot that makes for great visualizations and animations,
-besides its scientific uses.</p>
-
-<p>I will not delve into it deeply, but the link above points to a computer
-algorithm that is written in Python on Wikipedia. However, if you want to make
-that algorithm actually <strong>intuitive</strong> and more identical to the mathematical
-equations, you want to use <a href="https://metacpan.org/pod/PDL">PDL</a> for it.</p>
-
-<p>PDL allows for n-dimensional arrays to be created out of the box and manipulated
-on, as you would do in more mathematical but slower tools like MATLAB or
-Mathematica.</p>
-
-<p>In this post, I demonstrate how to go about implementing a Mandelbrot
-visualization, including <em>multibrot</em> ones.</p>
-
-                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/18/mandelbrot/#section-2">Continue reading...</a></p>
-
-                    <p>Tags:
-                        <a href="https://pdl.perl.org/advent/blog/tag/mandelbrot/">mandelbrot</a>
-                        <a href="https://pdl.perl.org/advent/blog/tag/visualization/">visualization</a>
-                    </p>
-
-            ]]></description>
-            <pubDate>
-                Wed, 18 Dec 2024 00:00:00 +0000
             </pubDate>
         </item>
     </channel>

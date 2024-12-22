@@ -3,7 +3,7 @@ title: Day 23: Generic, general random number simulation using the Inverse CDF m
 disable_content_template: 1
 tags:
     - 'Inverse CDF'
-    - random
+    - random numbers
     - performance
 author: Christos Argyropoulos
 images:
@@ -21,7 +21,18 @@ data:
 If you are generating _truly_ random numbers for esoteric distributions, you need PDL!
 ---
 
-Sometimes one finds themselves in need of a truly general random number generator from a distribution for which no random generator is (easily) accessible. In other cases, one would like to generate random numbers from truncated versions of common distributions, e.g. those in which the support is a proper subset of the original distribution. To visualize an example, consider the Gaussian distribution, which usually "runs" from negative to positive infinity and has the probability density function ![P.D.F.](PDF.svg); if one were to restrict it to just the positive numbers, the mathematical expression for the density changes to this Grinch:
+Sometimes one finds themselves in need of a truly general random number
+generator from a distribution for which no random generator is (easily)
+accessible. In other cases, one would like to generate random numbers
+from truncated versions of common distributions, e.g. those in which the
+support is a proper subset of the original distribution. To visualize an
+example, consider the Gaussian distribution, which usually "runs" from
+negative to positive infinity and has the probability density function:
+
+![P.D.F.](PDF.svg)
+
+if one were to restrict it to just the positive numbers, the mathematical expression for the density changes to this Grinch:
+
 ![density](density.png)
 
 Or for those who prefer visuals, here is our truncated Grinch towering over the unsuspecting normal cousin:
@@ -142,18 +153,18 @@ Santa Perl and PDL laboratory made for us many presents for truncated random num
 </tbody>
 </table>
 <p></p>
-But which one is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping it's builtin random number generator for the Xoshiro one)?
+But which one is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping its builtin random number generator for the Xoshiro one)?
 
 The two modules, i.e. `SimulateMathGSL` and `SimulatePDLGSL` and the two uniform random generators plugins, i.e. `PERLRNG` and `PDLRNG` become available by installing `Bio::SeqAlignment::Examples::TailingPolyester` (Santa makes a mental note that these probably deserve to be given their own distribution next year).
 
-But which one out of these four options is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping it's builtin random number generator for the Xoshiro one by installing the library [dqRNGkind](https://github.com/daqana/dqrng))? Furthermore, what is the price one has to pay for the object oriented paper that wraps the gifts?
+But which one out of these four options is the speediest , and how does it hold up against an implementation of the same method in R (which also offers the possibility of swapping its builtin random number generator for the Xoshiro one by installing the library [dqRNGkind](https://github.com/daqana/dqrng))? Furthermore, what is the price one has to pay for the object oriented paper that wraps the gifts?
 The quick elf in Santa's laboratory would point out that one could throw together at least three different  and possibly faster non object oriented solutions:
 
 1. create multiple implementations, e.g. `simulate_trunc_UniformRNG_CDFLibrary` that hard wire the function calls inside them
 2. use an `eval` string for the uniform RNG and CDF libraries (the elf was immediately banished from Santa's laboratory for bringing this up)
 3. provide code references to the `simulate_trunc` function for the random number generator and the CDF subroutines
 
-However, the kids that wrote to Santa asking for non-object oriented gifts, were naughty this year and Santa told them they will get such gifts in R this year. But all the gifts would be opened and benchmark on Christmas night!
+However, the kids that wrote to Santa asking for non-object oriented gifts, were naughty this year and Santa told them they will get such gifts in R this year. But all the gifts would be opened and benchmarked on Christmas night!
 
 To benchmark, I used the following code that uses the package [Benchmark::CSV](https://metacpan.org/pod/Benchmark::CSV) to obtain raw timings for a thousand replications of the generation of 1M random variates from the log-normal distribution.
 

@@ -2,7 +2,7 @@
 title: Day 21: Fun and Games with Images
 disable_content_template: 1
 tags:
-    - 'image manipulation'
+    - image processing
     - broadcasting
 author: Boyd Duffee
 images:

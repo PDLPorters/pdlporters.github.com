@@ -151,6 +151,11 @@ site:
                   He wrote software in several programming languages,
                   and occasionally he did get paid to solve problems quickly.
                   Perl is his language of choice for these things.
+            karlg:
+                name: 'Karl Glazebrook'
+                image: 'https://avatars.githubusercontent.com/u/15331994?v=4'
+                text: |-
+                  Karl Glazebrook is a [Professor of Astronomy at Swinburne University of Technology](https://experts.swinburne.edu.au/812-karl-glazebrook) in Melbourne, Australia. Originally from the UK he has worked for 30 years in the UK, the U.S. and Australia doing research on cosmology and the evolution of galaxies across time using observations on the largest telescopes, including the Keck observatory and the Hubble Space Telescope. He now leads a group at Swinburne studying the earliest galaxies with the new James Webb Space Telescope. [In 1996 he created version 1.0 of PDL](https://archive.md/ZMrEW) while on an observing trip to La Silla in Chile, due to his love of Perl and frustration with existing free software to do image processing.
             zmughal :
                 name: 'Zaki Mughal'
                 twitter: '@zmughal'

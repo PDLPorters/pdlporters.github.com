@@ -5,7 +5,6 @@ tags:
     - visualization
     - Mojolicious
     - D3.js
-    - 'random graph'
 author: Boyd Duffee
 images:
   banner:

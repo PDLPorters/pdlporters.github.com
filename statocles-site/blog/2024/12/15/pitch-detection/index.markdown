@@ -5,6 +5,7 @@ tags:
     - signal processing
     - phonetics
     - speech
+    - sound
 author: José Joaquín Atria
 images:
   banner:

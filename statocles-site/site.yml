@@ -123,6 +123,11 @@ site:
                 image: 'https://secure.gravatar.com/avatar/c6e74e4e0ab61c61db655f0e60c9f8a6.jpg'
                 text: |-
                   Ed J (aka "mohawk" on IRC) has been using Perl for a long time. He ported the reference [GraphQL](http://graphql.org/) implementation from the [JavaScript version](http://graphql.org/graphql-js/) to [Perl](https://metacpan.org/pod/GraphQL). He is currently release manager for PDL.
+            chrisarg :
+                name: 'Christos Argyropoulos'
+                image: 'https://avatars.githubusercontent.com/u/14349799?v=4'
+                text: |-
+                  Christos Argyropoulos, MD, PhD, FASN, is the Division Chief of Nephrology at the Clinical and Translational Science Center in the University of New Mexico School of Medicine. He can be found on [GitHub](https://github.com/chrisarg) and at @christosargyrop.bsky.social
             duffee :
                 name: 'Boyd Duffee'
                 image: 'https://www.gravatar.com/avatar/ddaa7882314b45624026eabdb6b3f5f7?d=identicon&s=130'

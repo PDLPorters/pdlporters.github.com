@@ -99,6 +99,9 @@ data:
       href: '/blog/2024/12/22/hough-lines/'
       image: '/blog/2024/12/22/hough-lines/Runway_34,_Nagoya_Airfield_(3937428018).jpg'
     - date: 2018-12-23
+      title: Generalised random numbers
+      href: '/blog/2024/12/23/random/'
+      image: '/blog/2024/12/23/random/banner.png'
     - date: 2018-12-24
     - date: 2018-12-25
     - date: 2018-12-26

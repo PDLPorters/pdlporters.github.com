@@ -1,13 +1,12 @@
 #!/usr/bin/env perl
 
-use Mojolicious::Lite;
+use Mojolicious::Lite -signatures;
 
 use Cwd;
 app->static->paths->[0] = getcwd;
 
-get '/' => sub {
-  shift->reply->static('index.html');
+get '/*whatever' => {whatever => 'index.html'} => sub ($c) {
+  $c->reply->static($c->stash('whatever') =~ s#/$#/index.html#r);
 };
 
 app->start;
-

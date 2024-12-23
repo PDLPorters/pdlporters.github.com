@@ -103,6 +103,9 @@ data:
       href: '/blog/2024/12/23/random/'
       image: '/blog/2024/12/23/random/banner.png'
     - date: 2018-12-24
+      title: Reflections
+      href: '/blog/2024/12/24/reflections/'
+      image: '/blog/2024/12/24/reflections/banner.jpg'
     - date: 2018-12-25
     - date: 2018-12-26
     - date: 2018-12-27

@@ -107,6 +107,9 @@ data:
       href: '/blog/2024/12/24/reflections/'
       image: '/blog/2024/12/24/reflections/banner.jpg'
     - date: 2018-12-25
+      title: PDL and the James Webb Space Telescope
+      href: '/blog/2024/12/25/jwst/'
+      image: '/blog/2024/12/25/jwst/banner.jpeg'
     - date: 2018-12-26
     - date: 2018-12-27
     - date: 2018-12-28

@@ -50,7 +50,7 @@ This is in the FITS format which is a RAW-type high dynamic range format used fo
 OK let's make a plot:
 
     use PDL;
-    use PDL::Graphics::Simple;
+    use PDL::Graphics::Simple qw(imag line plot);
     $jwst = rfits 'goodsn-wide0-v3_prism-clear_1211_1268.spec.fits[2]'; # Image is in second FITS extension
     imag $jwst, -0.05, 0.1, {justify=>0};
     @dims = dims($jwst);
@@ -68,7 +68,7 @@ Standard procedure would be to sum along the columns of the image to produce a 4
 We could use the `sumover()` function, but `$jwst->sumover` would _sum_ along the rows and produce a 31 pixel ndarray which is not what we want.
 'Reduction' operations like `sumover(), average(), medover() `etc. apply along the first axis and make a result with one dimension fewer.
 To get what we want we have to transpose the image, i.e. swap the two axes.
-There are various ways of doing this in PDL, the simplest is to use the `t() `function as in `$jwst->t()->sumover()`.
+There are various ways of doing this in PDL, the simplest is to use the `t()` function as in `$jwst->t->sumover()`.
 This will move dimension 1 to the place of dimension 0, i.e. transposing the 2D ndarray.
 You can see using `dims() `that the result is a 435 element 1D ndarray.
 
@@ -77,10 +77,9 @@ However in this case the resulting spectrum is hot garbage because by summing al
 ## Broadcasting
 
 We need to only extract the central few rows. Code like
-`$jwst->slice(':,13:17')->t()->sumover`  would work, but we can find a more optimal solution and demonstrate 'broadcasting' at the same time! First look at this code:
+`$jwst->slice(':,13:17')->t->sumover`  would work, but we can find a more optimal solution and demonstrate 'broadcasting' at the same time! First look at this code:
 
     # Make a gaussian extraction profile
-
     $x = xvals($dims[1]);
     $fwhm = 2.1; # pix
     $gaussian = 0.04*exp(-0.5*(($x-15)/($fwhm/2.35))**2);
@@ -94,11 +93,11 @@ This code generates a 31 element gaussian function along the slit axis. Here is 
 
 Now we can do some _broadcasting_ and some _reduction_:
 
-    $profile_weighted = $jwst * $gaussian->clump(0); # Multiply through
-    $spec1d = $profile_weighted->t()->sumover; # Extract by summing along columns
+    $profile_weighted = $jwst * $gaussian->t; # Multiply through
+    $spec1d = $profile_weighted->t->sumover; # Extract by summing along columns
     $spec1d = $spec1d/max($spec1d); # Normalise
 
-Recall `$jwst` has dimensions 435,31. We see another dimension trick, `$gaussian->clump(0)` adds a unit dimension at position 0 resulting in a dimension 1,31 ndarray. When we multiply these ndarrays together the second 31 element dimensions match, and the first  dimensions (435 and 1) are also matched. What happens is PDL implicitly expands the unit dimension by repeating it 435 times, and in the multiplication `$gaussian->clump(0)` behaves as a 435,31 ndarray. It is like multiplying two 435,31 ndarrays together. This ultimately results in the gaussian being multiplied through each column, which is then summed by the following line.
+Recall `$jwst` has dimensions 435,31. We see another dimension trick, `$gaussian->t` adds a unit dimension at position 0 resulting in a dimension 1,31 ndarray. When we multiply these ndarrays together the second 31 element dimensions match, and the first  dimensions (435 and 1) are also matched. What happens is PDL implicitly expands the unit dimension by repeating it 435 times, and in the multiplication `$gaussian->t` behaves as a 435,31 ndarray. It is like multiplying two 435,31 ndarrays together. This ultimately results in the gaussian being multiplied through each column, which is then summed by the following line.
 
 This trick is known as 'broadcasting' and is one of the most powerful PDL features.
 You can see we have written some highly complex code to apply mathematical operations to the image as a function of x,y without writing a single loop!
@@ -120,26 +119,29 @@ We can now look at our resulting spectrum:
 
     # Get wavelength array from fits table
     $temp = rfits 'goodsn-wide0-v3_prism-clear_1211_1268.spec.fits[1]';
-    $wavelengths = $temp->{'wave    '};
-
-    # Make a nice plot
-
-    env min($wavelengths), max($wavelengths), -0.1, 1.1, {XTitle=>'Wavelength / \gmm', YTitle=>'Flux'};
-    line $wavelengths, $spec1d;
-    hold;
+    $wavelengths = $temp->{wave}; # if no Astro::FITS::Header, need 'wave    '
 
     @line_waves = (1216, 3728, 3870, 3890, 3971, 4103, 4342);  # In Angstroms
-    @line_names = ('Ly\ga','[OII]','[NeIII]', 'H\gz', 'H\ge', 'H\gd', 'H\gg');
-    $redshift = 10.603;
-    for $w (@line_waves){
-       $name = shift(@line_names);
-       $w_obs = ($w/10000) * (1+$redshift); # Angstroms -> Microns and apply the redshift.
-       line pdl($w_obs,$w_obs), pdl(-1,1), {Color=>Red};
-       text $name,$w_obs, 1.02, {Color=>Red, JUSTIFICATION=>0.5};
-    }
+    # UTF-8, in bytes which is what Gnuplot needs
+    @line_names = ('|Lyα','|[OII]','|[NeIII]', '|Hζ', '|Hε', '|Hδ', '|Hγ');
 
-This code adds the wavelength calibration of the axis (which is complex and beyond the scope of this article) and makes a plot, adding labels for the location of some common spectral lines [OK I had to write a trivial loop for this :-(]. Here is the plot:
-![spectrum](spectrum.jpg)
+    $w_obs = pdl(\@line_waves)/10000; # Angstroms -> Microns
+    $redshift = 10.603;
+    $w_obs *= 1+$redshift; # apply the redshift
+    $label_height = $w_obs->xlinvals(0.8,1.02);
+    my @heights = ($label_height - 0.02)->list;
+
+    # Make a nice plot
+    plot
+      with=>'lines', $wavelengths, $spec1d,
+      (map +(with=>'lines', style=>7, pdl($_,$_), pdl(-1,shift @heights)), $w_obs->list),
+      with=>'labels', style=>7, $w_obs, $label_height, \@line_names,
+      {xlabel=>'Wavelength / μm', ylabel=>'Flux',
+        xrange=>[minmax($wavelengths)],yrange=>[-0.1,1.1]};
+
+This code adds the wavelength calibration of the axis (which is complex and beyond the scope of this article) and makes a plot, adding labels for the location of some common spectral lines. Here is the plot:
+
+![spectrum](spectrum.png)
 
 What we see is a spectrum running from wavelengths 1 to 5 micrometers - this is beyond the range that the human eye can see because JWST is an infrared telescope. Looking at the spectral transitions there are two notable astrophysical features:
 
@@ -150,4 +152,4 @@ What we see is a spectrum running from wavelengths 1 to 5 micrometers - this is 
 
 1. If you want to know more about this galaxy and its spectrum you can read the wikipedia page linked above or take a look at this (admittedly technical) [scientific paper](https://www.aanda.org/articles/aa/full_html/2023/09/aa46159-23/aa46159-23.html). You will see a similar spectrum in the paper.
 
-2. An interesting and straight forward exercise would be to use PDL to extract the slit profile and fit it with a gaussian to generation the extraction profile, rather than use my pre-canned one.
+2. An interesting and straight forward exercise would be to use PDL to extract the slit profile and fit it with a gaussian to generate the extraction profile, rather than use my pre-canned one.

@@ -2,11 +2,39 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-24T00:00:00Z</updated>
+    <updated>2024-12-25T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/25/jwst/</id>
+        <title>Day 25: PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</title>
+        <author><name>Karl Glazebrook</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/25/jwst/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p><em>The James Webb Space Telescope hangs like a Christmas tree ornament over Africa as it prepares to deploy its mirror and travel to its distant orbit. Image credit: NASA/ESA 25/Dec/2021.</em></p>
+
+<h1>PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</h1>
+
+<p>I am an astronomer who has for 30 years used PDL for processing of astronomical data. (In fact this is one of the reasons I created it :-) see &#39;<a href="https://pdl.perl.org/?page=book/index#The-Beginnings-of-PDL">The Beginnings of PDL</a>&#39;).</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/25/jwst/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/spectra/">spectra</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/data-reduction/">data reduction</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-25T00:00:00Z</updated>
+        <category term="broadcasting" />
+        <category term="image processing" />
+        <category term="spectra" />
+        <category term="data reduction" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/24/reflections/</id>
         <title>Day 24: Perl Data Language reflections</title>
@@ -99,29 +127,6 @@ select anything off-the-shelf (and they do know their shelves).</p>
         <updated>2024-12-21T00:00:00Z</updated>
         <category term="image processing" />
         <category term="broadcasting" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/</id>
-        <title>Day 20: Perl Data Language internals</title>
-        <author><name>Ed J</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p><a href="https://pdl.perl.org/">PDL</a> is powerful and has many features. But as
-with any complex software system, bugs can happen. Let&#39;s learn about two!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/20/pdl-internals/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/internals/">internals</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/implementation/">implementation</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/dataflow/">dataflow</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-20T00:00:00Z</updated>
-        <category term="internals" />
-        <category term="implementation" />
-        <category term="dataflow" />
     </entry>
 </feed>
 

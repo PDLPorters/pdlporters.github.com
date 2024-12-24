@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <meta content="" name="description">
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+  <link href="/advent/theme/css/default.css" rel="stylesheet">
+  <link href="/advent/theme/css/layout.css" rel="stylesheet">
+  <link href="/advent/theme/css/media-queries.css" rel="stylesheet">
+  <link href="/advent/theme/css/statocles.css" rel="stylesheet">
+
+  <!-- twitter and opengraph -->
+  <meta content="summary" name="twitter:card">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/25/jwst/" property="og:url">
+  <meta content="Day 25: PDL and the James Webb Space Telescope (broadcasting and dimension tricks)" property="og:title">
+    <meta content="JWST spectral processing" property="og:description">
+    <meta content="https://pdl.perl.org/advent/banner.jpeg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+
+  <script src="/advent/theme/js/modernizr.js"></script>
+
+      <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
+
+  <title>Day 25: PDL and the James Webb Space Telescope (broadcasting and dimension tricks) - PDL Advent calendar 2024</title>
+  <meta content="Karl Glazebrook" name="author">
+  <meta content="Statocles 0.098" name="generator">
+  <link href="/advent/../images/favicon.ico" rel="shortcut icon">
+  
+  
+</head>
+
+<body>
+
+   <header>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+
+            <nav id="nav-wrap">
+
+              <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+              <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+               <ul class="nav" id="nav">
+                 <!-- li.current is given a different styling -->
+                   <li><a href="/advent/../">PDL Website</a></li>
+                   <li><a href="/advent/blog">Blog</a></li>
+                   <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+
+               </ul>
+
+            </nav>
+
+         </div>
+
+      </div>
+
+   </header>
+
+   
+
+<div class="content-outer">
+
+  <div class="row" id="page-content">
+
+      <div class="eight columns" id="primary">
+
+        <article class="post">
+
+            <div class="entry-header cf">
+
+              <h1>Day 25: PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</h1>
+
+              <p class="post-meta">
+
+                  <time class="date" datetime="2024-12-25">Dec 25, 2024</time>
+                  
+
+              </p>
+
+            </div>
+
+              <div class="post-thumb">
+                <!-- theme suggests 1300x500 -->
+                <img alt="The James Webb Space Telescope hangs like a Christmas tree ornament over Africa as it prepares to deploy its mirror and travel to its distant orbit." src="banner.jpeg">
+              </div>
+
+            <div class="post-content">
+
+              <section id="section-1">
+                  <p><em>The James Webb Space Telescope hangs like a Christmas tree ornament over Africa as it prepares to deploy its mirror and travel to its distant orbit. Image credit: NASA/ESA 25/Dec/2021.</em></p>
+
+<h1>PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</h1>
+
+<p>I am an astronomer who has for 30 years used PDL for processing of astronomical data. (In fact this is one of the reasons I created it :-) see &#39;<a href="https://pdl.perl.org/?page=book/index#The-Beginnings-of-PDL">The Beginnings of PDL</a>&#39;).</p>
+
+              </section>
+              <section id="section-2">
+                  <p>I still use it like this today. These days I am a Professor at Swinburne University in Melbourne Australia and while most of my work is in research management (!) I still tinker with data analysis and love to use PDL for this (though annoyingly I am often forced to use python in collaborations). In particular PDL is excellent for processing 2D images, 1D spectra and 3D &#39;integral field spectroscopy&#39;, I have used it to analyse  data from telescopes such as AAT, Gemini, Keck, the Hubble Space Telescope (HST) and now the new James Webb Space Telescope (JWST). This was launched on Christmas Day 2021 so this 3-year anniversary seems appropriate. While much complex software has been written for JWST, for anything ad hoc or off-the-wall whipping something up in PDL is still the easiest thing, at least for me. :-)</p>
+
+<p>So in this piece to illustrate PDL and especially its ability to write fast and flexible code without loops (I will show the use of <em>broadcasting</em> and tricks with <em>dimensions</em>) it seemed appropriate to use JWST data.</p>
+
+<h2>The galaxy GN-z11</h2>
+
+<p>This galaxy has a long <a href="https://en.wikipedia.org/wiki/GN-z11">history</a> and was an early candidate for one of the most distant (and youngest) galaxies in the Universe. (Mind bendingly due to the finite speed of light we kind of observe the whole universe inside-out with the most distant galaxies being the earliest in cosmic time and the Big Bang being the furthest point we can see in all directions. Due to the expansion of the universe the light of distant galaxies is also extremely <a href="https://astronomy.swin.edu.au/cosmos/c/cosmological+redshift">redshifted</a> as we will see below). We will use PDL to process some JWST data and make a 1D spectrum where we can see the huge
+redshift.</p>
+
+<p>Let&#39;s start with an image, here is an image of the galaxy:
+<img alt="GNz-11 image" src="GNz-11.jpg">
+(<em>Image credit: DAWN JWST Archive</em>)</p>
+
+<p>This compares the Hubble Space Telescope (HST) and JWST (NIRCam infrared camera) images. It does not look very exciting. But on the right we see the meat of today&#39;s demonstration - this shows the location of <em>spectroscopic slits</em>. You can think of these are a series of slices through the galaxy where the light is dispersed to make a spectrum. (More info on <a href="https://en.wikipedia.org/wiki/Long-slit_spectroscopy">how a long-slit spectrograph works</a>).</p>
+
+<p>We can download one of these slit spectra of this object from the DAWN JWST archive:</p>
+
+<p><a href="https://s3.amazonaws.com/msaexp-nirspec/extractions/goodsn-wide0-v3/goodsn-wide0-v3_prism-clear_1211_1268.spec.fits">https://s3.amazonaws.com/msaexp-nirspec/extractions/goodsn-wide0-v3/goodsn-wide0-v3_prism-clear_1211_1268.spec.fits</a></p>
+
+<p>This is in the FITS format which is a RAW-type high dynamic range format used for professional astronomy images.</p>
+
+<p>OK let&#39;s make a plot:</p>
+
+<pre><code>use PDL;
+use PDL::Graphics::Simple qw(imag line plot);
+$jwst = rfits &#39;goodsn-wide0-v3_prism-clear_1211_1268.spec.fits[2]&#39;; # Image is in second FITS extension
+imag $jwst, -0.05, 0.1, {justify=&gt;0};
+@dims = dims($jwst);
+print join(&quot; &quot;, @dims),&quot;\n&quot;;
+</code></pre>
+
+<p>You can see from the output this is a 2D image of dimensions 435x31 and here is what it looks like:</p>
+
+<p><img alt="2D image" src="2D_image.png"></p>
+
+<p>The horizontal bright trace down the middle is the spectrum of the galaxy. (The sharp cutoff on the left is due to the extreme redshift of the galaxy as we will see below, so is a genuine astrophysical effect and not an artefact). The dark bands either side are negative traces which <em>are</em> an artefact of the  data reduction pipeline, specifically &quot;sky subtraction via nodding the telescope&quot;. These should be ignored.</p>
+
+<h2>Dimension tricks</h2>
+
+<p>Standard procedure would be to sum along the columns of the image to produce a 435 pixel spectrum, summing up the flux of the galaxy along the slit.
+We could use the <code>sumover()</code> function, but <code>$jwst-&gt;sumover</code> would <em>sum</em> along the rows and produce a 31 pixel ndarray which is not what we want.
+&#39;Reduction&#39; operations like <code>sumover(), average(), medover()</code>etc. apply along the first axis and make a result with one dimension fewer.
+To get what we want we have to transpose the image, i.e. swap the two axes.
+There are various ways of doing this in PDL, the simplest is to use the <code>t()</code> function as in <code>$jwst-&gt;t-&gt;sumover()</code>.
+This will move dimension 1 to the place of dimension 0, i.e. transposing the 2D ndarray.
+You can see using <code>dims()</code>that the result is a 435 element 1D ndarray.</p>
+
+<p>However in this case the resulting spectrum is hot garbage because by summing along the <em>entire</em> column one adds in the black trace artefacts.</p>
+
+<h2>Broadcasting</h2>
+
+<p>We need to only extract the central few rows. Code like
+<code>$jwst-&gt;slice(&#39;:,13:17&#39;)-&gt;t-&gt;sumover</code>  would work, but we can find a more optimal solution and demonstrate &#39;broadcasting&#39; at the same time! First look at this code:</p>
+
+<pre><code># Make a gaussian extraction profile
+$x = xvals($dims[1]);
+$fwhm = 2.1; # pix
+$gaussian = 0.04*exp(-0.5*(($x-15)/($fwhm/2.35))**2);
+line $x, $gaussian; # Plot
+</code></pre>
+
+<p>This code generates a 31 element gaussian function along the slit axis. Here is what <code>$gaussian</code> looks like:</p>
+
+<p><img alt="image" src="gaussian.png"></p>
+
+<p>(It does not look smooth as it is evaluated on a coarse pixel grid and is only a few pixels wide). If we can extract along the slit weighting by this gaussian we can get two things for the price of one: (1) eliminate the signal from the dark artefacts and (2) <em>optimally</em> weight the spectrum according to its light distribution along the slit (this arises from the shape of the galaxy) to get the most signal:noise.</p>
+
+<p>Now we can do some <em>broadcasting</em> and some <em>reduction</em>:</p>
+
+<pre><code>$profile_weighted = $jwst * $gaussian-&gt;t; # Multiply through
+$spec1d = $profile_weighted-&gt;t-&gt;sumover; # Extract by summing along columns
+$spec1d = $spec1d/max($spec1d); # Normalise
+</code></pre>
+
+<p>Recall <code>$jwst</code> has dimensions 435,31. We see another dimension trick, <code>$gaussian-&gt;t</code> adds a unit dimension at position 0 resulting in a dimension 1,31 ndarray. When we multiply these ndarrays together the second 31 element dimensions match, and the first  dimensions (435 and 1) are also matched. What happens is PDL implicitly expands the unit dimension by repeating it 435 times, and in the multiplication <code>$gaussian-&gt;t</code> behaves as a 435,31 ndarray. It is like multiplying two 435,31 ndarrays together. This ultimately results in the gaussian being multiplied through each column, which is then summed by the following line.</p>
+
+<p>This trick is known as &#39;broadcasting&#39; and is one of the most powerful PDL features.
+You can see we have written some highly complex code to apply mathematical operations to the image as a function of x,y without writing a single loop!
+Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as <code>t()</code> and <code>clump()</code>.
+It is also extremely fast as it operates at speeds close to what would happen if the loops were written in C or FORTRAN.
+When using it, I tend to need to experiment a bit to achieve what I want and look at the resulting dimensions.
+The main rule to remember is dimensions need to <em>match</em>, this happens when they are either the same size, or when one of them is of size unity.
+In the latter case the &#39;broadcasting&#39; happens and you can think of it as growing the axis by repetition.
+This all happens in the PDL internals during the operation it is being applied to, and the ndarray does not actually get any bigger nor use more memory!
+Some dimension-changes like <code>mv()</code> are just <a href="/advent/blog/2024/12/20/pdl-internals/index.html">different views on the same data</a>.
+The same goes for dimension manipulation with functions like <code>t()</code>, the ndarray is not copied it is simply &#39;viewed differently&#39;.
+For switching other dimensions, try <a href="https://metacpan.org/pod/PDL::Slices#mv">mv()</a> and <a href="https://metacpan.org/pod/PDL::Slices#xchg">xchg()</a>.</p>
+
+<p>More info on broadcasting and its rules is given in the pod <a href="https://metacpan.org/dist/PDL/view/Basic/Pod/Broadcasting.pod">PDL::Broadcasting</a>.</p>
+
+<h2>A galaxy 30 billion light years away</h2>
+
+<p>We can now look at our resulting spectrum:</p>
+
+<pre><code># Get wavelength array from fits table
+$temp = rfits &#39;goodsn-wide0-v3_prism-clear_1211_1268.spec.fits[1]&#39;;
+$wavelengths = $temp-&gt;{wave}; # if no Astro::FITS::Header, need &#39;wave    &#39;
+
+@line_waves = (1216, 3728, 3870, 3890, 3971, 4103, 4342);  # In Angstroms
+# UTF-8, in bytes which is what Gnuplot needs
+@line_names = (&#39;|Lyα&#39;,&#39;|[OII]&#39;,&#39;|[NeIII]&#39;, &#39;|Hζ&#39;, &#39;|Hε&#39;, &#39;|Hδ&#39;, &#39;|Hγ&#39;);
+
+$w_obs = pdl(\@line_waves)/10000; # Angstroms -&gt; Microns
+$redshift = 10.603;
+$w_obs *= 1+$redshift; # apply the redshift
+$label_height = $w_obs-&gt;xlinvals(0.8,1.02);
+my @heights = ($label_height - 0.02)-&gt;list;
+
+# Make a nice plot
+plot
+  with=&gt;&#39;lines&#39;, $wavelengths, $spec1d,
+  (map +(with=&gt;&#39;lines&#39;, style=&gt;7, pdl($_,$_), pdl(-1,shift @heights)), $w_obs-&gt;list),
+  with=&gt;&#39;labels&#39;, style=&gt;7, $w_obs, $label_height, \@line_names,
+  {xlabel=&gt;&#39;Wavelength / μm&#39;, ylabel=&gt;&#39;Flux&#39;,
+    xrange=&gt;[minmax($wavelengths)],yrange=&gt;[-0.1,1.1]};
+</code></pre>
+
+<p>This code adds the wavelength calibration of the axis (which is complex and beyond the scope of this article) and makes a plot, adding labels for the location of some common spectral lines. Here is the plot:</p>
+
+<p><img alt="spectrum" src="spectrum.png"></p>
+
+<p>What we see is a spectrum running from wavelengths 1 to 5 micrometers - this is beyond the range that the human eye can see because JWST is an infrared telescope. Looking at the spectral transitions there are two notable astrophysical features:</p>
+
+<ol>
+<li>The feature labelled &#39;Lyα&#39; is the Lyman-α spectral line of hydrogen which is strong as it is to the ground state of the atom. Because intergalactic space at early times contains a <em>lot</em> of hydrogen everything shortwards of this wavelength is totally absorbed giving rise to the &#39;break&#39; in the spectrum.  Lyman-α has a natural wavelength of 1216 Å or 0.1216 µm, so why is it appearing at 1.4µm ? This is because the galaxy is so distant is has an enormous cosmic redshift. The redshift &#39;z&#39; is 10.603, which means the wavelengths of the light is shifted by a factor of (1+z).</li>
+<li>One can confirm this by looking at the other lines. These are narrow &#39;emission lines&#39; that appear as sharp spikes at the long wavelength end of the spectrum. The ones I have labelled are the most obvious and are from Neon (Ne), and more from hydrogen (H). The wavelengths are all known precisely from laboratory measurements and line up precisely when multiplied by (1+z). This cosmic redshift has been securely measured by JWST!</li>
+</ol>
+
+<h2>Extra Credit</h2>
+
+<ol>
+<li><p>If you want to know more about this galaxy and its spectrum you can read the wikipedia page linked above or take a look at this (admittedly technical) <a href="https://www.aanda.org/articles/aa/full_html/2023/09/aa46159-23/aa46159-23.html">scientific paper</a>. You will see a similar spectrum in the paper.</p></li>
+<li><p>An interesting and straight forward exercise would be to use PDL to extract the slit profile and fit it with a gaussian to generate the extraction profile, rather than use my pre-canned one.</p></li>
+</ol>
+
+              </section>
+              <small><p>Image credit: NASA/ESA 25/Dec/2021</p>
+</small>
+
+              <p class="tags">
+                <span>Tagged in </span>:
+                  <a href="/advent/blog/tag/broadcasting/">broadcasting</a>,
+                  <a href="/advent/blog/tag/image-processing/">image processing</a>,
+                  <a href="/advent/blog/tag/spectra/">spectra</a>,
+                  <a href="/advent/blog/tag/data-reduction/">data reduction</a>
+              </p>
+
+
+                  <div class="bio cf">
+
+                      <div class="gravatar">
+                        <img alt="author image" src="https://avatars.githubusercontent.com/u/15331994?v=4">
+                      </div>
+                      <div class="about">
+                        <h5>Karl Glazebrook</h5>
+                        <p>Karl Glazebrook is a <a href="https://experts.swinburne.edu.au/812-karl-glazebrook">Professor of Astronomy at Swinburne University of Technology</a> in Melbourne, Australia. Originally from the UK he has worked for 30 years in the UK, the U.S. and Australia doing research on cosmology and the evolution of galaxies across time using observations on the largest telescopes, including the Keck observatory and the Hubble Space Telescope. He now leads a group at Swinburne studying the earliest galaxies with the new James Webb Space Telescope. <a href="https://archive.md/ZMrEW">In 1996 he created version 1.0 of PDL</a> while on an observing trip to La Silla in Chile, due to his love of Perl and frustration with existing free software to do image processing.</p>
+
+                      </div>
+
+                  </div>
+
+              <ul class="post-nav cf">
+                  <li class="prev"><a href="/advent/blog/2024/12/24/reflections/index.html" rel="prev"><strong>Previous Article</strong> Day 24: Perl Data Language reflections</a></li>
+              </ul>
+
+            </div>
+
+        </article>
+
+
+      </div>
+
+      <div class="four columns end" id="secondary">
+        <aside id="sidebar">
+          
+
+
+
+
+
+
+
+<div class="widget widget_tag_cloud">
+  <h5 class="widget-title">Tags</h5>
+  <div class="tagcloud cf">
+    <a href="/advent/blog/tag/api/">API</a>
+    <a href="/advent/blog/tag/bad-values/">Bad Values</a>
+    <a href="/advent/blog/tag/broadcasting/">broadcasting</a>
+    <a href="/advent/blog/tag/cartography/">cartography</a>
+    <a href="/advent/blog/tag/clustering/">clustering</a>
+    <a href="/advent/blog/tag/community/">community</a>
+    <a href="/advent/blog/tag/complex-numbers/">complex numbers</a>
+    <a href="/advent/blog/tag/computer-vision/">computer vision</a>
+    <a href="/advent/blog/tag/correlation/">correlation</a>
+    <a href="/advent/blog/tag/create-operation/">create operation</a>
+    <a href="/advent/blog/tag/csv/">CSV</a>
+    <a href="/advent/blog/tag/d3-js/">D3.js</a>
+    <a href="/advent/blog/tag/data-analysis/">data analysis</a>
+    <a href="/advent/blog/tag/data-reduction/">data reduction</a>
+    <a href="/advent/blog/tag/dataflow/">dataflow</a>
+    <a href="/advent/blog/tag/finance/">finance</a>
+    <a href="/advent/blog/tag/image-processing/">image processing</a>
+    <a href="/advent/blog/tag/implementation/">implementation</a>
+    <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>
+    <a href="/advent/blog/tag/installation/">installation</a>
+    <a href="/advent/blog/tag/internals/">internals</a>
+    <a href="/advent/blog/tag/interpolation/">interpolation</a>
+    <a href="/advent/blog/tag/introduction/">introduction</a>
+    <a href="/advent/blog/tag/inverse-cdf/">Inverse CDF</a>
+    <a href="/advent/blog/tag/macos/">MacOS</a>
+    <a href="/advent/blog/tag/mandelbrot/">mandelbrot</a>
+    <a href="/advent/blog/tag/matrix-operations/">matrix operations</a>
+    <a href="/advent/blog/tag/mojolicious/">Mojolicious</a>
+    <a href="/advent/blog/tag/nan/">NaN</a>
+    <a href="/advent/blog/tag/optics/">optics</a>
+    <a href="/advent/blog/tag/optimisation/">optimisation</a>
+    <a href="/advent/blog/tag/performance/">performance</a>
+    <a href="/advent/blog/tag/phonetics/">phonetics</a>
+    <a href="/advent/blog/tag/plotting/">plotting</a>
+    <a href="/advent/blog/tag/pptemplate/">pptemplate</a>
+    <a href="/advent/blog/tag/random-numbers/">random numbers</a>
+    <a href="/advent/blog/tag/scipdl/">SciPDL</a>
+    <a href="/advent/blog/tag/signal-processing/">signal processing</a>
+    <a href="/advent/blog/tag/significance/">significance</a>
+    <a href="/advent/blog/tag/simplex/">simplex</a>
+    <a href="/advent/blog/tag/slicing/">slicing</a>
+    <a href="/advent/blog/tag/sound/">sound</a>
+    <a href="/advent/blog/tag/spectra/">spectra</a>
+    <a href="/advent/blog/tag/speech/">speech</a>
+    <a href="/advent/blog/tag/statistics/">statistics</a>
+    <a href="/advent/blog/tag/test/">Test</a>
+    <a href="/advent/blog/tag/thin-lenses/">thin lenses</a>
+    <a href="/advent/blog/tag/transform/">transform</a>
+    <a href="/advent/blog/tag/trid/">TriD</a>
+    <a href="/advent/blog/tag/unsupervised-learning/">unsupervised learning</a>
+    <a href="/advent/blog/tag/visualisation/">visualisation</a>
+    <a href="/advent/blog/tag/visualization/">visualization</a>
+  </div>
+</div>
+
+
+
+        </aside>
+      </div>
+
+   </div>
+
+</div>
+
+
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="footer-nav">
+                <li><a href="/advent/../">PDL Website</a></li>
+                <li><a href="/advent/blog">Blog</a></li>
+                <li><a href="/advent/blog/index.rss"><i class="fa fa-rss"></i></a></li>
+            </ul>
+
+
+            <ul class="copyright">
+               <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
+               <li>Made with <a href="http://preaction.me/statocles">Statocles</a></li>
+               <li>Powered by <a href="http://www.perl.org">Perl</a></li>
+            </ul>
+
+         </div>
+
+         <div id="go-top" style="display: block;"><a href="#" title="Back to Top">Go To Top</a></div>
+
+      </div>
+
+   </footer>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="/theme/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="/advent/theme/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+   <script src="/advent/theme/js/jquery.flexslider.js"></script>
+   <script src="/advent/theme/js/doubletaptogo.js"></script>
+   <script src="/advent/theme/js/init.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/perl.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+      <script>
+        hljs.configure({"languages":["perl","bash","yaml","xml"]});
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+</body>
+
+</html>

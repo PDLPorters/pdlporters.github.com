@@ -7,6 +7,31 @@
         <description>Blog feed of PDL Advent calendar 2024</description>
         <generator>Statocles 0.098</generator>
         <item>
+            <title>Day 25: PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</title>
+            <link>https://pdl.perl.org/advent/blog/2024/12/25/jwst/</link>
+            <guid>https://pdl.perl.org/advent/blog/2024/12/25/jwst/</guid>
+            <description><![CDATA[
+                <p><em>The James Webb Space Telescope hangs like a Christmas tree ornament over Africa as it prepares to deploy its mirror and travel to its distant orbit. Image credit: NASA/ESA 25/Dec/2021.</em></p>
+
+<h1>PDL and the James Webb Space Telescope (broadcasting and dimension tricks)</h1>
+
+<p>I am an astronomer who has for 30 years used PDL for processing of astronomical data. (In fact this is one of the reasons I created it :-) see &#39;<a href="https://pdl.perl.org/?page=book/index#The-Beginnings-of-PDL">The Beginnings of PDL</a>&#39;).</p>
+
+                    <p><a href="https://pdl.perl.org/advent/blog/2024/12/25/jwst/#section-2">Continue reading...</a></p>
+
+                    <p>Tags:
+                        <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/spectra/">spectra</a>
+                        <a href="https://pdl.perl.org/advent/blog/tag/data-reduction/">data reduction</a>
+                    </p>
+
+            ]]></description>
+            <pubDate>
+                Wed, 25 Dec 2024 00:00:00 +0000
+            </pubDate>
+        </item>
+        <item>
             <title>Day 22: Clearing the Runway</title>
             <link>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</link>
             <guid>https://pdl.perl.org/advent/blog/2024/12/22/hough-lines/</guid>

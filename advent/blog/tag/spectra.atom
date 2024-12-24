@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pdl.perl.org/advent/blog/tag/broadcasting/</id>
+    <id>https://pdl.perl.org/advent/blog/tag/spectra/</id>
     <title>PDL Advent calendar 2024</title>
     <updated>2024-12-25T00:00:00Z</updated>
-    <link href="https://pdl.perl.org/advent/blog/tag/broadcasting.atom" rel="self" />
-    <link href="https://pdl.perl.org/advent/blog/tag/broadcasting/" rel="alternate" />
+    <link href="https://pdl.perl.org/advent/blog/tag/spectra.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/spectra/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
     <entry>
@@ -34,28 +34,6 @@
         <category term="image processing" />
         <category term="spectra" />
         <category term="data reduction" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/21/image-manip/</id>
-        <title>Day 21: Fun and Games with Images</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you are manipulating images, you need PDL!</p>
-
-<p>For years, I&#39;ve had this urge to use PDL to take a bitmap image and trace the outlines to make an SVG file that I could scale up to A0 poster size without the resulting pixelation. Yes, there are already <a href="https://github.com/autotrace/autotrace">tools that do that</a>, but where&#39;s the fun in that? It&#39;s Christmas, the time for Fun and Games!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/21/image-manip/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/image-processing/">image processing</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/broadcasting/">broadcasting</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-21T00:00:00Z</updated>
-        <category term="image processing" />
-        <category term="broadcasting" />
     </entry>
 </feed>
 

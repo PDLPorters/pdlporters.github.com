@@ -16,9 +16,9 @@
 
   <!-- twitter and opengraph -->
   <meta content="summary" name="twitter:card">
-  <meta content="https://pdl.perl.org/advent/blog/2024/12/17/new-pdl-operation/" property="og:url">
-  <meta content="Day 17: New operations for Perl Data Language" property="og:title">
-    <meta content="New operations for PDL (Perl Data Language)" property="og:description">
+  <meta content="https://pdl.perl.org/advent/blog/2024/12/24/reflections/" property="og:url">
+  <meta content="Day 24: Perl Data Language reflections" property="og:title">
+    <meta content="PDL (Perl Data Language) reflections" property="og:description">
     <meta content="https://pdl.perl.org/advent/./banner.jpg" property="og:image">
     <meta content="summary_large_image" name="twitter:card">
 
@@ -26,7 +26,7 @@
 
       <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css" rel="stylesheet">
 
-  <title>Day 17: New operations for Perl Data Language - PDL Advent calendar 2024</title>
+  <title>Day 24: Perl Data Language reflections - PDL Advent calendar 2024</title>
   <meta content="Ed J" name="author">
   <meta content="Statocles 0.098" name="generator">
   <link href="/advent/../images/favicon.ico" rel="shortcut icon">
@@ -76,11 +76,11 @@
 
             <div class="entry-header cf">
 
-              <h1>Day 17: New operations for Perl Data Language</h1>
+              <h1>Day 24: Perl Data Language reflections</h1>
 
               <p class="post-meta">
 
-                  <time class="date" datetime="2024-12-17">Dec 17, 2024</time>
+                  <time class="date" datetime="2024-12-24">Dec 24, 2024</time>
                   
 
               </p>
@@ -89,130 +89,98 @@
 
               <div class="post-thumb">
                 <!-- theme suggests 1300x500 -->
-                <img alt="Prometheus bringing fire to mankind" src="./banner.jpg">
+                <img alt="Four stroke gasoline engine diagram" src="./banner.jpg">
               </div>
 
             <div class="post-content">
 
               <section id="section-1">
-                  <p>If you want to create new <a href="https://pdl.perl.org/">PDL</a> operations, it&#39;s easy! You can make an ad-hoc one with
-<a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>, and expand it (or
-just start) by using <a href="https://metacpan.org/pod/pptemplate">pptemplate</a>.</p>
+                  <p><a href="https://pdl.perl.org/">PDL</a> is great to use. The community is pretty
+great, too!</p>
 
               </section>
               <section id="section-2">
-                  <p>&quot;Genetic engineering?&quot; Santa&#39;s chief planner wasn&#39;t
-<a href="https://www.youtube.com/watch?v=AeKizzQpPpY&amp;t=199s">fully losing her mind</a>,
-but it was visibly an effort.</p>
+                  <p>Making this Advent calendar has been an adventure (ha!). As well as a
+couple of articles from me, there have been many from Boyd, who also
+shepherded this thing from inception onwards.</p>
 
-<p>&quot;The presents stuff doesn&#39;t take up the whole year!&quot; Santa said,
-defensively. If they were going to analyse genetic data, they might as
-well do it efficiently. Perhaps PDL could help?</p>
+<p>We&#39;ve also had contributions from users both long-standing and also
+new. That reflects PDL itself, which from the moment it started had an
+active, some might say opinionated, community of contributors. Since
+the originator of PDL, Karl Glazebrook, gets pride of place with an
+article tomorrow (Xmas day), I won&#39;t steal any of his thunder.</p>
 
-<p>As <a href="https://www.perlmonks.org/?node_id=11162765">discussed recently on
-PerlMonks</a>, processing
-data in a highly efficient way is already possible using existing
-PDL operations, and it&#39;s easy to engage the <a href="https://metacpan.org/pod/PDL::ParallelCPU">automatic POSIX
-threading</a> too.</p>
+<p>That variety extends to the type of contribution made: from making
+continuous integration that has radically reduced the rate of bugs
+(hi Zaki!) to adding support for PDL without making their module depend
+on PDL. It&#39;s been a lot of fun supporting this community, and I intend
+to go on doing that.</p>
 
-<p>Those existing operations are made with
-<a href="https://metacpan.org/pod/PDL::PP">PDL::PP</a>, which allows making
-type-generic, n-dimensional operations for PDL. But taking the first
-step can feel a bit intimidating. Inline::Pdlpp allows you to make a
-script with a PP operation in minutes.</p>
+<h2>Math::3Space</h2>
 
-<p><a href="https://metacpan.org/pod/Inline::Pdlpp">Inline::Pdlpp</a>&#39;s SYNOPSIS has a
-working example of making a new PDL operation for processing genetic data:</p>
+<p>That last one I&#39;m going to unpack a bit: the module in question is
+<a href="https://metacpan.org/pod/Math::3Space">Math::3Space</a>. I was interested
+in some PerlMonks articles mentioning it, and similar 3D calculations,
+so I wanted to make sure PDL wasn&#39;t missing out any 3D goodness.</p>
 
-<pre><code>use strict; use warnings;
-use PDL;
-use Inline Pdlpp =&gt; &#39;DATA&#39;;
-# make data with: echo -n &#39;ATCGZATCG&#39; &gt;input.data
-# use it with aa_to_int.pl input.data
-my $file; ($file = shift, -f $file) || die &quot;Usage: $0 filename&quot;;
-my $size = -s $file;
-my $pdl = zeroes(byte, $size);
-${$pdl-&gt;get_dataref} = do { open my $fh, $file or die &quot;$file: $!&quot;; local $/; &lt;$fh&gt; };
-$pdl-&gt;upd_data;
-$pdl-&gt;inplace-&gt;aa_to_int;
-print $pdl, &quot;\n&quot;;
-__DATA__
-__Pdlpp__
-pp_def(&#39;aa_to_int&#39;,
- Pars =&gt; &#39;i();[o] o()&#39;,
- GenericTypes =&gt; [&#39;B&#39;],
- Inplace =&gt; 1,
- Code =&gt; &lt;&lt;&#39;EOF&#39;,
-switch($i()) {
- case &#39;A&#39;: $o() = 0; break;
- case &#39;T&#39;: $o() = 1; break;
- case &#39;C&#39;: $o() = 2; break;
- case &#39;G&#39;: $o() = 3; break;
- default: $o() = 255; break;
-}
-EOF
- Doc =&gt; &quot;=for ref\n\nConvert amino acid names to integers.\n&quot;,
-);
-</code></pre>
+<p>I made a few pull requests, most notably
+<a href="https://github.com/nrdvana/perl-Math-3Space/pull/8">this one</a> that
+proposed a complete PDL implementation. As of this writing, it&#39;s still
+open, because the author, Michael, chose a different approach. Preferring
+his modules to have very, very
+<a href="https://www.perlmonks.org/?node_id=11163301">minimal dependencies</a>,
+he instead had his XS code know about that module&#39;s objects, but <em>then
+also</em> know about PDL objects. On seeing one of those, it would call
+Perl methods on it, to see how many dimensions it has, and if few,
+to call PDL&#39;s <code>list</code> method to just get the raw data.</p>
 
-<p>A further improvement to that script might be to mark those unknown
-letters as <a href="../../10/bad-values/">bad values</a>:</p>
+<p>As shown in discussion on that pull request, for the finite things the
+module is for, it&#39;s extremely fast, indeed for those small things it&#39;s
+quicker than PDL. Without having done a full performance evaluation,
+I am certain that PDL will be quicker for really big 3D calculations,
+partly because it could use a GPU-using LAPACK implementation through
+<a href="https://metacpan.org/pod/PDL::LinearAlgebra">PDL::LinearAlgebra</a>,
+or even just using the <a href="https://metacpan.org/pod/PDL::ParallelCPU">automatic POSIX
+threading</a> that&#39;s available
+on any POSIX platform.</p>
 
-<pre><code>$pdl-&gt;inplace-&gt;setvaltobad(255);
-</code></pre>
+<p>The discussion, and ideas that came from it, was really enjoyable, and
+lead to what I believe is fixing / finishing an idea
+that had been discussed in very early PDL:
+&quot;<a href="https://metacpan.org/pod/PDL::Dataflow">flowing families</a>&quot;.</p>
 
-<p>Or, the operation itself could set the values bad:</p>
+<h2>PDL::Parallel::threads</h2>
 
-<pre><code>$pdl-&gt;badflag(1);
-$pdl-&gt;inplace-&gt;aa_to_int;
-# ...
-pp_def(&#39;aa_to_int&#39;,
- Pars =&gt; &#39;i();[o] o()&#39;,
- GenericTypes =&gt; [&#39;B&#39;],
- Inplace =&gt; 1,
- HandleBad =&gt; 1,
- Code =&gt; &lt;&lt;&#39;EOF&#39;,
-switch($i()) {
- case &#39;A&#39;: $o() = 0; break;
- case &#39;T&#39;: $o() = 1; break;
- case &#39;C&#39;: $o() = 2; break;
- case &#39;G&#39;: $o() = 3; break;
- default: PDL_IF_BAD($SETBAD(o()),$o() = 255); break;
-}
-EOF
- Doc =&gt; &quot;=for ref\n\nConvert amino acid names to integers.\n&quot;,
-);
-</code></pre>
+<p>Speaking of getting inspiration from collaboration,
+another module where something similar happened was
+<a href="https://metacpan.org/pod/PDL::Parallel::threads">PDL::Parallel::threads</a>.
+At first I couldn&#39;t see what it brought to PDL, until Mario Roy&#39;s
+<a href="https://github.com/PDLPorters/pdl/issues/385">incredibly thorough
+investigation</a> and
+comparison of different ways of doing parallel matrix computation. This
+module not only allows clever techniques for doing that quickly, but
+<em>also</em> would allow you to have a graphical user interface running all
+at the same time!</p>
 
-<p>To turn this into a fully-fledged PDL module, use
-<a href="https://metacpan.org/pod/pptemplate">pptemplate</a>:</p>
+<p>This year (2024), I thought I would see if that module could be made
+simpler, by adding some support for it in main PDL. It turns out it could,
+and its author (David Mertens) was kind enough to grant me permission
+to include it in main PDL. In an example of PDL synergy, the techniques
+used to provide PDL::Parallel::threads with the facilities it
+needed in core PDL, almost immediately helped fix a long-standing
+<a href="https://github.com/PDLPorters/pdl/issues/501">problem</a> with
+<a href="https://metacpan.org/pod/PDL::IO::FlexRaw">PDL::IO::FlexRaw</a>.</p>
 
-<pre><code>$ pptemplate PDL::MyModule
-</code></pre>
-
-<p>Put your <code>pp_def</code> code into <code>mymodule.pd</code> (or, in the new scheme as of
-PDL 2.096, <code>lib/PDL/MyModule.pd</code>), make some tests, write documentation,
-and publish to the world on CPAN!</p>
-
-<h2>Further resources</h2>
-
-<p>Be sure to check the documentation for
-<a href="https://metacpan.org/pod/PDL::PP">PDL::PP</a>, to see further
-possibilities. You can supply additional keys to the <code>pp_def</code>
-call to control whether to disable POSIX threading (which is
-on by default, but some C libraries can&#39;t handle that). Or you
-can automatically add lvalue processing, as with <a href="https://metacpan.org/pod/PDL::Slices#slice">the slice
-operation</a>.</p>
+<p>Teamwork truly makes the dream work!</p>
 
               </section>
-              <small><p><a href="https://commons.wikimedia.org/wiki/File:Heinrich_fueger_1817_prometheus_brings_fire_to_mankind.jpg">Prometheus Brings Fire to Mankind</a> by Heinrich Füger, circa 1790</p>
+              <small><p><a href="https://en.wikipedia.org/wiki/File:Mount_Hood_reflected_in_Mirror_Lake,_Oregon.jpg">Oregon&#39;s Mt. Hood Territory</a> - public domain</p>
 </small>
 
               <p class="tags">
                 <span>Tagged in </span>:
-                  <a href="/advent/blog/tag/inline-pdlpp/">inline-pdlpp</a>,
-                  <a href="/advent/blog/tag/pptemplate/">pptemplate</a>,
-                  <a href="/advent/blog/tag/create-operation/">create operation</a>
+                  <a href="/advent/blog/tag/community/">community</a>,
+                  <a href="/advent/blog/tag/api/">API</a>
               </p>
 
 
@@ -230,8 +198,7 @@ operation</a>.</p>
                   </div>
 
               <ul class="post-nav cf">
-                  <li class="prev"><a href="/advent/blog/2024/12/16/matrix-mult/index.html" rel="prev"><strong>Previous Article</strong> Day 16: These are Testing Times, Indeed!</a></li>
-                  <li class="next"><a href="/advent/blog/2024/12/18/mandelbrot/index.html" rel="next"><strong>Next Article</strong> Day 18: How to use PDL to draw a Mandelbrot Set </a></li>
+                  <li class="prev"><a href="/advent/blog/2024/12/23/random/index.html" rel="prev"><strong>Previous Article</strong> Day 23: Generic, general random number simulation using the Inverse CDF method in PDL</a></li>
               </ul>
 
             </div>

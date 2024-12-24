@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pdl.perl.org/advent/blog/tag/community/</id>
+    <title>PDL Advent calendar 2024</title>
+    <updated>2024-12-24T00:00:00Z</updated>
+    <link href="https://pdl.perl.org/advent/blog/tag/community.atom" rel="self" />
+    <link href="https://pdl.perl.org/advent/blog/tag/community/" rel="alternate" />
+    <generator version="0.098">Statocles</generator>
+
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/24/reflections/</id>
+        <title>Day 24: Perl Data Language reflections</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/24/reflections/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p><a href="https://pdl.perl.org/">PDL</a> is great to use. The community is pretty
+great, too!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/24/reflections/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/community/">community</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/api/">API</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-24T00:00:00Z</updated>
+        <category term="community" />
+        <category term="API" />
+    </entry>
+</feed>
+

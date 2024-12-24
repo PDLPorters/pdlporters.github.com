@@ -2,11 +2,32 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pdl.perl.org/advent/blog/</id>
     <title>PDL Advent calendar 2024</title>
-    <updated>2024-12-23T00:00:00Z</updated>
+    <updated>2024-12-24T00:00:00Z</updated>
     <link href="https://pdl.perl.org/advent/blog/index.atom" rel="self" />
     <link href="https://pdl.perl.org/advent/blog/" rel="alternate" />
     <generator version="0.098">Statocles</generator>
 
+    <entry>
+        <id>https://pdl.perl.org/advent/blog/2024/12/24/reflections/</id>
+        <title>Day 24: Perl Data Language reflections</title>
+        <author><name>Ed J</name></author>
+        <link href="https://pdl.perl.org/advent/blog/2024/12/24/reflections/" rel="alternate" />
+        <content type="html"><![CDATA[
+            <p><a href="https://pdl.perl.org/">PDL</a> is great to use. The community is pretty
+great, too!</p>
+
+                <p><a href="https://pdl.perl.org/advent/blog/2024/12/24/reflections/#section-2">Continue reading...</a></p>
+
+                <p>Tags:
+                    <a href="https://pdl.perl.org/advent/blog/tag/community/">community</a>
+                    <a href="https://pdl.perl.org/advent/blog/tag/api/">API</a>
+                </p>
+
+        ]]></content>
+        <updated>2024-12-24T00:00:00Z</updated>
+        <category term="community" />
+        <category term="API" />
+    </entry>
     <entry>
         <id>https://pdl.perl.org/advent/blog/2024/12/23/random/</id>
         <title>Day 23: Generic, general random number simulation using the Inverse CDF method in PDL</title>
@@ -101,36 +122,6 @@ with any complex software system, bugs can happen. Let&#39;s learn about two!</p
         <category term="internals" />
         <category term="implementation" />
         <category term="dataflow" />
-    </entry>
-    <entry>
-        <id>https://pdl.perl.org/advent/blog/2024/12/19/optics/</id>
-        <title>Day 19: Twinkle, Twinkle Little Star</title>
-        <author><name>Boyd Duffee</name></author>
-        <link href="https://pdl.perl.org/advent/blog/2024/12/19/optics/" rel="alternate" />
-        <content type="html"><![CDATA[
-            <p>If you&#39;re tracing rays or transforming coordinates, you could be using PDL!</p>
-
-<p>A little knowledge is a dangerous thing.
-Having seen how to do matrix multiplication <a href="https://pdl.perl.org/advent/advent/blog/2024/12/16/matrix-mult/">on 16 December</a>,
-the Elf R&amp;D department, headed by Rudolf and <a href="https://www.dancer.pm/">Dancer</a>,
-decided to calculate the sparkle from their baubles.
-In optics, tracing light rays through bits of glass that act as mirrors and lenses
-can be done by working through a series of equations <em>or</em> by
-<a href="https://en.wikipedia.org/wiki/Ray_transfer_matrix_analysis">multiplying matrices and vectors</a>!</p>
-
-                <p><a href="https://pdl.perl.org/advent/blog/2024/12/19/optics/#section-2">Continue reading...</a></p>
-
-                <p>Tags:
-                    <a href="https://pdl.perl.org/advent/blog/tag/matrix-operations/">matrix operations</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/optics/">optics</a>
-                    <a href="https://pdl.perl.org/advent/blog/tag/thin-lenses/">thin lenses</a>
-                </p>
-
-        ]]></content>
-        <updated>2024-12-19T00:00:00Z</updated>
-        <category term="matrix operations" />
-        <category term="optics" />
-        <category term="thin lenses" />
     </entry>
 </feed>
 

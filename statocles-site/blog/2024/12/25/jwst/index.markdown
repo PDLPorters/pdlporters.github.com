@@ -68,7 +68,7 @@ Standard procedure would be to sum along the columns of the image to produce a 4
 We could use the `sumover()` function, but `$jwst->sumover` would _sum_ along the rows and produce a 31 pixel ndarray which is not what we want.
 'Reduction' operations like `sumover(), average(), medover() `etc. apply along the first axis and make a result with one dimension fewer.
 To get what we want we have to transpose the image, i.e. swap the two axes.
-There are various ways of doing this in PDL, the simplest is to use the `t()` function as in `$jwst->t->sumover()`.
+There are various ways of doing this in PDL, the simplest is to use the `mv()` function as in `$jwst->mv(1,0)->sumover()`.
 This will move dimension 1 to the place of dimension 0, i.e. transposing the 2D ndarray.
 You can see using `dims() `that the result is a 435 element 1D ndarray.
 
@@ -77,7 +77,7 @@ However in this case the resulting spectrum is hot garbage because by summing al
 ## Broadcasting
 
 We need to only extract the central few rows. Code like
-`$jwst->slice(':,13:17')->t->sumover`  would work, but we can find a more optimal solution and demonstrate 'broadcasting' at the same time! First look at this code:
+`$jwst->slice(':,13:17')->mv(1,0)->sumover`  would work, but we can find a more optimal solution and demonstrate 'broadcasting' at the same time! First look at this code:
 
     # Make a gaussian extraction profile
     $x = xvals($dims[1]);
@@ -93,23 +93,28 @@ This code generates a 31 element gaussian function along the slit axis. Here is 
 
 Now we can do some _broadcasting_ and some _reduction_:
 
-    $profile_weighted = $jwst * $gaussian->t; # Multiply through
-    $spec1d = $profile_weighted->t->sumover; # Extract by summing along columns
+    $profile_weighted = $jwst * $gaussian->dummy(0); # Multiply through
+    $spec1d = $profile_weighted->mv(1,0)->sumover; # Extract by summing along columns
     $spec1d = $spec1d/max($spec1d); # Normalise
 
-Recall `$jwst` has dimensions 435,31. We see another dimension trick, `$gaussian->t` adds a unit dimension at position 0 resulting in a dimension 1,31 ndarray. When we multiply these ndarrays together the second 31 element dimensions match, and the first  dimensions (435 and 1) are also matched. What happens is PDL implicitly expands the unit dimension by repeating it 435 times, and in the multiplication `$gaussian->t` behaves as a 435,31 ndarray. It is like multiplying two 435,31 ndarrays together. This ultimately results in the gaussian being multiplied through each column, which is then summed by the following line.
+Recall `$jwst` has dimensions 435,31. We see another dimension trick, `$gaussian->dummy(0)` adds a unit dimension at position 0 resulting in a dimension 1,31 ndarray. When we multiply these ndarrays together the second 31 element dimensions match, and the first  dimensions (435 and 1) are also matched. What happens is PDL implicitly expands the unit dimension by repeating it 435 times, and in the multiplication `$gaussian->dummy(0)` behaves as a 435,31 ndarray. It is like multiplying two 435,31 ndarrays together. This ultimately results in the gaussian being multiplied through each column, which is then summed by the following line.
 
 This trick is known as 'broadcasting' and is one of the most powerful PDL features.
 You can see we have written some highly complex code to apply mathematical operations to the image as a function of x,y without writing a single loop!
-Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as `t()` and `clump()`.
+Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as `mv()` and `clump()`.
 It is also extremely fast as it operates at speeds close to what would happen if the loops were written in C or FORTRAN.
 When using it, I tend to need to experiment a bit to achieve what I want and look at the resulting dimensions.
 The main rule to remember is dimensions need to _match_, this happens when they are either the same size, or when one of them is of size unity.
 In the latter case the 'broadcasting' happens and you can think of it as growing the axis by repetition.
 This all happens in the PDL internals during the operation it is being applied to, and the ndarray does not actually get any bigger nor use more memory!
 Some dimension-changes like `mv()` are just [different views on the same data](/blog/2024/12/20/pdl-internals/index.html).
-The same goes for dimension manipulation with functions like `t()`, the ndarray is not copied it is simply 'viewed differently'.
+The same goes for dimension manipulation with functions like `mv()`, the ndarray is not copied it is simply 'viewed differently'.
 For switching other dimensions, try [mv()](https://metacpan.org/pod/PDL::Slices#mv) and [xchg()](https://metacpan.org/pod/PDL::Slices#xchg).
+For the first two (and inflating up to 2 dimensions if fewer), try [`transpose`](https://metacpan.org/pod/PDL::Basic#transpose).
+In very recent PDL versions there is also
+[`t`](https://metacpan.org/pod/PDL::Basic#t), which can also take a
+complex conjugate in one go. It wouldn't be Perl if there wasn't "more
+than one way to do it"!
 
 More info on broadcasting and its rules is given in the pod [PDL::Broadcasting](https://metacpan.org/dist/PDL/view/Basic/Pod/Broadcasting.pod).
 

@@ -101,7 +101,8 @@ Recall `$jwst` has dimensions 435,31. We see another dimension trick, `$gaussian
 
 This trick is known as 'broadcasting' and is one of the most powerful PDL features.
 You can see we have written some highly complex code to apply mathematical operations to the image as a function of x,y without writing a single loop!
-Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as `mv()` and `clump()`.
+Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as [`mv()`](https://metacpan.org/pod/PDL::Slices#mv) and [`dummy()`](https://metacpan.org/pod/PDL::Core#dummy).
+One can also use [`clump()`](https://metacpan.org/pod/PDL::Core#clump) to aggregate dimensions.
 It is also extremely fast as it operates at speeds close to what would happen if the loops were written in C or FORTRAN.
 When using it, I tend to need to experiment a bit to achieve what I want and look at the resulting dimensions.
 The main rule to remember is dimensions need to _match_, this happens when they are either the same size, or when one of them is of size unity.

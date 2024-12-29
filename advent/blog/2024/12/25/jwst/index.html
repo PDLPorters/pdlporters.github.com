@@ -181,7 +181,8 @@ $spec1d = $spec1d/max($spec1d); # Normalise
 
 <p>This trick is known as &#39;broadcasting&#39; and is one of the most powerful PDL features.
 You can see we have written some highly complex code to apply mathematical operations to the image as a function of x,y without writing a single loop!
-Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as <code>mv()</code> and <code>clump()</code>.
+Broadcasting is powerful because it can be applied along any axis with suitable dimension tricks using functions such as <a href="https://metacpan.org/pod/PDL::Slices#mv"><code>mv()</code></a> and <a href="https://metacpan.org/pod/PDL::Core#dummy"><code>dummy()</code></a>.
+One can also use <a href="https://metacpan.org/pod/PDL::Core#clump"><code>clump()</code></a> to aggregate dimensions.
 It is also extremely fast as it operates at speeds close to what would happen if the loops were written in C or FORTRAN.
 When using it, I tend to need to experiment a bit to achieve what I want and look at the resulting dimensions.
 The main rule to remember is dimensions need to <em>match</em>, this happens when they are either the same size, or when one of them is of size unity.

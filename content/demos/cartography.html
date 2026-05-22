@@ -12,7 +12,7 @@
  Also you must have <a href="https://metacpan.org/pod/PDL::Graphics::Simple">PDL::Graphics::Simple</a> installed to run it.
 <p/>
  <a href="https://metacpan.org/pod/PDL::Transform::Cartography">PDL::Transform::Cartography</a> includes a global earth vector coastline map
- and night and day world image maps, as well as the infrastructure for 
+ and night and day world image maps, as well as the infrastructure for
  transforming them to different coordinate systems.
 
 <hr/>
@@ -44,7 +44,7 @@ The image contains a FITS header that contains coordinate system info.
   print "FITS HEADER INFORMATION:\n";
   for $_(sort keys %{$map->hdr}){
     next if(m/SIMPLE/ || m/HISTORY/ || m/COMMENT/);
-    printf ("  %8s: %10s%s", $_, $map->hdr->{$_}, (++$i%3) ? "  " : "\n"); 
+    printf ("  %8s: %10s%s", $_, $map->hdr->{$_}, (++$i%3) ? "  " : "\n");
   }
   print "\n";
   $w = pgswin();
@@ -121,9 +121,9 @@ cases like stereographic and gnomonic projection): orthographic,
 vertical, and true perspective.  The true perspective has options for
 both downward-looking and aerial-view coordinate systems.
 <pre>
-draw( t_orthographic( o=>[-90,40] ), 
+draw( t_orthographic( o=>[-90,40] ),
       "Orthographic",  [400,300]);
-draw( t_vertical( r0=> (2 + 1), o=>[-90,40] ), 
+draw( t_vertical( r0=> (2 + 1), o=>[-90,40] ),
       "Vertical (Altitude = 2 r_e)", [400,300]);
 draw( t_perspective( r0=> (2 + 1), o=>[-90,40] ),
       "True Perspective (Altitude= 2 r_e)", [400,300]);
@@ -140,16 +140,48 @@ draw( t_perspective( r0=> 1.1, o=>[-117,31], cam=>[-22,-45,0] ),
 <img src="images/demos/cartography/output-5.png"/>
 
 <hr/>
+Speaking of stereographic and other projections, here are some.
+<pre>
+draw( t_sinusoidal(),
+      "Sinusoidal",  [400,300]);
+draw( t_sin_lat(),
+      "Sinusoidal except preserving longitude",  [400,300]);
+draw( t_stereographic(),
+      "Stereographic",  [400,300]);
+draw( t_stereographic(o=>[0,90]),
+      "Stereographic about North Pole",  [400,300]);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/cartography/output-6.png"/>
+
+<hr/>
+More projections.
+<pre>
+draw( t_az_eqa(),
+      "Azimuthal equal-area",  [400,300]);
+draw( t_az_eqd(),
+      "Azimuthal equal-distance",  [400,300]);
+draw( t_conic(),
+      "Simple conic",  [400,300]);
+draw( t_vertical(),
+      "Vertical perspective",  [400,300]);
+</pre>
+<h4>Output</h4>
+
+<img src="images/demos/cartography/output-7.png"/>
+
+<hr/>
 That concludes the basic cartography demo.  Numerous other transforms
-are available.  
+are available.
 <p/>
 Because PDL's cartographic transforms work within the Transform module
 and are invertible, it's easy to use them both forwards and backwards.
-In particular, the perspective transformation is useful for ingesting 
+In particular, the perspective transformation is useful for ingesting
 scientific image data of the Earth or other planets, and converting to
 a map of the imaged body.
 <p/>
-Similarly, scanned images of map data can easily be converted into 
-lat/lon coordinates or reprojected to make other projections. 
+Similarly, scanned images of map data can easily be converted into
+lat/lon coordinates or reprojected to make other projections.
 </body>
 </html>
